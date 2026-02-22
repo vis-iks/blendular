@@ -1,0 +1,16 @@
+<div class="bui-number-input-container">
+  <div class="progress-bar" [style.width]="progressWidth()"></div>
+  <input
+    type="number"
+    [value]="value()"
+    [min]="min()"
+    [max]="max()"
+    [step]="step()"
+    (input)="onInput($event)"
+    class="bui-number-input"
+  />
+  <div class="arrows">
+    <span class="arrow-up">▲</span>
+    <span class="arrow-down">▼</span>
+  </div>
+</div>

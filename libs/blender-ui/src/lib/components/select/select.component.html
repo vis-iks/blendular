@@ -1,0 +1,6 @@
+<div class="bui-select-container">
+  <select [ngModel]="value()" (ngModelChange)="valueChange.emit($event)" class="bui-select">
+    <option *ngFor="let option of options()" [value]="option.value">{{ option.label }}</option>
+  </select>
+  <span class="arrow-icon">▼</span>
+</div>

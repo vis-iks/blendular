@@ -1,0 +1,4 @@
+<div class="bui-checkbox-container" [class.disabled]="disabled()" (click)="toggle()">
+  <div class="bui-checkbox" [class.checked]="checked()"></div>
+  <span class="label" *ngIf="label()">{{ label() }}</span>
+</div>

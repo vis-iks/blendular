@@ -1,0 +1,7 @@
+<div class="bui-section-header" (click)="toggle()">
+  <span class="arrow-icon" [class.expanded]="expanded()">▶</span>
+  <span class="section-label">{{ label() }}</span>
+</div>
+<div class="bui-section-content" *ngIf="expanded()">
+  <ng-content></ng-content>
+</div>
