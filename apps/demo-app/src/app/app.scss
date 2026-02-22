@@ -1,0 +1,32 @@
+@use '../../../../libs/blender-ui/src/lib/styles/variables' as bui;
+
+:host {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background-color: bui.$bui-bg-dark;
+  color: bui.$bui-text-color;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.panel {
+  background-color: bui.$bui-panel-bg;
+  padding: 20px;
+  border-radius: bui.$bui-border-radius;
+  margin-top: 20px;
+  border: 1px solid bui.$bui-border-dark;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: bui.$bui-primary;
+  color: white;
+  border: none;
+  border-radius: bui.$bui-border-radius;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
