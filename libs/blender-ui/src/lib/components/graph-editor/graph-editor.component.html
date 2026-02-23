@@ -1,0 +1,302 @@
+<div class="graph-editor-container">
+  <!-- Top Header -->
+  <header class="editor-header">
+    <div class="header-left">
+      <button class="icon-btn" title="Graph Editor">
+        <span class="material-icons-round">show_chart</span>
+      </button>
+      <div class="menu-bar">
+        <button class="menu-btn">View</button>
+        <button class="menu-btn">Select</button>
+        <button class="menu-btn">Marker</button>
+        <button class="menu-btn">Channel</button>
+        <button class="menu-btn">Key</button>
+      </div>
+    </div>
+    <div class="header-spacer"></div>
+    <div class="header-right">
+      <button class="tool-btn">
+        <span class="material-icons-round sm-icon">crop_free</span>
+        <span>Normalize</span>
+      </button>
+      <button class="icon-btn primary-text">
+        <span class="material-icons-round">refresh</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="editor-body">
+    <!-- Channels Sidebar -->
+    <aside class="channels-sidebar">
+      <div class="sidebar-search">
+        <div class="search-box">
+          <span class="material-icons-round search-icon">search</span>
+          <input type="text" class="search-input" placeholder="Search">
+          <span class="material-icons-round filter-icon">compare_arrows</span>
+        </div>
+      </div>
+
+      <div class="channels-list">
+        <!-- Cube -->
+        <div class="channel-row group selected">
+          <span class="material-icons-round expand-icon">expand_more</span>
+          <span class="material-icons-round type-icon orange">deployed_code</span>
+          <span class="channel-name">Cube</span>
+          <div class="channel-icons hidden-group">
+            <span class="material-icons-round sm-icon">check_box</span>
+            <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+        <!-- CubeAction -->
+        <div class="channel-row group indent-1">
+          <span class="material-icons-round expand-icon">expand_more</span>
+          <span class="material-icons-round type-icon yellow">directions_run</span>
+          <span class="channel-name">CubeAction</span>
+        </div>
+
+        <!-- Object Transform -->
+        <div class="channel-row group indent-2 dimmed-bg">
+          <span class="material-icons-round expand-icon">expand_more</span>
+          <span class="material-icons-round type-icon dimmed">grid_4x4</span>
+          <span class="channel-name truncate">Object Transform</span>
+          <div class="channel-icons">
+            <span class="material-icons-round sm-icon">build</span>
+            <span class="material-icons-round sm-icon">check_box</span>
+            <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+        <!-- X Location -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-red">
+            <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">X Location</span>
+          <div class="channel-icons fade-in-group">
+            <span class="material-icons-round sm-icon">build</span>
+            <span class="material-icons-round sm-icon">check_box</span>
+            <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+        <!-- Y Location -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-green">
+            <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">Y Location</span>
+          <div class="channel-icons fade-in-group">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+        <!-- Z Location -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-blue">
+            <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">Z Location</span>
+          <div class="channel-icons fade-in-group">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+        <!-- X Euler Rotation -->
+        <div class="channel-row group indent-3 active-channel">
+          <div class="visibility-eye bg-red">
+             <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">X Euler Rotation</span>
+          <div class="channel-icons opacity-80">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+        <!-- Y Euler Rotation -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-green">
+             <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">Y Euler Rotation</span>
+          <div class="channel-icons fade-in-group">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+         <!-- Z Euler Rotation -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-blue">
+             <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">Z Euler Rotation</span>
+          <div class="channel-icons fade-in-group">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+        <!-- X Scale -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-red">
+             <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">X Scale</span>
+          <div class="channel-icons fade-in-group">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+         <!-- Y Scale -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-green">
+             <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">Y Scale</span>
+          <div class="channel-icons fade-in-group">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+         <!-- Z Scale -->
+        <div class="channel-row group indent-3">
+          <div class="visibility-eye bg-blue">
+             <span class="material-icons-round eye-icon">visibility</span>
+          </div>
+          <span class="channel-name">Z Scale</span>
+          <div class="channel-icons fade-in-group">
+             <span class="material-icons-round sm-icon">build</span>
+             <span class="material-icons-round sm-icon">check_box</span>
+             <span class="material-icons-round sm-icon">lock_open</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar-footer">
+        <span class="material-icons-round sm-icon dimmed">settings</span>
+        <span class="footer-text">Modifiers</span>
+      </div>
+    </aside>
+
+    <!-- Graph Viewport -->
+    <main class="graph-viewport">
+      <!-- Time Ruler -->
+      <div class="time-ruler">
+        <div class="ruler-ticks">
+           <span>0</span>
+           <span>12</span>
+           <span>24</span>
+           <span>36</span>
+           <span>48</span>
+           <span>60</span>
+           <span>72</span>
+           <span>84</span>
+           <span>96</span>
+           <span>108</span>
+           <span>120</span>
+           <span>132</span>
+           <span class="current-frame">138</span>
+           <span>144</span>
+           <span>156</span>
+           <span>168</span>
+           <span>180</span>
+           <span>192</span>
+           <span>204</span>
+           <span>216</span>
+           <span>228</span>
+           <span>240</span>
+        </div>
+        <div class="ruler-marks">
+            <!-- Simplified marks using CSS borders -->
+            <div class="mark"></div><div class="mark"></div><div class="mark"></div><div class="mark"></div>
+            <div class="mark"></div><div class="mark"></div><div class="mark"></div><div class="mark"></div>
+            <div class="mark"></div><div class="mark"></div><div class="mark"></div><div class="mark"></div>
+            <div class="mark empty"></div>
+            <div class="mark"></div><div class="mark"></div><div class="mark"></div><div class="mark"></div>
+            <div class="mark"></div><div class="mark"></div><div class="mark"></div><div class="mark"></div>
+            <div class="mark"></div>
+        </div>
+      </div>
+
+      <!-- Graph Canvas -->
+      <div class="graph-canvas graph-grid-strong">
+         <div class="graph-grid"></div>
+
+         <!-- Zero Line -->
+         <div class="zero-line">
+           <span class="zero-label">0</span>
+         </div>
+
+         <!-- Playhead -->
+         <div class="playhead"></div>
+
+         <!-- SVG Curves -->
+         <svg class="graph-svg" preserveAspectRatio="none">
+            <!-- Green Curve -->
+            <path class="bezier-curve green" d="M 0 350 C 100 500, 150 200, 200 450 C 250 650, 300 0, 400 300 C 500 500, 600 250, 650 350 L 1000 800"></path>
+            <!-- Handles -->
+            <line class="handle-line" x1="200" x2="160" y1="450" y2="350"></line>
+            <line class="handle-line" x1="200" x2="240" y1="450" y2="550"></line>
+            <circle class="keyframe" cx="200" cy="450"></circle>
+            <circle class="handle-control" cx="160" cy="350"></circle>
+            <circle class="handle-control" cx="240" cy="550"></circle>
+
+            <!-- Red Curve -->
+            <path class="bezier-curve red selected-curve" d="M 0 340 L 50 340 C 100 250, 150 280, 200 350 C 250 400, 300 350, 400 340 L 1000 340"></path>
+            <circle class="keyframe" cx="50" cy="340"></circle>
+            <circle class="keyframe keyframe-selected" cx="200" cy="350" r="4"></circle>
+            <circle class="keyframe" cx="400" cy="340"></circle>
+
+            <!-- Blue Curve -->
+            <path class="bezier-curve blue opacity-80" d="M 0 350 L 1000 350"></path>
+            <circle class="keyframe" cx="100" cy="350"></circle>
+            <circle class="keyframe" cx="300" cy="350"></circle>
+            <circle class="keyframe" cx="500" cy="350"></circle>
+
+            <!-- Dashed Curve -->
+            <path class="bezier-curve dashed opacity-40" d="M 200 350 C 300 350, 400 300, 500 250 C 600 200, 700 350, 800 600"></path>
+            <circle class="keyframe black-fill" cx="500" cy="250"></circle>
+         </svg>
+
+         <!-- Scrollbars -->
+         <div class="scrollbar-h">
+           <div class="thumb"></div>
+         </div>
+         <div class="scrollbar-v">
+            <div class="thumb"></div>
+         </div>
+      </div>
+
+      <!-- Footer Info -->
+      <div class="graph-footer">
+         <div class="info-group">
+            <span class="label">Frame:</span>
+            <span class="value">138</span>
+         </div>
+         <div class="info-group">
+            <span class="label">Value:</span>
+            <span class="value">0.000</span>
+         </div>
+         <div class="spacer"></div>
+         <div class="info-group dimmed">
+            <span class="material-icons-round sm-icon">mouse</span>
+            <span>Select Keyframe</span>
+         </div>
+      </div>
+    </main>
+  </div>
+</div>

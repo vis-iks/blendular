@@ -1,9 +1,9 @@
 import { Component, inject, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BuiThemeService, LayoutComponent, ModifierPanelComponent, HeaderComponent, FooterComponent, OutlinerComponent, PropertiesComponent, ViewportComponent, TimelineComponent, ContextMenuTriggerDirective, ContextMenuItem } from '@blender-ui/core';
+import { BuiThemeService, LayoutComponent, ModifierPanelComponent, HeaderComponent, FooterComponent, OutlinerComponent, PropertiesComponent, ViewportComponent, TimelineComponent, ContextMenuTriggerDirective, ContextMenuItem, FileBrowserComponent, GraphEditorComponent } from '@blender-ui/core';
 
 @Component({
-  imports: [RouterModule, LayoutComponent, ModifierPanelComponent, HeaderComponent, FooterComponent, OutlinerComponent, PropertiesComponent, ViewportComponent, TimelineComponent, ContextMenuTriggerDirective],
+  imports: [RouterModule, LayoutComponent, ModifierPanelComponent, HeaderComponent, FooterComponent, OutlinerComponent, PropertiesComponent, ViewportComponent, TimelineComponent, ContextMenuTriggerDirective, FileBrowserComponent, GraphEditorComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',

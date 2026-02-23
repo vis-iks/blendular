@@ -1,3 +1,4 @@
+<!--
 <bui-layout>
   <bui-header></bui-header>
 
@@ -11,7 +12,20 @@
 
   <bui-footer></bui-footer>
 </bui-layout>
+-->
 
-<button class="theme-toggle" (click)="toggleTheme()" style="position: absolute; top: 0; right: 0; z-index: 100;">
+<div style="display: flex; flex-direction: column; height: 100vh; padding: 20px; gap: 20px; background-color: var(--bui-bg-dark); overflow: auto;">
+  <h2 style="color: white; margin: 0 0 10px;">Blender File Browser</h2>
+  <div style="height: 500px; border: 1px solid var(--bui-border-dark);">
+    <bui-file-browser></bui-file-browser>
+  </div>
+
+  <h2 style="color: white; margin: 20px 0 10px;">Blender Graph Editor</h2>
+  <div style="height: 500px; border: 1px solid var(--bui-border-dark);">
+    <bui-graph-editor></bui-graph-editor>
+  </div>
+</div>
+
+<button class="theme-toggle" (click)="toggleTheme()" style="position: fixed; top: 10px; right: 10px; z-index: 100; font-size: 24px; background: none; border: none; cursor: pointer;">
   {{ activeTheme().name === 'dark' ? '☀️' : '🌙' }}
 </button>

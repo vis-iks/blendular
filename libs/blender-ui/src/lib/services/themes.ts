@@ -30,6 +30,14 @@ export const blenderDark: Theme = {
     '--bui-menu-hover': '#4772b3',
     '--bui-menu-text-muted': '#8f8f8f',
     '--bui-menu-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
+    '--bui-folder-icon': '#dcb67a',
+    '--bui-channel-red': '#e04e4e',
+    '--bui-channel-green': '#7ec928',
+    '--bui-channel-blue': '#4e8ce0',
+    '--bui-channel-yellow': '#d9bc26',
+    '--bui-grid-line': '#2a2a2a',
+    '--bui-grid-line-strong': '#353535',
+    '--bui-text-muted': '#9ca3af',
   },
 };
 
@@ -58,5 +66,13 @@ export const blenderLight: Theme = {
     '--bui-menu-hover': '#4772b3',
     '--bui-menu-text-muted': '#8f8f8f',
     '--bui-menu-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    '--bui-folder-icon': '#dcb67a',
+    '--bui-channel-red': '#e04e4e',
+    '--bui-channel-green': '#7ec928',
+    '--bui-channel-blue': '#4e8ce0',
+    '--bui-channel-yellow': '#d9bc26',
+    '--bui-grid-line': '#d1d1d1',
+    '--bui-grid-line-strong': '#b0b0b0',
+    '--bui-text-muted': '#666666',
   },
 };

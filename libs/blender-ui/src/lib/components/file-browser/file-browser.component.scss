@@ -1,0 +1,301 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  color: var(--bui-text-color);
+  background-color: var(--bui-bg-dark);
+}
+
+.file-browser-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--bui-border-dark);
+  background-color: var(--bui-panel-bg);
+  border-radius: var(--bui-border-radius);
+  overflow: hidden;
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 8px;
+  background-color: var(--bui-panel-header);
+  border-bottom: 1px solid var(--bui-border-dark);
+  font-size: 12px;
+  user-select: none;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    color: var(--bui-text-muted);
+
+    .icon-folder { font-size: 16px; }
+    .icon-expand { font-size: 10px; margin-left: -2px; }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 16px;
+
+    .header-btn {
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 2px 6px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: inherit;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+    }
+  }
+}
+
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 4px 8px;
+  background-color: var(--bui-panel-bg);
+  gap: 6px;
+
+  .nav-controls {
+    display: flex;
+    gap: 2px;
+  }
+
+  .nav-btn {
+    width: 28px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bui-border-dark); // Using border color as button bg approximation
+    color: var(--bui-text-color);
+    border: none;
+    cursor: pointer;
+
+    &:hover:not(.disabled) {
+      background-color: #4d4d4d; // slightly lighter
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &.rounded-left { border-top-left-radius: 2px; border-bottom-left-radius: 2px; }
+    &.rounded-right { border-top-right-radius: 2px; border-bottom-right-radius: 2px; }
+
+    .material-icons-round { font-size: 16px; }
+  }
+
+  .path-input-container {
+    flex-grow: 1;
+
+    .path-input {
+      width: 100%;
+      height: 24px;
+      background-color: var(--bui-input-bg);
+      border: 1px solid var(--bui-border-dark);
+      border-radius: 2px;
+      padding: 0 8px;
+      font-size: 12px;
+      color: var(--bui-input-text);
+      outline: none;
+
+      &:focus {
+        border-color: var(--bui-primary);
+      }
+    }
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 8px 4px 8px;
+  background-color: var(--bui-panel-bg);
+  border-bottom: 1px solid var(--bui-border-dark);
+  gap: 8px;
+
+  .search-container {
+    position: relative;
+    flex-grow: 1;
+    max-width: 670px;
+
+    .search-icon {
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--bui-text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      height: 24px;
+      padding-left: 28px;
+      background-color: var(--bui-input-bg);
+      border: 1px solid var(--bui-border-dark);
+      border-radius: 2px;
+      font-size: 12px;
+      color: var(--bui-input-text);
+      outline: none;
+
+      &:focus {
+        border-color: var(--bui-primary);
+      }
+    }
+  }
+
+  .spacer { flex-grow: 1; }
+
+  .view-mode-group, .filter-group {
+    display: flex;
+    height: 24px;
+    border: 1px solid var(--bui-border-dark);
+    border-radius: 2px;
+    overflow: hidden;
+
+    button {
+      background-color: var(--bui-border-dark);
+      border: none;
+      color: var(--bui-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+
+      &:hover {
+        background-color: #4d4d4d;
+      }
+
+      &.active {
+        background-color: var(--bui-primary);
+        color: white;
+      }
+
+      &.dropdown {
+        padding: 0 6px;
+        border-left: 1px solid rgba(0,0,0,0.2);
+      }
+
+      .material-icons-round { font-size: 14px; }
+    }
+  }
+}
+
+.file-list-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bui-bg-dark); // Using bg-dark for list background
+  overflow: hidden;
+
+  .list-header {
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bui-text-muted);
+    background-color: var(--bui-panel-header); // Assuming slightly lighter for header
+    border-bottom: 1px solid var(--bui-border-dark);
+    user-select: none;
+
+    .col-name {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      &:hover { color: var(--bui-text-color); }
+      .sort-icon { font-size: 10px; margin-left: 4px; opacity: 0.5; }
+    }
+
+    .col-date {
+      width: 144px;
+      padding-left: 16px;
+      border-left: 1px solid var(--bui-border-dark);
+      cursor: pointer;
+      &:hover { color: var(--bui-text-color); }
+    }
+
+    .col-size {
+      width: 80px;
+      padding-left: 16px;
+      border-left: 1px solid var(--bui-border-dark);
+      cursor: pointer;
+      &:hover { color: var(--bui-text-color); }
+    }
+  }
+
+  .list-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 4px;
+
+    .file-row {
+      display: flex;
+      align-items: center;
+      padding: 2px 8px;
+      font-size: 13px; // slightly bigger than header
+      color: var(--bui-text-color);
+      border-radius: 2px;
+      cursor: pointer;
+      margin-bottom: 1px;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      &.active {
+        background-color: #383838; // Or primary with opacity? Design shows darker grey
+      }
+
+      .cell-name {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        min-width: 0;
+
+        .folder-icon {
+          color: var(--bui-folder-icon);
+          font-size: 16px;
+          margin-right: 8px;
+        }
+
+        .filename {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .cell-date {
+        width: 144px;
+        font-size: 12px;
+        color: var(--bui-text-muted);
+        white-space: nowrap;
+      }
+
+      .cell-size {
+        width: 80px;
+        text-align: right;
+        padding-right: 8px;
+        font-size: 12px;
+        color: var(--bui-text-muted);
+      }
+    }
+  }
+}
