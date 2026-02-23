@@ -1,0 +1,91 @@
+@use '../../styles/variables' as *;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.bui-number-input-container {
+  position: relative;
+  width: 100%;
+  height: 1.5rem; // ~24px
+  background-color: $bui-input-bg;
+  border: 1px solid $bui-border-dark;
+  border-radius: 2px; // rounded-sm
+  overflow: hidden;
+
+  &:hover {
+    .progress-bar {
+      opacity: 0.5; // Slightly lighter on hover
+    }
+
+    .bui-number-input {
+      color: #fff; // text-white
+    }
+
+    .arrows {
+      opacity: 1;
+    }
+  }
+
+  &:focus-within {
+    border-color: $bui-primary;
+    // ring-1 ring-primary
+    box-shadow: 0 0 0 1px $bui-primary;
+  }
+}
+
+.progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1); // gray-600/30 equivalent
+  pointer-events: none;
+  transition: width 0.1s ease;
+  z-index: 0;
+}
+
+.bui-number-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: $bui-text-color;
+  font-family: inherit;
+  font-size: 0.75rem; // xs
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.5rem;
+  appearance: textfield; // remove spin buttons standard
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.arrows {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 2;
+
+  .arrow-up, .arrow-down {
+    font-size: 6px;
+    line-height: 6px;
+    color: #888;
+  }
+}

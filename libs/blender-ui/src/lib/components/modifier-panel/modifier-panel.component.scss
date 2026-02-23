@@ -1,0 +1,289 @@
+@use '../../styles/variables' as *;
+
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: $bui-bg-dark;
+  color: $bui-text-color;
+  font-family: var(--bui-font-display, "Inter", "system-ui", "sans-serif");
+  font-size: 12px;
+}
+
+.bui-layout {
+  display: flex;
+  height: 100%;
+}
+
+.bui-sidebar {
+  width: 2.5rem; // w-10 ~ 40px
+  background-color: $bui-panel-bg; // panel-light / dark
+  border-right: 1px solid $bui-border-dark;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0;
+  gap: 0.25rem;
+
+  .icon-button {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $bui-border-radius;
+    cursor: pointer;
+    opacity: 0.7;
+
+    &:hover {
+      background-color: rgba(255,255,255,0.1);
+      opacity: 1;
+    }
+
+    &.active {
+      background-color: $bui-highlight; // highlight-light/dark
+      color: #fff;
+      opacity: 1;
+    }
+  }
+
+  .separator {
+    width: 100%;
+    height: 1px;
+    background-color: $bui-border-dark;
+    margin: 0.25rem 0;
+  }
+}
+
+.bui-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: $bui-panel-bg;
+}
+
+.bui-panel-top {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid $bui-border-dark;
+  background-color: $bui-panel-bg;
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    padding: 0.125rem 0.25rem;
+    border-radius: 2px;
+
+    &:hover {
+       background-color: rgba(255,255,255,0.1);
+    }
+  }
+
+  .separator {
+    margin: 0 0.5rem;
+    color: #888;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+.bui-panel-content {
+  flex: 1;
+  padding: 0.5rem;
+  overflow-y: auto;
+}
+
+.add-modifier-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 0.75rem;
+  background-color: $bui-bg-light; // white / #3d3d3d
+  border: 1px solid $bui-border-dark;
+  border-radius: $bui-border-radius;
+  color: $bui-text-color;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255,255,255,0.05);
+  }
+}
+
+.bui-modifier-card {
+  border: 1px solid $bui-primary;
+  border-radius: $bui-border-radius;
+  background-color: $bui-card-bg;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.bui-modifier-header {
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  background-color: $bui-panel-header; // blue-50 / #343434
+  border-bottom: 1px solid $bui-border-dark;
+  gap: 0.5rem;
+  user-select: none;
+
+  .expand-icon {
+     font-size: 0.6rem;
+     color: #888;
+     cursor: pointer;
+  }
+
+  .modifier-icon {
+    color: $bui-highlight; // blue-400
+  }
+
+  .modifier-title {
+    flex: 1;
+    font-weight: 600;
+  }
+
+  .modifier-toggles {
+    display: flex;
+    gap: 2px;
+
+    .toggle-btn {
+      padding: 0.125rem;
+      border-radius: 2px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: #888;
+
+      &:hover {
+        background-color: rgba(255,255,255,0.1);
+      }
+
+      &.active {
+        color: $bui-highlight; // blue-400
+      }
+    }
+  }
+
+  .separator-vertical {
+     height: 1rem;
+     width: 1px;
+     background-color: $bui-border-dark;
+     margin: 0 0.25rem;
+  }
+
+  .close-btn, .drag-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .close-btn:hover {
+     color: #ff5555;
+  }
+}
+
+.bui-modifier-body {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem; // space-y-1.5
+}
+
+.type-toggle-row {
+  display: flex;
+  margin-bottom: 0.5rem;
+
+  .toggle-group {
+    display: flex;
+    width: 100%;
+    border: 1px solid $bui-border-dark;
+    border-radius: 2px;
+    overflow: hidden;
+
+    .toggle-option {
+      flex: 1;
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+      background-color: $bui-bg-light; // white / #222
+      color: $bui-text-color;
+      border: none;
+      border-right: 1px solid $bui-border-dark;
+      cursor: pointer;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &:hover {
+        background-color: rgba(255,255,255,0.05);
+      }
+
+      &.active {
+        background-color: $bui-primary; // highlight-light / primary
+        color: #fff;
+      }
+    }
+  }
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 10px; // Adjusted for dot
+  gap: 0.25rem;
+  align-items: center;
+
+  label {
+    text-align: right;
+    padding-right: 0.5rem;
+    color: #888; // text-gray-600/400
+  }
+
+  .status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: #555; // gray-600
+
+    &.hidden {
+      opacity: 0;
+    }
+  }
+
+  &.checkbox-row {
+     .spacer-label {
+        // empty
+     }
+  }
+}
+
+.bui-footer {
+  height: 1.5rem;
+  background-color: $bui-panel-bg;
+  border-top: 1px solid $bui-border-dark;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  font-size: 10px;
+  color: #888;
+
+  .footer-left, .footer-right {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+}

@@ -1,0 +1,148 @@
+<div class="bui-layout">
+  <!-- Sidebar -->
+  <div class="bui-sidebar">
+    <div class="icon-button">🔧</div>
+    <div class="separator"></div>
+    <div class="icon-button">📷</div>
+    <div class="icon-button">🖨️</div>
+    <div class="icon-button">📑</div>
+    <div class="icon-button">☀</div>
+    <div class="icon-button">🌐</div>
+    <div class="separator"></div>
+    <div class="icon-button active">🔧</div>
+    <div class="icon-button">📐</div>
+    <div class="icon-button">🧪</div>
+    <div class="icon-button">🔗</div>
+    <div class="icon-button">🔺</div>
+    <div class="icon-button">🔴</div>
+    <div class="icon-button">🏁</div>
+  </div>
+
+  <!-- Main Panel -->
+  <div class="bui-main">
+    <!-- Breadcrumb / Header -->
+    <div class="bui-panel-top">
+      <div class="breadcrumb-item">
+        <span class="icon">⬜</span> Cube <span class="arrow">▼</span>
+      </div>
+      <span class="separator">›</span>
+      <div class="breadcrumb-item">
+        <span class="icon">🔧</span> Modifiers
+      </div>
+      <div class="spacer"></div>
+      <div class="icon-button">📌</div>
+    </div>
+
+    <!-- Content -->
+    <div class="bui-panel-content">
+      <button class="add-modifier-btn">
+        <span class="icon">+</span> Add Modifier
+      </button>
+
+      <!-- Modifier Card -->
+      <div class="bui-modifier-card">
+        <!-- Modifier Header -->
+        <div class="bui-modifier-header">
+          <span class="expand-icon">▼</span>
+          <span class="modifier-icon">🌀</span>
+          <span class="modifier-title">Subdivision</span>
+
+          <div class="modifier-toggles">
+            <button class="toggle-btn" title="On Cage">📐</button>
+            <button class="toggle-btn active" title="Edit Mode">✏️</button>
+            <button class="toggle-btn active" title="Realtime">🖥️</button>
+            <button class="toggle-btn active" title="Render">📷</button>
+          </div>
+
+          <div class="separator-vertical"></div>
+          <button class="close-btn">✕</button>
+          <button class="drag-btn">⋮⋮</button>
+        </div>
+
+        <!-- Modifier Body -->
+        <div class="bui-modifier-body">
+          <!-- Type Toggle -->
+          <div class="type-toggle-row">
+             <div class="toggle-group">
+               <button class="toggle-option active">Catmull-Clark</button>
+               <button class="toggle-option">Simple</button>
+             </div>
+          </div>
+
+          <!-- Levels -->
+          <div class="control-row">
+            <label>Levels Viewport</label>
+            <bui-number-input [value]="levelsViewport()" (valueChange)="levelsViewport.set($event)" [min]="0" [max]="6"></bui-number-input>
+            <div class="status-dot"></div>
+          </div>
+          <div class="control-row">
+            <label>Render</label>
+            <bui-number-input [value]="levelsRender()" (valueChange)="levelsRender.set($event)" [min]="0" [max]="6"></bui-number-input>
+            <div class="status-dot"></div>
+          </div>
+
+          <!-- Optimal Display -->
+          <div class="control-row checkbox-row">
+            <div class="spacer-label"></div>
+            <bui-checkbox [checked]="optimalDisplay()" (checkedChange)="optimalDisplay.set($event)" label="Optimal Display"></bui-checkbox>
+            <div class="status-dot hidden"></div>
+          </div>
+
+          <!-- Advanced Section -->
+          <bui-section label="Advanced">
+             <div class="control-row checkbox-row">
+                <div class="spacer-label"></div>
+                <bui-checkbox [checked]="useLimitSurface()" (checkedChange)="useLimitSurface.set($event)" label="Use Limit Surface"></bui-checkbox>
+                <div class="status-dot"></div>
+             </div>
+
+             <div class="control-row">
+               <label>Quality</label>
+               <bui-number-input [value]="quality()" (valueChange)="quality.set($event)" [min]="1" [max]="10"></bui-number-input>
+               <div class="status-dot"></div>
+             </div>
+
+             <div class="control-row">
+               <label>UV Smooth</label>
+               <bui-select [options]="uvSmoothOptions" [value]="uvSmooth()" (valueChange)="uvSmooth.set($event)"></bui-select>
+               <div class="status-dot"></div>
+             </div>
+
+             <div class="control-row">
+               <label>Boundary Smooth</label>
+               <bui-select [options]="boundarySmoothOptions" [value]="boundarySmooth()" (valueChange)="boundarySmooth.set($event)"></bui-select>
+               <div class="status-dot"></div>
+             </div>
+
+             <div class="control-row checkbox-row">
+                <div class="spacer-label"></div>
+                <bui-checkbox [checked]="useCreases()" (checkedChange)="useCreases.set($event)" label="Use Creases"></bui-checkbox>
+                <div class="status-dot"></div>
+             </div>
+
+             <div class="control-row checkbox-row">
+                <div class="spacer-label"></div>
+                <bui-checkbox [checked]="useCustomNormals()" (checkedChange)="useCustomNormals.set($event)" label="Use Custom Normals" [disabled]="true"></bui-checkbox>
+                <div class="status-dot"></div>
+             </div>
+          </bui-section>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="bui-footer">
+       <div class="footer-left">
+          <span>🖱️ Select</span>
+          <span>🔄 Rotate View</span>
+       </div>
+       <div class="footer-right">
+          <span>5.2.0 Alpha</span>
+          <span>💾</span>
+       </div>
+    </div>
+
+  </div>
+</div>

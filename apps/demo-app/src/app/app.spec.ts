@@ -1,20 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
-import { NxWelcome } from './nx-welcome';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App, NxWelcome],
+      imports: [App],
     }).compileComponents();
   });
 
-  it('should render title', async () => {
+  it('should render modifier panel', async () => {
     const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome demo-app',
-    );
+    expect(compiled.querySelector('bui-modifier-panel')).toBeTruthy();
+  });
+
+  it('should render theme toggle', async () => {
+    const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.theme-toggle')).toBeTruthy();
   });
 });

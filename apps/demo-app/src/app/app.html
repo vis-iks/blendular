@@ -1,9 +1,5 @@
-<div class="demo-container">
-  <h1>Blender UI Demo</h1>
-  <p>Current Theme: {{ activeTheme().name }}</p>
-  <button (click)="toggleTheme()">Toggle Theme</button>
+<bui-modifier-panel></bui-modifier-panel>
 
-  <div class="panel">This is a panel.</div>
-
-  <router-outlet></router-outlet>
-</div>
+<button class="theme-toggle" (click)="toggleTheme()">
+  {{ activeTheme().name === 'dark' ? '☀️' : '🌙' }}
+</button>
