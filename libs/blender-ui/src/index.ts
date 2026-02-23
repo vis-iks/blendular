@@ -14,3 +14,6 @@ export * from './lib/components/properties/properties.component';
 export * from './lib/components/viewport/viewport.component';
 export * from './lib/components/timeline/timeline.component';
 export * from './lib/components/scene-properties/scene-properties.component';
+export * from './lib/components/context-menu/context-menu.component';
+export * from './lib/components/context-menu/context-menu.interface';
+export * from './lib/components/context-menu/context-menu-trigger.directive';
