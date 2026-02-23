@@ -4,32 +4,12 @@
 [33m❯[39m Building...
 [32m✔[39m Building...
 [37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[37m            [2m | [22m[2mmain[22m         [2m | [22m[36m154.07 kB[37m[2m | [22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m         [2m | [22m[36m160.31 kB[37m[2m | [22m
 [32mstyles.css[37m         [2m | [22m[2mstyles[22m       [2m | [22m[36m110 bytes[37m[2m | [22m
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m154.18 kB[22m
-Application bundle generation complete. [5.247 seconds] - 2026-02-23T05:22:28.178Z
+[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m160.42 kB[22m
+Application bundle generation complete. [4.077 seconds] - 2026-02-23T06:00:03.611Z
 [39m
 [37mWatch mode enabled. Watching for file changes...[39m
 [37mNOTE: Raw file sizes do not reflect development server per-request transformations.[39m
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-[33m❯[39m Changes detected. Rebuilding...
-[32m✔[39m Changes detected. Rebuilding...
-[37m
-No output file changes.
-Application bundle generation complete. [0.042 seconds] - 2026-02-23T05:23:41.802Z
-[39m
-[37mPage reload sent to client(s).[39m
-[33m❯[39m Changes detected. Rebuilding...
-[32m✔[39m Changes detected. Rebuilding...
-[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
-[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m144.77 kB[37m[2m | [22m
-Application bundle generation complete. [1.530 seconds] - 2026-02-23T05:24:44.348Z
-[39m
-[37mComponent update sent to client(s).[39m
-[33m❯[39m Changes detected. Rebuilding...
-[32m✔[39m Changes detected. Rebuilding...
-[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
-[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m144.79 kB[37m[2m | [22m
-Application bundle generation complete. [1.447 seconds] - 2026-02-23T05:25:17.881Z
-[39m
-[37mComponent update sent to client(s).[39m
+Task "demo-app:serve:development" is continuous but exited with code 143
