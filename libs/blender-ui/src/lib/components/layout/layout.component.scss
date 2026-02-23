@@ -1,0 +1,65 @@
+:host {
+  display: grid;
+  grid-template-rows: 28px 1fr 24px; /* Header, Main, Footer */
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--bui-bg-dark);
+  color: var(--bui-text-color);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  user-select: none;
+}
+
+.layout-header {
+  background-color: var(--bui-panel-header);
+  border-bottom: 1px solid #000;
+  z-index: 10;
+}
+
+.layout-main {
+  display: grid;
+  grid-template-columns: 1fr 300px; /* Viewport, Sidebar */
+  overflow: hidden;
+}
+
+.viewport-area {
+  display: grid;
+  grid-template-rows: 1fr 32px; /* Viewport content, Timeline */
+  overflow: hidden;
+  border-right: 1px solid #000;
+}
+
+.viewport-content {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bui-bg-dark);
+}
+
+.timeline-area {
+  background-color: var(--bui-panel-bg);
+  border-top: 1px solid #000;
+}
+
+.sidebar-area {
+  display: grid;
+  grid-template-rows: minmax(100px, 1fr) 2fr; /* Outliner, Properties */
+  overflow: hidden;
+  background-color: var(--bui-panel-bg);
+}
+
+.outliner-area {
+  border-bottom: 1px solid #000;
+  overflow: hidden;
+}
+
+.properties-area {
+  overflow: hidden;
+}
+
+.layout-footer {
+  background-color: var(--bui-panel-header);
+  border-top: 1px solid #000;
+  z-index: 10;
+  font-size: 11px;
+}

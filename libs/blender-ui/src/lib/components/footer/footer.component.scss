@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 8px;
+  background-color: var(--bui-panel-header);
+  color: var(--bui-text-color);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+}
+
+.footer-left {
+  display: flex;
+  gap: 12px;
+}
+
+.mouse-action {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--bui-text-color);
+  opacity: 0.8;
+}
+
+.action-btn {
+  font-weight: 600;
+  color: #fff;
+}
+
+.footer-right {
+  opacity: 0.5;
+  color: var(--bui-text-color);
+}

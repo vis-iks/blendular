@@ -1,5 +1,17 @@
-<bui-modifier-panel></bui-modifier-panel>
+<bui-layout>
+  <bui-header></bui-header>
 
-<button class="theme-toggle" (click)="toggleTheme()">
+  <bui-viewport></bui-viewport>
+  <bui-timeline></bui-timeline>
+
+  <bui-outliner></bui-outliner>
+  <bui-properties>
+    <bui-modifier-panel></bui-modifier-panel>
+  </bui-properties>
+
+  <bui-footer></bui-footer>
+</bui-layout>
+
+<button class="theme-toggle" (click)="toggleTheme()" style="position: absolute; top: 0; right: 0; z-index: 100;">
   {{ activeTheme().name === 'dark' ? '☀️' : '🌙' }}
 </button>

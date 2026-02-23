@@ -1,0 +1,81 @@
+<div class="viewport-header">
+  <div class="header-left">
+    <button class="icon-btn"><span class="material-icons">grid_view</span></button>
+    <div class="mode-select">
+      <span class="mode-text">Object Mode</span>
+      <span class="material-icons drop-icon">expand_more</span>
+    </div>
+    <div class="menu-btns">
+      <button>View</button>
+      <button>Select</button>
+      <button>Add</button>
+      <button>Object</button>
+    </div>
+    <div class="header-tools-left">
+      <div class="tool-pair">
+        <span class="material-icons tool-icon">near_me</span>
+        <span class="material-icons tool-icon">ads_click</span>
+      </div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="tool-group">
+      <span class="material-icons tool-icon active">radio_button_checked</span>
+      <span class="material-icons tool-icon active">hub</span>
+    </div>
+    <div class="tool-group">
+      <span class="material-icons tool-icon active">grid_3x3</span>
+      <span class="material-icons tool-icon">wifi_tethering</span>
+    </div>
+    <div class="tool-group">
+        <span class="material-icons tool-icon">tonality</span>
+        <span class="material-icons tool-icon">blur_on</span>
+        <span class="material-icons tool-icon active">public</span>
+        <span class="material-icons tool-icon">filter_vintage</span>
+    </div>
+  </div>
+</div>
+
+<div class="viewport-canvas">
+  <!-- Overlay Info -->
+  <div class="viewport-overlay">
+    <div>User Perspective</div>
+    <div>(1) Collection | Cube</div>
+  </div>
+
+  <!-- Left Toolbar -->
+  <div class="viewport-toolbar">
+    <button *ngFor="let tool of tools"
+            class="tool-btn"
+            [class.active]="tool.active"
+            [title]="tool.name"
+            (click)="tool.active = true">
+      <span class="material-icons">{{ tool.icon }}</span>
+    </button>
+  </div>
+
+  <!-- Center Object (Mock Cube) -->
+  <div class="center-object">
+    <div class="cube-visual">
+       <div class="origin-dot"></div>
+    </div>
+  </div>
+
+  <!-- Gizmo & Navigation -->
+  <div class="viewport-navigation">
+    <div class="gizmo-container">
+      <div class="gizmo-axis axis-z">Z</div>
+      <div class="gizmo-axis axis-x">X</div>
+      <div class="gizmo-axis axis-y">Y</div>
+      <div class="gizmo-line line-z"></div>
+      <div class="gizmo-line line-x"></div>
+      <div class="gizmo-line line-y"></div>
+    </div>
+    <div class="nav-tools">
+      <button class="nav-btn"><span class="material-icons">search</span></button>
+      <button class="nav-btn"><span class="material-icons">pan_tool</span></button>
+      <button class="nav-btn"><span class="material-icons">videocam</span></button>
+      <button class="nav-btn"><span class="material-icons">grid_on</span></button>
+    </div>
+  </div>
+</div>
