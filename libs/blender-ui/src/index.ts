@@ -17,3 +17,5 @@ export * from './lib/components/scene-properties/scene-properties.component';
 export * from './lib/components/context-menu/context-menu.component';
 export * from './lib/components/context-menu/context-menu.interface';
 export * from './lib/components/context-menu/context-menu-trigger.directive';
+export * from './lib/components/file-browser/file-browser.component';
+export * from './lib/components/graph-editor/graph-editor.component';
