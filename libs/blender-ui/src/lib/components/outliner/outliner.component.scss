@@ -1,116 +1,320 @@
-:host {
+@use 'sass:map';
+
+/* Icon font definitions */
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Default size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+.material-icons-round {
+  font-family: 'Material Icons Round';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+/* Utility classes for text sizing */
+.text-xs {
+  font-size: 11px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.outliner-container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: var(--bui-panel-bg);
+  width: 100%;
+  background-color: var(--bui-bg-dark); /* Fallback or specific panel bg */
   color: var(--bui-text-color);
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
   overflow: hidden;
+  border-radius: var(--bui-border-radius);
+  border: 1px solid var(--bui-border-dark);
 }
 
 .outliner-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 4px 8px;
+  height: 32px;
+  padding: 0 4px;
   background-color: var(--bui-panel-header);
-  border-bottom: 1px solid #000;
-  height: 24px;
+  border-bottom: 1px solid var(--bui-border-dark);
+  gap: 4px;
   flex-shrink: 0;
+
+  .header-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border-radius: var(--bui-border-radius);
+    color: var(--bui-text-color);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      opacity: 1;
+    }
+
+    .arrow {
+      margin-left: -2px;
+    }
+  }
+
+  .search-box {
+    flex: 1;
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+
+    .search-icon {
+      position: absolute;
+      left: 6px;
+      font-size: 14px;
+      color: var(--bui-text-color);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bui-input-bg);
+      border: 1px solid transparent;
+      border-radius: var(--bui-border-radius);
+      padding-left: 24px;
+      padding-right: 8px;
+      font-size: 12px;
+      color: var(--bui-text-color);
+      outline: none;
+
+      &:focus {
+        border-color: var(--bui-primary);
+      }
+
+      &::placeholder {
+        color: var(--bui-text-color);
+        opacity: 0.3;
+      }
+    }
+  }
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  opacity: 0.8;
-}
-
-.header-icon {
-  font-size: 14px;
-  margin-right: 6px;
-}
-
-.header-title {
-  font-size: 11px;
-}
-
-.filter-icon {
-  font-size: 14px;
-  opacity: 0.5;
-  cursor: pointer;
-  &:hover { opacity: 1; }
-}
-
-.outliner-tree {
+.outliner-tree-wrapper {
   flex: 1;
   overflow-y: auto;
-  padding-top: 2px;
+  overflow-x: hidden;
+  padding-bottom: 4px;
+
+  /* Custom Scrollbar */
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #595959;
+    border-radius: 4px;
+    border: 2px solid var(--bui-bg-dark); /* Simulate padding */
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #6e6e6e;
+  }
 }
 
-.tree-row {
+.tree-node-wrapper {
+  display: block;
+}
+
+.tree-node {
   display: flex;
   align-items: center;
-  padding: 2px 4px;
-  cursor: pointer;
-  height: 22px;
+  height: 24px;
+  padding-right: 8px;
+  cursor: default;
+  user-select: none;
+  position: relative;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
   }
 
   &.selected {
-    background-color: var(--bui-primary); /* Use primary for selected background */
+    background-color: var(--bui-primary);
     color: white;
 
-    .node-icon {
-      color: white !important; /* Override specific icon colors on selection */
-      opacity: 1;
+    .node-type-icon {
+      color: #e88e36; /* Keep icon color or make it white? Reference keeps it colored usually but text white */
+    }
+
+    .toggle-btn {
+       color: white;
     }
   }
 
   &.active {
-    /* Blender uses slightly different active state styling, often just bolder or icon change */
-    /* Assuming simple selection style for now */
+    /* Active node styling if different from selected */
+  }
+
+  .toggle-btn {
+    background: none;
+    border: none;
+    color: var(--bui-text-color);
+    opacity: 0.5;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 100%;
+    padding: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .material-icons-outlined {
+      font-size: 16px;
+    }
+  }
+
+  .node-type-icon {
+    font-size: 16px;
+    margin-right: 6px;
+    margin-left: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.collection {
+       /* Collection icon often has a background in Blender outliner */
+       color: white;
+       background-color: #595959;
+       border-radius: 4px;
+       width: 18px;
+       height: 18px;
+       font-size: 14px;
+    }
+
+    &.camera {
+      color: #e88e36; /* Orange */
+    }
+
+    &.mesh {
+      color: #e88e36;
+    }
+
+    &.light {
+      color: #e88e36;
+    }
+
+    &.orange-icon {
+        color: #e88e36;
+    }
+    &.green-icon {
+        color: #53b56a;
+    }
+  }
+
+  .node-name {
+    flex: 1;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .node-controls {
+    display: flex;
+    gap: 8px;
+    opacity: 0.5;
+
+    .control-icon {
+      font-size: 16px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+        color: white;
+      }
+    }
+  }
+
+  &:hover .node-controls {
+      opacity: 1;
   }
 }
 
-.expand-arrow {
-  font-size: 14px;
-  width: 16px;
-  cursor: pointer;
-  opacity: 0.5;
-  margin-right: 2px;
-  &:hover { opacity: 1; }
-}
-
-.node-icon {
-  font-size: 14px;
-  margin-right: 6px;
-  opacity: 0.8;
-
-  &.camera { color: #d68d3a; }
-  &.mesh { color: #d68d3a; }
-  &.light { color: #d6c63a; }
-  &.collection { color: #a0a0a0; }
-}
-
-.node-name {
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 12px;
-}
-
-.node-controls {
-  opacity: 0.3;
-  margin-left: 8px;
-  .visibility-icon { font-size: 14px; }
-  &:hover { opacity: 1; }
-}
-
-/* Indentation for children */
 .tree-children {
-  padding-left: 16px;
+  margin-left: 10px; /* Indentation step */
+  border-left: 1px solid var(--bui-border-dark);
+  padding-left: 0; /* Align content next to the border */
+
+  /* Reset toggle button margin or padding to align with the line */
+}
+
+/* Specific tweaks for leaf nodes to align with parents */
+.leaf-node {
+   padding-left: 0; /* Padding is handled by hierarchy if nested, but for leaf inside parent... */
+   /* If we use nested structure, leaf node is inside .tree-children of parent. */
+   /* So it's already indented. */
+}
+
+.outliner-footer {
+  height: 24px;
+  background-color: var(--bui-panel-header);
+  border-top: 1px solid var(--bui-border-dark);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 10px;
+  color: var(--bui-text-color);
+  opacity: 0.7;
+
+  .separator {
+    margin: 0 6px;
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
