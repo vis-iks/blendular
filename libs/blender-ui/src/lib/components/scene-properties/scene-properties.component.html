@@ -1,0 +1,175 @@
+<div class="scene-properties-container">
+  <!-- Search Bar -->
+  <div class="header-search-area">
+    <div class="search-input-wrapper">
+      <span class="material-icons search-icon">search</span>
+      <input type="text" placeholder="Search" [value]="searchText()" (input)="searchText.set($any($event.target).value)">
+    </div>
+    <button class="icon-btn filter-btn"><span class="material-icons">filter_list</span></button>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <span class="material-icons breadcrumb-icon">scene</span>
+    <span class="breadcrumb-text">Scene</span>
+    <span class="spacer"></span>
+    <span class="material-icons pin-icon" title="Pin">push_pin</span>
+  </div>
+
+  <!-- Scene Selector -->
+  <div class="scene-selector-wrapper">
+    <div class="scene-selector">
+      <div class="selector-icon-area">
+        <span class="material-icons dropdown-icon">expand_more</span>
+        <span class="material-icons type-icon">scene</span>
+      </div>
+      <span class="selector-text">Scene</span>
+      <div class="selector-actions">
+        <span class="material-icons action-icon">push_pin</span>
+        <span class="material-icons action-icon">content_copy</span>
+        <span class="material-icons action-icon">close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sections Container -->
+  <div class="sections-container">
+
+    <!-- Custom Scene Section (Manually implemented to match design) -->
+    <div class="custom-section">
+       <div class="section-header">
+         <span class="material-icons arrow-icon">expand_more</span>
+         <span class="section-label">Scene</span>
+         <span class="spacer"></span>
+         <span class="material-icons drag-icon">drag_indicator</span>
+       </div>
+       <div class="section-content">
+          <div class="control-row">
+            <label class="control-label">Camera</label>
+            <div class="input-wrapper">
+               <div class="input-icon-box"><span class="material-icons">videocam</span></div>
+               <input type="text" [value]="camera()" readonly>
+               <span class="material-icons clear-icon">close</span>
+            </div>
+          </div>
+          <div class="control-row">
+            <label class="control-label">Background Scene</label>
+            <div class="input-wrapper">
+               <div class="input-icon-box"><span class="material-icons">scene</span></div>
+               <input type="text" [value]="backgroundScene()" readonly class="italic-text">
+            </div>
+          </div>
+          <div class="control-row">
+            <label class="control-label">Active Clip</label>
+            <div class="input-wrapper">
+               <div class="input-icon-box"><span class="material-icons">movie</span></div>
+               <input type="text" [value]="activeClip()" readonly class="italic-text">
+            </div>
+          </div>
+       </div>
+    </div>
+
+    <!-- Units Section -->
+    <div class="section-wrapper">
+        <bui-section label="Units">
+            <div class="control-row">
+            <label class="control-label">Unit System</label>
+            <div class="control-input">
+                <bui-select [options]="unitSystemOptions" [value]="unitSystem()" (valueChange)="unitSystem.set($event)"></bui-select>
+            </div>
+            </div>
+            <div class="control-row">
+            <label class="control-label">Unit Scale</label>
+            <div class="control-input">
+                <bui-number-input [value]="unitScale()" (valueChange)="unitScale.set($event)"></bui-number-input>
+            </div>
+            </div>
+        </bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <!-- Gravity Section -->
+    <div class="section-wrapper">
+        <!-- Hack to simulate checkbox in header: we put it in content for now as section component doesn't support it -->
+        <bui-section label="Gravity">
+             <div class="control-row">
+                 <bui-checkbox [checked]="gravityEnabled()" (checkedChange)="gravityEnabled.set($event)" label="Enable Gravity"></bui-checkbox>
+             </div>
+             <div class="control-row">
+                <label class="control-label">X</label>
+                <div class="control-input">
+                    <bui-number-input [value]="gravityX()" (valueChange)="gravityX.set($event)"></bui-number-input>
+                </div>
+             </div>
+             <div class="control-row">
+                <label class="control-label">Y</label>
+                <div class="control-input">
+                    <bui-number-input [value]="gravityY()" (valueChange)="gravityY.set($event)"></bui-number-input>
+                </div>
+             </div>
+             <div class="control-row">
+                <label class="control-label">Z</label>
+                <div class="control-input">
+                    <bui-number-input [value]="gravityZ()" (valueChange)="gravityZ.set($event)"></bui-number-input>
+                </div>
+             </div>
+        </bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <div class="section-wrapper">
+        <bui-section label="Simulation"></bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <div class="section-wrapper">
+        <bui-section label="Keying Sets"></bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <div class="section-wrapper">
+        <bui-section label="Audio">
+            <div class="control-row">
+                <label class="control-label">Volume</label>
+                <div class="control-input">
+                    <bui-number-input [value]="volume()" (valueChange)="volume.set($event)"></bui-number-input>
+                </div>
+            </div>
+            <div class="control-row">
+                <label class="control-label">Doppler Speed</label>
+                <div class="control-input">
+                    <bui-number-input [value]="dopplerSpeed()" (valueChange)="dopplerSpeed.set($event)"></bui-number-input>
+                </div>
+            </div>
+            <div class="control-row">
+                <label class="control-label">Doppler Factor</label>
+                <div class="control-input">
+                    <bui-number-input [value]="dopplerFactor()" (valueChange)="dopplerFactor.set($event)"></bui-number-input>
+                </div>
+            </div>
+        </bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <div class="section-wrapper">
+        <bui-section label="Rigid Body World"></bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <div class="section-wrapper">
+        <bui-section label="Light Probes"></bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <div class="section-wrapper">
+        <bui-section label="Animation"></bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+    <div class="section-wrapper">
+        <bui-section label="Custom Properties"></bui-section>
+        <span class="material-icons section-drag-icon">drag_indicator</span>
+    </div>
+
+  </div>
+</div>

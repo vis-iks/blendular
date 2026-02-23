@@ -13,3 +13,4 @@ export * from './lib/components/outliner/outliner.component';
 export * from './lib/components/properties/properties.component';
 export * from './lib/components/viewport/viewport.component';
 export * from './lib/components/timeline/timeline.component';
+export * from './lib/components/scene-properties/scene-properties.component';
