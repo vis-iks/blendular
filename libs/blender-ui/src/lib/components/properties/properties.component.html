@@ -5,26 +5,45 @@
        <button class="tab-icon" title="Render"><span class="material-icons">photo_camera</span></button>
        <button class="tab-icon" title="Output"><span class="material-icons">image</span></button>
        <button class="tab-icon" title="View Layer"><span class="material-icons">layers</span></button>
-       <button class="tab-icon" title="Scene"><span class="material-icons">scene</span></button>
+
+       <button class="tab-icon" [class.active]="activeTab() === 'scene'" (click)="activeTab.set('scene')" title="Scene">
+         <span class="material-icons">scene</span>
+       </button>
+
        <button class="tab-icon" title="World"><span class="material-icons">public</span></button>
        <div class="separator"></div>
        <button class="tab-icon" title="Object"><span class="material-icons object-tab-icon">category</span></button>
-       <button class="tab-icon active" title="Modifiers"><span class="material-icons modifier-tab-icon">build</span></button>
+
+       <button class="tab-icon" [class.active]="activeTab() === 'modifiers'" (click)="activeTab.set('modifiers')" title="Modifiers">
+         <span class="material-icons modifier-tab-icon">build</span>
+       </button>
+
        <button class="tab-icon" title="Particles"><span class="material-icons">share</span></button>
        <button class="tab-icon" title="Physics"><span class="material-icons">blur_circular</span></button>
        <button class="tab-icon" title="Constraints"><span class="material-icons">link</span></button>
     </div>
   </div>
   <div class="properties-content">
-    <div class="content-header">
-       <span class="material-icons header-icon object-icon">category</span>
-       <span class="object-name">Cube</span>
-       <span class="material-icons breadcrumb-arrow">chevron_right</span>
-       <span class="material-icons header-icon modifier-icon">build</span>
-       <span class="panel-name">Modifiers</span>
-    </div>
-    <div class="content-body">
-       <ng-content></ng-content>
-    </div>
+    @if (activeTab() === 'scene') {
+        <bui-scene-properties></bui-scene-properties>
+    } @else if (activeTab() === 'modifiers') {
+        <div class="content-header">
+           <span class="material-icons header-icon object-icon">category</span>
+           <span class="object-name">Cube</span>
+           <span class="material-icons breadcrumb-arrow">chevron_right</span>
+           <span class="material-icons header-icon modifier-icon">build</span>
+           <span class="panel-name">Modifiers</span>
+        </div>
+        <div class="content-body">
+           <bui-modifier-panel></bui-modifier-panel>
+        </div>
+    } @else {
+        <div class="content-header">
+           <span class="panel-name">Properties</span>
+        </div>
+        <div class="content-body">
+           <ng-content></ng-content>
+        </div>
+    }
   </div>
 </div>
