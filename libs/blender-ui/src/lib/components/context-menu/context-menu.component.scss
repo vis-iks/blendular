@@ -1,0 +1,103 @@
+:host {
+  display: contents;
+}
+
+.context-menu {
+  background-color: var(--bui-menu-bg);
+  padding: 4px;
+  border-radius: var(--bui-border-radius);
+  box-shadow: var(--bui-menu-shadow);
+  border: 1px solid var(--bui-border-dark);
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--bui-menu-text, #e6e6e6);
+  outline: none;
+
+  // CDK Overlay styles
+  &.cdk-menu-inline {
+    display: inline-flex;
+    width: auto;
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: var(--bui-border-radius);
+  color: var(--bui-text-color);
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.4;
+  outline: none;
+
+  &:hover, &.cdk-program-focused, &[aria-expanded="true"] {
+    background-color: var(--bui-menu-hover);
+    color: white;
+
+    .icon, .shortcut, .arrow {
+      color: white;
+      opacity: 1;
+    }
+
+    .material-symbols-outlined {
+       color: white;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .left-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bui-menu-text-muted);
+
+    &.material-symbols-outlined {
+        font-size: 16px;
+    }
+  }
+
+  .label {
+    white-space: nowrap;
+  }
+
+  .shortcut {
+    font-size: 11px;
+    color: var(--bui-menu-text-muted);
+    margin-left: 16px;
+  }
+
+  .arrow {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-left: auto;
+  }
+}
+
+.menu-separator {
+  height: 1px;
+  background-color: var(--bui-border-dark);
+  margin: 4px 0;
+}

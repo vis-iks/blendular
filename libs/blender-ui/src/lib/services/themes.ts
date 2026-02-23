@@ -26,6 +26,10 @@ export const blenderDark: Theme = {
     '--bui-surface-dark': '#303030',
     '--bui-surface-light': '#f5f5f5',
     '--bui-card-bg': '#303030',
+    '--bui-menu-bg': '#2b2b2b',
+    '--bui-menu-hover': '#4772b3',
+    '--bui-menu-text-muted': '#8f8f8f',
+    '--bui-menu-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
   },
 };
 
@@ -50,5 +54,9 @@ export const blenderLight: Theme = {
     '--bui-surface-dark': '#303030',
     '--bui-surface-light': '#f5f5f5',
     '--bui-card-bg': '#ffffff',
+    '--bui-menu-bg': '#f0f0f0',
+    '--bui-menu-hover': '#4772b3',
+    '--bui-menu-text-muted': '#8f8f8f',
+    '--bui-menu-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
   },
 };
