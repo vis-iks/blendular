@@ -2,102 +2,15 @@
 
 :host {
   display: block;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  background-color: $bui-bg-dark;
+  /* Removed fixed height/width */
+  background-color: transparent; /* Let container decide */
   color: $bui-text-color;
   font-family: var(--bui-font-display, "Inter", "system-ui", "sans-serif");
   font-size: 12px;
 }
 
-.bui-layout {
-  display: flex;
-  height: 100%;
-}
-
-.bui-sidebar {
-  width: 2.5rem; // w-10 ~ 40px
-  background-color: $bui-panel-bg; // panel-light / dark
-  border-right: 1px solid $bui-border-dark;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5rem 0;
-  gap: 0.25rem;
-
-  .icon-button {
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: $bui-border-radius;
-    cursor: pointer;
-    opacity: 0.7;
-
-    &:hover {
-      background-color: rgba(255,255,255,0.1);
-      opacity: 1;
-    }
-
-    &.active {
-      background-color: $bui-highlight; // highlight-light/dark
-      color: #fff;
-      opacity: 1;
-    }
-  }
-
-  .separator {
-    width: 100%;
-    height: 1px;
-    background-color: $bui-border-dark;
-    margin: 0.25rem 0;
-  }
-}
-
-.bui-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: $bui-panel-bg;
-}
-
-.bui-panel-top {
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  padding: 0 0.5rem;
-  border-bottom: 1px solid $bui-border-dark;
-  background-color: $bui-panel-bg;
-
-  .breadcrumb-item {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    cursor: pointer;
-    padding: 0.125rem 0.25rem;
-    border-radius: 2px;
-
-    &:hover {
-       background-color: rgba(255,255,255,0.1);
-    }
-  }
-
-  .separator {
-    margin: 0 0.5rem;
-    color: #888;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-}
-
-.bui-panel-content {
-  flex: 1;
+.modifier-panel-content {
   padding: 0.5rem;
-  overflow-y: auto;
 }
 
 .add-modifier-btn {
@@ -107,15 +20,18 @@
   justify-content: center;
   padding: 0.25rem 0.75rem;
   margin-bottom: 0.75rem;
-  background-color: $bui-bg-light; // white / #3d3d3d
+  background-color: $bui-surface-dark;
   border: 1px solid $bui-border-dark;
   border-radius: $bui-border-radius;
   color: $bui-text-color;
   cursor: pointer;
+  gap: 4px;
 
   &:hover {
     background-color: rgba(255,255,255,0.05);
   }
+
+  .material-icons { font-size: 16px; }
 }
 
 .bui-modifier-card {
@@ -131,19 +47,20 @@
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
-  background-color: $bui-panel-header; // blue-50 / #343434
+  background-color: $bui-panel-header;
   border-bottom: 1px solid $bui-border-dark;
   gap: 0.5rem;
   user-select: none;
 
   .expand-icon {
-     font-size: 0.6rem;
+     font-size: 14px;
      color: #888;
      cursor: pointer;
   }
 
   .modifier-icon {
-    color: $bui-highlight; // blue-400
+    font-size: 14px;
+    color: $bui-highlight;
   }
 
   .modifier-title {
@@ -162,14 +79,18 @@
       border: none;
       background: transparent;
       color: #888;
+      display: flex;
+      align-items: center;
 
       &:hover {
         background-color: rgba(255,255,255,0.1);
       }
 
       &.active {
-        color: $bui-highlight; // blue-400
+        color: $bui-highlight;
       }
+
+      .material-icons { font-size: 14px; }
     }
   }
 
@@ -180,15 +101,19 @@
      margin: 0 0.25rem;
   }
 
-  .close-btn, .drag-btn {
+  .close-btn {
     background: transparent;
     border: none;
     color: #888;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 
     &:hover {
       color: #fff;
     }
+
+    .material-icons { font-size: 14px; }
   }
 
   .close-btn:hover {
@@ -200,7 +125,7 @@
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.375rem; // space-y-1.5
+  gap: 0.375rem;
 }
 
 .type-toggle-row {
@@ -218,7 +143,7 @@
       flex: 1;
       padding: 0.25rem 0.5rem;
       text-align: center;
-      background-color: $bui-bg-light; // white / #222
+      background-color: $bui-surface-dark;
       color: $bui-text-color;
       border: none;
       border-right: 1px solid $bui-border-dark;
@@ -233,7 +158,7 @@
       }
 
       &.active {
-        background-color: $bui-primary; // highlight-light / primary
+        background-color: $bui-primary;
         color: #fff;
       }
     }
@@ -242,48 +167,24 @@
 
 .control-row {
   display: grid;
-  grid-template-columns: 110px 1fr 10px; // Adjusted for dot
+  grid-template-columns: 110px 1fr 10px;
   gap: 0.25rem;
   align-items: center;
 
   label {
     text-align: right;
     padding-right: 0.5rem;
-    color: #888; // text-gray-600/400
+    color: #888;
   }
 
   .status-dot {
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 50%;
-    background-color: #555; // gray-600
+    background-color: #555;
 
     &.hidden {
       opacity: 0;
     }
-  }
-
-  &.checkbox-row {
-     .spacer-label {
-        // empty
-     }
-  }
-}
-
-.bui-footer {
-  height: 1.5rem;
-  background-color: $bui-panel-bg;
-  border-top: 1px solid $bui-border-dark;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.5rem;
-  font-size: 10px;
-  color: #888;
-
-  .footer-left, .footer-right {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
   }
 }

@@ -1,9 +1,9 @@
 import { Component, inject, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BuiThemeService, ModifierPanelComponent } from '@blender-ui/core';
+import { BuiThemeService, LayoutComponent, ModifierPanelComponent, HeaderComponent, FooterComponent, OutlinerComponent, PropertiesComponent, ViewportComponent, TimelineComponent } from '@blender-ui/core';
 
 @Component({
-  imports: [RouterModule, ModifierPanelComponent],
+  imports: [RouterModule, LayoutComponent, ModifierPanelComponent, HeaderComponent, FooterComponent, OutlinerComponent, PropertiesComponent, ViewportComponent, TimelineComponent],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',

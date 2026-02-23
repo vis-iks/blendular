@@ -1,0 +1,31 @@
+<div class="header-container">
+  <div class="header-left">
+    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDJD6nEsNr3SrB2Zvics4SLpKgINhiytknHvq-nPPibPizc98TquiiPtf9UEpR6Almzi6ZCxnaKnxBIGNy_CQnJTaE9qWdhvyn95V2YowmM4TbHsjFg5NFEZTs9dDOCLQqz5Rsfj7UesuX7QYaodyOv6O_F8GbVmFSdVPtX3X6UuCSQv5epl6Flb8Cpys2KbcF37yBLTj_2NsNeq8BbVVQgwa2FNx8bHMSLNzxLfHLmUK3X9ig3JypMNX5VJevpNqLpvis701UQy0" alt="Blender Logo" class="blender-logo">
+    <div class="menu-bar">
+      <button class="menu-item">File</button>
+      <button class="menu-item">Edit</button>
+      <button class="menu-item">Render</button>
+      <button class="menu-item">Window</button>
+      <button class="menu-item">Help</button>
+    </div>
+  </div>
+
+  <div class="header-center">
+    <div class="workspace-tabs">
+      <button *ngFor="let ws of workspaces"
+              class="workspace-tab"
+              [class.active]="ws === activeWorkspace"
+              (click)="activeWorkspace = ws">
+        {{ ws }}
+      </button>
+      <button class="add-workspace">+</button>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="scene-info">
+      <span>Scene</span>
+      <span>ViewLayer</span>
+    </div>
+  </div>
+</div>

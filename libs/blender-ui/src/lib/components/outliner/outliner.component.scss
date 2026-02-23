@@ -1,0 +1,116 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--bui-panel-bg);
+  color: var(--bui-text-color);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.outliner-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: var(--bui-panel-header);
+  border-bottom: 1px solid #000;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.header-icon {
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.header-title {
+  font-size: 11px;
+}
+
+.filter-icon {
+  font-size: 14px;
+  opacity: 0.5;
+  cursor: pointer;
+  &:hover { opacity: 1; }
+}
+
+.outliner-tree {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 2px;
+}
+
+.tree-row {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  cursor: pointer;
+  height: 22px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &.selected {
+    background-color: var(--bui-primary); /* Use primary for selected background */
+    color: white;
+
+    .node-icon {
+      color: white !important; /* Override specific icon colors on selection */
+      opacity: 1;
+    }
+  }
+
+  &.active {
+    /* Blender uses slightly different active state styling, often just bolder or icon change */
+    /* Assuming simple selection style for now */
+  }
+}
+
+.expand-arrow {
+  font-size: 14px;
+  width: 16px;
+  cursor: pointer;
+  opacity: 0.5;
+  margin-right: 2px;
+  &:hover { opacity: 1; }
+}
+
+.node-icon {
+  font-size: 14px;
+  margin-right: 6px;
+  opacity: 0.8;
+
+  &.camera { color: #d68d3a; }
+  &.mesh { color: #d68d3a; }
+  &.light { color: #d6c63a; }
+  &.collection { color: #a0a0a0; }
+}
+
+.node-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.node-controls {
+  opacity: 0.3;
+  margin-left: 8px;
+  .visibility-icon { font-size: 14px; }
+  &:hover { opacity: 1; }
+}
+
+/* Indentation for children */
+.tree-children {
+  padding-left: 16px;
+}

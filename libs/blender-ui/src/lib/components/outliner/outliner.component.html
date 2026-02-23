@@ -1,0 +1,45 @@
+<div class="outliner-header">
+  <div class="header-left">
+    <span class="material-icons header-icon">format_list_bulleted</span>
+    <span class="header-title">Scene Collection</span>
+  </div>
+  <div class="header-right">
+    <span class="material-icons filter-icon">filter_alt</span>
+  </div>
+</div>
+
+<div class="outliner-tree">
+  <ng-container *ngTemplateOutlet="nodeListTemplate; context: { $implicit: nodes }"></ng-container>
+</div>
+
+<ng-template #nodeListTemplate let-list>
+  <div *ngFor="let node of list" class="tree-node-wrapper">
+    <div class="tree-row"
+         [class.selected]="node.selected"
+         [class.active]="node.active">
+
+      <!-- Expand Arrow -->
+      <span class="material-icons expand-arrow"
+            [style.visibility]="node.children?.length ? 'visible' : 'hidden'"
+            (click)="toggleExpand(node, $event)">
+        {{ node.expanded ? 'expand_more' : 'chevron_right' }}
+      </span>
+
+      <!-- Icon -->
+      <span class="material-icons node-icon" [ngClass]="node.type">{{ node.icon }}</span>
+
+      <!-- Name -->
+      <span class="node-name">{{ node.name }}</span>
+
+      <!-- Visibility Toggle -->
+      <div class="node-controls">
+         <span class="material-icons visibility-icon">visibility</span>
+      </div>
+    </div>
+
+    <!-- Children (Recursive) -->
+    <div class="tree-children" *ngIf="node.expanded && node.children?.length">
+       <ng-container *ngTemplateOutlet="nodeListTemplate; context: { $implicit: node.children }"></ng-container>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,27 @@
+<header class="layout-header">
+  <ng-content select="bui-header"></ng-content>
+</header>
+
+<main class="layout-main">
+  <div class="viewport-area">
+    <div class="viewport-content">
+      <ng-content select="bui-viewport"></ng-content>
+    </div>
+    <div class="timeline-area">
+      <ng-content select="bui-timeline"></ng-content>
+    </div>
+  </div>
+
+  <aside class="sidebar-area">
+    <div class="outliner-area">
+      <ng-content select="bui-outliner"></ng-content>
+    </div>
+    <div class="properties-area">
+      <ng-content select="bui-properties"></ng-content>
+    </div>
+  </aside>
+</main>
+
+<footer class="layout-footer">
+  <ng-content select="bui-footer"></ng-content>
+</footer>
