@@ -1,0 +1,107 @@
+:host {
+  position: absolute;
+  width: max-content;
+  min-width: 140px;
+  user-select: none;
+}
+
+.node {
+  background-color: var(--bui-panel-bg, #2b2b2b);
+  border: 1px solid #111;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  color: #ccc;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  overflow: hidden;
+}
+
+.node-header {
+  padding: 4px 8px;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .expand-icon {
+    font-size: 12px;
+  }
+}
+
+.node-body {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sockets-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.inputs-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.outputs-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.socket-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 16px;
+
+  &.input {
+    flex-direction: row;
+  }
+
+  &.output {
+    flex-direction: row; // Label then Socket
+    justify-content: flex-end;
+  }
+}
+
+.socket {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  position: relative;
+  z-index: 10;
+  cursor: crosshair; // Blender uses crosshair for sockets
+
+  &:hover::after {
+    content: '';
+    position: absolute;
+    top: -3px; left: -3px; right: -3px; bottom: -3px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.label {
+    color: #a1a1a1;
+    white-space: nowrap;
+}

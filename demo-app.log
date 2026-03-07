@@ -4,12 +4,443 @@
 [33m❯[39m Building...
 [32m✔[39m Building...
 [37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m
-[32mmain.js[37m            [2m | [22m[2mmain[22m         [2m | [22m[36m160.31 kB[37m[2m | [22m
-[32mstyles.css[37m         [2m | [22m[2mstyles[22m       [2m | [22m[36m110 bytes[37m[2m | [22m
-[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m160.42 kB[22m
-Application bundle generation complete. [4.077 seconds] - 2026-02-23T06:00:03.611Z
+[32mmain.js[37m            [2m | [22m[2mmain[22m         [2m | [22m[36m360.76 kB[37m[2m | [22m
+[32mstyles.css[37m         [2m | [22m[2mstyles[22m       [2m | [22m  [36m2.68 kB[37m[2m | [22m
+[1m [22m                  [2m | [22m[1mInitial total[22m[2m | [22m[1m363.44 kB[22m
+Application bundle generation complete. [6.373 seconds] - 2026-02-23T09:23:26.064Z
 [39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
 [37mWatch mode enabled. Watching for file changes...[39m
 [37mNOTE: Raw file sizes do not reflect development server per-request transformations.[39m
   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m4200[22m/[39m
-Task "demo-app:serve:development" is continuous but exited with code 143
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.95 kB[37m[2m | [22m
+Application bundle generation complete. [2.029 seconds] - 2026-02-23T09:27:22.343Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mPage reload sent to client(s).[39m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.83 kB[37m[2m | [22m
+Application bundle generation complete. [0.795 seconds] - 2026-02-23T09:29:50.256Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mComponent update sent to client(s).[39m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.87 kB[37m[2m | [22m
+Application bundle generation complete. [0.953 seconds] - 2026-02-23T09:30:00.791Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mComponent update sent to client(s).[39m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.78 kB[37m[2m | [22m
+Application bundle generation complete. [0.862 seconds] - 2026-02-23T09:30:19.095Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mPage reload sent to client(s).[39m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m
+No output file changes.
+Application bundle generation complete. [0.845 seconds] - 2026-02-23T09:30:39.790Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.78 kB[37m[2m | [22m
+Application bundle generation complete. [0.700 seconds] - 2026-02-23T09:31:15.510Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mPage reload sent to client(s).[39m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.78 kB[37m[2m | [22m
+Application bundle generation complete. [0.669 seconds] - 2026-02-23T09:31:16.358Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mPage reload sent to client(s).[39m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.78 kB[37m[2m | [22m
+Application bundle generation complete. [0.519 seconds] - 2026-02-23T09:31:17.023Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mComponent update sent to client(s).[39m
+[33m❯[39m Changes detected. Rebuilding...
+[32m✔[39m Changes detected. Rebuilding...
+[37m[1mInitial chunk files[22m[2m | [22m[1mNames[22m[2m | [22m [1mRaw size[22m
+[32mmain.js[37m            [2m | [22m[2mmain[22m [2m | [22m[36m360.78 kB[37m[2m | [22m
+Application bundle generation complete. [0.509 seconds] - 2026-02-23T09:31:26.805Z
+[39m
+[1m[33m[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: LayoutComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:26:
+[37m      6 │   imports: [RouterModule, [32mLayoutComponent[37m, ModifierPanelComponent, ...
+        ╵                           [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ModifierPanelComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:43:
+[37m      6 │ ...le, LayoutComponent, [32mModifierPanelComponent[37m, HeaderComponent, Fo...
+        ╵                         [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: HeaderComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:67:
+[37m      6 │ ... ModifierPanelComponent, [32mHeaderComponent[37m, FooterComponent, Outli...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: FooterComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:84:
+[37m      6 │ ...ponent, HeaderComponent, [32mFooterComponent[37m, OutlinerComponent, Pro...
+        ╵                             [32m~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: OutlinerComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:101:
+[37m      6 │ ...onent, FooterComponent, [32mOutlinerComponent[37m, PropertiesComponent, ...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: PropertiesComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:120:
+[37m   [39m[22m[1m[33m   6 │ ...nt, OutlinerComponent, [32mPropertiesComponent[37m, ViewportComponent, T...
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ViewportComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:141:
+[37m      6 │ ...t, PropertiesComponent, [32mViewportComponent[37m, TimelineComponent, Co...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: TimelineComponent is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:160:
+[37m      6 │ ...ent, ViewportComponent, [32mTimelineComponent[37m, ContextMenuTriggerDir...
+        ╵                            [32m~~~~~~~~~~~~~~~~~[0m
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mNG8113: ContextMenuTriggerDirective is not used within the template of App[0m [1m[35m[plugin angular-compiler][0m
+    apps/demo-app/src/app/app.ts:6:179:
+[37m      6 │ ...TimelineComponent, [32mContextMenuTriggerDirective[37m, FileBrowserCompo...
+        ╵                       [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[39m[22m
+[37mComponent update sent to client(s).[39m
