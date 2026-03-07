@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bui-bg-dark, #1d1d1d);
+  font-family: 'Inter', sans-serif;
+}
+
+.shader-editor-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.grid-background {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
+  pointer-events: none;
+}
+
+.connections-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.nodes-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.connection-path {
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+}
