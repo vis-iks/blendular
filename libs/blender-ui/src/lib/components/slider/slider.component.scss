@@ -45,13 +45,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $bui-text-disabled;
+  color: #808080;
   cursor: pointer;
   z-index: 2;
-  transition: color 0.1s, background 0.1s;
+  transition: color 0.1s, background 0.1s, opacity 0.15s;
+  opacity: 0;
 
   &.left { left: 0; }
   &.right { right: 0; }
+
+  .bui-slider-container:hover & {
+    opacity: 1;
+  }
 
   &:hover {
     color: $bui-text-primary;
@@ -59,7 +64,7 @@
   }
 
   [class^="bl-icons-"], [class*=" bl-icons-"] {
-    font-size: 16px;
+    font-size: 10px;
   }
 }
 
@@ -85,7 +90,7 @@
   z-index: 1;
   font-size: $bui-font-size-small;
   color: $bui-text-dimmed;
-  padding-left: 8px;
+  padding-left: 18px;
   pointer-events: none;
   user-select: none;
 }
@@ -96,19 +101,19 @@
   z-index: 1;
   font-size: $bui-font-size-small;
   color: $bui-text-color;
-  padding: 0 8px;
+  padding: 0 18px 0 8px;
   pointer-events: none;
   flex: 1;
   text-align: right;
 
   &.centered {
     text-align: center;
-    padding: 0 16px;
+    padding: 0 18px;
   }
 
   &.right-aligned {
     text-align: right;
-    padding-right: 8px;
+    padding-right: 18px;
   }
 }
 
@@ -117,7 +122,7 @@
   z-index: 1;
   font-size: $bui-font-size-small;
   color: $bui-text-dimmed;
-  padding-left: 8px;
+  padding-left: 18px;
   pointer-events: none;
   user-select: none;
 }

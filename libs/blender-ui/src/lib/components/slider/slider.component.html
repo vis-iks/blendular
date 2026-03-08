@@ -10,12 +10,10 @@
     <!-- Progress fill bar -->
     <div class="bui-slider-fill" [style.width]="progressWidth()"></div>
 
-    <!-- Arrows for standard variant -->
-    @if (variant() === 'standard' && !disabled()) {
-      <div class="bui-slider-arrow left" (mousedown)="$event.stopPropagation()" (click)="decrement($event)">
-        <span class="bl-icons-tria_left"></span>
-      </div>
-    }
+    <!-- Arrows (show on hover via CSS) -->
+    <div class="bui-slider-arrow left" (mousedown)="$event.stopPropagation()" (click)="decrement($event)">
+      <span class="bl-icons-rightarrow_thin" style="display:inline-block;transform:rotate(180deg)"></span>
+    </div>
 
     <!-- Internal label (XYZ) -->
     @if (internalLabel()) {
@@ -33,11 +31,9 @@
       [class.right-aligned]="!!internalLabel()"
     >{{ displayValue() }}{{ suffix() }}</span>
 
-    @if (variant() === 'standard' && !disabled()) {
-      <div class="bui-slider-arrow right" (mousedown)="$event.stopPropagation()" (click)="increment($event)">
-        <span class="bl-icons-tria_right"></span>
-      </div>
-    }
+    <div class="bui-slider-arrow right" (mousedown)="$event.stopPropagation()" (click)="increment($event)">
+      <span class="bl-icons-rightarrow_thin"></span>
+    </div>
   </div>
 } @else {
   <!-- Edit mode: direct text input -->

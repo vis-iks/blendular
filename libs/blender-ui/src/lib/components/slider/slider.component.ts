@@ -49,7 +49,7 @@ export class BuiSliderComponent implements ControlValueAccessor, OnDestroy {
   label = input('');
 
   /** Slider style variant */
-  variant = input<'standard' | 'progress'>('progress');
+  variant = input<'standard' | 'progress'>('standard');
 
   /** Label shown inside the slider on the far left */
   internalLabel = input<string>('');
