@@ -13,11 +13,12 @@ import { OverlayModule, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { MenuItem } from './menu.interface';
 import { BuiCheckboxComponent } from '../checkbox/checkbox.component';
+import { BuiTooltipDirective } from '../tooltip/tooltip.directive';
 
 @Component({
   selector: 'bui-menu',
   standalone: true,
-  imports: [CommonModule, OverlayModule, BuiCheckboxComponent],
+  imports: [CommonModule, OverlayModule, BuiCheckboxComponent, BuiTooltipDirective],
   template: `
     <div class="bui-menu" (click)="$event.stopPropagation()">
       @for (item of items; track $index) {
@@ -29,7 +30,9 @@ import { BuiCheckboxComponent } from '../checkbox/checkbox.component';
             class="bui-menu-item"
             [class.disabled]="item.disabled"
             [class.active]="activeItem === item"
-            [attr.title]="item.tooltip"
+            [buiTooltip]="item.tooltip || ''"
+            [buiTooltipDetails]="item.tooltipDetails || ''"
+            [buiTooltipShortcut]="item.shortcut || ''"
             (click)="onItemClick(item, $event)"
             (mouseenter)="onItemMouseEnter(item, menuItemRef)"
           >

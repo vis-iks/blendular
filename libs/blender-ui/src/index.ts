@@ -41,3 +41,5 @@ export * from './lib/components/file-browser/file-browser.component';
 export * from './lib/components/graph-editor/graph-editor.component';
 export * from './lib/components/shader-editor/shader-editor.component';
 export * from './lib/components/menu/index';
+export * from './lib/components/tooltip/index';
+export * from './lib/components/popover/index';

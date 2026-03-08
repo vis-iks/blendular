@@ -1,0 +1,41 @@
+.bui-tooltip-container {
+  background-color: #1a1a1a;
+  border: 1px solid #111111;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  color: #cccccc;
+  font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
+  font-size: 11px;
+  padding: 6px 8px;
+  min-width: 150px;
+  max-width: 300px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.bui-tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.bui-tooltip-title {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.bui-tooltip-shortcut {
+  color: #888888;
+  margin-left: 12px;
+}
+
+.bui-tooltip-details {
+  color: #aaaaaa;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.bui-tooltip-container:not(:has(.bui-tooltip-details)) .bui-tooltip-header {
+  margin-bottom: 0;
+}

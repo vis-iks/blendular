@@ -13,7 +13,8 @@ import {
   BuiSegmentOption,
   BuiDropdownOption,
   MenubarComponent,
-  MenuItem
+  MenuItem,
+  BuiPopoverDirective
 } from '@blender-ui/core';
 
 @Component({
@@ -31,7 +32,8 @@ import {
     BuiSegmentedControlComponent,
     BuiCheckboxComponent,
     BuiDropdownComponent,
-    MenubarComponent
+    MenubarComponent,
+    BuiPopoverDirective
   ],
   templateUrl: './page7.component.html',
   styleUrl: './page7.component.scss',
@@ -106,6 +108,30 @@ export class Page7Component {
     this.panels.set(list);
   }
 
+  // Snap Panel Data
+  snapTargetMode = signal('increment');
+  snapBaseOptions: BuiSegmentOption[] = [
+    { label: 'Closest', value: 'closest' },
+    { label: 'Center', value: 'center' },
+    { label: 'Median', value: 'median' },
+    { label: 'Active', value: 'active' }
+  ];
+  snapBase = signal('closest');
+  snapTargetIndividualsEnabled1 = signal(false);
+  snapTargetIndividualsEnabled2 = signal(false);
+  absoluteIncrementSnap = signal(false);
+  alignRotationToTarget = signal(false);
+  backfaceCulling = signal(false);
+  
+  affectOptions: BuiSegmentOption[] = [
+    { label: 'Move', value: 'move' },
+    { label: 'Rotate', value: 'rotate' },
+    { label: 'Scale', value: 'scale' }
+  ];
+  affect = signal('move');
+
+  snapTargetSelection = signal('Exclude Non-Selectable');
+
   // Menubar data
   mainMenu: MenuItem[] = [
     {
@@ -123,7 +149,7 @@ export class Page7Component {
         { 
           label: 'Local View', 
           items: [
-            { label: 'Toggle Local View', shortcut: 'Numpad /' },
+            { label: 'Toggle Local View', shortcut: 'Numpad /', tooltip: 'Toggle Local View', tooltipDetails: 'Toggle local view for selected objects\nPython: bpy.ops.view3d.localview()' },
             { label: 'Remove from Local View', shortcut: 'Alt Numpad /' }
           ]
         },
@@ -133,7 +159,17 @@ export class Page7Component {
         { label: 'Viewpoint', items: [{ label: 'Top', shortcut: 'Numpad 7' }] },
         { label: 'Navigation', items: [{ label: 'Walk Navigation' }] },
         { label: 'Align View', items: [{ label: 'Align Active Camera to View', shortcut: 'Ctrl Alt Numpad 0' }] },
-        { label: 'View Regions', items: [{ label: 'Clipping Region', shortcut: 'Alt B' }] },
+        { 
+          label: 'View Regions', 
+          items: [
+            { 
+              label: 'Clipping Region', 
+              shortcut: 'Alt B',
+              tooltip: 'Clipping Region',
+              tooltipDetails: 'Set the view clipping region\nPython: bpy.ops.view3d.clip_border()'
+            }
+          ] 
+        },
         { separator: true },
         { label: 'Play Animation', shortcut: 'Space Bar' },
         { separator: true },

@@ -1,8 +1,115 @@
 <div class="page-container">
   <div class="blender-toolbar-container">
     <bui-menubar [items]="mainMenu"></bui-menubar>
+    <div class="toolbar-separator"></div>
+
+    <!-- Transformations -->
+    <div class="toolbar-group">
+      <button class="toolbar-tool-btn"><span class="material-symbols-outlined">public</span><span
+          class="toolbar-label">Global</span></button>
+      <button class="toolbar-tool-btn"><span class="material-symbols-outlined">architecture</span></button>
+    </div>
+
+    <!-- Snap settings button -->
+    <div class="toolbar-group">
+      <button class="toolbar-tool-btn active-blue"><span class="material-symbols-outlined">public</span></button>
+      <button class="toolbar-tool-dropdown" [buiPopover]="snapPopover"><span
+          class="material-symbols-outlined">straighten</span><span
+          class="material-symbols-outlined drop-arrow">arrow_drop_down</span></button>
+    </div>
   </div>
-  
+
+  <ng-template #snapPopover>
+    <div class="snap-popover-panel">
+      <div class="snap-section">
+        <div class="snap-header">Snap Base</div>
+        <bui-segmented-control [options]="snapBaseOptions" [(value)]="snapBase"></bui-segmented-control>
+      </div>
+
+      <div class="snap-section">
+        <div class="snap-header">Snap Target</div>
+        <div class="snap-list">
+          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'increment'"
+            (click)="snapTargetMode.set('increment')" (keydown.enter)="snapTargetMode.set('increment')">
+            <span class="material-symbols-outlined snap-icon">straighten</span>
+            <span>Increment</span>
+          </div>
+          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'grid'"
+            (click)="snapTargetMode.set('grid')" (keydown.enter)="snapTargetMode.set('grid')">
+            <span class="material-symbols-outlined snap-icon">grid_3x3</span>
+            <span>Grid</span>
+          </div>
+          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'vertex'"
+            (click)="snapTargetMode.set('vertex')" (keydown.enter)="snapTargetMode.set('vertex')">
+            <span class="material-symbols-outlined snap-icon">location_on</span>
+            <span>Vertex</span>
+          </div>
+          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'edge'"
+            (click)="snapTargetMode.set('edge')" (keydown.enter)="snapTargetMode.set('edge')">
+            <span class="material-symbols-outlined snap-icon">horizontal_rule</span>
+            <span>Edge</span>
+          </div>
+          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'face'"
+            (click)="snapTargetMode.set('face')" (keydown.enter)="snapTargetMode.set('face')">
+            <span class="material-symbols-outlined snap-icon">square</span>
+            <span>Face</span>
+          </div>
+          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'volume'"
+            (click)="snapTargetMode.set('volume')" (keydown.enter)="snapTargetMode.set('volume')">
+            <span class="material-symbols-outlined snap-icon">box</span>
+            <span>Volume</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="snap-section">
+        <div class="snap-header">Snap Target for Individual Elements</div>
+        <div class="snap-list tight">
+          <div class="snap-item nested">
+            <div tabindex="0" class="checkbox-mock" [class.checked]="snapTargetIndividualsEnabled1()"
+              (click)="snapTargetIndividualsEnabled1.set(!snapTargetIndividualsEnabled1())"
+              (keydown.enter)="snapTargetIndividualsEnabled1.set(!snapTargetIndividualsEnabled1())"></div>
+            <span>Face Project</span>
+          </div>
+          <div class="snap-item nested">
+            <div tabindex="0" class="checkbox-mock" [class.checked]="snapTargetIndividualsEnabled2()"
+              (click)="snapTargetIndividualsEnabled2.set(!snapTargetIndividualsEnabled2())"
+              (keydown.enter)="snapTargetIndividualsEnabled2.set(!snapTargetIndividualsEnabled2())"></div>
+            <span class="material-symbols-outlined snap-icon">architecture</span>
+            <span>Face Nearest</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="snap-section flush">
+        <bui-checkbox label="Absolute Increment Snap" [(checked)]="absoluteIncrementSnap"></bui-checkbox>
+        <bui-checkbox label="Align Rotation to Target" [(checked)]="alignRotationToTarget"></bui-checkbox>
+        <bui-checkbox label="Backface Culling" [(checked)]="backfaceCulling"></bui-checkbox>
+      </div>
+
+      <div class="snap-section">
+        <div class="snap-header">Target Selection</div>
+        <div class="snap-btn-row">
+          <button class="snap-action-btn"><span class="material-symbols-outlined">navigation</span> Exclude
+            Non-Selectable</button>
+        </div>
+      </div>
+
+      <div class="snap-section">
+        <div class="snap-header">Affect</div>
+        <bui-segmented-control [options]="affectOptions" [(value)]="affect"></bui-segmented-control>
+      </div>
+
+      <div class="snap-section">
+        <div class="snap-header">Rotation Increment</div>
+        <div class="snap-btn-row twin">
+          <button class="snap-action-btn">5°</button>
+          <button class="snap-action-btn">1°</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
   <header class="page-header">
     <h1>Property Panel Variants</h1>
     <p>High-fidelity reconstruction of Blender's property panels with grouped filters and choices.</p>
@@ -16,7 +123,8 @@
     }
 
     @if (panel.id === 'raytracing') {
-    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="raytracingEnabled" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="raytracingEnabled"
+      [draggable]="true" cdkDrag cdkDragLockAxis="y">
       <bui-field-group>
         <bui-field label="Method">
           <bui-dropdown [options]="rtMethodOptions" [(value)]="rtMethod"></bui-dropdown>
@@ -29,18 +137,22 @@
       <bui-panel title="Screen Tracing" variant="sub" [(expanded)]="stExpanded">
         <bui-field-group>
           <bui-field label="Precision">
-            <bui-slider [value]="stPrecision()" (valueChange)="stPrecision.set($event)" [min]="0" [max]="1" [precision]="3" variant="progress"></bui-slider>
+            <bui-slider [value]="stPrecision()" (valueChange)="stPrecision.set($event)" [min]="0" [max]="1"
+              [precision]="3" variant="progress"></bui-slider>
           </bui-field>
           <bui-field label="Thickness">
-            <bui-slider [value]="stThickness()" (valueChange)="stThickness.set($event)" [min]="0" [max]="1" [precision]="1" suffix=" m"></bui-slider>
+            <bui-slider [value]="stThickness()" (valueChange)="stThickness.set($event)" [min]="0" [max]="1"
+              [precision]="1" suffix=" m"></bui-slider>
           </bui-field>
         </bui-field-group>
       </bui-panel>
 
-      <bui-panel title="Denoising" variant="sub" [hasCheckbox]="true" [(checked)]="denoisingEnabled" [(expanded)]="denoisingExpanded">
+      <bui-panel title="Denoising" variant="sub" [hasCheckbox]="true" [(checked)]="denoisingEnabled"
+        [(expanded)]="denoisingExpanded">
       </bui-panel>
 
-      <bui-panel title="Fast GI Approximation" variant="sub" [hasCheckbox]="true" [(checked)]="fastGIEnabled" [(expanded)]="fastGIExpanded">
+      <bui-panel title="Fast GI Approximation" variant="sub" [hasCheckbox]="true" [(checked)]="fastGIEnabled"
+        [(expanded)]="fastGIExpanded">
       </bui-panel>
     </bui-panel>
     }
@@ -52,23 +164,29 @@
           <bui-dropdown [options]="volResolutionOptions" [(value)]="volResolution"></bui-dropdown>
         </bui-field>
         <bui-field label="Steps">
-          <bui-slider [value]="volSteps()" (valueChange)="volSteps.set($event)" [min]="1" [max]="256" [precision]="0"></bui-slider>
+          <bui-slider [value]="volSteps()" (valueChange)="volSteps.set($event)" [min]="1" [max]="256"
+            [precision]="0"></bui-slider>
         </bui-field>
         <bui-field label="Distribution">
-          <bui-slider [value]="volDistribution()" (valueChange)="volDistribution.set($event)" [min]="0" [max]="1" [precision]="3" variant="progress"></bui-slider>
+          <bui-slider [value]="volDistribution()" (valueChange)="volDistribution.set($event)" [min]="0" [max]="1"
+            [precision]="3" variant="progress"></bui-slider>
         </bui-field>
         <bui-field label="Max Depth">
-          <bui-slider [value]="volMaxDepth()" (valueChange)="volMaxDepth.set($event)" [min]="1" [max]="128" [precision]="0"></bui-slider>
+          <bui-slider [value]="volMaxDepth()" (valueChange)="volMaxDepth.set($event)" [min]="1" [max]="128"
+            [precision]="0"></bui-slider>
         </bui-field>
       </bui-field-group>
 
-      <bui-panel title="Custom Range" variant="sub" [hasCheckbox]="true" [(checked)]="customRangeEnabled" [(expanded)]="customRangeExpanded">
+      <bui-panel title="Custom Range" variant="sub" [hasCheckbox]="true" [(checked)]="customRangeEnabled"
+        [(expanded)]="customRangeExpanded">
         <bui-field-group>
           <bui-field label="Start">
-            <bui-slider [value]="customRangeStart()" (valueChange)="customRangeStart.set($event)" [min]="0" [max]="100" suffix=" m" [precision]="1"></bui-slider>
+            <bui-slider [value]="customRangeStart()" (valueChange)="customRangeStart.set($event)" [min]="0" [max]="100"
+              suffix=" m" [precision]="1"></bui-slider>
           </bui-field>
           <bui-field label="End">
-            <bui-slider [value]="customRangeEnd()" (valueChange)="customRangeEnd.set($event)" [min]="0" [max]="1000" suffix=" m" [precision]="0"></bui-slider>
+            <bui-slider [value]="customRangeEnd()" (valueChange)="customRangeEnd.set($event)" [min]="0" [max]="1000"
+              suffix=" m" [precision]="0"></bui-slider>
           </bui-field>
         </bui-field-group>
       </bui-panel>
@@ -82,24 +200,29 @@
           <bui-segmented-control [options]="shapeOptions" [(value)]="selectedShape"></bui-segmented-control>
         </bui-field>
         <bui-field label="Additional Subdivision">
-          <bui-slider [value]="additionalSubdivision()" (valueChange)="additionalSubdivision.set($event)" [min]="0" [max]="12" [step]="1" [precision]="0"></bui-slider>
+          <bui-slider [value]="additionalSubdivision()" (valueChange)="additionalSubdivision.set($event)" [min]="0"
+            [max]="12" [step]="1" [precision]="0"></bui-slider>
         </bui-field>
       </bui-field-group>
     </bui-panel>
     }
 
     @if (panel.id === 'simplify') {
-    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="simplifyEnabled" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="simplifyEnabled"
+      [draggable]="true" cdkDrag cdkDragLockAxis="y">
       <bui-panel title="Viewport" variant="sub" [(expanded)]="viewportExpanded">
         <bui-field-group>
           <bui-field label="Max Subdivision" [showDecorator]="true" [decoratorActive]="true">
-            <bui-slider [value]="viewportMaxSubdivision()" (valueChange)="viewportMaxSubdivision.set($event)" [min]="0" [max]="10" [precision]="0"></bui-slider>
+            <bui-slider [value]="viewportMaxSubdivision()" (valueChange)="viewportMaxSubdivision.set($event)" [min]="0"
+              [max]="10" [precision]="0"></bui-slider>
           </bui-field>
           <bui-field label="Max Child Particles" [showDecorator]="true" [decoratorActive]="true">
-            <bui-slider [value]="viewportMaxChildParticles()" (valueChange)="viewportMaxChildParticles.set($event)" [min]="0" [max]="2" [precision]="3" variant="progress"></bui-slider>
+            <bui-slider [value]="viewportMaxChildParticles()" (valueChange)="viewportMaxChildParticles.set($event)"
+              [min]="0" [max]="2" [precision]="3" variant="progress"></bui-slider>
           </bui-field>
           <bui-field label="Volume Resolution" [showDecorator]="true" [decoratorActive]="true">
-            <bui-slider [value]="viewportVolumeResolution()" (valueChange)="viewportVolumeResolution.set($event)" [min]="0" [max]="2" [precision]="3" variant="progress"></bui-slider>
+            <bui-slider [value]="viewportVolumeResolution()" (valueChange)="viewportVolumeResolution.set($event)"
+              [min]="0" [max]="2" [precision]="3" variant="progress"></bui-slider>
           </bui-field>
           <bui-field label="">
             <bui-checkbox label="Normals" [(checked)]="viewportNormals"></bui-checkbox>

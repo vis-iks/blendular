@@ -8,5 +8,6 @@ export interface MenuItem {
   items?: MenuItem[]; // For sub-menus
   action?: () => void;
   tooltip?: string;
+  tooltipDetails?: string;
   tooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
 }
