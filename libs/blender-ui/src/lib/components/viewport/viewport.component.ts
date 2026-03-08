@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './viewport.component.scss',
 })
 export class ViewportComponent {
+  showTools = input(true);
+
   tools = [
     { icon: 'crop_square', name: 'Select Box', active: false },
     { icon: 'ads_click', name: 'Cursor', active: false },

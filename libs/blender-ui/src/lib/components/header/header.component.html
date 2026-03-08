@@ -12,10 +12,10 @@
 
   <div class="header-center">
     <div class="workspace-tabs">
-      <button *ngFor="let ws of workspaces"
+      <button *ngFor="let ws of workspaces()"
               class="workspace-tab"
-              [class.active]="ws === activeWorkspace"
-              (click)="activeWorkspace = ws">
+              [class.active]="ws === activeWorkspaceSignal()"
+              (click)="selectWorkspace(ws)">
         {{ ws }}
       </button>
       <button class="add-workspace">+</button>
