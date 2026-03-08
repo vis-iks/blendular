@@ -1,0 +1,27 @@
+<div class="shader-editor-container">
+  <div class="grid-background"></div>
+
+  <svg class="connections-layer">
+    @for (conn of connectionPaths(); track $index) {
+      <path
+            [attr.d]="conn.path"
+            [attr.stroke]="conn.color"
+            fill="none"
+            stroke-width="2"
+            class="connection-path">
+      </path>
+    }
+  </svg>
+
+  <div class="nodes-layer">
+    @for (node of nodes(); track node.id) {
+      <lib-shader-node
+        [node]="node"
+        [style.left.px]="node.x"
+        [style.top.px]="node.y"
+        (positionChange)="onNodePositionChange($event)"
+        (dragMoved)="onNodeDragMoved($event)">
+      </lib-shader-node>
+    }
+  </div>
+</div>

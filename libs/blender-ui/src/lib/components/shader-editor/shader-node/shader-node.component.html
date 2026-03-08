@@ -1,0 +1,44 @@
+<div class="node" cdkDrag (cdkDragMoved)="onDragMoved($event)" (cdkDragEnded)="onDragEnded($event)">
+  <div class="node-header" cdkDragHandle [style.background-color]="getHeaderColor()">
+    <div class="header-content">
+      <span class="material-icons-round expand-icon">expand_more</span>
+      <span class="title">{{ node.title }}</span>
+    </div>
+  </div>
+
+  <div class="node-body">
+    <!-- Combined row loop logic is hard because inputs and outputs are separate arrays.
+         We'll just stack them: Inputs on top/left side, Outputs on right.
+         Or use absolute positioning for sockets? No, flex is better.
+    -->
+
+    <div class="sockets-container">
+      <div class="inputs-column">
+        @for (input of node.inputs; track input.id) {
+          <div class="socket-row input">
+            <div class="socket input" [attr.data-socket-id]="input.id" [style.background-color]="getSocketColor(input)">
+              <!-- Hover effect handled by CSS -->
+            </div>
+            <span class="label">{{ input.name }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="outputs-column">
+        @for (output of node.outputs; track output.id) {
+          <div class="socket-row output">
+            <span class="label">{{ output.name }}</span>
+            <div class="socket output" [attr.data-socket-id]="output.id" [style.background-color]="getSocketColor(output)"></div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Placeholder for node data controls (sliders etc) -->
+    @if (node.data) {
+      <div class="node-controls">
+          <!-- We could dynamically render controls here based on node.data -->
+      </div>
+    }
+  </div>
+</div>
