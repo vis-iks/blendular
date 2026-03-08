@@ -22,12 +22,14 @@
   white-space: nowrap;
   
   &:hover {
+    background-color: #3b3b3b;
     color: #ffffff;
+    border-radius: 4px;
   }
 
   &.active {
-    background-color: #4b4b4b; /* matches Blender active top menu item background roughly */
+    background-color: #4772b3; /* matches Blender active top menu item */
     color: #ffffff;
-    border-radius: 4px; /* Blender has slight rounding on active top bar item */
+    border-radius: 4px;
   }
 }

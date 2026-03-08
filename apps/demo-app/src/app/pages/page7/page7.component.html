@@ -1,23 +1,183 @@
 <div class="page-container">
   <div class="blender-toolbar-container">
+    <div class="toolbar-group">
+      <button class="toolbar-tool-dropdown editor-type-btn" [buiPopover]="editorTypePopover" style="padding-left: 8px;">
+        <span class="material-symbols-outlined">polyline</span>
+        <span class="material-symbols-outlined drop-arrow">arrow_drop_down</span>
+      </button>
+    </div>
+    
+    <div class="toolbar-group">
+      <button class="toolbar-tool-dropdown">
+        <span class="material-symbols-outlined" style="font-size: 14px; margin-right: 4px;">check_box_outline_blank</span>
+        <span class="toolbar-label">Object Mode</span>
+        <span class="material-symbols-outlined drop-arrow">arrow_drop_down</span>
+      </button>
+    </div>
+
     <bui-menubar [items]="mainMenu"></bui-menubar>
     <div class="toolbar-separator"></div>
 
     <!-- Transformations -->
     <div class="toolbar-group">
       <button class="toolbar-tool-btn"><span class="material-symbols-outlined">public</span><span
-          class="toolbar-label">Global</span></button>
-      <button class="toolbar-tool-btn"><span class="material-symbols-outlined">architecture</span></button>
+          class="toolbar-label">Global</span><span class="material-symbols-outlined drop-arrow" style="margin-left: 2px;">arrow_drop_down</span></button>
+      <button class="toolbar-tool-dropdown"><span class="material-symbols-outlined" style="font-size: 16px;">link</span><span class="material-symbols-outlined drop-arrow">arrow_drop_down</span></button>
     </div>
 
     <!-- Snap settings button -->
     <div class="toolbar-group">
-      <button class="toolbar-tool-btn active-blue"><span class="material-symbols-outlined">public</span></button>
+      <button class="toolbar-tool-btn"><span class="material-symbols-outlined" style="transform: rotate(180deg);">fingerprint</span></button>
       <button class="toolbar-tool-dropdown" [buiPopover]="snapPopover"><span
           class="material-symbols-outlined">straighten</span><span
           class="material-symbols-outlined drop-arrow">arrow_drop_down</span></button>
+      <button class="toolbar-tool-dropdown"><span class="material-symbols-outlined">adjust</span></button>
+      <button class="toolbar-tool-dropdown"><span class="material-symbols-outlined">show_chart</span></button>
     </div>
   </div>
+
+  <ng-template #editorTypePopover>
+    <div class="editor-type-popover">
+      <div class="editor-column">
+        <div class="editor-category">General</div>
+        <div class="editor-list">
+          <div class="editor-item active">
+            <span class="material-symbols-outlined editor-icon">polyline</span>
+            <span class="editor-label"><u>3</u>D Viewport</span>
+            <span class="editor-shortcut">Shift F5</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">image</span>
+            <span class="editor-label"><u>I</u>mage Editor</span>
+            <span class="editor-shortcut">Shift F10</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">texture</span>
+            <span class="editor-label"><u>U</u>V Editor</span>
+            <span class="editor-shortcut">Shift F10</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">scatter_plot</span>
+            <span class="editor-label"><u>G</u>eometry Node Editor</span>
+            <span class="editor-shortcut">Shift F3</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">layers</span>
+            <span class="editor-label"><u>C</u>ompositor</span>
+            <span class="editor-shortcut">Shift F3</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">radio_button_checked</span>
+            <span class="editor-label"><u>S</u>hader Editor</span>
+            <span class="editor-shortcut">Shift F3</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">apps</span>
+            <span class="editor-label"><u>T</u>exture Node Editor</span>
+            <span class="editor-shortcut">Shift F3</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">movie</span>
+            <span class="editor-label"><u>V</u>ideo Sequencer</span>
+            <span class="editor-shortcut">Shift F8</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">movie_filter</span>
+            <span class="editor-label"><u>M</u>ovie Clip Editor</span>
+            <span class="editor-shortcut">Shift F2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-column">
+        <div class="editor-category">Animation</div>
+        <div class="editor-list">
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">format_align_center</span>
+            <span class="editor-label">Dope <u>S</u>heet</span>
+            <span class="editor-shortcut">Shift F12</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">schedule</span>
+            <span class="editor-label">Time<u>l</u>ine</span>
+            <span class="editor-shortcut">Shift F12</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">show_chart</span>
+            <span class="editor-label">Graph <u>E</u>ditor</span>
+            <span class="editor-shortcut">Shift F6</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">route</span>
+            <span class="editor-label"><u>D</u>rivers</span>
+            <span class="editor-shortcut">Shift F6</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">menu_open</span>
+            <span class="editor-label"><u>N</u>onlinear Animation</span>
+            <span class="editor-shortcut"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-column">
+        <div class="editor-category">Scripting</div>
+        <div class="editor-list">
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">receipt_long</span>
+            <span class="editor-label">Te<u>x</u>t Editor</span>
+            <span class="editor-shortcut">Shift F11</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">terminal</span>
+            <span class="editor-label"><u>P</u>ython Console</span>
+            <span class="editor-shortcut">Shift F4</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">info</span>
+            <span class="editor-label">I<u>n</u>fo</span>
+            <span class="editor-shortcut"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-column">
+        <div class="editor-category">Data</div>
+        <div class="editor-list">
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">account_tree</span>
+            <span class="editor-label"><u>O</u>utliner</span>
+            <span class="editor-shortcut">Shift F9</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">toggle_on</span>
+            <span class="editor-label">P<u>r</u>operties</span>
+            <span class="editor-shortcut">Shift F7</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">folder</span>
+            <span class="editor-label"><u>F</u>ile Browser</span>
+            <span class="editor-shortcut">Shift F1</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">collections_bookmark</span>
+            <span class="editor-label"><u>A</u>sset Browser</span>
+            <span class="editor-shortcut">Shift F1</span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">grid_on</span>
+            <span class="editor-label">S<u>p</u>readsheet</span>
+            <span class="editor-shortcut"></span>
+          </div>
+          <div class="editor-item">
+            <span class="material-symbols-outlined editor-icon">settings</span>
+            <span class="editor-label">Preferences</span>
+            <span class="editor-shortcut"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 
   <ng-template #snapPopover>
     <div class="snap-popover-panel">

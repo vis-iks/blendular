@@ -93,13 +93,15 @@ export class MenubarComponent {
 
     this.overlayRef = this.overlay.create({
       positionStrategy,
-      hasBackdrop: true,
-      backdropClass: 'cdk-overlay-transparent-backdrop',
+      hasBackdrop: false,
       scrollStrategy: this.overlay.scrollStrategies.close()
     });
 
-    this.overlayRef.backdropClick().subscribe(() => {
-      this.closeAll();
+    this.overlayRef.outsidePointerEvents().subscribe((event) => {
+      const target = event.target as HTMLElement;
+      if (!this.menubar.nativeElement.contains(target)) {
+        this.closeAll();
+      }
     });
 
     const portal = new TemplatePortal(this.menuTemplate, this.viewContainerRef);

@@ -324,3 +324,84 @@
     }
   }
 }
+
+.editor-type-popover {
+  background-color: #1f1f1f;
+  border: 1px solid #111111;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  padding: 8px 12px;
+  gap: 16px;
+  user-select: none;
+}
+
+.editor-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+}
+
+.editor-category {
+  color: #aaaaaa;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px 6px;
+  border-bottom: 1px solid #2a2a2a;
+  margin-bottom: 4px;
+}
+
+.editor-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-item {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  cursor: pointer;
+  color: #cccccc;
+  font-size: 11px;
+  border-radius: 3px;
+  
+  &:hover:not(.active) {
+    background: #4772b3;
+    color: #ffffff;
+  }
+  
+  &.active {
+    background: #4772b3;
+    color: #ffffff;
+  }
+}
+
+.editor-icon {
+  font-size: 14px;
+  margin-right: 8px;
+  width: 14px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.editor-label {
+  flex: 1;
+  white-space: nowrap;
+  
+  u {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.editor-shortcut {
+  color: #777777;
+  font-size: 10px;
+  margin-left: 16px;
+}
+
+.editor-item:hover .editor-shortcut,
+.editor-item.active .editor-shortcut {
+  color: #cccccc;
+}
