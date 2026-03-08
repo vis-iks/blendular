@@ -1,28 +1,157 @@
-<!--
-<bui-layout>
-  <bui-header></bui-header>
+<div class="demo-layout">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Blender UI</h2>
+      <button class="theme-toggle" (click)="toggleTheme()" [title]="'Current theme: ' + themeName()">
+        {{ activeTheme().name === 'dark' ? '☀️' : '🌙' }}
+      </button>
+    </div>
 
-  <bui-viewport [blenderContextMenu]="menuItems"></bui-viewport>
-  <bui-timeline></bui-timeline>
-
-  <bui-outliner></bui-outliner>
-  <bui-properties>
-    <bui-modifier-panel></bui-modifier-panel>
-  </bui-properties>
-
-  <bui-footer></bui-footer>
-</bui-layout>
--->
-
-<div style="display: flex; flex-direction: column; height: 100vh; padding: 20px; gap: 20px; background-color: var(--bui-bg-dark); overflow: auto;">
-  <h2 style="color: white; margin: 0 0 10px;">Blender File Browser</h2>
-  <div style="height: 500px; border: 1px solid var(--bui-border-dark);">
-    <bui-file-browser></bui-file-browser>
+    <div class="categories" *ngFor="let category of categories">
+      <h3 class="category-title">{{ category.name }}</h3>
+      <button 
+        *ngFor="let tab of category.tabs"
+        class="tab-btn" 
+        [class.active]="selectedTab() === tab.id"
+        (click)="selectTab(tab.id)">
+        {{ tab.label }}
+      </button>
+    </div>
   </div>
 
-  <h2 style="color: white; margin: 20px 0 10px;">Blender Graph Editor</h2>
-  <div style="height: 500px; border: 1px solid var(--bui-border-dark);">
-    <bui-graph-editor></bui-graph-editor>
+  <div class="main-content">
+    <div class="component-showcase">
+      <!-- Standard Components -->
+      <div *ngIf="selectedTab() === 'checkbox'" class="showcase-card">
+        <h3>Checkbox Component</h3>
+        <div class="showcase-content flex-column" style="gap: 10px; max-width: 200px;">
+          <bui-checkbox label="Default Checkbox"></bui-checkbox>
+          <bui-checkbox label="Checked Checkbox" [checked]="true"></bui-checkbox>
+          <bui-checkbox label="Disabled Checkbox" [disabled]="true"></bui-checkbox>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'context-menu'" class="showcase-card">
+        <h3>Context Menu Component</h3>
+        <div class="showcase-content">
+          <div [blenderContextMenu]="menuItems" class="context-trigger-area" style="padding: 40px; border: 1px dashed var(--bui-border-color); background: var(--bui-panel-bg); text-align: center;">
+            Right-click in this area to see the context menu
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'number-input'" class="showcase-card">
+        <h3>Number Input Component</h3>
+        <div class="showcase-content" style="max-width: 300px; display: flex; flex-direction: column; gap: 10px;">
+          <bui-number-input placeholder="Default Value"></bui-number-input>
+          <bui-number-input label="X Position" [value]="10" suffix="m"></bui-number-input>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'select'" class="showcase-card">
+        <h3>Select Component</h3>
+        <div class="showcase-content" style="max-width: 200px;">
+          <bui-select [options]="[{label: 'Option 1', value: 1}, {label: 'Option 2', value: 2}]" placeholder="Select Option"></bui-select>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'section'" class="showcase-card">
+        <h3>Section Component</h3>
+        <div class="showcase-content">
+          <bui-section title="Transform">
+            <div style="padding: 10px;">
+              Content inside the expandable section.
+            </div>
+          </bui-section>
+        </div>
+      </div>
+
+      <!-- Application Layout -->
+      <div *ngIf="selectedTab() === 'header'" class="showcase-card">
+        <h3>Header Component</h3>
+        <div class="showcase-content mock-window">
+          <bui-header></bui-header>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'footer'" class="showcase-card">
+        <h3>Footer Component</h3>
+        <div class="showcase-content mock-window" style="height: 100px; display: flex; align-items: flex-end;">
+          <bui-footer></bui-footer>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'layout'" class="showcase-card full-height">
+        <h3>Layout Example</h3>
+        <div class="showcase-content mock-window" style="height: 500px;">
+          <bui-layout>
+            <bui-header></bui-header>
+            <bui-viewport></bui-viewport>
+            <bui-timeline></bui-timeline>
+            <bui-outliner></bui-outliner>
+            <bui-properties></bui-properties>
+            <bui-footer></bui-footer>
+          </bui-layout>
+        </div>
+      </div>
+
+      <!-- Blender Specific -->
+      <div *ngIf="selectedTab() === 'file-browser'" class="showcase-card full-height">
+        <h3>File Browser</h3>
+        <div class="showcase-content mock-window" style="height: 600px;">
+          <bui-file-browser></bui-file-browser>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'graph-editor'" class="showcase-card full-height">
+        <h3>Graph Editor</h3>
+        <div class="showcase-content mock-window" style="height: 500px;">
+          <bui-graph-editor></bui-graph-editor>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'modifier-panel'" class="showcase-card">
+        <h3>Modifier Panel</h3>
+        <div class="showcase-content mock-sidebar" style="width: 300px; min-height: 400px; background: var(--bui-bg-light);">
+          <bui-modifier-panel></bui-modifier-panel>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'outliner'" class="showcase-card">
+        <h3>Outliner</h3>
+        <div class="showcase-content mock-sidebar" style="width: 300px; min-height: 400px;">
+          <bui-outliner></bui-outliner>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'properties'" class="showcase-card">
+        <h3>Properties</h3>
+        <div class="showcase-content mock-sidebar" style="width: 300px; min-height: 400px;">
+          <bui-properties></bui-properties>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'scene-properties'" class="showcase-card">
+        <h3>Scene Properties</h3>
+        <div class="showcase-content mock-sidebar" style="width: 300px; min-height: 400px;">
+          <bui-scene-properties></bui-scene-properties>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'timeline'" class="showcase-card">
+        <h3>Timeline</h3>
+        <div class="showcase-content mock-window" style="height: 200px;">
+          <bui-timeline></bui-timeline>
+        </div>
+      </div>
+
+      <div *ngIf="selectedTab() === 'viewport'" class="showcase-card full-height">
+        <h3>Viewport</h3>
+        <div class="showcase-content mock-window" style="height: 500px;">
+          <bui-viewport></bui-viewport>
+        </div>
+      </div>
+    </div>
   </div>
 
   <h2 style="color: white; margin: 20px 0 10px;">Blender Shader Editor</h2>
@@ -30,7 +159,3 @@
     <lib-shader-editor></lib-shader-editor>
   </div>
 </div>
-
-<button class="theme-toggle" (click)="toggleTheme()" style="position: fixed; top: 10px; right: 10px; z-index: 100; font-size: 24px; background: none; border: none; cursor: pointer;">
-  {{ activeTheme().name === 'dark' ? '☀️' : '🌙' }}
-</button>
