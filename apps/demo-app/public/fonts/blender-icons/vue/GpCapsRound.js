@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const GpCapsRound = defineComponent({
+  name: 'GpCapsRound',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M515.778 574.807c-27.613.004-49.997 22.388-50 50v126.13H148.913v146.027h316.865v127.843c.003 27.613 22.387 49.997 50 50h400c27.613-.003 49.997-22.387 50-50v-400c-.003-27.612-22.387-49.996-50-50zM774.999 100c250.006 0 481.247 133.488 606.25 350s125.002 483.488 0 700c-125.003 216.512-356.244 350-606.25 350h-650V100z", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

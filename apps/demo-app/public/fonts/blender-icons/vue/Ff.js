@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const Ff = defineComponent({
+  name: 'Ff',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M150.586 200c-27.842 0-50.585 22.16-50.586 50v700c-.061 40.51 45.544 64.27 78.711 41.02l500-350c28.542-19.9 28.542-62.14 0-82.04l-500-350c-8.26-5.8-18.06-8.9-28.125-9zM800 100v1000h200V100z", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

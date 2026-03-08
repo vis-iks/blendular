@@ -30,8 +30,8 @@
   transition: background-color 0.1s;
 
   &.checked {
-    background-color: #555;
-    border-color: #666;
+    background-color: $bui-accent-blue;
+    border-color: $bui-border-dark;
 
     &.filled-variant {
       background-color: $bui-accent-blue; // Primary blue
@@ -46,7 +46,8 @@
 }
 
 .check-icon {
-  font-size: 14px;
+  font-size: 8px;
+  line-height: 1;
   color: white;
   pointer-events: none;
 }

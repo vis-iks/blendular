@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const Viewzoom = defineComponent({
+  name: 'Viewzoom',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M599.644 99.644c274.773 0 500 225.226 500 500 0 119.45-44.149 228.163-114.844 314.453l500.195 500.195a50.005 50.005 0 1 1-70.703 70.704L914.097 984.8c-86.29 70.695-195.004 114.844-314.453 114.844-274.773 0-500-225.227-500-500s225.227-500 500-500m0 100c-220.227 0-400 179.773-400 400 0 220.226 179.773 400 400 400s400-179.774 400-400c0-220.227-179.773-400-400-400", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

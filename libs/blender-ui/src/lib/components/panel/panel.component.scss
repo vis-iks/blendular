@@ -98,10 +98,12 @@
 }
 
 .chevron {
-  font-size: 14px;
+  font-size: 10px;
+  line-height: 1;
   color: #ccc;
   transition: transform 0.15s ease;
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 16px;
 
@@ -121,6 +123,10 @@
   font-size: 11px;
   font-weight: 500;
   color: $bui-text-color;
+
+  .bui-panel.unchecked & {
+    opacity: 0.4;
+  }
 }
 
 // ─── Body ───────────────────────────────────────────
@@ -130,6 +136,11 @@
   border-top: 1px solid $bui-border-dark;
   border-bottom-left-radius: $bui-radius-sm;
   border-bottom-right-radius: $bui-radius-sm;
+
+  &.content-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
 
   .bui-panel.sub-panel & {
     padding: 0; // Completely flush with parent grid

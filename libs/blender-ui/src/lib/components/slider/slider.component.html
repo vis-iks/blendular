@@ -13,7 +13,7 @@
     <!-- Arrows for standard variant -->
     @if (variant() === 'standard' && !disabled()) {
       <div class="bui-slider-arrow left" (mousedown)="$event.stopPropagation()" (click)="decrement($event)">
-        <span class="material-symbols-outlined">chevron_left</span>
+        <span class="bl-icons-tria_left"></span>
       </div>
     }
 
@@ -35,7 +35,7 @@
 
     @if (variant() === 'standard' && !disabled()) {
       <div class="bui-slider-arrow right" (mousedown)="$event.stopPropagation()" (click)="increment($event)">
-        <span class="material-symbols-outlined">chevron_right</span>
+        <span class="bl-icons-tria_right"></span>
       </div>
     }
   </div>

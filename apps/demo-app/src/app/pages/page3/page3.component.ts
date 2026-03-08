@@ -17,10 +17,10 @@ import {
 export class Page3Component {
   // Dropdown demos
   shadingOptions: BuiDropdownOption[] = [
-    { label: 'Solid', value: 'solid', icon: 'view_in_ar' },
-    { label: 'Material Preview', value: 'material', icon: 'palette' },
-    { label: 'Wireframe', value: 'wireframe', icon: 'grid_on' },
-    { label: 'Rendered', value: 'rendered', icon: 'photo_camera' },
+    { label: 'Solid', value: 'solid', icon: 'shading_solid' },
+    { label: 'Material Preview', value: 'material', icon: 'shading_texture' },
+    { label: 'Wireframe', value: 'wireframe', icon: 'shading_wire' },
+    { label: 'Rendered', value: 'rendered', icon: 'shading_rendered' },
   ];
 
   interpolationOptions: BuiDropdownOption[] = [

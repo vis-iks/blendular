@@ -16,7 +16,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background-color: var(--bui-panel-bg);
+  background-color: #353535;
   color: var(--bui-text-color);
   font-size: 12px;
   overflow: hidden;
@@ -51,13 +51,13 @@
     overflow: hidden;
     gap: 0;
 
-    .material-symbols-outlined {
-      font-size: 15px;
-    }
-
+  [class^="bl-icons-"], [class*=" bl-icons-"] {
+    font-size: 16px;
+    opacity: 0.9;
+  }
     .arrow {
       font-size: 12px;
-      margin-left: -1px;
+      margin-left: 3px;
     }
 
     &:hover {
@@ -96,7 +96,7 @@
       outline: none;
 
       &:focus {
-        border-color: var(--bui-primary);
+        border-color: var(--bui-accent-blue);
       }
 
       &::placeholder {
@@ -142,7 +142,7 @@
   }
 
   &.selected {
-    background-color: var(--bui-primary);
+    background-color: var(--bui-accent-blue);
     color: #fff;
 
     .node-controls { opacity: 0.85; }
@@ -166,7 +166,11 @@
   padding: 0;
   overflow: hidden;
 
-  .material-symbols-outlined { font-size: 16px; }
+  [class^="bl-icons-"], [class*=" bl-icons-"] {
+  font-size: 14px;
+}
+
+  .bl-icons { font-size: 16px; }
 
   &:hover { opacity: 1; }
 
@@ -184,14 +188,31 @@
   margin-right: 5px;
 
   &.collection {
-    color: #fff;
-    background-color: #555;
-    border-radius: 3px;
-    font-size: 12px;
+    color: #e6e6e6;
   }
 
-  &.camera, &.mesh, &.light {
+  &.camera, &.mesh {
     color: #e88e36;
+  }
+
+  [class*="bl-icons-outliner_ob_mesh"] {
+    color: #e88e36;
+  }
+
+  &.light {
+    color: #f5ce42;
+  }
+
+  &.mesh-data, &.camera-data {
+    color: #38b99d;
+  }
+
+  &.light-data {
+    color: #f5ce42;
+  }
+
+  &.material {
+    color: #eb4b4b;
   }
 }
 
@@ -214,13 +235,12 @@
   margin-left: 4px;
 
   .control-icon {
-    font-size: 14px;
+    margin-left: 6px;
+    font-size: 16px;
     cursor: pointer;
-    color: var(--bui-text-color);
-    opacity: 0.7;
+    color: #666;
 
     &:hover {
-      opacity: 1;
       color: #fff;
     }
   }

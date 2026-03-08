@@ -17,48 +17,48 @@ export class Page5Component {
   private outlinerActions(type: 'collection' | 'object'): BuiTreeAction[] {
     if (type === 'collection') {
       return [
-        { id: 'toggle', icon: 'check_box', active: true },
-        { id: 'visibility', icon: 'visibility', active: true },
-        { id: 'render', icon: 'photo_camera', active: true }
+        { id: 'toggle', icon: 'checkbox_hlt', active: true },
+        { id: 'visibility', icon: 'hide_off', active: true },
+        { id: 'render', icon: 'camera_data', active: true }
       ];
     }
     return [
-      { id: 'visibility', icon: 'visibility', active: true },
-      { id: 'render', icon: 'photo_camera', active: true }
+      { id: 'visibility', icon: 'hide_off', active: true },
+      { id: 'render', icon: 'camera_data', active: true }
     ];
   }
 
   // Blender-like scene hierarchy with actions
   sceneTree: BuiTreeNode[] = [
     {
-      id: 'scene', label: 'Scene Collection', icon: 'folder', expanded: true,
+      id: 'scene', label: 'Scene Collection', icon: 'outliner_collection', expanded: true,
       checked: true,
       actions: this.outlinerActions('collection'),
       children: [
         {
-          id: 'collection-1', label: 'Collection', icon: 'folder_open', expanded: true,
+          id: 'collection-1', label: 'Collection', icon: 'outliner_collection', expanded: true,
           checked: true,
           actions: this.outlinerActions('collection'),
           children: [
-            { id: 'cube', label: 'Cube', icon: 'view_in_ar', actions: this.outlinerActions('object') },
-            { id: 'camera', label: 'Camera', icon: 'photo_camera', actions: this.outlinerActions('object') },
-            { id: 'light', label: 'Light', icon: 'light_mode', actions: this.outlinerActions('object') },
+            { id: 'cube', label: 'Cube', icon: 'outliner_ob_mesh', actions: this.outlinerActions('object') },
+            { id: 'camera', label: 'Camera', icon: 'camera_data', actions: this.outlinerActions('object') },
+            { id: 'light', label: 'Light', icon: 'light', actions: this.outlinerActions('object') },
           ]
         },
         {
-          id: 'collection-2', label: 'Characters', icon: 'folder_open',
+          id: 'collection-2', label: 'Characters', icon: 'outliner_collection',
           checked: true,
           actions: this.outlinerActions('collection'),
           children: [
             {
-              id: 'armature', label: 'Armature', icon: 'accessibility_new',
+              id: 'armature', label: 'Armature', icon: 'armature_data',
               actions: this.outlinerActions('object'),
               children: [
-                { id: 'mesh-body', label: 'Body', icon: 'view_in_ar', actions: this.outlinerActions('object') },
-                { id: 'mesh-head', label: 'Head', icon: 'view_in_ar', actions: this.outlinerActions('object') },
+                { id: 'mesh-body', label: 'Body', icon: 'outliner_ob_mesh', actions: this.outlinerActions('object') },
+                { id: 'mesh-head', label: 'Head', icon: 'outliner_ob_mesh', actions: this.outlinerActions('object') },
               ]
             },
-            { id: 'material-skin', label: 'Skin Material', icon: 'palette' },
+            { id: 'material-skin', label: 'Skin Material', icon: 'material' },
           ]
         }
       ]
@@ -67,16 +67,16 @@ export class Page5Component {
 
   fileTree: BuiTreeNode[] = [
     {
-      id: 'root', label: 'project/', icon: 'folder', expanded: true,
+      id: 'root', label: 'project/', icon: 'filebrowser', expanded: true,
       children: [
         {
-          id: 'src', label: 'src/', icon: 'folder', expanded: true,
+          id: 'src', label: 'src/', icon: 'filebrowser', expanded: true,
           children: [
-            { id: 'app-ts', label: 'app.component.ts', icon: 'code' },
-            { id: 'main-ts', label: 'main.ts', icon: 'code' },
+            { id: 'app-ts', label: 'app.component.ts', icon: 'text' },
+            { id: 'main-ts', label: 'main.ts', icon: 'text' },
           ]
         },
-        { id: 'package', label: 'package.json', icon: 'settings' },
+        { id: 'package', label: 'package.json', icon: 'preferences' },
       ]
     }
   ];
@@ -89,7 +89,7 @@ export class Page5Component {
     if (event.action.id === 'toggle') {
       // Toggle the node's checked state
       event.node.checked = !event.node.checked;
-      event.action.icon = event.node.checked ? 'check_box' : 'check_box_outline_blank';
+      event.action.icon = event.node.checked ? 'checkbox_hlt' : 'checkbox_dehlt';
     } else {
       // Toggle the action itself (visibility/render)
       event.action.active = !event.action.active;

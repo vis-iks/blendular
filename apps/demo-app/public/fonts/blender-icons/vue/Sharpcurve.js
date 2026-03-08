@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const Sharpcurve = defineComponent({
+  name: 'Sharpcurve',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M748.047 99.735a50.005 50.005 0 0 0-46.875 39.453c-73.399 342.527-246.804 748.775-567.969 863.477a50.005 50.005 0 1 0 33.594 94.14C486.17 982.743 656.826 650.91 750 334.891c93.174 316.019 263.83 647.852 583.203 761.914a50.005 50.005 0 1 0 33.594-94.14c-321.165-114.702-494.57-520.95-567.969-863.477a50.005 50.005 0 0 0-50.781-39.453", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

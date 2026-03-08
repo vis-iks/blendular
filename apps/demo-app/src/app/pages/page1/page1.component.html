@@ -12,7 +12,7 @@
       <h4 class="demo-label">Standard Button</h4>
       <div class="demo-row">
         <bui-button (clicked)="onButtonClick()">Execute</bui-button>
-        <bui-button icon="play_arrow" (clicked)="onButtonClick()">Play</bui-button>
+        <bui-button icon="play" (clicked)="onButtonClick()">Play</bui-button>
         <bui-button [disabled]="true">Disabled</bui-button>
       </div>
       <p class="demo-info">Clicked {{ buttonClickCount() }} times</p>
@@ -22,7 +22,7 @@
     <div class="demo-block">
       <h4 class="demo-label">Toggle Button (pressed/unpressed)</h4>
       <div class="demo-row">
-        <bui-button variant="toggle" [(pressed)]="toggleState" icon="lock">Lock</bui-button>
+        <bui-button variant="toggle" [(pressed)]="toggleState" icon="locked">Lock</bui-button>
         <bui-button variant="toggle" [(pressed)]="toggleState">Toggle</bui-button>
       </div>
       <p class="demo-info">Toggle state: {{ toggleState() ? 'ON' : 'OFF' }}</p>
@@ -32,11 +32,11 @@
     <div class="demo-block">
       <h4 class="demo-label">Icon-Only Button</h4>
       <div class="demo-row">
-        <bui-button variant="icon" icon="visibility"></bui-button>
-        <bui-button variant="icon" icon="delete"></bui-button>
+        <bui-button variant="icon" icon="hide_off"></bui-button>
+        <bui-button variant="icon" icon="trash"></bui-button>
         <bui-button variant="icon" icon="settings"></bui-button>
         <bui-button variant="icon" icon="add"></bui-button>
-        <bui-button variant="icon" icon="content_copy"></bui-button>
+        <bui-button variant="icon" icon="duplicate"></bui-button>
       </div>
     </div>
   </section>

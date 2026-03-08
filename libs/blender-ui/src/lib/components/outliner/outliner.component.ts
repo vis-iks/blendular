@@ -5,7 +5,7 @@ import { ArrayDataSource } from '@angular/cdk/collections';
 
 export interface OutlinerNode {
   name: string;
-  type: 'collection' | 'camera' | 'mesh' | 'light';
+  type: 'collection' | 'camera' | 'mesh' | 'mesh-data' | 'material' | 'light' | 'light-data' | string;
   icon: string;
   children?: OutlinerNode[];
   expanded?: boolean;
@@ -17,28 +17,46 @@ export const DEFAULT_OUTLINER_NODES: OutlinerNode[] = [
   {
     name: 'Scene Collection',
     type: 'collection',
-    icon: 'format_list_bulleted',
+    icon: 'outliner',
     expanded: true,
     children: [
       {
         name: 'Collection',
         type: 'collection',
-        icon: 'folder_open',
+        icon: 'outliner',
         expanded: true,
         children: [
-          { name: 'Camera', type: 'camera', icon: 'videocam' },
-          { name: 'Cube', type: 'mesh', icon: 'change_history', selected: true, active: true },
-          { name: 'Light', type: 'light', icon: 'lightbulb' },
+          { name: 'Collection 1', type: 'collection', icon: 'outliner' },
+          { 
+            name: 'Cube', 
+            type: 'mesh', 
+            icon: 'outliner_ob_mesh', 
+            selected: true, 
+            active: true,
+            expanded: true,
+            children: [
+              {
+                name: 'Cube',
+                type: 'mesh-data',
+                icon: 'mesh_data',
+                expanded: true,
+                children: [
+                  { name: 'Material', type: 'material', icon: 'material' }
+                ]
+              }
+            ]
+          },
+          { 
+            name: 'Light', 
+            type: 'light', 
+            icon: 'light',
+            expanded: false,
+            children: [
+              { name: 'Light', type: 'light-data', icon: 'light_data' }
+            ]
+          },
         ],
-      },
-      {
-        name: 'Collection 2',
-        type: 'collection',
-        icon: 'folder_open',
-        children: [
-          { name: 'Light', type: 'light', icon: 'lightbulb_outline' },
-        ],
-      },
+      }
     ],
   },
 ];

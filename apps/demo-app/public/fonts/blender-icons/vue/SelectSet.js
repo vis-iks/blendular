@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const SelectSet = defineComponent({
+  name: 'SelectSet',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M100 100v200h100V200h100V100zm400 0v100h200V100zm400 0v100h200V100zm400 0v100h100v100h100V100zM100 500v200h100V500zm1300 0v200h100V500zM100 900v200h100V900zm1300 0v200h100V900zM100 1300v200h200v-100H200v-100zm1300 0v100h-100v100h200v-200zm-900 100v100h200v-100zm400 0v100h200v-100z", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

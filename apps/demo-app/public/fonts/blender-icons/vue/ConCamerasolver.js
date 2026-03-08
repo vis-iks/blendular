@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const ConCamerasolver = defineComponent({
+  name: 'ConCamerasolver',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M300 700v100H100V700zm400 400h100v300H700zm0-1000h100v300H700zM450 500c-27.613.003-49.997 22.387-50 50v400c.003 27.613 22.387 49.997 50 50h600c27.613-.003 49.997-22.387 50-50V800h33.594l261.914 190.43A50.07 50.07 0 0 0 1425 1000h25c27.613-.003 49.997-22.387 50-50V550c-.003-27.613-22.387-49.997-50-50h-25a50.04 50.04 0 0 0-29.492 9.57L1133.594 700H1100V550c-.003-27.613-22.387-49.997-50-50zm50 100h502.734v300H500zm900 30.078v239.844L1234.96 750z", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

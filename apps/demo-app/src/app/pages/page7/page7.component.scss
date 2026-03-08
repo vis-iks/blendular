@@ -60,7 +60,8 @@
   font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
   font-size: 11px;
   
-  .material-symbols-outlined {
+  .bl-icons-checkmark,
+  [class^="bl-icons-"], [class*=" bl-icons-"] {
     font-size: 16px;
   }
   
@@ -70,9 +71,12 @@
   }
   
   .drop-arrow {
-    font-size: 18px;
-    margin-left: -2px;
-    margin-right: -4px;
+    font-size: 10px;
+    line-height: 1;
+    margin-left: 6px;
+    margin-right: -2px;
+    display: inline-block;
+    transform: rotate(90deg);
   }
 }
 
@@ -210,7 +214,8 @@
   gap: 6px;
   cursor: pointer;
   
-  .material-symbols-outlined {
+  .bl-icons-checkmark,
+  [class^="bl-icons-"], [class*=" bl-icons-"] {
     font-size: 14px;
   }
   

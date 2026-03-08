@@ -12,13 +12,12 @@ import { CommonModule } from '@angular/common';
 import { OverlayModule, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { MenuItem } from './menu.interface';
-import { BuiCheckboxComponent } from '../checkbox/checkbox.component';
 import { BuiTooltipDirective } from '../tooltip/tooltip.directive';
 
 @Component({
   selector: 'bui-menu',
   standalone: true,
-  imports: [CommonModule, OverlayModule, BuiCheckboxComponent, BuiTooltipDirective],
+  imports: [CommonModule, OverlayModule, BuiTooltipDirective],
   template: `
     <div class="bui-menu" (click)="$event.stopPropagation()">
       @for (item of items; track $index) {
@@ -39,13 +38,12 @@ import { BuiTooltipDirective } from '../tooltip/tooltip.directive';
             <!-- Prefix Icon / Checkbox area -->
             <div class="bui-menu-item-prefix">
               @if (item.checked !== undefined) {
-                <span class="material-symbols-outlined check-icon">
-                  {{ item.checked ? 'check' : '' }}
+                <span class="check-icon" [ngClass]="item.checked ? 'bl-icons-checkmark' : ''">
                 </span>
                 <!-- We do not use the full checkbox to prevent focus trapping or extra clicks,
                      we just display the check visually matching Blender style -->
               } @else if (item.icon) {
-                <span class="material-symbols-outlined item-icon">{{ item.icon }}</span>
+                <span class="item-icon" [ngClass]="'bl-icons-' + item.icon"></span>
               }
             </div>
 
@@ -55,7 +53,7 @@ import { BuiTooltipDirective } from '../tooltip/tooltip.directive';
             <!-- Suffix: Shortcut or Submenu Arrow -->
             <div class="bui-menu-item-suffix">
               @if (item.items && item.items.length > 0) {
-                <span class="material-symbols-outlined submenu-icon">arrow_right</span>
+                <span class="bl-icons-rightarrow_thin submenu-icon"></span>
               } @else if (item.shortcut) {
                 <span class="bui-menu-item-shortcut">{{ item.shortcut }}</span>
               }

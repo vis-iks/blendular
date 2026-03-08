@@ -2,7 +2,7 @@
   <!-- Trigger button -->
   <button class="bui-dropdown-trigger" (click)="toggle()" [disabled]="disabled()">
     @if (selectedIcon()) {
-      <span class="trigger-icon material-symbols-outlined">{{ selectedIcon() }}</span>
+      <span class="trigger-icon" [ngClass]="'bl-icons-' + selectedIcon()"></span>
     }
     <span class="trigger-label">{{ selectedLabel() }}</span>
     <span class="trigger-arrow">▾</span>
@@ -33,7 +33,7 @@
             (click)="selectOption(option)"
           >
             @if (option.icon) {
-              <span class="option-icon material-symbols-outlined">{{ option.icon }}</span>
+              <span class="option-icon" [ngClass]="'bl-icons-' + option.icon"></span>
             }
             <span class="option-label">{{ option.label }}</span>
           </button>

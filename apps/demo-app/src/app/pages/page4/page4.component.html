@@ -9,7 +9,7 @@
     <p class="section-desc">Click the header to expand/collapse. Chevron rotates to indicate state.</p>
 
     <div class="demo-block" style="max-width: 320px;">
-      <bui-panel title="Transform" icon="transform" [(expanded)]="panelExpanded" [draggable]="true">
+      <bui-panel title="Transform" icon="con_transform" [(expanded)]="panelExpanded" [draggable]="true">
         <div class="panel-content">
           <bui-slider label="X" [value]="1.5" [min]="-10" [max]="10" [step]="0.01" [precision]="3" suffix=" m"></bui-slider>
           <bui-slider label="Y" [value]="0" [min]="-10" [max]="10" [step]="0.01" [precision]="3" suffix=" m"></bui-slider>
@@ -19,7 +19,7 @@
 
       <div style="margin-top: 8px;"></div>
 
-      <bui-panel title="Modifiers" icon="tune">
+      <bui-panel title="Modifiers" icon="modifier">
         <div class="panel-content">
           <p class="placeholder-text">Subdivision Surface, Mirror…</p>
         </div>
@@ -27,7 +27,7 @@
 
       <div style="margin-top: 8px;"></div>
 
-      <bui-panel title="Constraints" icon="link" [expanded]="false">
+      <bui-panel title="Constraints" icon="constraint" [expanded]="false">
         <div class="panel-content">
           <p class="placeholder-text">No constraints applied.</p>
         </div>
@@ -47,13 +47,13 @@
       <h4 class="demo-label">Horizontal Tabs</h4>
       <div style="max-width: 400px;">
         <bui-tabs [(activeIndex)]="activeTabIndex">
-          <bui-tab label="Render" icon="photo_camera">
+          <bui-tab label="Render" icon="scene">
             <div class="tab-demo-content">Render engine settings: Cycles, Samples, Denoising…</div>
           </bui-tab>
-          <bui-tab label="Output" icon="save">
+          <bui-tab label="Output" icon="output">
             <div class="tab-demo-content">Output file format, resolution, frame range…</div>
           </bui-tab>
-          <bui-tab label="Scene" icon="public">
+          <bui-tab label="Scene" icon="world_data">
             <div class="tab-demo-content">Scene units, gravity, rigid body world…</div>
           </bui-tab>
         </bui-tabs>
@@ -66,13 +66,13 @@
       <h4 class="demo-label">Vertical Tabs</h4>
       <div style="max-width: 400px; height: 220px;">
         <bui-tabs orientation="vertical">
-          <bui-tab label="Object" icon="view_in_ar">
+          <bui-tab label="Object" icon="object_data">
             <div class="tab-demo-content">Object properties and settings</div>
           </bui-tab>
-          <bui-tab label="Material" icon="palette">
+          <bui-tab label="Material" icon="material">
             <div class="tab-demo-content">Material slots and shader settings</div>
           </bui-tab>
-          <bui-tab label="Physics" icon="science">
+          <bui-tab label="Physics" icon="physics">
             <div class="tab-demo-content">Physics simulation settings</div>
           </bui-tab>
         </bui-tabs>
@@ -84,19 +84,19 @@
       <h4 class="demo-label">Vertical Tabs (Icon Only)</h4>
       <div style="max-width: 400px; height: 180px;">
         <bui-tabs orientation="vertical" [iconOnly]="true">
-          <bui-tab label="Object" icon="view_in_ar">
+          <bui-tab label="Object" icon="object_data">
             <div class="tab-demo-content">Object properties and settings</div>
           </bui-tab>
-          <bui-tab label="Material" icon="palette">
+          <bui-tab label="Material" icon="material">
             <div class="tab-demo-content">Material slots and shader settings</div>
           </bui-tab>
-          <bui-tab label="Physics" icon="science">
+          <bui-tab label="Physics" icon="physics">
             <div class="tab-demo-content">Physics simulation settings</div>
           </bui-tab>
-          <bui-tab label="Particles" icon="grain">
+          <bui-tab label="Particles" icon="particles">
             <div class="tab-demo-content">Particle system settings</div>
           </bui-tab>
-          <bui-tab label="Constraints" icon="link">
+          <bui-tab label="Constraints" icon="constraint">
             <div class="tab-demo-content">Constraint settings</div>
           </bui-tab>
         </bui-tabs>

@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const ModLattice = defineComponent({
+  name: 'ModLattice',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M450.465 100.488a50.005 50.005 0 0 0-48.632 38.867L100.66 1438.183a50.005 50.005 0 0 0 48.633 61.328h997.46a50.005 50.005 0 0 0 48.829-38.476l303.71-1299.024a50.005 50.005 0 0 0-48.828-61.523zm39.844 100H887.77l-115.43 500H374.49zm500 0h397.266l-116.992 500H875.075zm-639.062 600h398.047l-138.282 599.023H212.38zm500.586 0h395.312l-140.039 599.023h-393.36z", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

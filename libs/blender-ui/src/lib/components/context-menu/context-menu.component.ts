@@ -32,7 +32,7 @@ import { ContextMenuItem } from './context-menu.interface';
               (click)="$event.stopPropagation(); onItemClick(item)"
             >
               @if (item.icon) {
-                <span class="material-symbols-outlined menu-icon">{{ item.icon }}</span>
+                <span class="menu-icon" [ngClass]="'bl-icons-' + item.icon"></span>
               } @else {
                 <span class="menu-spacer"></span>
               }

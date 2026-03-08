@@ -57,7 +57,7 @@
 }
 
 .chevron {
-  font-size: 7px;
+  font-size: 10px;
   transition: transform 0.12s ease;
   display: inline-block;
 
@@ -79,6 +79,29 @@
   color: var(--bui-text-muted, #9ca3af);
   flex-shrink: 0;
   margin-right: 2px;
+
+  // Blender icon colors
+  &.bl-icons-outliner_collection,
+  &.bl-icons-outliner { color: #e6e6e6; }
+
+  &.bl-icons-mesh,
+  &.bl-icons-outliner_ob_mesh,
+  &.bl-icons-object_data,
+  &.bl-icons-camera_data { color: #e88e36; }
+
+  &.bl-icons-light,
+  &.bl-icons-outliner_ob_light,
+  &.bl-icons-light_data { color: #f5ce42; }
+
+  &.bl-icons-mesh_data { color: #38b99d; }
+
+  &.bl-icons-armature_data { color: #38b99d; }
+
+  &.bl-icons-material { color: #eb4b4b; }
+
+  &.bl-icons-filebrowser,
+  &.bl-icons-text,
+  &.bl-icons-preferences { color: #aaa; }
 
   .selected & {
     color: $bui-text-color;

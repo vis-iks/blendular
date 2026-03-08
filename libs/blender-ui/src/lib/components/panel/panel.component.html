@@ -1,7 +1,7 @@
-<div class="bui-panel" [class.collapsed]="!expanded()" [class.sub-panel]="isSub()">
+<div class="bui-panel" [class.collapsed]="!expanded()" [class.sub-panel]="isSub()" [class.unchecked]="hasCheckbox() && !checked()">
   <!-- Header -->
   <div class="bui-panel-header" (click)="toggle()">
-    <span class="chevron material-symbols-outlined" [class.is-sub]="isSub()">{{ expanded() ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</span>
+    <span class="chevron bl-icons-rightarrow_thin" [class.is-sub]="isSub()" [class.rotated]="expanded()"></span>
     
     @if (hasCheckbox()) {
       <div class="header-checkbox-wrapper" (click)="$event.stopPropagation()">
@@ -10,7 +10,7 @@
     }
 
     @if (icon()) {
-      <span class="header-icon material-symbols-outlined">{{ icon() }}</span>
+      <span class="header-icon" [ngClass]="'bl-icons-' + icon()"></span>
     }
     <span class="header-title" [class.is-sub]="isSub()">{{ title() }}</span>
 
@@ -21,7 +21,7 @@
 
   <!-- Body (collapsible content) -->
   @if (expanded()) {
-    <div class="bui-panel-body">
+    <div class="bui-panel-body" [class.content-disabled]="hasCheckbox() && !checked()">
       <ng-content></ng-content>
     </div>
   }

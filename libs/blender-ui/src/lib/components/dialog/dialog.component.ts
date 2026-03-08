@@ -25,8 +25,7 @@ import { PortalModule } from '@angular/cdk/portal';
           <!-- Header -->
           <div class="bui-dialog-header">
             <span class="bui-dialog-title">{{ title() }}</span>
-            <button class="bui-dialog-close material-symbols-outlined" (click)="close.emit()">
-              close
+            <button class="bui-dialog-close bl-icons-cancel" (click)="close.emit()">
             </button>
           </div>
           

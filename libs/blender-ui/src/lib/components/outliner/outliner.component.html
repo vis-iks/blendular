@@ -2,25 +2,25 @@
   <!-- Header -->
   <div class="outliner-header">
     <button class="header-btn" title="Display Mode">
-      <span class="material-symbols-outlined text-sm">view_list</span>
-      <span class="material-symbols-outlined text-xs arrow">expand_more</span>
+      <span class="bl-icons-outliner text-sm"></span>
+      <span class="bl-icons-rightarrow_thin text-xs arrow" style="display: inline-block; transform: rotate(90deg);"></span>
     </button>
     <button class="header-btn" title="View Layer">
-      <span class="material-symbols-outlined text-sm">image</span>
-      <span class="material-symbols-outlined text-xs arrow">expand_more</span>
+      <span class="bl-icons-image text-sm"></span>
+      <span class="bl-icons-rightarrow_thin text-xs arrow" style="display: inline-block; transform: rotate(90deg);"></span>
     </button>
 
     <div class="search-box">
-      <span class="material-symbols-outlined search-icon">search</span>
+      <span class="bl-icons-viewzoom search-icon"></span>
       <input type="text" placeholder="Search" class="search-input">
     </div>
 
     <button class="header-btn" title="Filter">
-      <span class="material-symbols-outlined text-sm">filter_alt</span>
-      <span class="material-symbols-outlined text-xs arrow">expand_more</span>
+      <span class="bl-icons-filter text-sm"></span>
+      <span class="bl-icons-rightarrow_thin text-xs arrow" style="display: inline-block; transform: rotate(90deg);"></span>
     </button>
     <button class="header-btn" title="New Collection">
-      <span class="material-symbols-outlined text-sm">create_new_folder</span>
+      <span class="bl-icons-newfolder text-sm"></span>
     </button>
   </div>
 
@@ -39,16 +39,16 @@
              tabindex="0">
 
           <button cdkTreeNodeToggle class="toggle-btn invisible" [attr.aria-label]="'Toggle ' + node.name">
-              <span class="material-symbols-outlined">arrow_right</span>
+              <span class="bl-icons-rightarrow_thin"></span>
           </button>
 
-          <span class="material-symbols-outlined node-type-icon" [ngClass]="node.type">{{ node.icon }}</span>
+          <span class="node-type-icon" [ngClass]="[node.type, 'bl-icons-' + node.icon]"></span>
 
           <span class="node-name truncate">{{ node.name }}</span>
 
           <div class="node-controls">
-            <span class="material-symbols-outlined control-icon">visibility</span>
-            <span class="material-symbols-outlined control-icon">camera_alt</span>
+            <span class="bl-icons-hide_off control-icon"></span>
+            <span class="bl-icons-camera_data control-icon"></span>
           </div>
         </div>
       </cdk-nested-tree-node>
@@ -64,19 +64,18 @@
              tabindex="0">
 
           <button cdkTreeNodeToggle class="toggle-btn" [attr.aria-label]="'Toggle ' + node.name">
-            <span class="material-symbols-outlined">
-              {{ treeControl.isExpanded(node) ? 'arrow_drop_down' : 'arrow_right' }}
+            <span class="bl-icons-rightarrow_thin" [style.transform]="treeControl.isExpanded(node) ? 'rotate(90deg)' : 'none'" style="transition: transform 0.1s;">
             </span>
           </button>
 
-          <span class="material-symbols-outlined node-type-icon" [ngClass]="node.type">{{ node.icon }}</span>
+          <span class="node-type-icon" [ngClass]="[node.type, 'bl-icons-' + node.icon]"></span>
 
           <span class="node-name truncate">{{ node.name }}</span>
 
           <div class="node-controls">
-            <span class="material-symbols-outlined control-icon">check_box</span>
-            <span class="material-symbols-outlined control-icon">visibility</span>
-            <span class="material-symbols-outlined control-icon">camera_alt</span>
+            <span class="bl-icons-checkbox_hlt control-icon"></span>
+            <span class="bl-icons-hide_off control-icon"></span>
+            <span class="bl-icons-camera_data control-icon"></span>
           </div>
         </div>
 

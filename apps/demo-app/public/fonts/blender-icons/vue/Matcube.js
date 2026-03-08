@@ -1,0 +1,26 @@
+import { defineComponent, h } from 'vue';
+
+export const Matcube = defineComponent({
+  name: 'Matcube',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `bl-icons ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M450 100a50 50 0 0 0-35.352 14.648l-300 300A50 50 0 0 0 100 450v1000a50.005 50.005 0 0 0 50 50h1000a50 50 0 0 0 35.352-14.648l300-300A50 50 0 0 0 1500 1150V150a50.005 50.005 0 0 0-50-50zm20.703 100H1400v929.297L1129.297 1400H200V470.703z", "fillRule": "evenodd"}),
+        h('path', {"d": "M1349.023 198.828a50 50 0 0 0-34.375 15.235L1129.297 400H350a50.005 50.005 0 1 0 0 100h750v750a50.005 50.005 0 1 0 100 0V470.703l185.352-186.133a50.005 50.005 0 0 0-36.329-85.742", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

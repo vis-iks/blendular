@@ -8,7 +8,7 @@
         (click)="selectTab($index)"
       >
         @if (tab.icon()) {
-          <span class="tab-icon material-symbols-outlined">{{ tab.icon() }}</span>
+          <span class="tab-icon" [ngClass]="'bl-icons-' + tab.icon()"></span>
         }
         <span class="tab-label">{{ tab.label() }}</span>
       </button>

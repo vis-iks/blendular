@@ -31,10 +31,10 @@ export class Page6Component {
   menuY = signal(0);
   
   menuItems: ContextMenuItem[] = [
-    { label: 'Move', icon: 'open_with' },
-    { label: 'Rotate', icon: 'sync' },
-    { label: 'Scale', icon: 'aspect_ratio' },
-    { label: 'Delete', icon: 'delete', disabled: true },
+    { label: 'Move', icon: 'object_origin' },
+    { label: 'Rotate', icon: 'orientation_gimbal' },
+    { label: 'Scale', icon: 'fullscreen_enter' },
+    { label: 'Delete', icon: 'trash', disabled: true },
   ];
 
   openDialog() {

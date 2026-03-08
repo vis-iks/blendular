@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         [class.filled-variant]="variant() === 'filled'"
       >
         @if (checked()) {
-          <span class="material-symbols-outlined check-icon">check</span>
+          <span class="bl-icons-checkmark check-icon"></span>
         }
       </div>
       @if (label()) {

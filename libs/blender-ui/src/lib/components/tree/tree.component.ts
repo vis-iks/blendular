@@ -51,7 +51,7 @@ export interface BuiTreeNode {
       <!-- Expand/collapse chevron -->
       @if (node().children && node().children!.length > 0) {
         <button class="node-toggle" (click)="toggleExpand($event)">
-          <span class="chevron" [class.expanded]="expanded()">▶</span>
+          <span class="chevron bl-icons-rightarrow_thin" [class.expanded]="expanded()"></span>
         </button>
       } @else {
         <span class="node-spacer"></span>
@@ -59,7 +59,7 @@ export interface BuiTreeNode {
 
       <!-- Node icon -->
       @if (node().icon) {
-        <span class="node-icon material-symbols-outlined">{{ node().icon }}</span>
+        <span class="node-icon" [ngClass]="'bl-icons-' + node().icon"></span>
       }
 
       <!-- Node label -->
@@ -73,11 +73,10 @@ export interface BuiTreeNode {
         <div class="node-actions">
           @for (action of node().actions; track action.id) {
             <button
-              class="node-action material-symbols-outlined"
-              [class.active]="action.active"
+              class="node-action"
+              [ngClass]="[action.icon ? 'bl-icons-' + action.icon : '', action.active ? 'active' : '']"
               (click)="onActionClick($event, action)"
             >
-              {{ action.icon }}
             </button>
           }
         </div>
@@ -87,7 +86,9 @@ export interface BuiTreeNode {
     <!-- Children (recursive) with indent guide line -->
     @if (expanded() && node().children && node().children!.length > 0) {
       <div class="children-group" [class.hierarchy-disabled]="isNodeUnchecked() || hierarchyDisabled()">
-        <div class="indent-guide" [style.left.px]="depth() * 20 + 12"></div>
+        @if (node().checked !== undefined) {
+          <div class="indent-guide" [style.left.px]="depth() * 20 + 12"></div>
+        }
         @for (child of node().children; track child.id) {
           <bui-tree-node
             [node]="child"

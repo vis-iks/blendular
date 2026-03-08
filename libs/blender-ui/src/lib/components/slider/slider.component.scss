@@ -58,8 +58,8 @@
     background: rgba(255, 255, 255, 0.05);
   }
 
-  .material-symbols-outlined {
-    font-size: 14px;
+  [class^="bl-icons-"], [class*=" bl-icons-"] {
+    font-size: 16px;
   }
 }
 
@@ -75,7 +75,7 @@
 
   .progress-variant & {
     background: $bui-accent-blue; // Blender blue progress
-    opacity: 0.8;
+    opacity: 1;
   }
 }
 
