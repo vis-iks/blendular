@@ -1,4 +1,8 @@
 <div class="page-container">
+  <div class="blender-toolbar-container">
+    <bui-menubar [items]="mainMenu"></bui-menubar>
+  </div>
+  
   <header class="page-header">
     <h1>Property Panel Variants</h1>
     <p>High-fidelity reconstruction of Blender's property panels with grouped filters and choices.</p>
@@ -6,73 +10,65 @@
 
   <div class="properties-layout" cdkDropList (cdkDropListDropped)="onDrop($event)">
     @for (panel of panels(); track panel.id) {
-    @if (panel.id === '3d_cursor') {
-    <!-- 3D Cursor Panel -->
-    <bui-panel [title]="panel.title" [expanded]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
-      <bui-field-group header="Location:">
-        <bui-field variant="compact">
-          <bui-slider internalLabel="X" [value]="cursorLocation().x" suffix=" m"
-            (valueChange)="cursorLocation().x = $event" [precision]="2"></bui-slider>
+    @if (panel.id === 'light_paths') {
+    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+    </bui-panel>
+    }
+
+    @if (panel.id === 'raytracing') {
+    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="raytracingEnabled" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+      <bui-field-group>
+        <bui-field label="Method">
+          <bui-dropdown [options]="rtMethodOptions" [(value)]="rtMethod"></bui-dropdown>
         </bui-field>
-        <bui-field variant="compact">
-          <bui-slider internalLabel="Y" [value]="cursorLocation().y" suffix=" m"
-            (valueChange)="cursorLocation().y = $event" [precision]="2"></bui-slider>
-        </bui-field>
-        <bui-field variant="compact">
-          <bui-slider internalLabel="Z" [value]="cursorLocation().z" suffix=" m"
-            (valueChange)="cursorLocation().z = $event" [precision]="2"></bui-slider>
+        <bui-field label="Resolution">
+          <bui-dropdown [options]="rtResolutionOptions" [(value)]="rtResolution"></bui-dropdown>
         </bui-field>
       </bui-field-group>
 
-      <bui-field-group header="Rotation:">
-        <bui-field variant="compact">
-          <bui-slider internalLabel="X" [value]="cursorRotation().x" suffix="°"
-            (valueChange)="cursorRotation().x = $event" [precision]="2"></bui-slider>
-        </bui-field>
-        <bui-field variant="compact">
-          <bui-slider internalLabel="Y" [value]="cursorRotation().y" suffix="°"
-            (valueChange)="cursorRotation().y = $event" [precision]="2"></bui-slider>
-        </bui-field>
-        <bui-field variant="compact">
-          <bui-slider internalLabel="Z" [value]="cursorRotation().z" suffix="°"
-            (valueChange)="cursorRotation().z = $event" [precision]="2"></bui-slider>
-        </bui-field>
-      </bui-field-group>
+      <bui-panel title="Screen Tracing" variant="sub" [(expanded)]="stExpanded">
+        <bui-field-group>
+          <bui-field label="Precision">
+            <bui-slider [value]="stPrecision()" (valueChange)="stPrecision.set($event)" [min]="0" [max]="1" [precision]="3" variant="progress"></bui-slider>
+          </bui-field>
+          <bui-field label="Thickness">
+            <bui-slider [value]="stThickness()" (valueChange)="stThickness.set($event)" [min]="0" [max]="1" [precision]="1" suffix=" m"></bui-slider>
+          </bui-field>
+        </bui-field-group>
+      </bui-panel>
 
-      <bui-field variant="compact">
-        <bui-dropdown [options]="rotationModeOptions" [(value)]="rotationMode"></bui-dropdown>
-      </bui-field>
+      <bui-panel title="Denoising" variant="sub" [hasCheckbox]="true" [(checked)]="denoisingEnabled" [(expanded)]="denoisingExpanded">
+      </bui-panel>
+
+      <bui-panel title="Fast GI Approximation" variant="sub" [hasCheckbox]="true" [(checked)]="fastGIEnabled" [(expanded)]="fastGIExpanded">
+      </bui-panel>
     </bui-panel>
     }
 
     @if (panel.id === 'volumes') {
-    <!-- Volumes Panel -->
-    <bui-panel [title]="panel.title" [expanded]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
       <bui-field-group>
         <bui-field label="Resolution">
-          <bui-dropdown [options]="resolutionOptions" [value]="resolution()"
-            (valueChange)="resolution.set($any($event))"></bui-dropdown>
+          <bui-dropdown [options]="volResolutionOptions" [(value)]="volResolution"></bui-dropdown>
         </bui-field>
         <bui-field label="Steps">
-          <bui-slider [value]="64" [min]="1" [max]="1024" [precision]="2"></bui-slider>
+          <bui-slider [value]="volSteps()" (valueChange)="volSteps.set($event)" [min]="1" [max]="256" [precision]="0"></bui-slider>
         </bui-field>
         <bui-field label="Distribution">
-          <bui-slider [value]="0.8" [min]="0" [max]="1" [precision]="2" variant="progress"></bui-slider>
+          <bui-slider [value]="volDistribution()" (valueChange)="volDistribution.set($event)" [min]="0" [max]="1" [precision]="3" variant="progress"></bui-slider>
         </bui-field>
         <bui-field label="Max Depth">
-          <bui-slider [value]="16" [min]="1" [max]="128" [precision]="2"></bui-slider>
+          <bui-slider [value]="volMaxDepth()" (valueChange)="volMaxDepth.set($event)" [min]="1" [max]="128" [precision]="0"></bui-slider>
         </bui-field>
       </bui-field-group>
 
-      <!-- Nested integrated Sub-panel -->
-      <bui-panel title="Custom Range" variant="sub" [hasCheckbox]="true" [checked]="customRangeEnabled()"
-        (checkedChange)="customRangeEnabled.set($event)" [expanded]="customRangeEnabled()">
+      <bui-panel title="Custom Range" variant="sub" [hasCheckbox]="true" [(checked)]="customRangeEnabled" [(expanded)]="customRangeExpanded">
         <bui-field-group>
           <bui-field label="Start">
-            <bui-slider [value]="0.1" [min]="0" [max]="100" suffix=" m" [precision]="1"></bui-slider>
+            <bui-slider [value]="customRangeStart()" (valueChange)="customRangeStart.set($event)" [min]="0" [max]="100" suffix=" m" [precision]="1"></bui-slider>
           </bui-field>
           <bui-field label="End">
-            <bui-slider [value]="100" [min]="0" [max]="1000" suffix=" m" [precision]="0"></bui-slider>
+            <bui-slider [value]="customRangeEnd()" (valueChange)="customRangeEnd.set($event)" [min]="0" [max]="1000" suffix=" m" [precision]="0"></bui-slider>
           </bui-field>
         </bui-field-group>
       </bui-panel>
@@ -80,40 +76,37 @@
     }
 
     @if (panel.id === 'curves') {
-    <!-- Curves Panel -->
-    <bui-panel [title]="panel.title" [expanded]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
       <bui-field-group>
         <bui-field label="Shape">
           <bui-segmented-control [options]="shapeOptions" [(value)]="selectedShape"></bui-segmented-control>
         </bui-field>
         <bui-field label="Additional Subdivision">
-          <bui-slider [min]="0" [max]="12" [step]="1" [precision]="0"></bui-slider>
+          <bui-slider [value]="additionalSubdivision()" (valueChange)="additionalSubdivision.set($event)" [min]="0" [max]="12" [step]="1" [precision]="0"></bui-slider>
         </bui-field>
       </bui-field-group>
     </bui-panel>
     }
 
-    @if (panel.id === 'sampling') {
-    <!-- Sampling Panel -->
-    <bui-panel [title]="panel.title" [expanded]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
-      <bui-field-group>
-        <bui-field label="Mode">
-          <bui-radio-group [options]="radioOptions" [(value)]="selectedRadio"></bui-radio-group>
-        </bui-field>
-      </bui-field-group>
-    </bui-panel>
-    }
-
-    @if (panel.id === 'film') {
-    <!-- Film Panel -->
-    <bui-panel [title]="panel.title" [expanded]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
-      <bui-field label="Filter Size" [showDecorator]="true" [decoratorActive]="true">
-        <bui-slider variant="standard" [value]="filterSize()" [min]="0" [max]="10" suffix=" px"
-          (valueChange)="filterSize.set($event)"></bui-slider>
-      </bui-field>
-      <bui-field label="Transparent" [showDecorator]="true">
-        <bui-checkbox [(checked)]="transparent"></bui-checkbox>
-      </bui-field>
+    @if (panel.id === 'simplify') {
+    <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="simplifyEnabled" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+      <bui-panel title="Viewport" variant="sub" [(expanded)]="viewportExpanded">
+        <bui-field-group>
+          <bui-field label="Max Subdivision" [showDecorator]="true" [decoratorActive]="true">
+            <bui-slider [value]="viewportMaxSubdivision()" (valueChange)="viewportMaxSubdivision.set($event)" [min]="0" [max]="10" [precision]="0"></bui-slider>
+          </bui-field>
+          <bui-field label="Max Child Particles" [showDecorator]="true" [decoratorActive]="true">
+            <bui-slider [value]="viewportMaxChildParticles()" (valueChange)="viewportMaxChildParticles.set($event)" [min]="0" [max]="2" [precision]="3" variant="progress"></bui-slider>
+          </bui-field>
+          <bui-field label="Volume Resolution" [showDecorator]="true" [decoratorActive]="true">
+            <bui-slider [value]="viewportVolumeResolution()" (valueChange)="viewportVolumeResolution.set($event)" [min]="0" [max]="2" [precision]="3" variant="progress"></bui-slider>
+          </bui-field>
+          <bui-field label="">
+            <bui-checkbox label="Normals" [(checked)]="viewportNormals"></bui-checkbox>
+            <div decorator style="width: 8px; height: 8px; border-radius: 50%; background: #444; margin: auto;"></div>
+          </bui-field>
+        </bui-field-group>
+      </bui-panel>
     </bui-panel>
     }
     }

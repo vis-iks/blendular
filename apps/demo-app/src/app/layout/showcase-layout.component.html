@@ -5,7 +5,8 @@
     </div>
     <nav class="bui-sidebar-nav">
       <ul class="bui-nav-list">
-        <li *ngFor="let link of navLinks" class="bui-nav-item">
+        @for (link of navLinks; track link.path) {
+        <li class="bui-nav-item">
           <a
             [routerLink]="link.path"
             routerLinkActive="active"
@@ -14,6 +15,7 @@
             {{ link.label }}
           </a>
         </li>
+        }
       </ul>
     </nav>
   </aside>

@@ -1,0 +1,33 @@
+@use '../../styles/variables' as *;
+
+.bui-menubar {
+  display: flex;
+  align-items: center;
+  background-color: transparent; // often parent provides background
+  height: 24px;
+  user-select: none;
+}
+
+.bui-menubar-item {
+  height: 100%;
+  padding: 0 10px;
+  background: transparent;
+  border: none;
+  color: $bui-text-color;
+  font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  
+  &:hover {
+    color: #ffffff;
+  }
+
+  &.active {
+    background-color: #4b4b4b; /* matches Blender active top menu item background roughly */
+    color: #ffffff;
+    border-radius: 4px; /* Blender has slight rounding on active top bar item */
+  }
+}

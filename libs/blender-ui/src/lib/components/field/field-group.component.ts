@@ -30,7 +30,7 @@ import { CommonModule } from '@angular/common';
     .bui-field-group-header {
       font-size: $bui-font-size-small;
       color: $bui-text-dimmed;
-      padding: 0 8px 6px 8px; // 8px left/right matches fields
+      padding: 0 8px 6px 8px; /* 8px left/right matches fields */
       user-select: none;
     }
 
@@ -39,15 +39,15 @@ import { CommonModule } from '@angular/common';
       flex-direction: column;
 
       
-      // Target the controls inside the fields for special rounding
+      /* Target the controls inside the fields for special rounding */
       ::ng-deep {
         bui-field {
-          margin-bottom: -1px; // Overlap borders
+          margin-bottom: -1px; /* Overlap borders */
 
           &:first-child .bui-field-control > * {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
-            // Handle nested trigger elements for complex components
+            /* Handle nested trigger elements for complex components */
             ::ng-deep .bui-dropdown-trigger {
                border-bottom-left-radius: 0;
                border-bottom-right-radius: 0;
@@ -73,7 +73,7 @@ import { CommonModule } from '@angular/common';
             }
           }
 
-          // If there's only one child, keep it rounded
+          /* If there's only one child, keep it rounded */
           &:first-child:last-child .bui-field-control > * {
             border-radius: $bui-radius-sm;
             ::ng-deep .bui-dropdown-trigger {

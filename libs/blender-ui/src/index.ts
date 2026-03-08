@@ -40,3 +40,4 @@ export * from './lib/components/scene-properties/scene-properties.component';
 export * from './lib/components/file-browser/file-browser.component';
 export * from './lib/components/graph-editor/graph-editor.component';
 export * from './lib/components/shader-editor/shader-editor.component';
+export * from './lib/components/menu/index';

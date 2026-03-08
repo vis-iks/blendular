@@ -1,0 +1,95 @@
+@use '../../styles/variables' as *;
+
+.bui-menu {
+  background: #2b2b2b; /* Blender menu background */
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  padding: 4px;
+  min-width: 160px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.bui-menu-separator {
+  height: 1px;
+  background: #1a1a1a;
+  margin: 4px 0;
+}
+
+.bui-menu-item {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  padding: 0 4px; // tighter padding for the item itself
+  background: transparent;
+  color: #cccccc;
+  font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 4px; /* match Blender hover shape */
+  user-select: none;
+  transition: background-color 0s; // instantaneous on blender
+  position: relative; // For tooltip positioning if needed
+
+  &:hover:not(.disabled), &.active {
+    background: #4772b3; /* Blender blue highlight */
+    color: #ffffff;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.bui-menu-item-prefix {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.check-icon, .item-icon {
+  font-size: 14px;
+}
+
+.bui-menu-item-label {
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.bui-menu-item-suffix {
+  margin-left: 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 40px;
+  padding-right: 8px;
+}
+
+.bui-menu-item-shortcut {
+  font-size: 10px;
+  color: #999999;
+}
+
+.bui-menu-item:hover .bui-menu-item-shortcut,
+.bui-menu-item.active .bui-menu-item-shortcut {
+  color: #d9d9d9;
+}
+
+.bui-menu-item:hover .bui-menu-item-shortcut,
+.bui-menu-item.active .bui-menu-item-shortcut {
+  color: #d9d9d9;
+}
+
+.submenu-icon {
+  font-size: 16px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -88,7 +88,7 @@ import { CommonModule } from '@angular/common';
       background-color: #555;
       
       &.active {
-        background-color: #ff9d33; // Blender animated property orange
+        background-color: #ff9d33; /* Blender animated property orange */
       }
     }
   `],

@@ -8,6 +8,7 @@
 }
 
 .page-header {
+  margin-top: 16px;
   margin-bottom: 24px;
   
   h1 {
@@ -19,6 +20,16 @@
     color: #888;
     font-size: 0.9rem;
   }
+}
+
+.blender-toolbar-container {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  background-color: #2b2b2b; /* Match Blender header */
+  border-bottom: 1px solid #1a1a1a;
+  padding: 0 4px;
+  margin: -20px -20px 0 -20px; /* Offset page-container padding to reach edges */
 }
 
 .properties-layout {
@@ -58,7 +69,71 @@
 }
 
 ::ng-deep {
-  bui-panel {
-    margin-bottom: 2px;
+  .properties-layout {
+    width: 320px;
+    background-color: #2b2b2b;
+    border-radius: 4px;
+    padding: 0;
+
+    .bui-panel {
+      margin-bottom: 2px;
+      border: 1px solid #3d3d3d;
+      border-radius: 4px;
+      background-color: #333333;
+    }
+    
+    .bui-panel.sub-panel {
+      margin-left: 12px;
+      margin-bottom: 0px;
+      border: none;
+      background-color: transparent;
+
+      .bui-panel-header {
+        height: 24px;
+        padding: 0 4px;
+        
+        .header-title {
+          font-weight: 400;
+        }
+      }
+      
+      .bui-field-label {
+        // Fix alignment inner fields since we added margin-left
+        flex: 0 0 calc(35% - 7.8px); 
+      }
+    }
+
+    .bui-panel-header {
+      padding: 0 8px;
+      background: #3a3a3a;
+      height: 28px;
+      
+      .header-title {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+        color: #ddd;
+      }
+      
+      &:hover {
+        background: #444;
+      }
+    }
+    
+    .bui-panel-body {
+      background: transparent;
+      padding-bottom: 4px;
+      border-top: none;
+    }
+
+    .bui-field {
+      padding: 1px 8px;
+    }
+    
+    .bui-field-label {
+      flex: 0 0 35%;
+      color: #aaaaaa;
+      padding-right: 12px;
+    }
   }
 }
