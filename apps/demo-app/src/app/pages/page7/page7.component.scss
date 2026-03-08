@@ -60,13 +60,5 @@
 ::ng-deep {
   bui-panel {
     margin-bottom: 2px;
-    
-    // Nested panel indentation
-    bui-panel {
-      margin-left: 12px;
-      margin-top: 1px;
-      margin-bottom: 1px;
-      border-left: 1px solid rgba(255, 255, 255, 0.05);
-    }
   }
 }
