@@ -27,8 +27,8 @@
 
     <!-- Value display -->
     <span class="bui-slider-value" 
-      [class.centered]="variant() === 'standard' && !internalLabel()"
-      [class.right-aligned]="!!internalLabel()"
+      [class.centered]="(!internalLabel() && !label() && !suffix())"
+      [class.right-aligned]="!!internalLabel() || !!label() || !!suffix()"
     >{{ displayValue() }}{{ suffix() }}</span>
 
     <div class="bui-slider-arrow right" (mousedown)="$event.stopPropagation()" (click)="increment($event)">

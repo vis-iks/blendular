@@ -49,10 +49,9 @@ import { BuiTooltipDirective } from '../tooltip/tooltip.directive';
             <!-- Label -->
             <span class="bui-menu-item-label">{{ item.label }}</span>
 
-            <!-- Suffix: Shortcut or Submenu Arrow -->
             <div class="bui-menu-item-suffix">
               @if (item.items && item.items.length > 0) {
-                <span class="bl-icons-rightarrow_thin submenu-icon"></span>
+                <span class="bl-icons-tria_right submenu-icon"></span>
               } @else if (item.shortcut) {
                 <span class="bui-menu-item-shortcut">{{ item.shortcut }}</span>
               }
@@ -134,16 +133,16 @@ export class MenuComponent {
           originY: 'top',
           overlayX: 'start',
           overlayY: 'top',
-          offsetX: -4,
-          offsetY: -4
+          offsetX: 3,
+          offsetY: -6
         },
         {
           originX: 'start',
           originY: 'top',
           overlayX: 'end',
           overlayY: 'top',
-          offsetX: 4,
-          offsetY: -4
+          offsetX: -3,
+          offsetY: -6
         }
       ]);
 
