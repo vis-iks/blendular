@@ -32,11 +32,22 @@
   margin: -20px -20px 0 -20px; /* Offset page-container padding to reach edges */
 }
 
-.toolbar-separator {
-  width: 1px;
-  height: 16px;
-  background: #111111;
-  margin: 0 8px;
+.toolbar-section {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-left {
+  flex: 1;
+}
+
+.toolbar-center {
+  flex: 0 0 auto;
+}
+
+.toolbar-right {
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .toolbar-group {

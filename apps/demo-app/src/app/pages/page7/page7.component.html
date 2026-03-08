@@ -1,38 +1,44 @@
 <div class="page-container">
   <div class="blender-toolbar-container">
-    <div class="toolbar-group">
-      <button class="toolbar-tool-dropdown editor-type-btn" [buiPopover]="editorTypePopover" style="padding-left: 8px;">
-        <span class="bl-icons-view3d"></span>
-        <span class="bl-icons-rightarrow_thin drop-arrow"></span>
-      </button>
-    </div>
-    
-    <div class="toolbar-group">
-      <button class="toolbar-tool-dropdown">
-        <span class="bl-icons-checkbox_dehlt" style="font-size: 14px; margin-right: 4px;"></span>
-        <span class="toolbar-label">Object Mode</span>
-        <span class="bl-icons-rightarrow_thin drop-arrow"></span>
-      </button>
-    </div>
+    <!-- Left group: Editor type + Mode + Menus -->
+    <div class="toolbar-section toolbar-left">
+      <div class="toolbar-group">
+        <button class="toolbar-tool-dropdown editor-type-btn" [buiPopover]="editorTypePopover" style="padding-left: 8px;">
+          <span class="bl-icons-view3d"></span>
+          <span class="bl-icons-rightarrow_thin drop-arrow"></span>
+        </button>
+      </div>
+      
+      <div class="toolbar-group">
+        <button class="toolbar-tool-dropdown">
+          <span class="bl-icons-checkbox_dehlt" style="font-size: 14px; margin-right: 4px;"></span>
+          <span class="toolbar-label">Object Mode</span>
+          <span class="bl-icons-rightarrow_thin drop-arrow"></span>
+        </button>
+      </div>
 
-    <bui-menubar [items]="mainMenu"></bui-menubar>
-    <div class="toolbar-separator"></div>
-
-    <!-- Transformations -->
-    <div class="toolbar-group">
-      <button class="toolbar-tool-btn"><span class="bl-icons-orientation_global"></span><span
-          class="toolbar-label">Global</span><span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span></button>
-      <button class="toolbar-tool-dropdown"><span class="bl-icons-prop_on" style="font-size: 16px;"></span><span class="bl-icons-rightarrow_thin drop-arrow"></span></button>
+      <bui-menubar [items]="mainMenu"></bui-menubar>
     </div>
 
-    <!-- Snap settings button -->
-    <div class="toolbar-group">
-      <button class="toolbar-tool-btn"><span class="bl-icons-prop_projected" style="transform: rotate(180deg);"></span></button>
-      <button class="toolbar-tool-dropdown" [buiPopover]="snapPopover"><span
-          class="bl-icons-snap_on"></span><span
-          class="bl-icons-rightarrow_thin drop-arrow"></span></button>
-      <button class="toolbar-tool-dropdown"><span class="bl-icons-cursor"></span></button>
-      <button class="toolbar-tool-dropdown"><span class="bl-icons-graph"></span></button>
+    <!-- Center group: Transformations -->
+    <div class="toolbar-section toolbar-center">
+      <div class="toolbar-group">
+        <button class="toolbar-tool-btn"><span class="bl-icons-orientation_global"></span><span
+            class="toolbar-label">Global</span><span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span></button>
+        <button class="toolbar-tool-dropdown"><span class="bl-icons-prop_on" style="font-size: 16px;"></span><span class="bl-icons-rightarrow_thin drop-arrow"></span></button>
+      </div>
+    </div>
+
+    <!-- Right group: Snap, Pivot, Overlays -->
+    <div class="toolbar-section toolbar-right">
+      <div class="toolbar-group">
+        <button class="toolbar-tool-btn"><span class="bl-icons-prop_projected" style="transform: rotate(180deg);"></span></button>
+        <button class="toolbar-tool-dropdown" [buiPopover]="snapPopover"><span
+            class="bl-icons-snap_on"></span><span
+            class="bl-icons-rightarrow_thin drop-arrow"></span></button>
+        <button class="toolbar-tool-dropdown"><span class="bl-icons-cursor"></span></button>
+        <button class="toolbar-tool-dropdown"><span class="bl-icons-graph"></span></button>
+      </div>
     </div>
   </div>
 

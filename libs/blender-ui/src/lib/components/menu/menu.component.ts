@@ -38,8 +38,7 @@ import { BuiTooltipDirective } from '../tooltip/tooltip.directive';
             <!-- Prefix Icon / Checkbox area -->
             <div class="bui-menu-item-prefix">
               @if (item.checked !== undefined) {
-                <span class="check-icon" [ngClass]="item.checked ? 'bl-icons-checkmark' : ''">
-                </span>
+                <span class="check-icon" [ngClass]="item.checked ? 'bl-icons-checkbox_hlt' : 'bl-icons-checkbox_dehlt'"></span>
                 <!-- We do not use the full checkbox to prevent focus trapping or extra clicks,
                      we just display the check visually matching Blender style -->
               } @else if (item.icon) {
