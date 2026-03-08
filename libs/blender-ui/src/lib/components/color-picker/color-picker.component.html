@@ -1,0 +1,56 @@
+<!-- Color swatch trigger -->
+<div class="bui-color-swatch" [style.background]="color()" (click)="togglePopup()">
+</div>
+
+<!-- Popup panel -->
+@if (isOpen()) {
+  <div class="bui-color-panel">
+    <!-- SV Gradient Area -->
+    <div
+      #gradientArea
+      class="bui-color-gradient"
+      [style.background]="hueColor()"
+      (mousedown)="onGradientMouseDown($event)"
+    >
+      <div class="gradient-white"></div>
+      <div class="gradient-black"></div>
+      <!-- Picker cursor -->
+      <div
+        class="gradient-cursor"
+        [style.left.%]="saturation()"
+        [style.top.%]="100 - brightness()"
+      ></div>
+    </div>
+
+    <!-- Hue Strip -->
+    <div
+      #hueStrip
+      class="bui-hue-strip"
+      (mousedown)="onHueMouseDown($event)"
+    >
+      <div class="hue-cursor" [style.left.%]="(hue() / 360) * 100"></div>
+    </div>
+
+    <!-- RGB Inputs -->
+    <div class="bui-color-inputs">
+      <div class="color-input-group">
+        <label>R</label>
+        <input type="number" [value]="rgb().r" min="0" max="255" (input)="onRgbInput('r', $event)" />
+      </div>
+      <div class="color-input-group">
+        <label>G</label>
+        <input type="number" [value]="rgb().g" min="0" max="255" (input)="onRgbInput('g', $event)" />
+      </div>
+      <div class="color-input-group">
+        <label>B</label>
+        <input type="number" [value]="rgb().b" min="0" max="255" (input)="onRgbInput('b', $event)" />
+      </div>
+    </div>
+
+    <!-- Hex Input -->
+    <div class="bui-hex-input">
+      <label>Hex</label>
+      <input type="text" [value]="hexValue()" (change)="onHexInput($event)" />
+    </div>
+  </div>
+}

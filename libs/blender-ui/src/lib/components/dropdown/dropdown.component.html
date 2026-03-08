@@ -1,0 +1,46 @@
+<div class="bui-dropdown" [class.open]="isOpen()" [class.disabled]="disabled()">
+  <!-- Trigger button -->
+  <button class="bui-dropdown-trigger" (click)="toggle()" [disabled]="disabled()">
+    @if (selectedIcon()) {
+      <span class="trigger-icon material-symbols-outlined">{{ selectedIcon() }}</span>
+    }
+    <span class="trigger-label">{{ selectedLabel() }}</span>
+    <span class="trigger-arrow">▾</span>
+  </button>
+
+  <!-- Popup panel -->
+  @if (isOpen()) {
+    <div class="bui-dropdown-panel">
+      <!-- Search filter -->
+      <div class="bui-dropdown-search">
+        <input
+          #searchInput
+          type="text"
+          class="search-input"
+          placeholder="Search..."
+          [value]="searchText()"
+          (input)="onSearchInput($event)"
+          (keydown)="onSearchKeydown($event)"
+        />
+      </div>
+
+      <!-- Options list -->
+      <div class="bui-dropdown-list">
+        @for (option of filteredOptions(); track option.value) {
+          <button
+            class="bui-dropdown-option"
+            [class.selected]="option.value === value()"
+            (click)="selectOption(option)"
+          >
+            @if (option.icon) {
+              <span class="option-icon material-symbols-outlined">{{ option.icon }}</span>
+            }
+            <span class="option-label">{{ option.label }}</span>
+          </button>
+        } @empty {
+          <div class="bui-dropdown-empty">No matches</div>
+        }
+      </div>
+    </div>
+  }
+</div>

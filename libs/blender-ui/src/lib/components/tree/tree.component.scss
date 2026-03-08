@@ -1,0 +1,148 @@
+@use '../../styles/variables' as *;
+
+// ─── Tree Container ─────────────────────────────────
+.bui-tree {
+  font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
+  font-size: 11px;
+  color: $bui-text-color;
+  user-select: none;
+}
+
+// ─── Tree Node Row ──────────────────────────────────
+.bui-tree-node {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 22px;
+  padding-right: 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.08s;
+
+  &:hover:not(.disabled) {
+    background: $bui-tab-active;
+  }
+
+  &.selected {
+    background: rgba(71, 114, 179, 0.35);
+
+    &:hover {
+      background: rgba(71, 114, 179, 0.45);
+    }
+  }
+
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+// ─── Expand/Collapse Toggle ─────────────────────────
+.node-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #888;
+  flex-shrink: 0;
+
+  &:hover {
+    color: $bui-text-color;
+  }
+}
+
+.chevron {
+  font-size: 7px;
+  transition: transform 0.12s ease;
+  display: inline-block;
+
+  &.expanded {
+    transform: rotate(90deg);
+  }
+}
+
+.node-spacer {
+  display: inline-block;
+  width: 16px;
+  flex-shrink: 0;
+}
+
+// ─── Node Icon ──────────────────────────────────────
+.node-icon {
+  font-size: 14px;
+  line-height: 1;
+  color: var(--bui-text-muted, #9ca3af);
+  flex-shrink: 0;
+  margin-right: 2px;
+
+  .selected & {
+    color: $bui-text-color;
+  }
+}
+
+// ─── Node Label ─────────────────────────────────────
+.node-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px;
+}
+
+.flex-spacer {
+  flex: 1;
+}
+
+// ─── Node Actions ───────────────────────────────────
+.node-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
+}
+
+.node-action {
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  color: var(--bui-text-muted, #9ca3af);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.1s;
+
+  &:hover {
+    color: #fff;
+  }
+
+  &.active {
+    color: #fff;
+  }
+}
+
+// ─── Children Group (indent guide line) ─────────────
+.children-group {
+  position: relative;
+
+  &.hierarchy-disabled {
+    .indent-guide {
+      opacity: 0.3;
+    }
+  }
+}
+
+.indent-guide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 1;
+}

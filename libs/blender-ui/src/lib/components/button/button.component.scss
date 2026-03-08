@@ -1,0 +1,88 @@
+@use '../../styles/variables' as *;
+
+:host {
+  display: inline-block;
+}
+
+.bui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 3px 10px;
+  min-height: 22px;
+  font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: $bui-text-color;
+  background-color: $bui-panel-header;
+  border: 1px solid $bui-border-dark;
+  border-radius: $bui-border-radius;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+
+  &:hover:not(.disabled) {
+    background-color: $bui-tab-active;
+  }
+
+  &:active:not(.disabled) {
+    background-color: $bui-input-bg;
+  }
+
+  // Toggle variant
+  &.toggle {
+    &.pressed {
+      background-color: $bui-primary;
+      border-color: $bui-primary;
+      color: #ffffff;
+
+      &:hover {
+        background-color: $bui-highlight;
+      }
+    }
+  }
+
+  // Primary variant (Blender blue action buttons)
+  &.primary {
+    background-color: #4772b3;
+    border-color: #3e639b;
+    color: #ffffff;
+
+    &:hover:not(.disabled) {
+      background-color: #5684c9;
+      border-color: #3e639b;
+    }
+
+    &:active:not(.disabled) {
+      background-color: #3e639b;
+    }
+  }
+
+  // Icon-only variant
+  &.icon-only {
+    padding: 3px;
+    min-width: 22px;
+    min-height: 22px;
+
+    .bui-btn-label {
+      display: none;
+    }
+  }
+
+  // Disabled state
+  &.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.bui-btn-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.bui-btn-label {
+  white-space: nowrap;
+}

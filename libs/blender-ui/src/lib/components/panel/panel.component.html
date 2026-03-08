@@ -1,0 +1,20 @@
+<div class="bui-panel" [class.collapsed]="!expanded()">
+  <!-- Header -->
+  <div class="bui-panel-header" (click)="toggle()">
+    @if (draggable()) {
+      <span class="drag-grip">⠿</span>
+    }
+    <span class="chevron" [class.rotated]="expanded()">▶</span>
+    @if (icon()) {
+      <span class="header-icon material-symbols-outlined">{{ icon() }}</span>
+    }
+    <span class="header-title">{{ title() }}</span>
+  </div>
+
+  <!-- Body (collapsible content) -->
+  @if (expanded()) {
+    <div class="bui-panel-body">
+      <ng-content></ng-content>
+    </div>
+  }
+</div>

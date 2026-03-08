@@ -1,0 +1,82 @@
+<div class="page-container">
+  <h2 class="page-title">Page 3: Advanced Form Controls</h2>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- DROPDOWN COMPONENT                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Dropdown Component</h3>
+    <p class="section-desc">Blender-style enum dropdown with search filter. Click to open, type to filter options.</p>
+
+    <div class="demo-block">
+      <h4 class="demo-label">With Icons</h4>
+      <div class="demo-row" style="max-width: 220px;">
+        <bui-dropdown [options]="shadingOptions" [(value)]="selectedShading" placeholder="Shading Mode"></bui-dropdown>
+      </div>
+      <p class="demo-info">Selected: {{ selectedShading() }}</p>
+    </div>
+
+    <div class="demo-block">
+      <h4 class="demo-label">Without Icons (Many Options – Try Searching)</h4>
+      <div class="demo-row" style="max-width: 220px;">
+        <bui-dropdown [options]="interpolationOptions" [(value)]="selectedInterpolation" placeholder="Interpolation"></bui-dropdown>
+      </div>
+      <p class="demo-info">Selected: {{ selectedInterpolation() ?? 'None' }}</p>
+    </div>
+
+    <div class="demo-block">
+      <h4 class="demo-label">Disabled</h4>
+      <div class="demo-row" style="max-width: 220px;">
+        <bui-dropdown [options]="shadingOptions" [value]="'solid'" [disabled]="true"></bui-dropdown>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h4 class="demo-label">Reactive Forms</h4>
+      <div class="demo-row" style="max-width: 220px;">
+        <bui-dropdown [options]="interpolationOptions" [formControl]="dropdownFormControl"></bui-dropdown>
+      </div>
+      <p class="demo-info">FormControl value: {{ dropdownFormControl.value }}</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- COLOR PICKER COMPONENT                                 -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Color Picker Component</h3>
+    <p class="section-desc">Click the swatch to open the picker. Drag in the gradient to pick saturation/brightness, drag the hue strip, or type RGB/Hex values.</p>
+
+    <div class="demo-block">
+      <h4 class="demo-label">Color Swatches</h4>
+      <div class="demo-row color-demo-row">
+        <div class="color-field">
+          <span class="color-label">Base Color</span>
+          <bui-color-picker [(color)]="baseColor"></bui-color-picker>
+          <span class="color-hex">{{ baseColor() }}</span>
+        </div>
+        <div class="color-field">
+          <span class="color-label">Emission</span>
+          <bui-color-picker [(color)]="emissionColor"></bui-color-picker>
+          <span class="color-hex">{{ emissionColor() }}</span>
+        </div>
+        <div class="color-field">
+          <span class="color-label">Ambient</span>
+          <bui-color-picker [(color)]="ambientColor"></bui-color-picker>
+          <span class="color-hex">{{ ambientColor() }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h4 class="demo-label">Reactive Forms</h4>
+      <div class="demo-row color-demo-row">
+        <div class="color-field">
+          <span class="color-label">Form Color</span>
+          <bui-color-picker [formControl]="colorFormControl"></bui-color-picker>
+          <span class="color-hex">{{ colorFormControl.value }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

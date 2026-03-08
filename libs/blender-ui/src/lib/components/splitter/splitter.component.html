@@ -1,0 +1,28 @@
+<div
+  #container
+  class="bui-splitter"
+  [class.horizontal]="orientation() === 'horizontal'"
+  [class.vertical]="orientation() === 'vertical'"
+  [class.dragging]="dragging()"
+>
+  <!-- First pane -->
+  <div
+    class="bui-pane first-pane"
+    [style.flex-basis.%]="firstPaneSize()"
+  >
+    <ng-content select="[first]"></ng-content>
+  </div>
+
+  <!-- Divider / gutter -->
+  <div
+    class="bui-divider"
+    (mousedown)="onDividerMouseDown($event)"
+  >
+    <div class="divider-handle"></div>
+  </div>
+
+  <!-- Second pane -->
+  <div class="bui-pane second-pane">
+    <ng-content select="[second]"></ng-content>
+  </div>
+</div>

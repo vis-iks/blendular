@@ -1,21 +1,64 @@
-import { Component, input, output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, model, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+/**
+ * BuiCheckboxComponent – Blender-style minimalist checkbox.
+ *
+ * Supports two-way binding via `[(checked)]` model signal
+ * and works with Angular Reactive Forms via ControlValueAccessor.
+ */
 @Component({
   selector: 'bui-checkbox',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => BuiCheckboxComponent),
+      multi: true,
+    },
+  ],
 })
-export class BuiCheckboxComponent {
-  checked = input(false);
+export class BuiCheckboxComponent implements ControlValueAccessor {
+  /** Two-way binding for checked state */
+  checked = model(false);
+
+  /** Label text */
   label = input('');
+
+  /** Disabled state */
   disabled = input(false);
-  checkedChange = output<boolean>();
+
+  // CVA callbacks
+  private onChange: (value: boolean) => void = () => {};
+  private onTouched: () => void = () => {};
 
   toggle() {
     if (this.disabled()) return;
-    this.checkedChange.emit(!this.checked());
+    const newVal = !this.checked();
+    this.checked.set(newVal);
+    this.onChange(newVal);
+    this.onTouched();
+  }
+
+  // ControlValueAccessor implementation
+  writeValue(value: boolean): void {
+    this.checked.set(!!value);
+  }
+
+  registerOnChange(fn: (value: boolean) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    // disabled is an input signal, so CVA disabled is handled externally
   }
 }

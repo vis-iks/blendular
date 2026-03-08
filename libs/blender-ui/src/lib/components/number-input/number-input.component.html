@@ -1,4 +1,6 @@
-<div class="bui-number-input-container">
+<div class="bui-number-input-container" 
+     [class.dragging]="isDragging"
+     (mousedown)="onMouseDown($event)">
   <div class="progress-bar" [style.width]="progressWidth()"></div>
   <input
     type="number"

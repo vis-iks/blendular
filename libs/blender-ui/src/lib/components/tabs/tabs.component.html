@@ -1,0 +1,22 @@
+<div class="bui-tabs" [class.vertical]="orientation() === 'vertical'" [class.icon-only]="iconOnly()">
+  <!-- Tab Headers -->
+  <div class="bui-tabs-header">
+    @for (tab of tabs(); track $index) {
+      <button
+        class="bui-tab-button"
+        [class.active]="$index === activeIndex()"
+        (click)="selectTab($index)"
+      >
+        @if (tab.icon()) {
+          <span class="tab-icon material-symbols-outlined">{{ tab.icon() }}</span>
+        }
+        <span class="tab-label">{{ tab.label() }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- Tab Content -->
+  <div class="bui-tabs-content">
+    <ng-content></ng-content>
+  </div>
+</div>

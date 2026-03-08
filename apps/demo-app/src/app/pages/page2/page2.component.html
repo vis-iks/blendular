@@ -1,0 +1,57 @@
+<div class="page-container">
+  <h2 class="page-title">Page 2: Numeric Controls</h2>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BLENDER DRAGGABLE NUMBER SLIDER                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Draggable Number Slider</h3>
+    <p class="section-desc">Click &amp; drag horizontally to change value. Click once to type a value directly.</p>
+
+    <!-- Basic Slider -->
+    <div class="demo-block">
+      <h4 class="demo-label">Basic Slider</h4>
+      <div class="demo-sliders">
+        <bui-slider label="Value" [(value)]="sliderValue" [min]="0" [max]="100" [step]="1" [precision]="0"></bui-slider>
+      </div>
+      <p class="demo-info">Value: {{ sliderValue() }}</p>
+    </div>
+
+    <!-- Transform Sliders (like Blender's Transform panel) -->
+    <div class="demo-block">
+      <h4 class="demo-label">Transform Panel (X / Y / Z)</h4>
+      <div class="demo-sliders">
+        <bui-slider label="X" [(value)]="xPosition" [min]="-100" [max]="100" [step]="0.01" suffix=" m" [precision]="3"></bui-slider>
+        <bui-slider label="Y" [(value)]="yPosition" [min]="-100" [max]="100" [step]="0.01" suffix=" m" [precision]="3"></bui-slider>
+        <bui-slider label="Z" [(value)]="zPosition" [min]="-100" [max]="100" [step]="0.01" suffix=" m" [precision]="3"></bui-slider>
+      </div>
+    </div>
+
+    <!-- Different ranges -->
+    <div class="demo-block">
+      <h4 class="demo-label">Different Ranges &amp; Precision</h4>
+      <div class="demo-sliders">
+        <bui-slider label="Scale" [(value)]="scale" [min]="0" [max]="10" [step]="0.01" [precision]="2"></bui-slider>
+        <bui-slider label="Rotation" [(value)]="rotation" [min]="0" [max]="360" [step]="1" suffix="°" [precision]="0"></bui-slider>
+        <bui-slider label="Opacity" [(value)]="opacity" [min]="0" [max]="1" [step]="0.01" [precision]="2"></bui-slider>
+      </div>
+    </div>
+
+    <!-- Disabled Slider -->
+    <div class="demo-block">
+      <h4 class="demo-label">Disabled Slider</h4>
+      <div class="demo-sliders">
+        <bui-slider label="Locked" [value]="42" [disabled]="true" [precision]="0"></bui-slider>
+      </div>
+    </div>
+
+    <!-- Reactive Form Slider -->
+    <div class="demo-block">
+      <h4 class="demo-label">Reactive Forms Integration</h4>
+      <div class="demo-sliders">
+        <bui-slider label="Form Value" [formControl]="formSlider" [min]="0" [max]="100" [step]="1" [precision]="0"></bui-slider>
+      </div>
+      <p class="demo-info">FormControl value: {{ formSlider.value }}</p>
+    </div>
+  </section>
+</div>

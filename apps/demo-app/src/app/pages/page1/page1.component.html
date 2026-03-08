@@ -1,0 +1,71 @@
+<div class="page-container">
+  <h2 class="page-title">Page 1: Basic Inputs</h2>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BUTTON COMPONENT                                       -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Button Component</h3>
+
+    <!-- Standard Push Button -->
+    <div class="demo-block">
+      <h4 class="demo-label">Standard Button</h4>
+      <div class="demo-row">
+        <bui-button (clicked)="onButtonClick()">Execute</bui-button>
+        <bui-button icon="play_arrow" (clicked)="onButtonClick()">Play</bui-button>
+        <bui-button [disabled]="true">Disabled</bui-button>
+      </div>
+      <p class="demo-info">Clicked {{ buttonClickCount() }} times</p>
+    </div>
+
+    <!-- Toggle Button -->
+    <div class="demo-block">
+      <h4 class="demo-label">Toggle Button (pressed/unpressed)</h4>
+      <div class="demo-row">
+        <bui-button variant="toggle" [(pressed)]="toggleState" icon="lock">Lock</bui-button>
+        <bui-button variant="toggle" [(pressed)]="toggleState">Toggle</bui-button>
+      </div>
+      <p class="demo-info">Toggle state: {{ toggleState() ? 'ON' : 'OFF' }}</p>
+    </div>
+
+    <!-- Icon-only Button -->
+    <div class="demo-block">
+      <h4 class="demo-label">Icon-Only Button</h4>
+      <div class="demo-row">
+        <bui-button variant="icon" icon="visibility"></bui-button>
+        <bui-button variant="icon" icon="delete"></bui-button>
+        <bui-button variant="icon" icon="settings"></bui-button>
+        <bui-button variant="icon" icon="add"></bui-button>
+        <bui-button variant="icon" icon="content_copy"></bui-button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHECKBOX COMPONENT                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Checkbox Component</h3>
+
+    <!-- Basic Checkbox -->
+    <div class="demo-block">
+      <h4 class="demo-label">Standard Checkbox</h4>
+      <div class="demo-column">
+        <bui-checkbox label="Unchecked" [(checked)]="checkboxA"></bui-checkbox>
+        <bui-checkbox label="Pre-checked" [(checked)]="checkboxB"></bui-checkbox>
+        <bui-checkbox label="Disabled" [disabled]="true"></bui-checkbox>
+        <bui-checkbox label="Disabled Checked" [checked]="true" [disabled]="true"></bui-checkbox>
+      </div>
+      <p class="demo-info">Checkbox A: {{ checkboxA() }}, Checkbox B: {{ checkboxB() }}</p>
+    </div>
+
+    <!-- Reactive Forms Checkbox -->
+    <div class="demo-block">
+      <h4 class="demo-label">Reactive Forms Integration</h4>
+      <div class="demo-column">
+        <bui-checkbox label="Form control checkbox" [formControl]="checkboxFormControl"></bui-checkbox>
+      </div>
+      <p class="demo-info">FormControl value: {{ checkboxFormControl.value }}</p>
+    </div>
+  </section>
+</div>

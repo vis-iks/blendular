@@ -1,62 +1,67 @@
-import { Component, Input, ViewEncapsulation, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component, ChangeDetectionStrategy, Input, Output, 
+  EventEmitter
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CdkMenuModule } from '@angular/cdk/menu';
 import { ContextMenuItem } from './context-menu.interface';
 
+/**
+ * ContextMenuComponent – Floating right-click menu.
+ * 
+ * Works with ContextMenuTriggerDirective or can be used manually in templates.
+ */
 @Component({
   selector: 'bui-context-menu',
   standalone: true,
-  imports: [CommonModule, CdkMenuModule],
+  imports: [CommonModule],
   template: `
-    <ng-template #menuTemplate let-items="items">
-      <div class="context-menu" cdkMenu>
-        <ng-container *ngFor="let item of items">
-
-          <!-- Separator -->
-          <div *ngIf="item.separator" class="menu-separator"></div>
-
-          <!-- Submenu -->
-          <button *ngIf="item.children && !item.separator"
-                  class="menu-item"
-                  [cdkMenuTriggerFor]="childMenu"
-                  [disabled]="item.disabled">
-            <div class="left-content">
-              <span *ngIf="item.icon" class="icon material-symbols-outlined">{{item.icon}}</span>
-              <span *ngIf="!item.icon" class="icon"></span> <!-- spacer -->
-              <span class="label">{{item.label}}</span>
-            </div>
-            <span class="arrow material-symbols-outlined">arrow_right</span>
-
-            <ng-template #childMenu>
-              <ng-container *ngTemplateOutlet="menuTemplate; context: {items: item.children}"></ng-container>
-            </ng-template>
-          </button>
-
-          <!-- Standard Item -->
-          <button *ngIf="!item.children && !item.separator"
-                  class="menu-item"
-                  cdkMenuItem
-                  (cdkMenuItemTriggered)="item.action && item.action()"
-                  [disabled]="item.disabled">
-            <div class="left-content">
-              <span *ngIf="item.icon" class="icon material-symbols-outlined">{{item.icon}}</span>
-              <span *ngIf="!item.icon" class="icon"></span> <!-- spacer -->
-              <span class="label">{{item.label}}</span>
-            </div>
-            <span *ngIf="item.shortcut" class="shortcut">{{item.shortcut}}</span>
-          </button>
-
-        </ng-container>
+    @if (visible) {
+      <div 
+        class="bui-context-menu"
+        [style.left.px]="x"
+        [style.top.px]="y"
+        (click)="$event.stopPropagation()"
+      >
+        @for (item of items; track $index) {
+          @if (item.separator) {
+            <div class="menu-separator"></div>
+          } @else {
+            <button 
+              class="menu-item" 
+              [class.disabled]="item.disabled"
+              (click)="$event.stopPropagation(); onItemClick(item)"
+            >
+              @if (item.icon) {
+                <span class="material-symbols-outlined menu-icon">{{ item.icon }}</span>
+              } @else {
+                <span class="menu-spacer"></span>
+              }
+              <span class="menu-label">{{ item.label }}</span>
+              @if (item.shortcut) {
+                <span class="menu-shortcut">{{ item.shortcut }}</span>
+              }
+            </button>
+          }
+        }
       </div>
-    </ng-template>
-
-    <!-- Entry point for the recursive template -->
-    <ng-container *ngTemplateOutlet="menuTemplate; context: {items: items}"></ng-container>
+    }
   `,
-  styleUrls: ['./context-menu.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrl: './context-menu.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuComponent {
   @Input() items: ContextMenuItem[] = [];
-  @ViewChild('menuTemplate') menuTemplate!: TemplateRef<any>;
+  @Input() x = 0;
+  @Input() y = 0;
+  @Input() visible = true; // Default to true if used via Overlay
+  
+  @Output() itemClick = new EventEmitter<ContextMenuItem>();
+  @Output() close = new EventEmitter<void>();
+
+  onItemClick(item: ContextMenuItem) {
+    if (item.disabled) return;
+    if (item.action) item.action();
+    this.itemClick.emit(item);
+    this.close.emit();
+  }
 }

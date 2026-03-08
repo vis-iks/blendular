@@ -64,6 +64,7 @@ export class App {
         { id: 'outliner', label: 'Outliner' },
         { id: 'properties', label: 'Properties' },
         { id: 'scene-properties', label: 'Scene Properties' },
+        { id: 'shader-editor', label: 'Shader Editor' },
         { id: 'timeline', label: 'Timeline' },
         { id: 'viewport', label: 'Viewport' },
       ]

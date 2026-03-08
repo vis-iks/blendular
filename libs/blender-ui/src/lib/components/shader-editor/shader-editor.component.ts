@@ -44,7 +44,8 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
 
       const dist = Math.abs(x1 - x4);
       // Adaptive curvature based on distance, but capped
-      const curvature = Math.max(dist * 0.5, 50);
+      // Emphasize horizontal exit/entry points like in Blender
+      const curvature = Math.max(dist * 0.75, 40);
 
       const cp1x = x1 + curvature;
       const cp1y = y1;
@@ -117,6 +118,8 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
                 });
             }
         });
+        
+        // Update connections eagerly
         this.dragVersion.update(v => v + 1);
     }
   }
@@ -128,10 +131,6 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
           }
           return n;
       }));
-      // Recalculate socket positions based on new fixed position
-      // We can just trigger the drag moved logic again or rely on next digest cycle?
-      // Since we updated the signal, the DOM binding [style.left] updates.
-      // We should re-measure or just use the offsets.
       this.onNodeDragMoved(event);
   }
 
@@ -149,9 +148,9 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
               y: 200,
               inputs: [],
               outputs: [
-                  { id: 'tc_generated', name: 'Generated', type: 'vector' },
+                  { id: 'tc_generated', name: 'Generated', type: 'vector', isConnected: true },
                   { id: 'tc_normal', name: 'Normal', type: 'vector' },
-                  { id: 'tc_uv', name: 'UV', type: 'vector' },
+                  { id: 'tc_uv', name: 'UV', type: 'vector', isConnected: true },
                   { id: 'tc_object', name: 'Object', type: 'vector' },
                   { id: 'tc_camera', name: 'Camera', type: 'vector' },
                   { id: 'tc_window', name: 'Window', type: 'vector' },
@@ -163,15 +162,19 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
               title: 'Mapping',
               type: 'Mapping',
               x: 290,
-              y: 200,
+              y: 160,
               inputs: [
-                  { id: 'm_vector_in', name: 'Vector', type: 'vector' },
+                  { 
+                      id: 'm_type', name: 'Type', type: 'float', 
+                      control: { id: 'm_type_ctrl', type: 'select', label: 'Type:', value: 'Point', options: ['Point', 'Texture', 'Vector', 'Normal'] } 
+                  },
+                  { id: 'm_vector_in', name: 'Vector', type: 'vector', isConnected: true },
                   { id: 'm_location', name: 'Location', type: 'vector' },
                   { id: 'm_rotation', name: 'Rotation', type: 'vector' },
                   { id: 'm_scale', name: 'Scale', type: 'vector' },
               ],
               outputs: [
-                  { id: 'm_vector_out', name: 'Vector', type: 'vector' }
+                  { id: 'm_vector_out', name: 'Vector', type: 'vector', isConnected: true }
               ]
           },
           {
@@ -181,10 +184,10 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
               x: 500,
               y: 200,
               inputs: [
-                  { id: 'it_vector', name: 'Vector', type: 'vector' }
+                  { id: 'it_vector', name: 'Vector', type: 'vector', isConnected: true }
               ],
               outputs: [
-                  { id: 'it_color', name: 'Color', type: 'color' },
+                  { id: 'it_color', name: 'Color', type: 'color', isConnected: true },
                   { id: 'it_alpha', name: 'Alpha', type: 'float' }
               ]
           },
@@ -193,17 +196,17 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
               title: 'Principled BSDF',
               type: 'Principled BSDF',
               x: 720,
-              y: 170,
+              y: 100,
               inputs: [
-                  { id: 'pb_base_color', name: 'Base Color', type: 'color' },
-                  { id: 'pb_metallic', name: 'Metallic', type: 'float' },
-                  { id: 'pb_roughness', name: 'Roughness', type: 'float' },
-                  { id: 'pb_ior', name: 'IOR', type: 'float' },
-                  { id: 'pb_alpha', name: 'Alpha', type: 'float' },
+                  { id: 'pb_base_color', name: 'Base Color', type: 'color', isConnected: true },
+                  { id: 'pb_metallic', name: 'Metallic', type: 'float', control: { id: 'pb_met_ctrl', type: 'number', value: 0.000, min: 0, max: 1 } },
+                  { id: 'pb_roughness', name: 'Roughness', type: 'float', control: { id: 'pb_rough_ctrl', type: 'number', value: 0.500, min: 0, max: 1 } },
+                  { id: 'pb_ior', name: 'IOR', type: 'float', control: { id: 'pb_ior_ctrl', type: 'number', value: 1.500, min: 0, max: 3 } },
+                  { id: 'pb_alpha', name: 'Alpha', type: 'float', control: { id: 'pb_alpha_ctrl', type: 'number', value: 1.000, min: 0, max: 1 } },
                   { id: 'pb_normal', name: 'Normal', type: 'vector' },
               ],
               outputs: [
-                  { id: 'pb_bsdf', name: 'BSDF', type: 'shader' }
+                  { id: 'pb_bsdf', name: 'BSDF', type: 'shader', isConnected: true }
               ]
           },
           {
@@ -213,7 +216,11 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
               x: 1000,
               y: 200,
               inputs: [
-                  { id: 'mo_surface', name: 'Surface', type: 'shader' },
+                  { 
+                      id: 'mo_all', name: 'Target', type: 'shader', 
+                      control: { id: 'mo_target_ctrl', type: 'select', value: 'All', options: ['All', 'Cycles', 'Eevee'] } 
+                  },
+                  { id: 'mo_surface', name: 'Surface', type: 'shader', isConnected: true },
                   { id: 'mo_volume', name: 'Volume', type: 'shader' },
                   { id: 'mo_displacement', name: 'Displacement', type: 'vector' },
                   { id: 'mo_thickness', name: 'Thickness', type: 'float' },
@@ -226,10 +233,9 @@ export class ShaderEditorComponent implements OnInit, AfterViewInit {
 
   initConnections() {
       const connections: ShaderConnection[] = [
-          { id: 'c1', sourceNodeId: 'tex_coord', sourceSocketId: 'tc_generated', targetNodeId: 'mapping', targetSocketId: 'm_vector_in' },
+          { id: 'c1', sourceNodeId: 'tex_coord', sourceSocketId: 'tc_uv', targetNodeId: 'mapping', targetSocketId: 'm_vector_in' },
           { id: 'c2', sourceNodeId: 'mapping', sourceSocketId: 'm_vector_out', targetNodeId: 'image_tex', targetSocketId: 'it_vector' },
           { id: 'c3', sourceNodeId: 'image_tex', sourceSocketId: 'it_color', targetNodeId: 'bsdf', targetSocketId: 'pb_base_color' },
-          { id: 'c4', sourceNodeId: 'image_tex', sourceSocketId: 'it_alpha', targetNodeId: 'bsdf', targetSocketId: 'pb_alpha' },
           { id: 'c5', sourceNodeId: 'bsdf', sourceSocketId: 'pb_bsdf', targetNodeId: 'output', targetSocketId: 'mo_surface' },
       ];
       this.connections.set(connections);

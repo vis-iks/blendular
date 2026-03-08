@@ -4,41 +4,75 @@
       <span class="material-icons-round expand-icon">expand_more</span>
       <span class="title">{{ node.title }}</span>
     </div>
+    
+    <!-- Render header-level output sockets (like BSDF output) -->
+    <div class="header-sockets" *ngIf="headerOutputs.length > 0">
+      @for (output of headerOutputs; track output.id) {
+        <div class="socket-row output header-output">
+          <span class="label">{{ output.name }}</span>
+          <div class="socket output" 
+               [class.connected]="output.isConnected"
+               [attr.data-socket-id]="output.id" 
+               [style.border-color]="getSocketColor(output)"
+               [style.background-color]="output.isConnected ? getSocketColor(output) : 'var(--bui-socket-unconnected-bg, #222)'"></div>
+        </div>
+      }
+    </div>
   </div>
 
   <div class="node-body">
-    <!-- Combined row loop logic is hard because inputs and outputs are separate arrays.
-         We'll just stack them: Inputs on top/left side, Outputs on right.
-         Or use absolute positioning for sockets? No, flex is better.
-    -->
-
     <div class="sockets-container">
       <div class="inputs-column">
-        @for (input of node.inputs; track input.id) {
-          <div class="socket-row input">
-            <div class="socket input" [attr.data-socket-id]="input.id" [style.background-color]="getSocketColor(input)">
-              <!-- Hover effect handled by CSS -->
+        @for (input of bodyInputs; track input.id) {
+          <div class="socket-row input" [class.has-control]="!!input.control">
+            <div class="socket input" 
+                 [class.connected]="input.isConnected"
+                 [attr.data-socket-id]="input.id" 
+                 [style.border-color]="getSocketColor(input)"
+                 [style.background-color]="input.isConnected ? getSocketColor(input) : 'var(--bui-socket-unconnected-bg, #222)'">
             </div>
-            <span class="label">{{ input.name }}</span>
+
+            <!-- Socket Label or Inline Control -->
+            <ng-container *ngIf="!input.control">
+              <span class="label">{{ input.name }}</span>
+            </ng-container>
+
+            <ng-container *ngIf="input.control as ctrl">
+              <div class="inline-control-wrapper">
+                <span class="label" *ngIf="ctrl.label">{{ ctrl.label }}</span>
+                <span class="label" *ngIf="!ctrl.label">{{ input.name }}</span>
+                
+                <bui-number-input 
+                  *ngIf="ctrl.type === 'number'" 
+                  [value]="ctrl.value" 
+                  class="node-inline-input">
+                </bui-number-input>
+                
+                <bui-select 
+                  *ngIf="ctrl.type === 'select'" 
+                  [options]="ctrl.options || []"
+                  [value]="ctrl.value"
+                  class="node-inline-select">
+                </bui-select>
+              </div>
+            </ng-container>
           </div>
         }
       </div>
 
       <div class="outputs-column">
-        @for (output of node.outputs; track output.id) {
+        @for (output of bodyOutputs; track output.id) {
           <div class="socket-row output">
             <span class="label">{{ output.name }}</span>
-            <div class="socket output" [attr.data-socket-id]="output.id" [style.background-color]="getSocketColor(output)"></div>
+            <div class="socket output" 
+                 [class.connected]="output.isConnected"
+                 [attr.data-socket-id]="output.id" 
+                 [style.border-color]="getSocketColor(output)"
+                 [style.background-color]="output.isConnected ? getSocketColor(output) : 'var(--bui-socket-unconnected-bg, #222)'">
+            </div>
           </div>
         }
       </div>
     </div>
-
-    <!-- Placeholder for node data controls (sliders etc) -->
-    @if (node.data) {
-      <div class="node-controls">
-          <!-- We could dynamically render controls here based on node.data -->
-      </div>
-    }
   </div>
 </div>

@@ -1,0 +1,24 @@
+<div class="bui-layout-container">
+  <aside class="bui-sidebar">
+    <div class="bui-sidebar-header">
+      <h2>Blender UI Component Library</h2>
+    </div>
+    <nav class="bui-sidebar-nav">
+      <ul class="bui-nav-list">
+        <li *ngFor="let link of navLinks" class="bui-nav-item">
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="active"
+            class="bui-nav-link"
+          >
+            {{ link.label }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  
+  <main class="bui-main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

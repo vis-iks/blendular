@@ -1,0 +1,32 @@
+<div class="page-container">
+  <h2 class="page-title">Page 5: Data &amp; Hierarchies</h2>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- TREE COMPONENT                                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Tree / Outliner Component</h3>
+    <p class="section-desc">Expandable hierarchical tree with selection, icons, and indentation. Click a node to select, click the chevron to expand/collapse.</p>
+
+    <!-- Blender Scene Tree -->
+    <div class="demo-block">
+      <h4 class="demo-label">Scene Hierarchy (Outliner)</h4>
+      <div class="tree-container">
+        <bui-tree 
+          [nodes]="sceneTree" 
+          (nodeSelected)="onNodeSelected($event)"
+          (actionSelected)="onActionSelected($event)"
+        ></bui-tree>
+      </div>
+      <p class="demo-info">Selected: {{ selectedNode() }}</p>
+    </div>
+
+    <!-- File System Tree -->
+    <div class="demo-block">
+      <h4 class="demo-label">File System Tree</h4>
+      <div class="tree-container">
+        <bui-tree [nodes]="fileTree" (nodeSelected)="onNodeSelected($event)"></bui-tree>
+      </div>
+    </div>
+  </section>
+</div>

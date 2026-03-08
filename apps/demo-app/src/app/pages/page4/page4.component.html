@@ -1,0 +1,142 @@
+<div class="page-container">
+  <h2 class="page-title">Page 4: Layout &amp; Splitters</h2>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PANEL COMPONENT                                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Collapsible Panel</h3>
+    <p class="section-desc">Click the header to expand/collapse. Chevron rotates to indicate state.</p>
+
+    <div class="demo-block" style="max-width: 320px;">
+      <bui-panel title="Transform" icon="transform" [(expanded)]="panelExpanded" [draggable]="true">
+        <div class="panel-content">
+          <bui-slider label="X" [value]="1.5" [min]="-10" [max]="10" [step]="0.01" [precision]="3" suffix=" m"></bui-slider>
+          <bui-slider label="Y" [value]="0" [min]="-10" [max]="10" [step]="0.01" [precision]="3" suffix=" m"></bui-slider>
+          <bui-slider label="Z" [value]="3.2" [min]="-10" [max]="10" [step]="0.01" [precision]="3" suffix=" m"></bui-slider>
+        </div>
+      </bui-panel>
+
+      <div style="margin-top: 8px;"></div>
+
+      <bui-panel title="Modifiers" icon="tune">
+        <div class="panel-content">
+          <p class="placeholder-text">Subdivision Surface, Mirror…</p>
+        </div>
+      </bui-panel>
+
+      <div style="margin-top: 8px;"></div>
+
+      <bui-panel title="Constraints" icon="link" [expanded]="false">
+        <div class="panel-content">
+          <p class="placeholder-text">No constraints applied.</p>
+        </div>
+      </bui-panel>
+    </div>
+    <p class="demo-info">Panel expanded: {{ panelExpanded() }}</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- TABS COMPONENT                                         -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Tabs Component</h3>
+
+    <!-- Horizontal Tabs -->
+    <div class="demo-block">
+      <h4 class="demo-label">Horizontal Tabs</h4>
+      <div style="max-width: 400px;">
+        <bui-tabs [(activeIndex)]="activeTabIndex">
+          <bui-tab label="Render" icon="photo_camera">
+            <div class="tab-demo-content">Render engine settings: Cycles, Samples, Denoising…</div>
+          </bui-tab>
+          <bui-tab label="Output" icon="save">
+            <div class="tab-demo-content">Output file format, resolution, frame range…</div>
+          </bui-tab>
+          <bui-tab label="Scene" icon="public">
+            <div class="tab-demo-content">Scene units, gravity, rigid body world…</div>
+          </bui-tab>
+        </bui-tabs>
+      </div>
+      <p class="demo-info">Active tab: {{ activeTabIndex() }}</p>
+    </div>
+
+    <!-- Vertical Tabs -->
+    <div class="demo-block">
+      <h4 class="demo-label">Vertical Tabs</h4>
+      <div style="max-width: 400px; height: 220px;">
+        <bui-tabs orientation="vertical">
+          <bui-tab label="Object" icon="view_in_ar">
+            <div class="tab-demo-content">Object properties and settings</div>
+          </bui-tab>
+          <bui-tab label="Material" icon="palette">
+            <div class="tab-demo-content">Material slots and shader settings</div>
+          </bui-tab>
+          <bui-tab label="Physics" icon="science">
+            <div class="tab-demo-content">Physics simulation settings</div>
+          </bui-tab>
+        </bui-tabs>
+      </div>
+    </div>
+
+    <!-- Icon-only Vertical Tabs -->
+    <div class="demo-block">
+      <h4 class="demo-label">Vertical Tabs (Icon Only)</h4>
+      <div style="max-width: 400px; height: 180px;">
+        <bui-tabs orientation="vertical" [iconOnly]="true">
+          <bui-tab label="Object" icon="view_in_ar">
+            <div class="tab-demo-content">Object properties and settings</div>
+          </bui-tab>
+          <bui-tab label="Material" icon="palette">
+            <div class="tab-demo-content">Material slots and shader settings</div>
+          </bui-tab>
+          <bui-tab label="Physics" icon="science">
+            <div class="tab-demo-content">Physics simulation settings</div>
+          </bui-tab>
+          <bui-tab label="Particles" icon="grain">
+            <div class="tab-demo-content">Particle system settings</div>
+          </bui-tab>
+          <bui-tab label="Constraints" icon="link">
+            <div class="tab-demo-content">Constraint settings</div>
+          </bui-tab>
+        </bui-tabs>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SPLITTER COMPONENT                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section-title">Splitter Component</h3>
+    <p class="section-desc">Drag the divider bar between the two panes to resize them.</p>
+
+    <div class="demo-block">
+      <h4 class="demo-label">Horizontal Split</h4>
+      <div class="splitter-demo">
+        <bui-splitter orientation="horizontal" [initialSize]="40">
+          <div first class="pane-content pane-left">
+            <p>Left Pane (Outliner)</p>
+          </div>
+          <div second class="pane-content pane-right">
+            <p>Right Pane (Properties)</p>
+          </div>
+        </bui-splitter>
+      </div>
+    </div>
+
+    <div class="demo-block">
+      <h4 class="demo-label">Vertical Split</h4>
+      <div class="splitter-demo">
+        <bui-splitter orientation="vertical" [initialSize]="60">
+          <div first class="pane-content pane-top">
+            <p>Top Pane (Viewport)</p>
+          </div>
+          <div second class="pane-content pane-bottom">
+            <p>Bottom Pane (Timeline)</p>
+          </div>
+        </bui-splitter>
+      </div>
+    </div>
+  </section>
+</div>

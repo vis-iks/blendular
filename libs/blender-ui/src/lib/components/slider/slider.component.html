@@ -1,0 +1,29 @@
+<!-- Slider mode: drag to change value -->
+@if (!editing()) {
+  <div
+    class="bui-slider-container"
+    [class.dragging]="dragging()"
+    [class.disabled]="disabled()"
+    (mousedown)="onMouseDown($event)"
+  >
+    <!-- Progress fill bar -->
+    <div class="bui-slider-fill" [style.width]="progressWidth()"></div>
+
+    <!-- Label on the left -->
+    @if (label()) {
+      <span class="bui-slider-label">{{ label() }}</span>
+    }
+
+    <!-- Value display on the right -->
+    <span class="bui-slider-value">{{ displayValue() }}{{ suffix() }}</span>
+  </div>
+} @else {
+  <!-- Edit mode: direct text input -->
+  <input
+    #editInput
+    type="text"
+    class="bui-slider-edit"
+    (keydown)="onEditKeydown($event)"
+    (blur)="onEditBlur($event)"
+  />
+}

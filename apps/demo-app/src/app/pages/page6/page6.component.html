@@ -1,0 +1,59 @@
+<div class="page-container">
+  <h2 class="page-title">Page 6: Overlays & Messaging</h2>
+
+  <!-- Toast Container (Must be in DOM to see toasts) -->
+  <bui-toast-container></bui-toast-container>
+
+  <section class="demo-section">
+    <h3 class="section-title">Modal Dialogs</h3>
+    <div class="demo-block">
+      <bui-button (click)="openDialog()">Open Sample Dialog</bui-button>
+      
+      <bui-dialog 
+        title="Blender Preferences" 
+        [visible]="isDialogVisible()" 
+        (close)="isDialogVisible.set(false)"
+      >
+        <div class="dialog-inner">
+          <p>This is a custom Blender-style modal. It uses a relative layout and a dark backdrop.</p>
+          <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <label style="color: #888;">Interface Scale</label>
+            <div style="background: #232323; padding: 12px; border-radius: 4px;">
+              User preferences and system settings would go here.
+            </div>
+          </div>
+        </div>
+        <bui-button footer (click)="isDialogVisible.set(false)">Cancel</bui-button>
+        <bui-button footer variant="primary" (click)="isDialogVisible.set(false)">Save Changes</bui-button>
+      </bui-dialog>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="section-title">Context Menus</h3>
+    <div class="demo-block">
+      <div class="context-area" (contextmenu)="onRightClick($event)">
+        Right-click here to open a context menu
+      </div>
+
+      <bui-context-menu
+        [visible]="isMenuVisible()"
+        [x]="menuX()"
+        [y]="menuY()"
+        [items]="menuItems"
+        (itemClick)="onMenuItemClick($event)"
+        (close)="isMenuVisible.set(false)"
+      ></bui-context-menu>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="section-title">Toasts & Notifications</h3>
+    <div class="demo-block" style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <bui-button (click)="showToast('info')">Info Toast</bui-button>
+      <bui-button (click)="showToast('success')" style="color: #56b278;">Success Toast</bui-button>
+      <bui-button (click)="showToast('warning')" style="color: #e29c45;">Warning Toast</bui-button>
+      <bui-button (click)="showToast('error')" style="color: #d9534f;">Error Toast</bui-button>
+    </div>
+  </section>
+</div>

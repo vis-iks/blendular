@@ -1,0 +1,85 @@
+@use '../../styles/variables' as *;
+
+.bui-dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(1px);
+}
+
+.bui-dialog-container {
+  background: $bui-bg-dark;
+  border: 1px solid $bui-border-dark;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  min-width: 320px;
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: $bui-text-color;
+  font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
+}
+
+.bui-dialog-header {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 0 12px;
+  background: $bui-panel-header;
+  border-bottom: 1px solid $bui-border-dark;
+  user-select: none;
+}
+
+.bui-dialog-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: $bui-text-color;
+}
+
+.bui-dialog-close {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+}
+
+.bui-dialog-content {
+  padding: 16px;
+  font-size: 12px;
+  overflow-y: auto;
+  line-height: 1.4;
+}
+
+.bui-dialog-footer {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid $bui-border-dark;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+
+  &:empty {
+    display: none;
+  }
+}
