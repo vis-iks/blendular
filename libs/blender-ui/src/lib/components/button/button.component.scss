@@ -10,14 +10,14 @@
   justify-content: center;
   gap: 4px;
   padding: 3px 10px;
-  min-height: 22px;
-  font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
-  font-size: 0.75rem;
+  min-height: $bui-spacing-row;
+  font-family: inherit;
+  font-size: $bui-font-size-small;
   line-height: 1.2;
   color: $bui-text-color;
   background-color: $bui-panel-header;
   border: 1px solid $bui-border-dark;
-  border-radius: $bui-border-radius;
+  border-radius: $bui-radius-sm;
   cursor: pointer;
   user-select: none;
   outline: none;
@@ -34,25 +34,24 @@
   // Toggle variant
   &.toggle {
     &.pressed {
-      background-color: $bui-primary;
-      border-color: $bui-primary;
+      background-color: $bui-accent-blue;
+      border-color: $bui-accent-blue;
       color: #ffffff;
 
       &:hover {
-        background-color: $bui-highlight;
+        background-color: $bui-accent-blue-hover;
       }
     }
   }
 
   // Primary variant (Blender blue action buttons)
   &.primary {
-    background-color: #4772b3;
-    border-color: #3e639b;
+    background-color: $bui-accent-blue;
+    border-color: $bui-border-dark;
     color: #ffffff;
 
     &:hover:not(.disabled) {
-      background-color: #5684c9;
-      border-color: #3e639b;
+      background-color: $bui-accent-blue-hover;
     }
 
     &:active:not(.disabled) {

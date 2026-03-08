@@ -13,18 +13,25 @@
 .bui-select {
   width: 100%;
   appearance: none;
-  background-color: $bui-input-bg;
+  background: $bui-input-bg-gradient;
   border: 1px solid $bui-border-dark;
-  border-radius: 2px;
+  border-radius: $bui-radius-sm;
   color: $bui-text-color;
   font-family: inherit;
-  font-size: 0.75rem; // xs
-  padding: 0.25rem 1.5rem 0.25rem 0.5rem; // Right padding for arrow
+  font-size: $bui-font-size-small;
+  height: $bui-spacing-row;
+  padding: 0 1.5rem 0 0.5rem; // Right padding for arrow
   cursor: pointer;
+  display: flex;
+  align-items: center;
 
   &:focus {
     outline: none;
-    border-color: $bui-primary;
+    border-color: $bui-accent-blue;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: $bui-input-border-hover;
   }
 }
 
@@ -34,6 +41,6 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: #888;
-  font-size: 0.6rem;
+  color: $bui-text-disabled;
+  font-size: 12px;
 }

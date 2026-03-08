@@ -7,52 +7,52 @@
 .bui-checkbox-container {
   display: flex;
   align-items: center;
+  gap: $bui-spacing-sm; // Blender-style margin
   cursor: pointer;
   user-select: none;
+  height: $bui-spacing-row;
 
   &.disabled {
-    cursor: not-allowed;
+    cursor: default;
     opacity: 0.5;
   }
 }
 
-.bui-checkbox {
-  appearance: none;
-  background-color: transparent;
-  margin: 0;
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid $bui-text-color; // Fallback or distinct color
-  border-radius: 2px;
-  display: grid;
-  place-content: center;
-  margin-right: 0.5rem;
-  transition: all 0.2s ease;
-
-  // The checkmark
-  &::before {
-    content: "";
-    width: 0.65em;
-    height: 0.65em;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em white;
-    transform-origin: center;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  }
+.bui-checkbox-box {
+  width: 14px;
+  height: 14px;
+  background-color: $bui-input-bg;
+  border: 1px solid $bui-border-dark;
+  border-radius: $bui-radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s;
 
   &.checked {
-    background-color: $bui-primary;
-    border-color: $bui-primary;
+    background-color: #555;
+    border-color: #666;
 
-    &::before {
-      transform: scale(1);
+    &.filled-variant {
+      background-color: $bui-accent-blue; // Primary blue
+      border-color: $bui-border-dark;
     }
+  }
+
+  .disabled &.checked {
+    background-color: #444; // Solid gray fill for disabled
+    border-color: #555;
   }
 }
 
-.label {
-  font-family: var(--bui-font-display, "Inter", "system-ui", "sans-serif");
-  font-size: 0.75rem; // 12px
+.check-icon {
+  font-size: 14px;
+  color: white;
+  pointer-events: none;
+}
+
+.bui-checkbox-label {
+  font-size: 11px;
   color: $bui-text-color;
+  white-space: nowrap;
 }

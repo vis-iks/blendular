@@ -1,0 +1,61 @@
+@use '../../styles/variables' as *;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.bui-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 2px 0;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.bui-radio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  min-height: 20px;
+
+  &:hover .bui-radio-circle {
+    border-color: $bui-input-border-hover;
+  }
+}
+
+.bui-radio-circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid $bui-border-dark;
+  background: $bui-input-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.1s;
+
+  .selected & {
+    border-color: #666;
+  }
+}
+
+.bui-radio-inner-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff; // Blender's white inner dot
+}
+
+.bui-radio-label {
+  font-size: $bui-font-size-small;
+  color: $bui-text-color;
+  white-space: nowrap;
+}

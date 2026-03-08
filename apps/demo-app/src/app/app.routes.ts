@@ -1,6 +1,5 @@
 import { Route } from '@angular/router';
 import { ShowcaseLayoutComponent } from './layout/showcase-layout.component';
-import { PlaceholderPageComponent } from './pages/placeholder.component';
 
 export const appRoutes: Route[] = [
   {
@@ -12,8 +11,14 @@ export const appRoutes: Route[] = [
       { path: 'page3', loadComponent: () => import('./pages/page3/page3.component').then(m => m.Page3Component) },
       { path: 'page4', loadComponent: () => import('./pages/page4/page4.component').then(m => m.Page4Component) },
       { path: 'page5', loadComponent: () => import('./pages/page5/page5.component').then(m => m.Page5Component) },
-      { path: 'page6', loadComponent: () => import('./pages/page6/page6.component').then(m => m.Page6Component) },
-      { path: 'page6', component: PlaceholderPageComponent, data: { title: 'Page 6' } },
+      {
+        path: 'page6',
+        loadComponent: () => import('./pages/page6/page6.component').then(m => m.Page6Component)
+      },
+      {
+        path: 'page7',
+        loadComponent: () => import('./pages/page7/page7.component').then(m => m.Page7Component)
+      },
       { path: '', redirectTo: 'page1', pathMatch: 'full' }
     ]
   }

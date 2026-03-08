@@ -10,12 +10,21 @@ export * from './lib/components/panel/panel.component';
 export * from './lib/components/tabs/tabs.component';
 export * from './lib/components/splitter/splitter.component';
 export * from './lib/components/tree/tree.component';
+
+// Step 7
 export * from './lib/components/dialog/dialog.component';
 export * from './lib/components/context-menu/context-menu.component';
-export * from './lib/components/context-menu/context-menu.interface';
 export * from './lib/components/context-menu/context-menu-trigger.directive';
+export * from './lib/components/context-menu/context-menu.interface';
 export * from './lib/components/toast/toast.service';
 export * from './lib/components/toast/toast.component';
+
+// Step 8
+export * from './lib/components/field/field.component';
+export * from './lib/components/field/field-group.component';
+export * from './lib/components/segmented-control/segmented-control.component';
+export * from './lib/components/radio-group/radio-group.component';
+
 export * from './lib/components/number-input/number-input.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/section/section.component';

@@ -4,18 +4,40 @@
     class="bui-slider-container"
     [class.dragging]="dragging()"
     [class.disabled]="disabled()"
+    [class.progress-variant]="variant() === 'progress'"
     (mousedown)="onMouseDown($event)"
   >
     <!-- Progress fill bar -->
     <div class="bui-slider-fill" [style.width]="progressWidth()"></div>
 
-    <!-- Label on the left -->
+    <!-- Arrows for standard variant -->
+    @if (variant() === 'standard' && !disabled()) {
+      <div class="bui-slider-arrow left" (mousedown)="$event.stopPropagation()" (click)="decrement($event)">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </div>
+    }
+
+    <!-- Internal label (XYZ) -->
+    @if (internalLabel()) {
+      <span class="bui-slider-internal-label">{{ internalLabel() }}</span>
+    }
+
+    <!-- Label on the left (external) -->
     @if (label()) {
       <span class="bui-slider-label">{{ label() }}</span>
     }
 
-    <!-- Value display on the right -->
-    <span class="bui-slider-value">{{ displayValue() }}{{ suffix() }}</span>
+    <!-- Value display -->
+    <span class="bui-slider-value" 
+      [class.centered]="variant() === 'standard' && !internalLabel()"
+      [class.right-aligned]="!!internalLabel()"
+    >{{ displayValue() }}{{ suffix() }}</span>
+
+    @if (variant() === 'standard' && !disabled()) {
+      <div class="bui-slider-arrow right" (mousedown)="$event.stopPropagation()" (click)="increment($event)">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </div>
+    }
   </div>
 } @else {
   <!-- Edit mode: direct text input -->

@@ -18,5 +18,6 @@ export class ShowcaseLayoutComponent {
     { path: '/page4', label: 'Page 4: Layout & Splitters' },
     { path: '/page5', label: 'Page 5: Data & Hierarchies' },
     { path: '/page6', label: 'Page 6: Overlays & Messaging' },
+    { path: '/page7', label: 'Page 7: Blender Property Panels' },
   ];
 }

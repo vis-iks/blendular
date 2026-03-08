@@ -1,4 +1,8 @@
 /* Blender Dark Theme Variables */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 :root {
   /* Surface Colors */
   --bui-panel-bg: #303030;
@@ -16,6 +20,7 @@
   /* Text Colors */
   --bui-text-primary: #e6e6e6;
   --bui-text-secondary: #999999;
+  --bui-text-dimmed: #888888;
   --bui-text-disabled: #666666;
   
   /* Accents & States */
@@ -24,12 +29,17 @@
   --bui-accent-orange: #ed7d31;
   --bui-accent-orange-hover: #f19553;
   
-  /* Controls */
-  --bui-control-bg: #282828;
-  --bui-control-bg-hover: #3d3d3d;
-  --bui-control-bg-active: #4772b3;
-  --bui-control-border: #1a1a1a;
+  /* Buttons & Inputs */
+  --bui-input-bg: #282828;
+  --bui-input-bg-gradient: #3d3d3d; /* Flattened to solid color */
+  --bui-input-border: #1a1a1a;
+  --bui-input-border-hover: #666;
+  --bui-input-active-blue: #4772b3;
   
+  /* Panels */
+  --bui-panel-header-expanded: rgba(255, 255, 255, 0.05);
+  --bui-panel-header-hover: #4e4e4e;
+
   /* Typography */
   --bui-font-family: 'Inter', system-ui, -apple-system, sans-serif;
   --bui-font-size-base: 12px;
@@ -43,6 +53,7 @@
   --bui-radius-lg: 6px;
   
   /* Spacing */
+  --bui-spacing-row: 22px;
   --bui-spacing-xs: 2px;
   --bui-spacing-sm: 4px;
   --bui-spacing-md: 8px;

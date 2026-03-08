@@ -12,7 +12,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'bui-checkbox',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './checkbox.component.html',
+  template: `
+    <div class="bui-checkbox-container" [class.disabled]="disabled()" (click)="toggle()">
+      <div 
+        class="bui-checkbox-box" 
+        [class.checked]="checked()"
+        [class.filled-variant]="variant() === 'filled'"
+      >
+        @if (checked()) {
+          <span class="material-symbols-outlined check-icon">check</span>
+        }
+      </div>
+      @if (label()) {
+        <span class="bui-checkbox-label">{{ label() }}</span>
+      }
+    </div>
+  `,
   styleUrl: './checkbox.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
@@ -29,6 +44,9 @@ export class BuiCheckboxComponent implements ControlValueAccessor {
 
   /** Label text */
   label = input('');
+
+  /** Variant for the checkbox box */
+  variant = input<'standard' | 'filled'>('standard');
 
   /** Disabled state */
   disabled = input(false);

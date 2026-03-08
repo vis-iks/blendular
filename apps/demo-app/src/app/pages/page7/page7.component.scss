@@ -1,0 +1,72 @@
+@use '../../../../../../libs/blender-ui/src/lib/styles/variables' as *;
+
+.page-container {
+  padding: 20px;
+  color: $bui-text-color;
+  background-color: $bui-bg-dark;
+  min-height: 100vh;
+}
+
+.page-header {
+  margin-bottom: 24px;
+  
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  p {
+    color: #888;
+    font-size: 0.9rem;
+  }
+}
+
+.properties-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 400px;
+}
+
+.panel-info {
+  font-size: 11px;
+  color: #888;
+  padding: 4px 0;
+}
+
+.bui-mock-select {
+  width: 100%;
+  height: 22px;
+  background: $bui-input-bg;
+  border: 1px solid $bui-border-dark;
+  border-radius: $bui-border-radius;
+  color: $bui-text-color;
+  font-size: 11px;
+  padding: 0 4px;
+  outline: none;
+  
+  &:hover {
+    border-color: #666;
+  }
+}
+
+.overscan-layout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+::ng-deep {
+  bui-panel {
+    margin-bottom: 2px;
+    
+    // Nested panel indentation
+    bui-panel {
+      margin-left: 12px;
+      margin-top: 1px;
+      margin-bottom: 1px;
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  }
+}

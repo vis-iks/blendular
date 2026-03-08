@@ -1,14 +1,22 @@
-<div class="bui-panel" [class.collapsed]="!expanded()">
+<div class="bui-panel" [class.collapsed]="!expanded()" [class.sub-panel]="isSub()">
   <!-- Header -->
   <div class="bui-panel-header" (click)="toggle()">
-    @if (draggable()) {
-      <span class="drag-grip">⠿</span>
+    <span class="chevron material-symbols-outlined" [class.is-sub]="isSub()">{{ expanded() ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</span>
+    
+    @if (hasCheckbox()) {
+      <div class="header-checkbox-wrapper" (click)="$event.stopPropagation()">
+        <bui-checkbox [checked]="checked()" (checkedChange)="checked.set($event)"></bui-checkbox>
+      </div>
     }
-    <span class="chevron" [class.rotated]="expanded()">▶</span>
+
     @if (icon()) {
       <span class="header-icon material-symbols-outlined">{{ icon() }}</span>
     }
-    <span class="header-title">{{ title() }}</span>
+    <span class="header-title" [class.is-sub]="isSub()">{{ title() }}</span>
+
+    @if (shouldShowDragHandle()) {
+      <span class="drag-grip" cdkDragHandle>⠿</span>
+    }
   </div>
 
   <!-- Body (collapsible content) -->

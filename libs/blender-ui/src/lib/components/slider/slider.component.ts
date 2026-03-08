@@ -48,7 +48,13 @@ export class BuiSliderComponent implements ControlValueAccessor, OnDestroy {
   /** Label shown on the left side */
   label = input('');
 
-  /** Suffix shown after the value (e.g., "px", "°", "m") */
+  /** Slider style variant */
+  variant = input<'standard' | 'progress'>('progress');
+
+  /** Label shown inside the slider on the far left */
+  internalLabel = input<string>('');
+
+  /** Suffix shown after the value (e.g., "px", "°", "m", "%") */
   suffix = input('');
 
   /** Decimal precision for display */
@@ -79,7 +85,11 @@ export class BuiSliderComponent implements ControlValueAccessor, OnDestroy {
   /** Formatted display value */
   displayValue = computed(() => {
     const p = this.precision();
-    return this.value().toFixed(p);
+    const val = this.value();
+    if (this.suffix() === '%') {
+      return (val * 100).toFixed(p);
+    }
+    return val.toFixed(p);
   });
 
   // CVA callbacks
@@ -198,6 +208,22 @@ export class BuiSliderComponent implements ControlValueAccessor, OnDestroy {
 
     this.value.set(final);
     this.onChange(final);
+  }
+
+  increment(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.disabled()) return;
+    const step = this.step() || Math.pow(10, -this.precision());
+    this.updateValue(this.value() + step);
+    this.onTouched();
+  }
+
+  decrement(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.disabled()) return;
+    const step = this.step() || Math.pow(10, -this.precision());
+    this.updateValue(this.value() - step);
+    this.onTouched();
   }
 
   // ──────────────────────────────────────────────
