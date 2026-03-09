@@ -1,12 +1,29 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BuiTopBarComponent } from '@blender-ui/core';
-import { MenuItem } from '@blender-ui/core';
+import { 
+  BuiTopBarComponent, 
+  BuiToolbarComponent, 
+  BuiToolbarSectionComponent, 
+  BuiToolbarGroupComponent, 
+  BuiToolbarButtonComponent, 
+  BuiToolbarDropdownComponent,
+  MenubarComponent,
+  MenuItem 
+} from '@blender-ui/core';
 
 @Component({
   selector: 'app-workspace-demo',
   standalone: true,
-  imports: [CommonModule, BuiTopBarComponent],
+  imports: [
+    CommonModule, 
+    BuiTopBarComponent, 
+    BuiToolbarComponent, 
+    BuiToolbarSectionComponent, 
+    BuiToolbarGroupComponent, 
+    BuiToolbarButtonComponent, 
+    BuiToolbarDropdownComponent,
+    MenubarComponent
+  ],
   template: `
     <div class="demo-container">
       <bui-top-bar 
@@ -16,12 +33,56 @@ import { MenuItem } from '@blender-ui/core';
       ></bui-top-bar>
       
       <div class="workspace-content">
-        <div class="placeholder-viewport">
-          <div class="viewport-overlay">
-            <h2>Active Workspace: {{ activeWorkspace() }}</h2>
-            <p>This page demonstrates the Blender-style Top Bar with Menu and Workspace Tabs.</p>
+        @if (activeWorkspace() === 'Layout') {
+          <div class="viewport-panel">
+            <!-- Viewport Toolbar -->
+            <bui-toolbar>
+              <bui-toolbar-section align="left">
+                <bui-toolbar-group>
+                  <bui-toolbar-dropdown>
+                    <span class="bl-icons-view3d"></span>
+                  </bui-toolbar-dropdown>
+                </bui-toolbar-group>
+                
+                <bui-toolbar-group>
+                  <bui-toolbar-dropdown>
+                    <span class="bl-icons-checkbox_dehlt" style="font-size: 14px; margin-right: 4px;"></span>
+                    <span class="toolbar-label">Object Mode</span>
+                  </bui-toolbar-dropdown>
+                </bui-toolbar-group>
+
+                <bui-menubar [items]="viewportMenu"></bui-menubar>
+              </bui-toolbar-section>
+
+              <bui-toolbar-section align="right">
+                <bui-toolbar-group>
+                  <bui-toolbar-dropdown icon="bl-icons-gizmo"></bui-toolbar-dropdown>
+                  <bui-toolbar-dropdown [hideArrow]="true">
+                    <span class="bl-icons-cursor"></span>
+                  </bui-toolbar-dropdown>
+                  <bui-toolbar-dropdown [hideArrow]="true" style="padding-right: 8px;">
+                    <span class="toolbar-label">Options</span>
+                    <span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span>
+                  </bui-toolbar-dropdown>
+                </bui-toolbar-group>
+              </bui-toolbar-section>
+            </bui-toolbar>
+
+            <div class="viewport-canvas">
+              <div class="viewport-overlay">
+                <h2>Active Workspace: Layout</h2>
+                <p>This layout includes the main Top Bar and a specific Panel Toolbar (like Blender's 3D Viewport).</p>
+              </div>
+            </div>
           </div>
-        </div>
+        } @else {
+          <div class="placeholder-content">
+            <div class="viewport-overlay">
+              <h2>Active Workspace: {{ activeWorkspace() }}</h2>
+              <p>This workspace has a different layout. Switch back to <b>Layout</b> to see the viewport toolbar.</p>
+            </div>
+          </div>
+        }
       </div>
     </div>
   `,
@@ -35,19 +96,32 @@ import { MenuItem } from '@blender-ui/core';
 
     .workspace-content {
       flex: 1;
-      padding: 1px; // gutter
+      padding: 1px; // gutter between bars/panels
       background-color: #000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .viewport-panel, .placeholder-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #393939;
+      border-radius: 4px;
       overflow: hidden;
     }
 
-    .placeholder-viewport {
-      width: 100%;
-      height: 100%;
-      background-color: #393939;
+    .placeholder-content {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .viewport-canvas {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
       position: relative;
     }
 
@@ -62,12 +136,29 @@ import { MenuItem } from '@blender-ui/core';
         font-size: 24px;
       }
     }
+
+    .toolbar-label {
+      font-size: 11px;
+      color: #ccc;
+    }
+
+    .drop-arrow {
+      font-size: 10px;
+      opacity: 0.6;
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkspaceDemoComponent {
   workspaces = signal(['Layout', 'Modeling', 'Sculpting', 'UV Editing', 'Texture Paint', 'Shading', 'Animation', 'Rendering', 'Compositing', 'Geometry Nodes', 'Scripting']);
   activeWorkspace = signal('Layout');
+
+  viewportMenu: MenuItem[] = [
+    { label: 'View', items: [{ label: 'Toolbar' }, { label: 'Sidebar' }] },
+    { label: 'Select', items: [{ label: 'All' }, { label: 'None' }] },
+    { label: 'Add', items: [{ label: 'Mesh' }, { label: 'Curve' }] },
+    { label: 'Object', items: [{ label: 'Transform' }, { label: 'Set Origin' }] },
+  ];
 
   mainMenu: MenuItem[] = [
     {
