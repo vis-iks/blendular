@@ -37,7 +37,7 @@ import { CommonModule } from '@angular/common';
 
     .bui-workspace-tab {
       height: 100%;
-      padding: 0 12px;
+      padding: 0 8px;
       background: transparent;
       border: none;
       color: $bui-text-color;

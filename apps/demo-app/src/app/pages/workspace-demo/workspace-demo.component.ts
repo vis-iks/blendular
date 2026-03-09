@@ -1,37 +1,44 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { 
-  BuiTopBarComponent, 
-  BuiToolbarComponent, 
-  BuiToolbarSectionComponent, 
-  BuiToolbarGroupComponent, 
-  BuiToolbarButtonComponent, 
+import {
+  BuiTopBarComponent,
+  BuiToolbarComponent,
+  BuiToolbarSectionComponent,
+  BuiToolbarGroupComponent,
+  BuiToolbarButtonComponent,
   BuiToolbarDropdownComponent,
   MenubarComponent,
-  MenuItem 
+  MenuComponent,
+  MenuItem,
+  BuiPopoverDirective,
+  BuiEditorTypePopoverComponent
 } from '@blender-ui/core';
 
 @Component({
   selector: 'app-workspace-demo',
   standalone: true,
   imports: [
-    CommonModule, 
-    BuiTopBarComponent, 
-    BuiToolbarComponent, 
-    BuiToolbarSectionComponent, 
-    BuiToolbarGroupComponent, 
-    BuiToolbarButtonComponent, 
+    CommonModule,
+    BuiTopBarComponent,
+    BuiToolbarComponent,
+    BuiToolbarSectionComponent,
+    BuiToolbarGroupComponent,
+    BuiToolbarButtonComponent,
     BuiToolbarDropdownComponent,
-    MenubarComponent
+    MenubarComponent,
+    BuiPopoverDirective,
+    BuiEditorTypePopoverComponent,
+    MenuComponent
   ],
   template: `
-    <div class="demo-container">
-      <bui-top-bar 
-        [menuItems]="mainMenu" 
-        [workspaces]="workspaces()" 
-        [(activeWorkspace)]="activeWorkspace"
+    <div class="workspace-demo-container">
+      <bui-top-bar
+        [workspaces]="workspaces()"
+        [activeWorkspace]="activeWorkspace()"
+        (activeWorkspaceChange)="activeWorkspace.set($event)"
+        [menuItems]="mainMenu"
       ></bui-top-bar>
-      
+
       <div class="workspace-content">
         @if (activeWorkspace() === 'Layout') {
           <div class="viewport-panel">
@@ -39,15 +46,15 @@ import {
             <bui-toolbar>
               <bui-toolbar-section align="left">
                 <bui-toolbar-group>
-                  <bui-toolbar-dropdown>
+                  <bui-toolbar-dropdown [buiPopover]="editorTypePopover">
                     <span class="bl-icons-view3d"></span>
                   </bui-toolbar-dropdown>
                 </bui-toolbar-group>
-                
+
                 <bui-toolbar-group>
-                  <bui-toolbar-dropdown>
-                    <span class="bl-icons-checkbox_dehlt" style="font-size: 14px; margin-right: 4px;"></span>
-                    <span class="toolbar-label">Object Mode</span>
+                  <bui-toolbar-dropdown [activeBlue]="true" [buiPopover]="objectModePopover">
+                    <span [class]="'bl-icons-' + getModeIcon(currentMode())" style="font-size: 14px; margin-right: 4px;"></span>
+                    <span class="toolbar-label">{{ currentMode() }}</span>
                   </bui-toolbar-dropdown>
                 </bui-toolbar-group>
 
@@ -85,9 +92,17 @@ import {
         }
       </div>
     </div>
+
+    <ng-template #editorTypePopover>
+      <bui-editor-type-popover [columns]="editorColumns"></bui-editor-type-popover>
+    </ng-template>
+
+    <ng-template #objectModePopover>
+      <bui-menu [items]="objectModesMenu"></bui-menu>
+    </ng-template>
   `,
   styles: [`
-    .demo-container {
+    .workspace-demo-container {
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -152,11 +167,124 @@ import {
 export class WorkspaceDemoComponent {
   workspaces = signal(['Layout', 'Modeling', 'Sculpting', 'UV Editing', 'Texture Paint', 'Shading', 'Animation', 'Rendering', 'Compositing', 'Geometry Nodes', 'Scripting']);
   activeWorkspace = signal('Layout');
+  currentMode = signal('Object Mode');
+
+  editorColumns = [
+    {
+      category: 'General',
+      items: [
+        { label: '3D Viewport', icon: 'bl-icons-view3d' },
+        { label: 'Image Editor', icon: 'bl-icons-image_data' },
+        { label: 'UV Editor', icon: 'bl-icons-uv' },
+        { label: 'Compositor', icon: 'bl-icons-node_compositor' },
+        { label: 'Texture Node Editor', icon: 'bl-icons-node_texture' },
+        { label: 'Geometry Node Editor', icon: 'bl-icons-node_geometry' },
+        { label: 'Shader Editor', icon: 'bl-icons-node_material' },
+        { label: 'Video Sequencer', icon: 'bl-icons-sequencer' },
+        { label: 'Movie Clip Editor', icon: 'bl-icons-movie' }
+      ]
+    },
+    {
+      category: 'Animation',
+      items: [
+        { label: 'Dope Sheet', icon: 'bl-icons-dopesheet' },
+        { label: 'Timeline', icon: 'bl-icons-time' },
+        { label: 'Graph Editor', icon: 'bl-icons-graph' },
+        { label: 'Drivers', icon: 'bl-icons-driver' },
+        { label: 'Nonlinear Animation', icon: 'bl-icons-nla' }
+      ]
+    },
+    {
+      category: 'Scripting',
+      items: [
+        { label: 'Text Editor', icon: 'bl-icons-text_data' },
+        { label: 'Python Console', icon: 'bl-icons-console' },
+        { label: 'Info', icon: 'bl-icons-info' }
+      ]
+    },
+    {
+      category: 'Data',
+      items: [
+        { label: 'Outliner', icon: 'bl-icons-outliner' },
+        { label: 'Properties', icon: 'bl-icons-properties' },
+        { label: 'File Browser', icon: 'bl-icons-file_browser' },
+        { label: 'Asset Browser', icon: 'bl-icons-asset_manager' },
+        { label: 'Spreadsheet', icon: 'bl-icons-spreadsheet' }
+      ]
+    }
+  ];
+
+  objectModesMenu: MenuItem[] = [
+    { label: 'Object Mode', icon: 'object_data', active: true, action: () => this.setMode('Object Mode') },
+    { label: 'Edit Mode', icon: 'editmode_hlt', action: () => this.setMode('Edit Mode') },
+    { label: 'Sculpt Mode', icon: 'sculptmode_hlt', action: () => this.setMode('Sculpt Mode') },
+    { label: 'Vertex Paint', icon: 'vpaint_hlt', action: () => this.setMode('Vertex Paint') },
+    { label: 'Weight Paint', icon: 'wpaint_hlt', action: () => this.setMode('Weight Paint') },
+    { label: 'Texture Paint', icon: 'tpaint_hlt', action: () => this.setMode('Texture Paint') }
+  ];
+
+  setMode(mode: string) {
+    this.currentMode.set(mode);
+    this.objectModesMenu.forEach(item => {
+      item.active = item.label === mode;
+    });
+  }
+
+  getModeIcon(mode: string): string {
+    const item = this.objectModesMenu.find(m => m.label === mode);
+    return item?.icon || 'object_data';
+  }
 
   viewportMenu: MenuItem[] = [
     { label: 'View', items: [{ label: 'Toolbar' }, { label: 'Sidebar' }] },
-    { label: 'Select', items: [{ label: 'All' }, { label: 'None' }] },
-    { label: 'Add', items: [{ label: 'Mesh' }, { label: 'Curve' }] },
+    { label: 'Select', items: [{ label: 'All', shortcut: 'A' }, { label: 'None', shortcut: 'Alt A' }] },
+    { 
+      label: 'Add', 
+      items: [
+        { 
+          label: 'Mesh', 
+          icon: 'mesh', 
+          items: [
+            { label: 'Plane', icon: 'mesh_plane' },
+            { label: 'Cube', icon: 'mesh_cube' },
+            { label: 'Circle', icon: 'mesh_circle' },
+            { label: 'UV Sphere', icon: 'mesh_uvsphere' },
+            { label: 'Ico Sphere', icon: 'mesh_icosphere' },
+            { label: 'Cylinder', icon: 'mesh_cylinder' },
+            { label: 'Cone', icon: 'mesh_cone' },
+            { label: 'Torus', icon: 'mesh_torus' },
+            { separator: true },
+            { label: 'Grid', icon: 'mesh_grid' },
+            { label: 'Monkey', icon: 'mesh_monkey' },
+            { separator: true },
+            { label: 'Bolt', icon: 'mesh_bolt' }
+          ] 
+        },
+        { label: 'Curve', icon: 'curve', items: [{ label: 'Bézier' }, { label: 'Circle' }] },
+        { label: 'Surface', icon: 'surface' },
+        { label: 'Metaball', icon: 'meta' },
+        { label: 'Text', icon: 'text' },
+        { label: 'Point Cloud', icon: 'pointcloud' },
+        { label: 'Volume', icon: 'volume' },
+        { label: 'Grease Pencil', icon: 'greasepencil' },
+        { separator: true },
+        { label: 'Armature', icon: 'armature' },
+        { label: 'Lattice', icon: 'lattice' },
+        { separator: true },
+        { label: 'Empty', icon: 'empty' },
+        { label: 'Image', icon: 'image' },
+        { separator: true },
+        { label: 'Light', icon: 'light' },
+        { label: 'Light Probe', icon: 'lightprobe' },
+        { separator: true },
+        { label: 'Camera', icon: 'camera' },
+        { label: 'Speaker', icon: 'speaker' },
+        { label: 'Force Field', icon: 'forcefield' },
+        { label: 'Collection Instance', icon: 'collection' },
+        { separator: true },
+        { label: 'Sketch' }
+      ] 
+    },
     { label: 'Object', items: [{ label: 'Transform' }, { label: 'Set Origin' }] },
   ];
 

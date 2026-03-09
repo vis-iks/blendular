@@ -16,7 +16,7 @@ import { Component, ChangeDetectionStrategy, input, output } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'toolbar-tool-btn',
-    '[class.active-blue]': 'active()',
+    '[class.active]': 'active()',
     '(click)': 'clicked.emit($event)'
   }
 })

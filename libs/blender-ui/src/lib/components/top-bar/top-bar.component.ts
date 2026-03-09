@@ -12,7 +12,7 @@ import { BuiWorkspaceTabsComponent } from '../workspace-tabs/workspace-tabs.comp
     <div class="bui-top-bar">
       <div class="bui-top-bar-left">
         <div class="bui-logo-container">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDJD6nEsNr3SrB2Zvics4SLpKgINhiytknHvq-nPPibPizc98TquiiPtf9UEpR6Almzi6ZCxnaKnxBIGNy_CQnJTaE9qWdhvyn95V2YowmM4TbHsjFg5NFEZTs9dDOCLQqz5Rsfj7UesuX7QYaodyOv6O_F8GbVmFSdVPtX3X6UuCSQv5epl6Flb8Cpys2KbcF37yBLTj_2NsNeq8BbVVQgwa2FNx8bHMSLNzxLfHLmUK3X9ig3JypMNX5VJevpNqLpvis701UQy0" alt="Blender Logo" class="bui-logo">
+          <span class="bl-icons-blender bui-logo"></span>
         </div>
         <bui-menubar [items]="menuItems()"></bui-menubar>
       </div>
@@ -64,13 +64,13 @@ import { BuiWorkspaceTabsComponent } from '../workspace-tabs/workspace-tabs.comp
     .bui-logo-container {
       display: flex;
       align-items: center;
-      padding: 0 6px;
-      opacity: 0.9;
+      padding: 0 4px;
     }
 
     .bui-logo {
-      height: 14px;
-      width: 14px;
+      font-size: 14px;
+      color: #e37d36; // Blender orange
+      cursor: default;
     }
 
     .bui-top-bar-center {
@@ -86,7 +86,7 @@ import { BuiWorkspaceTabsComponent } from '../workspace-tabs/workspace-tabs.comp
       justify-content: flex-end;
       flex: 1;
       gap: 12px;
-      padding-right: 8px;
+      padding-right: 4px;
     }
 
     .bui-scene-info {

@@ -29,6 +29,7 @@ import { BuiTooltipDirective } from '../tooltip/tooltip.directive';
             class="bui-menu-item"
             [class.disabled]="item.disabled"
             [class.active]="activeItem === item"
+            [class.active-blue]="item.active"
             [buiTooltip]="item.tooltip || ''"
             [buiTooltipDetails]="item.tooltipDetails || ''"
             [buiTooltipShortcut]="item.shortcut || ''"

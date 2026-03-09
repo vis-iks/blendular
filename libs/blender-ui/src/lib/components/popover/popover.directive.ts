@@ -44,17 +44,17 @@ export class BuiPopoverDirective implements OnDestroy {
     const positionStrategy = this.overlay.position()
       .flexibleConnectedTo(this.elementRef)
       .withPositions([{
-        originX: 'center',
-        originY: 'bottom',
-        overlayX: 'center',
-        overlayY: 'top',
-        offsetY: 8
-      }, {
         originX: 'start',
         originY: 'bottom',
         overlayX: 'start',
         overlayY: 'top',
-        offsetY: 8
+        offsetY: 0
+      }, {
+        originX: 'center',
+        originY: 'bottom',
+        overlayX: 'center',
+        overlayY: 'top',
+        offsetY: 0
       }]);
 
     this.overlayRef = this.overlay.create({

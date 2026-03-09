@@ -10,4 +10,5 @@ export interface MenuItem {
   tooltip?: string;
   tooltipDetails?: string;
   tooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+  active?: boolean;
 }

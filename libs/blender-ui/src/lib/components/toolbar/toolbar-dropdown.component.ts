@@ -19,7 +19,8 @@ import { Component, ChangeDetectionStrategy, input, output } from '@angular/core
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'toolbar-tool-dropdown',
-    '[class.active-blue]': 'active()',
+    '[class.active]': 'active()',
+    '[class.active-blue]': 'activeBlue()',
     '(click)': 'clicked.emit($event)'
   }
 })
@@ -27,6 +28,7 @@ export class BuiToolbarDropdownComponent {
   label = input<string>();
   icon = input<string>();
   active = input<boolean>(false);
+  activeBlue = input<boolean>(false);
   hideArrow = input<boolean>(false);
   clicked = output<MouseEvent>();
 }

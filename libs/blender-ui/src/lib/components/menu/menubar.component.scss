@@ -10,7 +10,7 @@
 
 .bui-menubar-item {
   height: 100%;
-  padding: 0 10px;
+  padding: 0 8px;
   background: transparent;
   border: none;
   color: $bui-text-color;
@@ -28,7 +28,7 @@
   }
 
   &.active {
-    background-color: #4772b3; /* matches Blender active top menu item */
+    background-color: #4d4d4d; /* matches Blender active top menu item (grey, not blue) */
     color: #ffffff;
     border-radius: 4px;
   }
