@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   BuiTopBarComponent,
   BuiToolbarComponent,
@@ -11,7 +13,22 @@ import {
   MenuComponent,
   MenuItem,
   BuiPopoverDirective,
-  BuiEditorTypePopoverComponent
+  BuiEditorTypePopoverComponent,
+  BuiSplitterComponent,
+  BuiTabsComponent,
+  BuiTabComponent,
+  BuiTreeComponent,
+  BuiTreeNode,
+  BuiTreeAction,
+  BuiPanelComponent,
+  BuiFieldComponent,
+  BuiFieldGroupComponent,
+  BuiSliderComponent,
+  BuiCheckboxComponent,
+  BuiDropdownComponent,
+  BuiDropdownOption,
+  BuiSegmentOption,
+  BuiSegmentedControlComponent
 } from '@blender-ui/core';
 
 @Component({
@@ -19,6 +36,9 @@ import {
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
+    CdkDropList,
+    CdkDrag,
     BuiTopBarComponent,
     BuiToolbarComponent,
     BuiToolbarSectionComponent,
@@ -28,7 +48,18 @@ import {
     MenubarComponent,
     BuiPopoverDirective,
     BuiEditorTypePopoverComponent,
-    MenuComponent
+    MenuComponent,
+    BuiSplitterComponent,
+    BuiTabsComponent,
+    BuiTabComponent,
+    BuiTreeComponent,
+    BuiPanelComponent,
+    BuiFieldComponent,
+    BuiFieldGroupComponent,
+    BuiSliderComponent,
+    BuiCheckboxComponent,
+    BuiDropdownComponent,
+    BuiSegmentedControlComponent
   ],
   template: `
     <div class="workspace-demo-container">
@@ -41,47 +72,200 @@ import {
 
       <div class="workspace-content">
         @if (activeWorkspace() === 'Layout') {
-          <div class="viewport-panel">
-            <!-- Viewport Toolbar -->
-            <bui-toolbar>
-              <bui-toolbar-section align="left">
-                <bui-toolbar-group>
-                  <bui-toolbar-dropdown [buiPopover]="editorTypePopover">
-                    <span class="bl-icons-view3d"></span>
-                  </bui-toolbar-dropdown>
-                </bui-toolbar-group>
+          <bui-splitter orientation="horizontal" [initialSize]="60">
+            <div first class="viewport-panel">
+              <!-- Viewport Toolbar -->
+              <bui-toolbar>
+                <bui-toolbar-section align="left">
+                  <bui-toolbar-group>
+                    <bui-toolbar-dropdown [buiPopover]="editorTypePopover">
+                      <span class="bl-icons-view3d"></span>
+                    </bui-toolbar-dropdown>
+                  </bui-toolbar-group>
 
-                <bui-toolbar-group>
-                  <bui-toolbar-dropdown [activeBlue]="true" [buiPopover]="objectModePopover">
-                    <span [class]="'bl-icons-' + getModeIcon(currentMode())" style="font-size: 14px; margin-right: 4px;"></span>
-                    <span class="toolbar-label">{{ currentMode() }}</span>
-                  </bui-toolbar-dropdown>
-                </bui-toolbar-group>
+                  <bui-toolbar-group>
+                    <bui-toolbar-dropdown [activeBlue]="true" [buiPopover]="objectModePopover">
+                      <span [class]="'bl-icons-' + getModeIcon(currentMode())" style="font-size: 14px; margin-right: 4px;"></span>
+                      <span class="toolbar-label">{{ currentMode() }}</span>
+                    </bui-toolbar-dropdown>
+                  </bui-toolbar-group>
 
-                <bui-menubar [items]="viewportMenu"></bui-menubar>
-              </bui-toolbar-section>
+                  <bui-menubar [items]="viewportMenu"></bui-menubar>
+                </bui-toolbar-section>
 
-              <bui-toolbar-section align="right">
-                <bui-toolbar-group>
-                  <bui-toolbar-dropdown icon="bl-icons-gizmo"></bui-toolbar-dropdown>
-                  <bui-toolbar-dropdown [hideArrow]="true">
-                    <span class="bl-icons-cursor"></span>
-                  </bui-toolbar-dropdown>
-                  <bui-toolbar-dropdown [hideArrow]="true" style="padding-right: 8px;">
-                    <span class="toolbar-label">Options</span>
-                    <span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span>
-                  </bui-toolbar-dropdown>
-                </bui-toolbar-group>
-              </bui-toolbar-section>
-            </bui-toolbar>
+                <bui-toolbar-section align="right">
+                  <bui-toolbar-group>
+                    <bui-toolbar-btn>
+                      <span class="bl-icons-orientation_global"></span>
+                      <span class="toolbar-label">Global</span>
+                      <span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span>
+                    </bui-toolbar-btn>
+                    <bui-toolbar-dropdown icon="bl-icons-gizmo"></bui-toolbar-dropdown>
+                    <bui-toolbar-dropdown [hideArrow]="true">
+                      <span class="bl-icons-cursor"></span>
+                    </bui-toolbar-dropdown>
+                    <bui-toolbar-dropdown [hideArrow]="true" style="padding-right: 8px;">
+                      <span class="toolbar-label">Options</span>
+                      <span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span>
+                    </bui-toolbar-dropdown>
+                  </bui-toolbar-group>
+                </bui-toolbar-section>
+              </bui-toolbar>
 
-            <div class="viewport-canvas">
-              <div class="viewport-overlay">
-                <h2>Active Workspace: Layout</h2>
-                <p>This layout includes the main Top Bar and a specific Panel Toolbar (like Blender's 3D Viewport).</p>
+              <div class="viewport-canvas">
+                <div class="viewport-overlay">
+                  <h2>3D Viewport</h2>
+                  <p>Active Workspace: <b>Layout</b></p>
+                  <div class="viewport-actions">
+                    <bui-toolbar-btn>Add Cube</bui-toolbar-btn>
+                    <bui-toolbar-btn>Select All</bui-toolbar-btn>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+
+            <div second class="sidebar-panel">
+              <bui-splitter orientation="vertical" [initialSize]="30">
+                <div first class="outliner-container">
+                  <bui-toolbar>
+                    <bui-toolbar-section align="left">
+                      <bui-toolbar-group>
+                         <bui-toolbar-dropdown [hideArrow]="true" style="padding-left: 8px;">
+                           <span class="bl-icons-outliner"></span>
+                         </bui-toolbar-dropdown>
+                      </bui-toolbar-group>
+                      <bui-menubar [items]="outlinerMenu"></bui-menubar>
+                    </bui-toolbar-section>
+                  </bui-toolbar>
+                  <div class="sidebar-content outliner-content">
+                    <bui-tree 
+                      [nodes]="sceneTree" 
+                      (nodeSelected)="onNodeSelected($event)"
+                      (actionSelected)="onActionSelected($event)"
+                    ></bui-tree>
+                  </div>
+                </div>
+                <div second class="properties-container">
+                   <bui-toolbar>
+                    <bui-toolbar-section align="left">
+                      <bui-toolbar-group>
+                         <bui-toolbar-dropdown [hideArrow]="true" style="padding-left: 8px;">
+                           <span class="bl-icons-properties"></span>
+                         </bui-toolbar-dropdown>
+                      </bui-toolbar-group>
+                      <bui-menubar [items]="propertiesMenu"></bui-menubar>
+                    </bui-toolbar-section>
+                  </bui-toolbar>
+                  <div class="sidebar-content properties-tabs-content">
+                    <bui-tabs orientation="vertical" [iconOnly]="true">
+                      <!-- Render Tab (Page 7 Panels) -->
+                      <bui-tab label="Render" icon="render">
+                        <div class="draggable-panels-wrapper" cdkDropList (cdkDropListDropped)="onDrop($event)">
+                          @for (panel of panels(); track panel.id) {
+                            @if (panel.id === 'light_paths') {
+                              <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+                                <p class="placeholder-text">Light path settings...</p>
+                              </bui-panel>
+                            }
+
+                            @if (panel.id === 'raytracing') {
+                              <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="raytracingEnabled"
+                                [draggable]="true" cdkDrag cdkDragLockAxis="y">
+                                <bui-field-group>
+                                  <bui-field label="Method">
+                                    <bui-dropdown [options]="rtMethodOptions" [(value)]="rtMethod"></bui-dropdown>
+                                  </bui-field>
+                                  <bui-field label="Resolution">
+                                    <bui-dropdown [options]="rtResolutionOptions" [(value)]="rtResolution"></bui-dropdown>
+                                  </bui-field>
+                                </bui-field-group>
+
+                                <bui-panel title="Screen Tracing" variant="sub" [(expanded)]="stExpanded">
+                                  <bui-field-group>
+                                    <bui-field label="Precision">
+                                      <bui-slider [value]="stPrecision()" (valueChange)="stPrecision.set($event)" [min]="0" [max]="1"
+                                        [precision]="3" variant="progress"></bui-slider>
+                                    </bui-field>
+                                    <bui-field label="Thickness">
+                                      <bui-slider [value]="stThickness()" (valueChange)="stThickness.set($event)" [min]="0" [max]="1"
+                                        [precision]="1" suffix=" m"></bui-slider>
+                                    </bui-field>
+                                  </bui-field-group>
+                                </bui-panel>
+
+                                <bui-panel title="Denoising" variant="sub" [hasCheckbox]="true" [(checked)]="denoisingEnabled"
+                                  [(expanded)]="denoisingExpanded">
+                                </bui-panel>
+                              </bui-panel>
+                            }
+
+                            @if (panel.id === 'volumes') {
+                              <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+                                <bui-field-group>
+                                  <bui-field label="Steps">
+                                    <bui-slider [value]="volSteps()" (valueChange)="volSteps.set($event)" [min]="1" [max]="256"
+                                      [precision]="0"></bui-slider>
+                                  </bui-field>
+                                  <bui-field label="Distribution">
+                                    <bui-slider [value]="volDistribution()" (valueChange)="volDistribution.set($event)" [min]="0" [max]="1"
+                                      [precision]="3" variant="progress"></bui-slider>
+                                  </bui-field>
+                                </bui-field-group>
+                              </bui-panel>
+                            }
+
+                            @if (panel.id === 'curves') {
+                              <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [draggable]="true" cdkDrag cdkDragLockAxis="y">
+                                <bui-field-group>
+                                  <bui-field label="Shape">
+                                    <bui-segmented-control [options]="shapeOptions" [(value)]="selectedShape"></bui-segmented-control>
+                                  </bui-field>
+                                </bui-field-group>
+                              </bui-panel>
+                            }
+
+                            @if (panel.id === 'simplify') {
+                              <bui-panel [title]="panel.title" [(expanded)]="panel.expanded" [hasCheckbox]="true" [(checked)]="simplifyEnabled"
+                                [draggable]="true" cdkDrag cdkDragLockAxis="y">
+                                <bui-panel title="Viewport" variant="sub" [(expanded)]="viewportExpanded">
+                                  <bui-field-group>
+                                    <bui-field label="Max Subdivision">
+                                      <bui-slider [value]="viewportMaxSubdivision()" (valueChange)="viewportMaxSubdivision.set($event)" [min]="0"
+                                        [max]="10" [precision]="0"></bui-slider>
+                                    </bui-field>
+                                  </bui-field-group>
+                                </bui-panel>
+                              </bui-panel>
+                            }
+                          }
+                        </div>
+                      </bui-tab>
+
+                      <!-- Object Tab -->
+                      <bui-tab label="Object" icon="object_data">
+                         <bui-panel title="Transform" [(expanded)]="panelExpanded">
+                            <bui-field-group>
+                              <bui-field label="Location">
+                                <bui-slider label="X" [value]="0" suffix="m"></bui-slider>
+                                <bui-slider label="Y" [value]="0" suffix="m"></bui-slider>
+                                <bui-slider label="Z" [value]="0" suffix="m"></bui-slider>
+                              </bui-field>
+                            </bui-field-group>
+                         </bui-panel>
+                      </bui-tab>
+
+                      <!-- Modifiers Tab -->
+                      <bui-tab label="Modifiers" icon="modifier">
+                         <bui-panel title="Modifiers" [(expanded)]="panelExpanded">
+                            <bui-toolbar-btn style="width: 100%; margin: 8px 0;">Add Modifier</bui-toolbar-btn>
+                         </bui-panel>
+                      </bui-tab>
+                    </bui-tabs>
+                  </div>
+                </div>
+              </bui-splitter>
+            </div>
+          </bui-splitter>
         } @else {
           <div class="placeholder-content">
             <div class="viewport-overlay">
@@ -111,15 +295,13 @@ import {
 
     .workspace-content {
       flex: 1;
-      padding: 1px; // gutter between bars/panels
+      padding: 1px;
       background-color: #000;
       overflow: hidden;
       display: flex;
-      flex-direction: column;
     }
 
-    .viewport-panel, .placeholder-content {
-      flex: 1;
+    .viewport-panel, .placeholder-content, .sidebar-panel {
       display: flex;
       flex-direction: column;
       background-color: #393939;
@@ -127,7 +309,60 @@ import {
       overflow: hidden;
     }
 
+    .viewport-panel {
+      flex: 1;
+      margin-right: 1px;
+    }
+
+    .sidebar-panel {
+      flex: 1;
+      background-color: #000;
+    }
+
+    .outliner-container, .properties-container {
+      display: flex;
+      flex-direction: column;
+      background-color: #393939;
+      height: 100%;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sidebar-content {
+      flex: 1;
+      overflow: auto;
+    }
+
+    .outliner-content {
+      padding: 0;
+    }
+
+    .properties-tabs-content {
+      ::ng-deep .bui-tabs {
+        border: none;
+        border-radius: 0;
+      }
+      ::ng-deep .bui-tab-content {
+        padding: 0;
+      }
+    }
+
+    .draggable-panels-wrapper {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .placeholder-text {
+      font-size: 11px;
+      color: #777;
+      padding: 8px;
+      margin: 0;
+    }
+
     .placeholder-content {
+      flex: 1;
       align-items: center;
       justify-content: center;
     }
@@ -150,6 +385,13 @@ import {
         font-weight: 400;
         font-size: 24px;
       }
+
+      .viewport-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 16px;
+      }
     }
 
     .toolbar-label {
@@ -168,13 +410,86 @@ export class WorkspaceDemoComponent {
   workspaces = signal(['Layout', 'Modeling', 'Sculpting', 'UV Editing', 'Texture Paint', 'Shading', 'Animation', 'Rendering', 'Compositing', 'Geometry Nodes', 'Scripting']);
   activeWorkspace = signal('Layout');
   currentMode = signal('Object Mode');
+  panelExpanded = signal(true);
+
+  // Property Panels Data (Page 7)
+  raytracingEnabled = signal(false);
+  rtMethodOptions: BuiDropdownOption[] = [{ label: 'Screen-Trace', value: 'screen_trace' }];
+  rtMethod = signal('screen_trace');
+  rtResolutionOptions: BuiDropdownOption[] = [{ label: '1:2', value: '1:2' }];
+  rtResolution = signal('1:2');
+  stExpanded = signal(true);
+  stPrecision = signal(0.250);
+  stThickness = signal(0.2);
+  denoisingEnabled = signal(true);
+  denoisingExpanded = signal(false);
+  volResolutionOptions: BuiDropdownOption[] = [{ label: '1:2', value: '1:2' }];
+  volResolution = signal('1:2');
+  volSteps = signal(64);
+  volDistribution = signal(0.800);
+  volMaxDepth = signal(16);
+  shapeOptions: BuiSegmentOption[] = [
+    { label: 'Strand', value: 'strand' },
+    { label: 'Strip', value: 'strip' },
+    { label: 'Cylinder', value: 'cylinder' }
+  ];
+  selectedShape = signal('strand');
+  simplifyEnabled = signal(false);
+  viewportExpanded = signal(true);
+  viewportMaxSubdivision = signal(6);
+
+  panels = signal([
+    { id: 'light_paths', title: 'Light Paths', expanded: false },
+    { id: 'raytracing', title: 'Raytracing', expanded: true },
+    { id: 'volumes', title: 'Volumes', expanded: true },
+    { id: 'curves', title: 'Curves', expanded: true },
+    { id: 'simplify', title: 'Simplify', expanded: true }
+  ]);
+
+  onDrop(event: CdkDragDrop<any[]>) {
+    const list = [...this.panels()];
+    moveItemInArray(list, event.previousIndex, event.currentIndex);
+    this.panels.set(list);
+  }
+
+  // Outliner Data
+  private outlinerActions(type: 'collection' | 'object'): BuiTreeAction[] {
+    return [
+      { id: 'visibility', icon: 'hide_off', active: true },
+      { id: 'render', icon: 'camera_data', active: true }
+    ];
+  }
+
+  sceneTree: BuiTreeNode[] = [
+    {
+      id: 'scene', label: 'Scene Collection', icon: 'outliner_collection', expanded: true,
+      actions: this.outlinerActions('collection'),
+      children: [
+        {
+          id: 'collection-1', label: 'Collection', icon: 'outliner_collection', expanded: true,
+          actions: this.outlinerActions('collection'),
+          children: [
+            { id: 'cube', label: 'Cube', icon: 'outliner_ob_mesh', actions: this.outlinerActions('object') },
+            { id: 'camera', label: 'Camera', icon: 'camera_data', actions: this.outlinerActions('object') },
+            { id: 'light', label: 'Light', icon: 'light', actions: this.outlinerActions('object') },
+          ]
+        }
+      ]
+    }
+  ];
+
+  onNodeSelected(node: BuiTreeNode) {}
+  onActionSelected(event: { node: BuiTreeNode, action: BuiTreeAction }) {
+    event.action.active = !event.action.active;
+    this.sceneTree = [...this.sceneTree];
+  }
 
   editorColumns = [
     {
       category: 'General',
       items: [
         { label: '3D Viewport', icon: 'bl-icons-view3d' },
-        { label: 'Image Editor', icon: 'bl-icons-image_data' },
+        { label: 'Image Editor', icon: 'bl-icons-image' },
         { label: 'UV Editor', icon: 'bl-icons-uv' },
         { label: 'Compositor', icon: 'bl-icons-node_compositor' },
         { label: 'Texture Node Editor', icon: 'bl-icons-node_texture' },
@@ -197,7 +512,7 @@ export class WorkspaceDemoComponent {
     {
       category: 'Scripting',
       items: [
-        { label: 'Text Editor', icon: 'bl-icons-text_data' },
+        { label: 'Text Editor', icon: 'bl-icons-text' },
         { label: 'Python Console', icon: 'bl-icons-console' },
         { label: 'Info', icon: 'bl-icons-info' }
       ]
@@ -207,7 +522,7 @@ export class WorkspaceDemoComponent {
       items: [
         { label: 'Outliner', icon: 'bl-icons-outliner' },
         { label: 'Properties', icon: 'bl-icons-properties' },
-        { label: 'File Browser', icon: 'bl-icons-file_browser' },
+        { label: 'File Browser', icon: 'bl-icons-filebrowser' },
         { label: 'Asset Browser', icon: 'bl-icons-asset_manager' },
         { label: 'Spreadsheet', icon: 'bl-icons-spreadsheet' }
       ]
@@ -288,6 +603,15 @@ export class WorkspaceDemoComponent {
     { label: 'Object', items: [{ label: 'Transform' }, { label: 'Set Origin' }] },
   ];
 
+  outlinerMenu: MenuItem[] = [
+    { label: 'Display Mode', icon: 'view_filtered' },
+    { label: 'Filter', icon: 'filter' }
+  ];
+
+  propertiesMenu: MenuItem[] = [
+    { label: 'Tab', items: [{ label: 'Tool' }, { label: 'Render' }, { label: 'Output' }] }
+  ];
+
   mainMenu: MenuItem[] = [
     {
       label: 'File',
@@ -346,3 +670,4 @@ export class WorkspaceDemoComponent {
     }
   ];
 }
+

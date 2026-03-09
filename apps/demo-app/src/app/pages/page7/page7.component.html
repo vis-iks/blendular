@@ -7,7 +7,7 @@
           <span class="bl-icons-view3d"></span>
         </bui-toolbar-dropdown>
       </bui-toolbar-group>
-      
+
       <bui-toolbar-group>
         <bui-toolbar-dropdown>
           <span class="bl-icons-checkbox_dehlt" style="font-size: 14px; margin-right: 4px;"></span>
@@ -57,19 +57,11 @@
   </ng-template>
 
   <ng-template #snapPopover>
-    <bui-snap-popover
-      [snapBaseOptions]="snapBaseOptions"
-      [(snapBase)]="snapBase"
-      [snapTargetItems]="snapTargetItems"
-      [(snapTarget)]="snapTargetMode"
-      [individualItems]="snapIndividualItems"
-      [(individualChecked)]="snapIndividualChecked"
-      [(absoluteIncrementSnap)]="absoluteIncrementSnap"
-      [(alignRotationToTarget)]="alignRotationToTarget"
-      [(backfaceCulling)]="backfaceCulling"
-      [affectOptions]="affectOptions"
-      [(affect)]="affect"
-      [rotationIncrements]="rotationIncrements">
+    <bui-snap-popover [snapBaseOptions]="snapBaseOptions" [(snapBase)]="snapBase" [snapTargetItems]="snapTargetItems"
+      [(snapTarget)]="snapTargetMode" [individualItems]="snapIndividualItems"
+      [(individualChecked)]="snapIndividualChecked" [(absoluteIncrementSnap)]="absoluteIncrementSnap"
+      [(alignRotationToTarget)]="alignRotationToTarget" [(backfaceCulling)]="backfaceCulling"
+      [affectOptions]="affectOptions" [(affect)]="affect" [rotationIncrements]="rotationIncrements">
     </bui-snap-popover>
   </ng-template>
 
@@ -200,8 +192,5 @@
     </bui-panel>
     }
     }
-  </div>
-  <div style="margin-top: 20px;">
-    <bui-timeline></bui-timeline>
   </div>
 </div>
