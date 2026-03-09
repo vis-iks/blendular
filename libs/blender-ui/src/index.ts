@@ -46,3 +46,5 @@ export * from './lib/components/popover/index';
 export * from './lib/components/toolbar/index';
 export * from './lib/components/editor-type-popover/index';
 export * from './lib/components/snap-popover/index';
+export * from './lib/components/workspace-tabs/workspace-tabs.component';
+export * from './lib/components/top-bar/top-bar.component';

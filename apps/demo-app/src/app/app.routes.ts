@@ -19,6 +19,10 @@ export const appRoutes: Route[] = [
         path: 'page7',
         loadComponent: () => import('./pages/page7/page7.component').then(m => m.Page7Component)
       },
+      {
+        path: 'workspace-demo',
+        loadComponent: () => import('./pages/workspace-demo/workspace-demo.component').then(m => m.WorkspaceDemoComponent)
+      },
       { path: '', redirectTo: 'page1', pathMatch: 'full' }
     ]
   }
