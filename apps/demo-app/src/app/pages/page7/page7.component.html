@@ -1,279 +1,80 @@
 <div class="page-container">
-  <div class="blender-toolbar-container">
+  <bui-toolbar>
     <!-- Left group: Editor type + Mode + Menus -->
-    <div class="toolbar-section toolbar-left">
-      <div class="toolbar-group">
-        <button class="toolbar-tool-dropdown editor-type-btn" [buiPopover]="editorTypePopover" style="padding-left: 8px;">
+    <bui-toolbar-section align="left">
+      <bui-toolbar-group>
+        <bui-toolbar-dropdown [buiPopover]="editorTypePopover" style="padding-left: 8px;">
           <span class="bl-icons-view3d"></span>
-          <span class="bl-icons-rightarrow_thin drop-arrow"></span>
-        </button>
-      </div>
+        </bui-toolbar-dropdown>
+      </bui-toolbar-group>
       
-      <div class="toolbar-group">
-        <button class="toolbar-tool-dropdown">
+      <bui-toolbar-group>
+        <bui-toolbar-dropdown>
           <span class="bl-icons-checkbox_dehlt" style="font-size: 14px; margin-right: 4px;"></span>
           <span class="toolbar-label">Object Mode</span>
-          <span class="bl-icons-rightarrow_thin drop-arrow"></span>
-        </button>
-      </div>
+        </bui-toolbar-dropdown>
+      </bui-toolbar-group>
 
       <bui-menubar [items]="mainMenu"></bui-menubar>
-    </div>
+    </bui-toolbar-section>
 
     <!-- Center group: Transformations -->
-    <div class="toolbar-section toolbar-center">
-      <div class="toolbar-group">
-        <button class="toolbar-tool-btn"><span class="bl-icons-orientation_global"></span><span
-            class="toolbar-label">Global</span><span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span></button>
-        <button class="toolbar-tool-dropdown"><span class="bl-icons-prop_on" style="font-size: 16px;"></span><span class="bl-icons-rightarrow_thin drop-arrow"></span></button>
-      </div>
-    </div>
+    <bui-toolbar-section align="center">
+      <bui-toolbar-group>
+        <bui-toolbar-btn>
+          <span class="bl-icons-orientation_global"></span>
+          <span class="toolbar-label">Global</span>
+          <span class="bl-icons-rightarrow_thin drop-arrow" style="margin-left: 2px;"></span>
+        </bui-toolbar-btn>
+        <bui-toolbar-dropdown>
+          <span class="bl-icons-prop_on" style="font-size: 16px;"></span>
+        </bui-toolbar-dropdown>
+      </bui-toolbar-group>
+    </bui-toolbar-section>
 
     <!-- Right group: Snap, Pivot, Overlays -->
-    <div class="toolbar-section toolbar-right">
-      <div class="toolbar-group">
-        <button class="toolbar-tool-btn"><span class="bl-icons-prop_projected" style="transform: rotate(180deg);"></span></button>
-        <button class="toolbar-tool-dropdown" [buiPopover]="snapPopover"><span
-            class="bl-icons-snap_on"></span><span
-            class="bl-icons-rightarrow_thin drop-arrow"></span></button>
-        <button class="toolbar-tool-dropdown"><span class="bl-icons-cursor"></span></button>
-        <button class="toolbar-tool-dropdown"><span class="bl-icons-graph"></span></button>
-      </div>
-    </div>
-  </div>
+    <bui-toolbar-section align="right">
+      <bui-toolbar-group>
+        <bui-toolbar-btn>
+          <span class="bl-icons-prop_projected" style="transform: rotate(180deg);"></span>
+        </bui-toolbar-btn>
+        <bui-toolbar-dropdown [buiPopover]="snapPopover">
+          <span class="bl-icons-snap_on"></span>
+        </bui-toolbar-dropdown>
+        <bui-toolbar-dropdown icon="bl-icons-gizmo" [buiPopover]="gizmosPopover"></bui-toolbar-dropdown>
+        <bui-toolbar-dropdown [hideArrow]="true">
+          <span class="bl-icons-cursor"></span>
+        </bui-toolbar-dropdown>
+        <bui-toolbar-dropdown [hideArrow]="true">
+          <span class="bl-icons-graph"></span>
+        </bui-toolbar-dropdown>
+      </bui-toolbar-group>
+    </bui-toolbar-section>
+  </bui-toolbar>
 
   <ng-template #editorTypePopover>
-    <div class="editor-type-popover">
-      <div class="editor-column">
-        <div class="editor-category">General</div>
-        <div class="editor-list">
-          <div class="editor-item active">
-            <span class="bl-icons-view3d editor-icon"></span>
-            <span class="editor-label"><u>3</u>D Viewport</span>
-            <span class="editor-shortcut">Shift F5</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-image editor-icon"></span>
-            <span class="editor-label"><u>I</u>mage Editor</span>
-            <span class="editor-shortcut">Shift F10</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-uv editor-icon"></span>
-            <span class="editor-label"><u>U</u>V Editor</span>
-            <span class="editor-shortcut">Shift F10</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-geometry_nodes editor-icon"></span>
-            <span class="editor-label"><u>G</u>eometry Node Editor</span>
-            <span class="editor-shortcut">Shift F3</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-node_compositing editor-icon"></span>
-            <span class="editor-label"><u>C</u>ompositor</span>
-            <span class="editor-shortcut">Shift F3</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-node_material editor-icon"></span>
-            <span class="editor-label"><u>S</u>hader Editor</span>
-            <span class="editor-shortcut">Shift F3</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-node_texture editor-icon"></span>
-            <span class="editor-label"><u>T</u>exture Node Editor</span>
-            <span class="editor-shortcut">Shift F3</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-sequence editor-icon"></span>
-            <span class="editor-label"><u>V</u>ideo Sequencer</span>
-            <span class="editor-shortcut">Shift F8</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-tracker editor-icon"></span>
-            <span class="editor-label"><u>M</u>ovie Clip Editor</span>
-            <span class="editor-shortcut">Shift F2</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="editor-column">
-        <div class="editor-category">Animation</div>
-        <div class="editor-list">
-          <div class="editor-item">
-            <span class="bl-icons-action editor-icon"></span>
-            <span class="editor-label">Dope <u>S</u>heet</span>
-            <span class="editor-shortcut">Shift F12</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-time editor-icon"></span>
-            <span class="editor-label">Time<u>l</u>ine</span>
-            <span class="editor-shortcut">Shift F12</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-graph editor-icon"></span>
-            <span class="editor-label">Graph <u>E</u>ditor</span>
-            <span class="editor-shortcut">Shift F6</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-driver editor-icon"></span>
-            <span class="editor-label"><u>D</u>rivers</span>
-            <span class="editor-shortcut">Shift F6</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-nla editor-icon"></span>
-            <span class="editor-label"><u>N</u>onlinear Animation</span>
-            <span class="editor-shortcut"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="editor-column">
-        <div class="editor-category">Scripting</div>
-        <div class="editor-list">
-          <div class="editor-item">
-            <span class="bl-icons-text editor-icon"></span>
-            <span class="editor-label">Te<u>x</u>t Editor</span>
-            <span class="editor-shortcut">Shift F11</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-console editor-icon"></span>
-            <span class="editor-label"><u>P</u>ython Console</span>
-            <span class="editor-shortcut">Shift F4</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-info editor-icon"></span>
-            <span class="editor-label">I<u>n</u>fo</span>
-            <span class="editor-shortcut"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="editor-column">
-        <div class="editor-category">Data</div>
-        <div class="editor-list">
-          <div class="editor-item">
-            <span class="bl-icons-outliner editor-icon"></span>
-            <span class="editor-label"><u>O</u>utliner</span>
-            <span class="editor-shortcut">Shift F9</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-properties editor-icon"></span>
-            <span class="editor-label">P<u>r</u>operties</span>
-            <span class="editor-shortcut">Shift F7</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-filebrowser editor-icon"></span>
-            <span class="editor-label"><u>F</u>ile Browser</span>
-            <span class="editor-shortcut">Shift F1</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-asset_manager editor-icon"></span>
-            <span class="editor-label"><u>A</u>sset Browser</span>
-            <span class="editor-shortcut">Shift F1</span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-spreadsheet editor-icon"></span>
-            <span class="editor-label">S<u>p</u>readsheet</span>
-            <span class="editor-shortcut"></span>
-          </div>
-          <div class="editor-item">
-            <span class="bl-icons-preferences editor-icon"></span>
-            <span class="editor-label">Preferences</span>
-            <span class="editor-shortcut"></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <bui-editor-type-popover [columns]="editorColumns"></bui-editor-type-popover>
   </ng-template>
 
   <ng-template #snapPopover>
-    <div class="snap-popover-panel">
-      <div class="snap-section">
-        <div class="snap-header">Snap Base</div>
-        <bui-segmented-control [options]="snapBaseOptions" [(value)]="snapBase"></bui-segmented-control>
-      </div>
+    <bui-snap-popover
+      [snapBaseOptions]="snapBaseOptions"
+      [(snapBase)]="snapBase"
+      [snapTargetItems]="snapTargetItems"
+      [(snapTarget)]="snapTargetMode"
+      [individualItems]="snapIndividualItems"
+      [(individualChecked)]="snapIndividualChecked"
+      [(absoluteIncrementSnap)]="absoluteIncrementSnap"
+      [(alignRotationToTarget)]="alignRotationToTarget"
+      [(backfaceCulling)]="backfaceCulling"
+      [affectOptions]="affectOptions"
+      [(affect)]="affect"
+      [rotationIncrements]="rotationIncrements">
+    </bui-snap-popover>
+  </ng-template>
 
-      <div class="snap-section">
-        <div class="snap-header">Snap Target</div>
-        <div class="snap-list">
-          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'increment'"
-            (click)="snapTargetMode.set('increment')" (keydown.enter)="snapTargetMode.set('increment')">
-            <span class="bl-icons-snap_on snap-icon"></span>
-            <span>Increment</span>
-          </div>
-          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'grid'"
-            (click)="snapTargetMode.set('grid')" (keydown.enter)="snapTargetMode.set('grid')">
-            <span class="bl-icons-snap_grid snap-icon"></span>
-            <span>Grid</span>
-          </div>
-          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'vertex'"
-            (click)="snapTargetMode.set('vertex')" (keydown.enter)="snapTargetMode.set('vertex')">
-            <span class="bl-icons-snap_vertex snap-icon"></span>
-            <span>Vertex</span>
-          </div>
-          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'edge'"
-            (click)="snapTargetMode.set('edge')" (keydown.enter)="snapTargetMode.set('edge')">
-            <span class="bl-icons-snap_edge snap-icon"></span>
-            <span>Edge</span>
-          </div>
-          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'face'"
-            (click)="snapTargetMode.set('face')" (keydown.enter)="snapTargetMode.set('face')">
-            <span class="bl-icons-snap_face snap-icon"></span>
-            <span>Face</span>
-          </div>
-          <div tabindex="0" class="snap-item" [class.active]="snapTargetMode() === 'volume'"
-            (click)="snapTargetMode.set('volume')" (keydown.enter)="snapTargetMode.set('volume')">
-            <span class="bl-icons-snap_volume snap-icon"></span>
-            <span>Volume</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="snap-section">
-        <div class="snap-header">Snap Target for Individual Elements</div>
-        <div class="snap-list tight">
-          <div class="snap-item nested">
-            <div tabindex="0" class="checkbox-mock" [class.checked]="snapTargetIndividualsEnabled1()"
-              (click)="snapTargetIndividualsEnabled1.set(!snapTargetIndividualsEnabled1())"
-              (keydown.enter)="snapTargetIndividualsEnabled1.set(!snapTargetIndividualsEnabled1())"></div>
-            <span>Face Project</span>
-          </div>
-          <div class="snap-item nested">
-            <div tabindex="0" class="checkbox-mock" [class.checked]="snapTargetIndividualsEnabled2()"
-              (click)="snapTargetIndividualsEnabled2.set(!snapTargetIndividualsEnabled2())"
-              (keydown.enter)="snapTargetIndividualsEnabled2.set(!snapTargetIndividualsEnabled2())"></div>
-            <span class="bl-icons-snap_face_nearest snap-icon"></span>
-            <span>Face Nearest</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="snap-section flush">
-        <bui-checkbox label="Absolute Increment Snap" [(checked)]="absoluteIncrementSnap"></bui-checkbox>
-        <bui-checkbox label="Align Rotation to Target" [(checked)]="alignRotationToTarget"></bui-checkbox>
-        <bui-checkbox label="Backface Culling" [(checked)]="backfaceCulling"></bui-checkbox>
-      </div>
-
-      <div class="snap-section">
-        <div class="snap-header">Target Selection</div>
-        <div class="snap-btn-row">
-          <button class="snap-action-btn"><span class="bl-icons-restrict_select_off"></span> Exclude
-            Non-Selectable</button>
-        </div>
-      </div>
-
-      <div class="snap-section">
-        <div class="snap-header">Affect</div>
-        <bui-segmented-control [options]="affectOptions" [(value)]="affect"></bui-segmented-control>
-      </div>
-
-      <div class="snap-section">
-        <div class="snap-header">Rotation Increment</div>
-        <div class="snap-btn-row twin">
-          <button class="snap-action-btn">5°</button>
-          <button class="snap-action-btn">1°</button>
-        </div>
-      </div>
-    </div>
+  <ng-template #gizmosPopover>
+    <bui-gizmos-popover></bui-gizmos-popover>
   </ng-template>
 
   <header class="page-header">
@@ -399,5 +200,8 @@
     </bui-panel>
     }
     }
+  </div>
+  <div style="margin-top: 20px;">
+    <bui-timeline></bui-timeline>
   </div>
 </div>

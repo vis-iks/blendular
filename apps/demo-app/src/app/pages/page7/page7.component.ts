@@ -14,7 +14,20 @@ import {
   BuiDropdownOption,
   MenubarComponent,
   MenuItem,
-  BuiPopoverDirective
+  BuiPopoverDirective,
+  TimelineComponent,
+  BuiToolbarComponent,
+  BuiToolbarSectionComponent,
+  BuiToolbarGroupComponent,
+  BuiToolbarButtonComponent,
+  BuiToolbarDropdownComponent,
+  BuiEditorTypePopoverComponent,
+  EditorTypeColumn,
+  BuiSnapPopoverComponent,
+  SnapTargetItem,
+  SnapIndividualItem,
+  SnapRotationIncrement,
+  BuiGizmosPopoverComponent
 } from '@blender-ui/core';
 
 @Component({
@@ -33,13 +46,69 @@ import {
     BuiCheckboxComponent,
     BuiDropdownComponent,
     MenubarComponent,
-    BuiPopoverDirective
+    BuiPopoverDirective,
+    TimelineComponent,
+    BuiToolbarComponent,
+    BuiToolbarSectionComponent,
+    BuiToolbarGroupComponent,
+    BuiToolbarButtonComponent,
+    BuiToolbarDropdownComponent,
+    BuiEditorTypePopoverComponent,
+    BuiSnapPopoverComponent,
+    BuiGizmosPopoverComponent
   ],
   templateUrl: './page7.component.html',
   styleUrl: './page7.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Page7Component {
+  // Editor Type Popover Data
+  editorColumns: EditorTypeColumn[] = [
+    {
+      category: 'General',
+      items: [
+        { label: '<u>3</u>D Viewport', icon: 'bl-icons-view3d', shortcut: 'Shift F5', active: true },
+        { label: '<u>I</u>mage Editor', icon: 'bl-icons-image', shortcut: 'Shift F10' },
+        { label: '<u>U</u>V Editor', icon: 'bl-icons-uv', shortcut: 'Shift F10' },
+        { label: '<u>G</u>eometry Node Editor', icon: 'bl-icons-geometry_nodes', shortcut: 'Shift F3' },
+        { label: '<u>C</u>ompositor', icon: 'bl-icons-node_compositing', shortcut: 'Shift F3' },
+        { label: '<u>S</u>hader Editor', icon: 'bl-icons-node_material', shortcut: 'Shift F3' },
+        { label: '<u>T</u>exture Node Editor', icon: 'bl-icons-node_texture', shortcut: 'Shift F3' },
+        { label: '<u>V</u>ideo Sequencer', icon: 'bl-icons-sequence', shortcut: 'Shift F8' },
+        { label: '<u>M</u>ovie Clip Editor', icon: 'bl-icons-tracker', shortcut: 'Shift F2' },
+      ]
+    },
+    {
+      category: 'Animation',
+      items: [
+        { label: 'Dope <u>S</u>heet', icon: 'bl-icons-action', shortcut: 'Shift F12' },
+        { label: 'Time<u>l</u>ine', icon: 'bl-icons-time', shortcut: 'Shift F12' },
+        { label: 'Graph <u>E</u>ditor', icon: 'bl-icons-graph', shortcut: 'Shift F6' },
+        { label: '<u>D</u>rivers', icon: 'bl-icons-driver', shortcut: 'Shift F6' },
+        { label: '<u>N</u>onlinear Animation', icon: 'bl-icons-nla' },
+      ]
+    },
+    {
+      category: 'Scripting',
+      items: [
+        { label: 'Te<u>x</u>t Editor', icon: 'bl-icons-text', shortcut: 'Shift F11' },
+        { label: '<u>P</u>ython Console', icon: 'bl-icons-console', shortcut: 'Shift F4' },
+        { label: 'I<u>n</u>fo', icon: 'bl-icons-info' },
+      ]
+    },
+    {
+      category: 'Data',
+      items: [
+        { label: '<u>O</u>utliner', icon: 'bl-icons-outliner', shortcut: 'Shift F9' },
+        { label: 'P<u>r</u>operties', icon: 'bl-icons-properties', shortcut: 'Shift F7' },
+        { label: '<u>F</u>ile Browser', icon: 'bl-icons-filebrowser', shortcut: 'Shift F1' },
+        { label: '<u>A</u>sset Browser', icon: 'bl-icons-asset_manager', shortcut: 'Shift F1' },
+        { label: 'S<u>p</u>readsheet', icon: 'bl-icons-spreadsheet' },
+        { label: 'Preferences', icon: 'bl-icons-preferences' },
+      ]
+    }
+  ];
+
   // Light Paths
   // Nothing specific
 
@@ -110,25 +179,45 @@ export class Page7Component {
 
   // Snap Panel Data
   snapTargetMode = signal('increment');
+
+  snapTargetItems: SnapTargetItem[] = [
+    { value: 'increment', label: 'Increment', icon: 'bl-icons-snap_on' },
+    { value: 'grid',      label: 'Grid',      icon: 'bl-icons-snap_grid' },
+    { value: 'vertex',    label: 'Vertex',    icon: 'bl-icons-snap_vertex' },
+    { value: 'edge',      label: 'Edge',      icon: 'bl-icons-snap_edge' },
+    { value: 'face',      label: 'Face',      icon: 'bl-icons-snap_face' },
+    { value: 'volume',    label: 'Volume',    icon: 'bl-icons-snap_volume' },
+  ];
+
   snapBaseOptions: BuiSegmentOption[] = [
     { label: 'Closest', value: 'closest' },
-    { label: 'Center', value: 'center' },
-    { label: 'Median', value: 'median' },
-    { label: 'Active', value: 'active' }
+    { label: 'Center',  value: 'center' },
+    { label: 'Median',  value: 'median' },
+    { label: 'Active',  value: 'active' }
   ];
   snapBase = signal('closest');
-  snapTargetIndividualsEnabled1 = signal(false);
-  snapTargetIndividualsEnabled2 = signal(false);
+
+  snapIndividualItems: SnapIndividualItem[] = [
+    { label: 'Face Project' },
+    { label: 'Face Nearest', icon: 'bl-icons-snap_face_nearest' },
+  ];
+  snapIndividualChecked = signal([false, false]);
+
   absoluteIncrementSnap = signal(false);
   alignRotationToTarget = signal(false);
   backfaceCulling = signal(false);
   
   affectOptions: BuiSegmentOption[] = [
-    { label: 'Move', value: 'move' },
+    { label: 'Move',   value: 'move' },
     { label: 'Rotate', value: 'rotate' },
-    { label: 'Scale', value: 'scale' }
+    { label: 'Scale',  value: 'scale' }
   ];
   affect = signal('move');
+
+  rotationIncrements: SnapRotationIncrement[] = [
+    { label: '5°' },
+    { label: '1°' },
+  ];
 
   snapTargetSelection = signal('Exclude Non-Selectable');
 

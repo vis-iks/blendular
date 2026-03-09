@@ -1,0 +1,22 @@
+<bui-popover-container>
+  <div class="editor-type-popover-inner">
+    @for (column of columns(); track column.category) {
+      <div class="editor-column">
+        <bui-popover-header>{{ column.category }}</bui-popover-header>
+        <div class="editor-list">
+          @for (item of column.items; track item.label) {
+            <div class="editor-item" [class.active]="item.active"
+                 (click)="onItemClick(item)" (keydown.enter)="onItemClick(item)"
+                 tabindex="0" role="button">
+              <span [class]="item.icon + ' editor-icon'"></span>
+              <span class="editor-label" [innerHTML]="item.label"></span>
+              @if (item.shortcut) {
+                <span class="editor-shortcut">{{ item.shortcut }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</bui-popover-container>

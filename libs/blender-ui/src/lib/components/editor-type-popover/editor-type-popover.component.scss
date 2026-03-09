@@ -1,0 +1,68 @@
+.editor-type-popover-inner {
+  display: flex;
+  padding: 0 4px 8px; /* Header has its own padding */
+  gap: 16px;
+}
+
+.editor-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+}
+
+
+.editor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.editor-item {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  cursor: pointer;
+  color: #cccccc;
+  font-size: 11px;
+  border-radius: 3px;
+  
+  &:hover:not(.active) {
+    background: #4772b3;
+    color: #ffffff;
+  }
+  
+  &.active {
+    background: #4772b3;
+    color: #ffffff;
+  }
+}
+
+.editor-icon {
+  font-size: 14px;
+  margin-right: 8px;
+  width: 14px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.editor-label {
+  flex: 1;
+  white-space: nowrap;
+  
+  u {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.editor-shortcut {
+  color: #777777;
+  font-size: 10px;
+  margin-left: 16px;
+}
+
+.editor-item:hover .editor-shortcut,
+.editor-item.active .editor-shortcut {
+  color: #cccccc;
+}

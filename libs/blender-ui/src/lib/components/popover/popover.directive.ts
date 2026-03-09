@@ -1,6 +1,7 @@
-import { Directive, Input, ElementRef, ViewContainerRef, HostListener, TemplateRef, OnDestroy } from '@angular/core';
+import { Directive, Input, ElementRef, ViewContainerRef, HostListener, TemplateRef, OnDestroy, Optional } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { BuiPopoverService } from './popover.service';
 
 @Directive({
   selector: '[buiPopover]',
@@ -14,20 +15,31 @@ export class BuiPopoverDirective implements OnDestroy {
   constructor(
     private overlay: Overlay,
     private elementRef: ElementRef,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    @Optional() private popoverService: BuiPopoverService
   ) {}
 
-  @HostListener('click')
-  toggle() {
+  @HostListener('click', ['$event'])
+  toggle(event: MouseEvent) {
+    event.stopPropagation();
     if (this.overlayRef) {
       this.close();
     } else {
+      this.open(true);
+    }
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    if (this.popoverService?.canSwitchOnHover() && !this.overlayRef) {
       this.open();
     }
   }
 
-  open() {
+  open(isClick = false) {
     if (this.overlayRef) return;
+
+    this.popoverService?.setActivePopover(this, isClick);
 
     const positionStrategy = this.overlay.position()
       .flexibleConnectedTo(this.elementRef)
@@ -36,13 +48,13 @@ export class BuiPopoverDirective implements OnDestroy {
         originY: 'bottom',
         overlayX: 'center',
         overlayY: 'top',
-        offsetY: 4
+        offsetY: 8
       }, {
         originX: 'start',
         originY: 'bottom',
         overlayX: 'start',
         overlayY: 'top',
-        offsetY: 4
+        offsetY: 8
       }]);
 
     this.overlayRef = this.overlay.create({
@@ -59,8 +71,11 @@ export class BuiPopoverDirective implements OnDestroy {
     this.overlayRef.attach(portal);
   }
 
-  close() {
+  close(isSwitching = false) {
     if (this.overlayRef) {
+      if (!isSwitching) {
+        this.popoverService?.notifyClosed(this);
+      }
       this.overlayRef.dispose();
       this.overlayRef = null;
     }

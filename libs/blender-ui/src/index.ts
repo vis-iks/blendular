@@ -43,3 +43,6 @@ export * from './lib/components/shader-editor/shader-editor.component';
 export * from './lib/components/menu/index';
 export * from './lib/components/tooltip/index';
 export * from './lib/components/popover/index';
+export * from './lib/components/toolbar/index';
+export * from './lib/components/editor-type-popover/index';
+export * from './lib/components/snap-popover/index';

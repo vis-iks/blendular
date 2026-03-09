@@ -1,19 +1,81 @@
-<div class="timeline-container">
-  <div class="timeline-left">
-    <div class="controls-group">
-      <button class="icon-btn"><span class="material-icons">skip_previous</span></button>
-      <button class="icon-btn"><span class="material-icons">play_arrow</span></button>
-      <button class="icon-btn"><span class="material-icons">skip_next</span></button>
+<div class="blender-timeline">
+  <div class="blender-toolbar-container timeline-header">
+    <div class="toolbar-section toolbar-left">
+      <button class="toolbar-tool-dropdown editor-type-btn" [buiPopover]="editorTypePopover">
+        <span class="bl-icons-time editor-icon"></span>
+        <span class="bl-icons-rightarrow_thin drop-arrow"></span>
+      </button>
+
+      <bui-menubar [items]="mainMenu"></bui-menubar>
     </div>
-    <div class="frame-indicator">
-      <span class="frame-label">1</span>
+
+    <!-- Center playback controls -->
+    <div class="toolbar-section toolbar-center playback-controls">
+      <div class="toolbar-group">
+        <button class="toolbar-tool-dropdown" [class.active-blue]="autoKeying()" (click)="autoKeying.set(!autoKeying())">
+          <span class="bl-icons-record_off"></span>
+          <span class="bl-icons-rightarrow_thin drop-arrow"></span>
+        </button>
+      </div>
+      <div class="toolbar-group playback-btn-group">
+        <button class="toolbar-tool-btn" (click)="jumpToStart()">
+          <span class="bl-icons-rew"></span>
+        </button>
+        <button class="toolbar-tool-btn">
+          <span class="bl-icons-prev_keyframe"></span>
+        </button>
+        <button class="toolbar-tool-btn" [class.active-blue]="playing()" (click)="playReverse()">
+          <span class="bl-icons-play_reverse"></span>
+        </button>
+        <button class="toolbar-tool-btn" (click)="pause()">
+          <span class="bl-icons-pause"></span>
+        </button>
+        <button class="toolbar-tool-btn" [class.active-blue]="playing()" (click)="playForward()">
+          <span class="bl-icons-play"></span>
+        </button>
+        <button class="toolbar-tool-btn">
+          <span class="bl-icons-next_keyframe"></span>
+        </button>
+        <button class="toolbar-tool-btn" (click)="jumpToEnd()">
+          <span class="bl-icons-ff"></span>
+        </button>
+      </div>
     </div>
-    <div class="range-controls">
-      <div class="range-box start">Start: 1</div>
-      <div class="range-box end">End: 250</div>
+
+    <!-- Right frame inputs -->
+    <div class="toolbar-section toolbar-right">
+      <div class="frame-inputs">
+        <div class="frame-input-group current-frame-group">
+          <bui-slider [value]="currentFrame()" [min]="1" [max]="3000" [precision]="0" (valueChange)="currentFrame.set($event)" class="bui-timeline-input current-frame-input"></bui-slider>
+        </div>
+        <div class="frame-input-group std-frame-group">
+          <span class="frame-label"><span class="bl-icons-time"></span> Start</span>
+          <bui-slider [value]="startFrame()" [min]="1" [max]="3000" [precision]="0" (valueChange)="startFrame.set($event)" class="bui-timeline-input std-frame-input"></bui-slider>
+        </div>
+        <div class="frame-input-group std-frame-group">
+          <span class="frame-label">End</span>
+          <bui-slider [value]="endFrame()" [min]="1" [max]="3000" [precision]="0" (valueChange)="endFrame.set($event)" class="bui-timeline-input std-frame-input"></bui-slider>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="timeline-right">
-      <button class="icon-btn"><span class="material-icons">schedule</span></button>
+
+  <ng-template #editorTypePopover>
+    <div style="padding: 8px; color: #ccc;">Editor Type Selection Dropdown</div>
+  </ng-template>
+
+  <div class="timeline-track-area" #trackArea (mousedown)="onTrackMouseDown($event)">
+    <div class="ruler-bg">
+      @for (mark of frameMarks(); track mark) {
+        <div class="ruler-mark" [style.left.%]="(mark - startFrame()) / (endFrame() - startFrame()) * 100">
+          <span class="ruler-number">{{ mark }}</span>
+        </div>
+      }
+      <div class="scrubber" [style.left.%]="(currentFrame() - startFrame()) / (endFrame() - startFrame()) * 100">
+        <div class="scrubber-head">{{ currentFrame() }}</div>
+        <div class="scrubber-line"></div>
+      </div>
+    </div>
+    <div class="track-bg"></div>
   </div>
 </div>

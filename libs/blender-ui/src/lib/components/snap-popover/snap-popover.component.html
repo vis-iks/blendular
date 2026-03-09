@@ -1,0 +1,78 @@
+<bui-popover-container width="260px">
+  
+  <!-- Snap Base -->
+  @if (snapBaseOptions().length) {
+    <bui-popover-section>
+      <bui-popover-header>Snap Base</bui-popover-header>
+      <bui-segmented-control [options]="snapBaseOptions()" [(value)]="snapBase"></bui-segmented-control>
+    </bui-popover-section>
+  }
+
+  <!-- Snap Target -->
+  @if (snapTargetItems().length) {
+    <bui-popover-section>
+      <bui-popover-header>Snap Target</bui-popover-header>
+      <div class="snap-list">
+        @for (item of snapTargetItems(); track item.value) {
+          <div tabindex="0" class="snap-item" [class.active]="snapTarget() === item.value"
+               (click)="snapTarget.set(item.value)"
+               (keydown.enter)="snapTarget.set(item.value)">
+            <span [class]="item.icon + ' snap-icon'"></span>
+            <span>{{ item.label }}</span>
+          </div>
+        }
+      </div>
+    </bui-popover-section>
+  }
+
+  <!-- Snap Target for Individual Elements -->
+  @if (individualItems().length) {
+    <bui-popover-section>
+      <bui-popover-header>Snap Target for Individual Elements</bui-popover-header>
+      <div class="snap-list tight">
+        @for (item of individualItems(); track item.label; let i = $index) {
+          <div class="snap-item nested">
+            <div tabindex="0" class="checkbox-mock"
+                 [class.checked]="individualChecked()[i]"
+                 (click)="toggleIndividual(i)"
+                 (keydown.enter)="toggleIndividual(i)"></div>
+            @if (item.icon) {
+              <span [class]="item.icon + ' snap-icon'"></span>
+            }
+            <span>{{ item.label }}</span>
+          </div>
+        }
+      </div>
+    </bui-popover-section>
+  }
+
+  <!-- Checkboxes -->
+  <bui-popover-section [flush]="true">
+    <div class="checkbox-group">
+      <bui-checkbox label="Absolute Increment Snap" [(checked)]="absoluteIncrementSnap"></bui-checkbox>
+      <bui-checkbox label="Align Rotation to Target" [(checked)]="alignRotationToTarget"></bui-checkbox>
+      <bui-checkbox label="Backface Culling" [(checked)]="backfaceCulling"></bui-checkbox>
+    </div>
+  </bui-popover-section>
+
+  <!-- Affect -->
+  @if (affectOptions().length) {
+    <bui-popover-section>
+      <bui-popover-header>Affect</bui-popover-header>
+      <bui-segmented-control [options]="affectOptions()" [(value)]="affect"></bui-segmented-control>
+    </bui-popover-section>
+  }
+
+  <!-- Rotation Increment -->
+  @if (rotationIncrements().length) {
+    <bui-popover-section [noBorder]="true">
+      <bui-popover-header>Rotation Increment</bui-popover-header>
+      <div class="snap-btn-row" [class.twin]="rotationIncrements().length > 1">
+        @for (inc of rotationIncrements(); track inc.label) {
+          <button class="snap-action-btn">{{ inc.label }}</button>
+        }
+      </div>
+    </bui-popover-section>
+  }
+
+</bui-popover-container>

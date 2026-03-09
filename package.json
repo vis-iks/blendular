@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve demo-app"
+    "start": "nx serve demo-app --port 4201"
   },
   "private": true,
   "devDependencies": {
