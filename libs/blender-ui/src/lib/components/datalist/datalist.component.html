@@ -1,0 +1,70 @@
+<div class="bui-datalist-container">
+  <div class="bui-datalist-main">
+    
+    <!-- The scrollable list view -->
+    <div class="bui-datalist-viewport">
+      @if (filteredItems().length === 0) {
+        <div class="bui-datalist-empty">No items found</div>
+      }
+      
+      @for (item of filteredItems(); track item) {
+        <div 
+          class="bui-datalist-item" 
+          [class.selected]="item === selectedItem"
+          (click)="selectItem(item)"
+        >
+          <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+          
+          <!-- Fallback if no template is provided -->
+          @if (!itemTemplate) {
+            <span class="default-item-text">{{ typeof item === 'string' ? item : item[filterKey] }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- The vertical tool column on the right -->
+    <div class="bui-datalist-toolbar">
+      <button class="bui-btn-icon" (click)="onAdd()" title="Add">
+        <span class="bl-icons-add"></span>
+      </button>
+      <button class="bui-btn-icon" (click)="onRemove()" [disabled]="!selectedItem" title="Remove">
+        <span class="bl-icons-remove"></span>
+      </button>
+      
+      <div class="toolbar-separator"></div>
+      
+      <button class="bui-btn-icon" (click)="onMoveUp()" [disabled]="!selectedItem" title="Move Up">
+        <span class="bl-icons-select_handle"></span>
+      </button>
+      <button class="bui-btn-icon" (click)="onMoveDown()" [disabled]="!selectedItem" style="transform: scaleY(-1);" title="Move Down">
+        <span class="bl-icons-select_handle"></span>
+      </button>
+
+      @if (headerActions.length > 0) {
+        <div class="toolbar-separator"></div>
+        @for (action of headerActions; track action.id) {
+           <button class="bui-btn-icon" (click)="actionClick.emit(action)" [title]="action.label || ''">
+             <span [class]="'bl-icons-' + action.icon"></span>
+           </button>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- Search / Filter input below the list -->
+  <div class="bui-datalist-search-row">
+    <div class="bui-search-input-wrapper">
+      <span class="bl-icons-search search-icon"></span>
+      <input 
+        type="text" 
+        class="bui-search-input" 
+        [(ngModel)]="searchQuery" 
+        [placeholder]="searchPlaceholder"
+      />
+      @if (searchQuery()) {
+        <span class="bl-icons-x clear-icon" (click)="searchQuery.set('')"></span>
+      }
+    </div>
+  </div>
+</div>

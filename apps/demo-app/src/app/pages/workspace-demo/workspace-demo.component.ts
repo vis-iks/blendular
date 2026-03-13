@@ -30,7 +30,9 @@ import {
   BuiSegmentOption,
   BuiSegmentedControlComponent,
   BuiBreadcrumbsComponent,
-  BreadcrumbItem
+  BreadcrumbItem,
+  BuiDatalistComponent,
+  BuiDatalistAction
 } from '@blender-ui/core';
 
 @Component({
@@ -62,7 +64,8 @@ import {
     BuiCheckboxComponent,
     BuiDropdownComponent,
     BuiSegmentedControlComponent,
-    BuiBreadcrumbsComponent
+    BuiBreadcrumbsComponent,
+    BuiDatalistComponent
   ],
   template: `
     <div class="workspace-demo-container">
@@ -163,7 +166,7 @@ import {
                     </bui-toolbar-section>
                   </bui-toolbar>
                   <div class="sidebar-content properties-tabs-content">
-                    <bui-tabs orientation="vertical" [iconOnly]="true">
+                    <bui-tabs orientation="vertical" [iconOnly]="true" [(activeIndex)]="activeTabIndex">
                       <!-- Render Tab (Page 7 Panels) -->
                       <bui-tab label="Render" icon="render">
                         <div class="draggable-panels-wrapper" cdkDropList (cdkDropListDropped)="onDrop($event)">
@@ -257,6 +260,39 @@ import {
                                 <bui-slider label="Z" [value]="0" suffix="m"></bui-slider>
                               </bui-field>
                             </bui-field-group>
+                         </bui-panel>
+
+                         <bui-panel title="Vertex Groups" [expanded]="true">
+                           <bui-datalist 
+                             [items]="vertexGroups()"
+                             [selectedItem]="selectedVertexGroup()"
+                             (selectionChange)="selectedVertexGroup.set($event)"
+                             filterKey="name"
+                             searchPlaceholder="Search Vertex Groups"
+                             [headerActions]="datalistActions"
+                             (add)="addVertexGroup()"
+                             (remove)="removeVertexGroup($event)"
+                             (moveUp)="moveVertexGroupUp($event)"
+                             (moveDown)="moveVertexGroupDown($event)"
+                           >
+                              <ng-template let-item>
+                                <div style="display: flex; align-items: center; width: 100%;">
+                                  <span class="bl-icons-group_vertex" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span>
+                                  <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.name }}</span>
+                                  <span class="bl-icons-locked" style="font-size: 12px; color: #555;"></span>
+                                </div>
+                              </ng-template>
+                           </bui-datalist>
+
+                           @if (selectedVertexGroup()) {
+                             <div style="margin-top: 8px;">
+                                <bui-field-group>
+                                  <bui-field label="Weight">
+                                    <bui-slider [value]="1.0" [min]="0" [max]="1" [precision]="3" variant="progress"></bui-slider>
+                                  </bui-field>
+                                </bui-field-group>
+                             </div>
+                           }
                          </bui-panel>
                       </bui-tab>
 
@@ -417,6 +453,7 @@ export class WorkspaceDemoComponent {
   activeWorkspace = signal('Layout');
   currentMode = signal('Object Mode');
   panelExpanded = signal(true);
+  activeTabIndex = signal(0);
 
   // Property Panels Data (Page 7)
   raytracingEnabled = signal(false);
@@ -451,6 +488,61 @@ export class WorkspaceDemoComponent {
     { id: 'curves', title: 'Curves', expanded: true },
     { id: 'simplify', title: 'Simplify', expanded: true }
   ]);
+
+  // UIList Datalist Demo Data
+  vertexGroups = signal([
+    { id: 1, name: 'Group' },
+    { id: 2, name: 'Arm_L' },
+    { id: 3, name: 'Arm_R' },
+    { id: 4, name: 'Leg_L' },
+    { id: 5, name: 'Leg_R' },
+    { id: 6, name: 'Head' },
+    { id: 7, name: 'Spine' }
+  ]);
+  selectedVertexGroup = signal<any>(this.vertexGroups()[0]);
+  datalistActions: BuiDatalistAction[] = [
+    { id: 'options', icon: 'downres' } // Dropdown arrow
+  ];
+
+  addVertexGroup() {
+    const list = [...this.vertexGroups()];
+    const newItem = { id: Date.now(), name: 'Group' + (list.length > 0 ? '.' + list.length.toString().padStart(3, '0') : '') };
+    list.push(newItem);
+    this.vertexGroups.set(list);
+    this.selectedVertexGroup.set(newItem);
+  }
+
+  removeVertexGroup(item: any) {
+    const list = this.vertexGroups().filter(g => g.id !== item.id);
+    this.vertexGroups.set(list);
+    if (list.length > 0) {
+       this.selectedVertexGroup.set(list[list.length - 1]);
+    } else {
+       this.selectedVertexGroup.set(null);
+    }
+  }
+
+  moveVertexGroupUp(item: any) {
+    const list = [...this.vertexGroups()];
+    const index = list.findIndex(g => g.id === item.id);
+    if (index > 0) {
+      const temp = list[index];
+      list[index] = list[index - 1];
+      list[index - 1] = temp;
+      this.vertexGroups.set(list);
+    }
+  }
+
+  moveVertexGroupDown(item: any) {
+    const list = [...this.vertexGroups()];
+    const index = list.findIndex(g => g.id === item.id);
+    if (index < list.length - 1) {
+      const temp = list[index];
+      list[index] = list[index + 1];
+      list[index + 1] = temp;
+      this.vertexGroups.set(list);
+    }
+  }
 
   onDrop(event: CdkDragDrop<any[]>) {
     const list = [...this.panels()];

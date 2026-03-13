@@ -50,3 +50,5 @@ export * from './lib/components/workspace-tabs/workspace-tabs.component';
 export * from './lib/components/top-bar/top-bar.component';
 
 export * from './lib/components/breadcrumbs/breadcrumbs.component';
+
+export * from './lib/components/datalist/datalist.component';

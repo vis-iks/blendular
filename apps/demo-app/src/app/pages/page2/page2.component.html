@@ -54,4 +54,40 @@
       <p class="demo-info">FormControl value: {{ formSlider.value }}</p>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- BLENDER DATALIST (UILIST)                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section" style="margin-top: 2rem;">
+    <h3 class="section-title">UIList (Datalist)</h3>
+    <p class="section-desc">Searchable, selectable list. Select an item to enable up/down/remove actions.</p>
+
+    <div class="demo-block" style="max-width: 400px;">
+      <bui-datalist 
+        [items]="demoItems()"
+        [selectedItem]="selectedDemoItem()"
+        (selectionChange)="selectedDemoItem.set($event)"
+        filterKey="name"
+        searchPlaceholder="Search Items"
+        [headerActions]="datalistActions"
+        (add)="addItem()"
+        (remove)="removeItem($event)"
+        (moveUp)="moveItemUp($event)"
+        (moveDown)="moveItemDown($event)"
+      >
+        <ng-template let-item>
+          <div style="display: flex; align-items: center; width: 100%;">
+            <span class="bl-icons-mesh_cube" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span>
+            <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.name }}</span>
+            <span class="bl-icons-visible_on" style="font-size: 14px; color: #a5a5a5;"></span>
+          </div>
+        </ng-template>
+      </bui-datalist>
+
+      @if (selectedDemoItem()) {
+        <p class="demo-info" style="margin-top: 8px;">Selected: {{ selectedDemoItem().name }} (ID: {{ selectedDemoItem().id }})</p>
+      }
+    </div>
+  </section>
+
 </div>
