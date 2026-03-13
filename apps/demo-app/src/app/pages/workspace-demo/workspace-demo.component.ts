@@ -28,7 +28,9 @@ import {
   BuiDropdownComponent,
   BuiDropdownOption,
   BuiSegmentOption,
-  BuiSegmentedControlComponent
+  BuiSegmentedControlComponent,
+  BuiBreadcrumbsComponent,
+  BreadcrumbItem
 } from '@blender-ui/core';
 
 @Component({
@@ -59,7 +61,8 @@ import {
     BuiSliderComponent,
     BuiCheckboxComponent,
     BuiDropdownComponent,
-    BuiSegmentedControlComponent
+    BuiSegmentedControlComponent,
+    BuiBreadcrumbsComponent
   ],
   template: `
     <div class="workspace-demo-container">
@@ -111,6 +114,9 @@ import {
                   </bui-toolbar-group>
                 </bui-toolbar-section>
               </bui-toolbar>
+              <div style="background-color: #282828; border-bottom: 1px solid #1e1e1e;">
+                <bui-breadcrumbs [items]="activePath()" (itemClick)="onBreadcrumbClick($event)"></bui-breadcrumbs>
+              </div>
 
               <div class="viewport-canvas">
                 <div class="viewport-overlay">
@@ -482,6 +488,23 @@ export class WorkspaceDemoComponent {
   onActionSelected(event: { node: BuiTreeNode, action: BuiTreeAction }) {
     event.action.active = !event.action.active;
     this.sceneTree = [...this.sceneTree];
+  }
+
+  activePath = signal<BreadcrumbItem[]>([
+    { label: 'Scene Collection', value: 'scene_collection', icon: 'bl-icons-outliner_collection' },
+    { label: 'Collection', value: 'collection', icon: 'bl-icons-outliner_collection' },
+    { label: 'Cube', value: 'cube', icon: 'bl-icons-outliner_ob_mesh' },
+    { label: 'Material', value: 'material', icon: 'bl-icons-material' }
+  ]);
+
+  onBreadcrumbClick(item: BreadcrumbItem) {
+    console.log('Breadcrumb clicked:', item);
+    // Truncate path up to the clicked item
+    const currentPath = this.activePath();
+    const index = currentPath.findIndex(i => i.value === item.value);
+    if (index !== -1) {
+      this.activePath.set(currentPath.slice(0, index + 1));
+    }
   }
 
   editorColumns = [

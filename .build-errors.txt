@@ -1,0 +1,76 @@
+
+ NX   Running target build for project demo-app and 1 task it depends on:
+
+
+
+> nx run core:build:production
+
+[34mBuilding Angular Package[39m
+[37m[39m
+[37m------------------------------------------------------------------------------[39m
+[37mBuilding entry point '@blender-ui/core'[39m
+[37m------------------------------------------------------------------------------[39m
+- Compiling with Angular sources in partial compilation mode.
+[33mWARNING: ▲ [WARNING] Comments in CSS use "/* ... */" instead of "//" [js-comment-in-css][39m
+[33m[39m
+[33m    angular:styles/component:css;78eee06214ac292b9eb68714a8c2ed38f58b2cc81ca94296a464c9bb16bf75b6;/home/visiks/Documents/Projects/blendular/libs/blender-ui/src/lib/components/top-bar/top-bar.component.ts:9:33:[39m
+[33m      9 │       background-color: #212121; // Darker top bar in Blender[39m
+[33m        ╵                                  ~~[39m
+[33m[39m
+[33m[39m
+[33mWARNING: ▲ [WARNING] Comments in CSS use "/* ... */" instead of "//" [js-comment-in-css][39m
+[33m[39m
+[33m    angular:styles/component:css;78eee06214ac292b9eb68714a8c2ed38f58b2cc81ca94296a464c9bb16bf75b6;/home/visiks/Documents/Projects/blendular/libs/blender-ui/src/lib/components/top-bar/top-bar.component.ts:31:22:[39m
+[33m      31 │       color: #e37d36; // Blender orange[39m
+[33m         ╵                       ~~[39m
+[33m[39m
+[33m[39m
+[33mWARNING: ▲ [WARNING] Comments in CSS use "/* ... */" instead of "//" [js-comment-in-css][39m
+[33m[39m
+[33m    angular:styles/component:css;21478912a516feb6fd64f3592efdf07883d8ce6a36e313301f45585376d4112a;/home/visiks/Documents/Projects/blendular/libs/blender-ui/src/lib/components/workspace-tabs/workspace-tabs.component.ts:32:23:[39m
+[33m      32 │       margin-top: 2px; // slightly down[39m
+[33m         ╵                        ~~[39m
+[33m[39m
+[33m[39m
+[33mWARNING: ▲ [WARNING] Comments in CSS use "/* ... */" instead of "//" [js-comment-in-css][39m
+[33m[39m
+[33m    angular:styles/component:css;21478912a516feb6fd64f3592efdf07883d8ce6a36e313301f45585376d4112a;/home/visiks/Documents/Projects/blendular/libs/blender-ui/src/lib/components/workspace-tabs/workspace-tabs.component.ts:41:35:[39m
+[33m      41 │ ...    background-color: #3d3d3d; // Blender-like active tab color...[39m
+[33m         ╵                                   ~~[39m
+[33m[39m
+[33m[39m
+[31m✘ [ERROR] Undefined variable.[39m
+[31m   ╷[39m
+[31m14 │   font-family: var.$font-family-system;[39m
+[31m   │                ^^^^^^^^^^^^^^^^^^^^^^^[39m
+[31m   ╵[39m
+[31m  libs/blender-ui/src/lib/components/breadcrumbs/breadcrumbs.component.scss 14:16  root stylesheet [plugin angular-sass][39m
+[31m[39m
+[31m[39m
+[31m✖[39m Compiling with Angular sources in partial compilation mode.
+
+[7m[1m[31m NX [39m[22m[27m  [31mAn error has occuried while processing /home/visiks/Documents/Projects/blendular/libs/blender-ui/src/lib/components/breadcrumbs/breadcrumbs.component.scss.[39m
+
+Error: An error has occuried while processing /home/visiks/Documents/Projects/blendular/libs/blender-ui/src/lib/components/breadcrumbs/breadcrumbs.component.scss.
+    at Object.readResource (/home/visiks/Documents/Projects/blendular/node_modules/ng-packagr/src/lib/ts/cache-compiler-host.js:149:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async file:///home/visiks/Documents/Projects/blendular/node_modules/@angular/compiler-cli/bundles/chunk-MKYLKJX2.js:21164:7
+    at async Promise.all (index 0)
+    at async Promise.all (index 49)
+    at async file:///home/visiks/Documents/Projects/blendular/node_modules/@angular/compiler-cli/bundles/chunk-5DFEL3JC.js:4460:7
+    at async _NgCompiler.analyzeAsync (file:///home/visiks/Documents/Projects/blendular/node_modules/@angular/compiler-cli/bundles/chunk-5DFEL3JC.js:4448:5)
+    at async compileSourceFiles (/home/visiks/Documents/Projects/blendular/node_modules/ng-packagr/src/lib/ngc/compile-source-files.js:136:5)
+    at async /home/visiks/Documents/Projects/blendular/node_modules/ng-packagr/src/lib/ng-package/entry-point/compile-ngc.transform.js:78:13
+
+
+
+
+ NX   Running target build for project demo-app and 1 task it depends on failed
+
+Failed tasks:
+
+- core:build:production
+
+Hint: run the command with --verbose for more details.
+

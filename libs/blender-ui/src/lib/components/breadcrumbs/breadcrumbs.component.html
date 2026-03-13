@@ -1,0 +1,20 @@
+<div class="bui-breadcrumbs-container">
+  @for (item of items(); track item.label; let last = $last) {
+    <div
+      class="breadcrumb-item"
+      (click)="itemClick.emit(item)"
+      [attr.title]="item.label"
+    >
+      @if (item.icon) {
+        <i [class]="item.icon + ' breadcrumb-icon'"></i>
+      }
+      <span class="breadcrumb-label">{{ item.label }}</span>
+    </div>
+
+    @if (!last) {
+      <div class="breadcrumb-separator">
+        <i class="bl-icons-tria_right"></i>
+      </div>
+    }
+  }
+</div>
