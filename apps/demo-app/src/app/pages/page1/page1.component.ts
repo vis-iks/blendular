@@ -1,12 +1,22 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { BuiButtonComponent, BuiCheckboxComponent, BuiButtonGroupComponent } from '@blender-ui/core';
+import { BuiButtonComponent, BuiCheckboxComponent, BuiButtonGroupComponent, BuiPopoverDirective, BuiPopoverContainerComponent, BuiPopoverSectionComponent } from '@blender-ui/core';
 
 @Component({
   selector: 'app-page1',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, BuiButtonComponent, BuiCheckboxComponent, BuiButtonGroupComponent],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    BuiButtonComponent, 
+    BuiCheckboxComponent, 
+    BuiButtonGroupComponent,
+    BuiPopoverDirective,
+    BuiPopoverContainerComponent,
+    BuiPopoverSectionComponent
+  ],
   templateUrl: './page1.component.html',
   styleUrl: './page1.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

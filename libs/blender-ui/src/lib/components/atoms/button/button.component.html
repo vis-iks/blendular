@@ -11,7 +11,11 @@
   (click)="onClick($event)"
 >
   @if (icon()) {
-    <span class="bui-btn-icon" [ngClass]="'bl-icons-' + icon()"></span>
+    <span 
+      class="bui-btn-icon" 
+      [ngClass]="'bl-icons-' + icon()"
+      [style.font-size]="iconSize() ? (typeof iconSize() === 'number' ? iconSize() + 'px' : iconSize()) : null"
+    ></span>
   }
   <span class="bui-btn-label">
     <ng-content></ng-content>

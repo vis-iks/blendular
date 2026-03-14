@@ -25,6 +25,10 @@ import { CommonModule } from '@angular/common';
         padding: 0;
       }
     }
+
+    :host(:last-child) .popover-section {
+      border-bottom: none;
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

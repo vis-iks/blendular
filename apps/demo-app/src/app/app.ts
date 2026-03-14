@@ -2,13 +2,12 @@ import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { 
-  BuiThemeService, ContextMenuTriggerDirective, ContextMenuItem
+  BuiThemeService, ContextMenuItem
 } from '@blender-ui/core';
 
 @Component({
   imports: [
-    CommonModule, RouterModule,
-    ContextMenuTriggerDirective
+    CommonModule, RouterModule
   ],
   selector: 'app-root',
   templateUrl: './app.html',

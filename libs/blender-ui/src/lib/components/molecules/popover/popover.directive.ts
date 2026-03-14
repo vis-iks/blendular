@@ -2,6 +2,7 @@ import { Directive, Input, ElementRef, ViewContainerRef, HostListener, TemplateR
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { BuiPopoverService } from './popover.service';
+import { BuiPopoverArrowPosition } from './popover-container.component';
 
 @Directive({
   selector: '[buiPopover]',
@@ -9,8 +10,10 @@ import { BuiPopoverService } from './popover.service';
 })
 export class BuiPopoverDirective implements OnDestroy {
   @Input('buiPopover') popoverTemplate!: TemplateRef<any>;
+  @Input() buiPopoverPlacement: 'auto' | 'top' | 'bottom' = 'auto';
   
   private overlayRef: OverlayRef | null = null;
+  private readonly arrowOffset = 8;
 
   constructor(
     private overlay: Overlay,
@@ -43,19 +46,7 @@ export class BuiPopoverDirective implements OnDestroy {
 
     const positionStrategy = this.overlay.position()
       .flexibleConnectedTo(this.elementRef)
-      .withPositions([{
-        originX: 'start',
-        originY: 'bottom',
-        overlayX: 'start',
-        overlayY: 'top',
-        offsetY: 0
-      }, {
-        originX: 'center',
-        originY: 'bottom',
-        overlayX: 'center',
-        overlayY: 'top',
-        offsetY: 0
-      }]);
+      .withPositions(this.getPositions());
 
     this.overlayRef = this.overlay.create({
       positionStrategy,
@@ -66,7 +57,51 @@ export class BuiPopoverDirective implements OnDestroy {
 
     this.overlayRef.backdropClick().subscribe(() => this.close());
     
-    // Allow closing popover from inside (e.g. clicking a menu action) by listening to custom events on the template wrapper
+    // Subscribe BEFORE attach so we catch the initial position emission
+    positionStrategy.positionChanges.subscribe(change => {
+      const pair = change.connectionPair;
+      let arrowPos: BuiPopoverArrowPosition = 'none';
+      
+      // Determine arrow position based on the chosen connection pair
+      if (pair.overlayY === 'top') {
+        arrowPos = 'top';
+      } else if (pair.overlayY === 'bottom') {
+        arrowPos = 'bottom';
+      } else if (pair.overlayX === 'start') {
+        arrowPos = 'left';
+      } else if (pair.overlayX === 'end') {
+        arrowPos = 'right';
+      }
+
+      const overlayElement = this.overlayRef?.overlayElement;
+      if (overlayElement) {
+        // Find the container - it might take a microtask if attach hasn't finished rendering
+        setTimeout(() => {
+          const container = overlayElement.querySelector('.popover-container') as HTMLElement;
+          if (container) {
+            container.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right', 'arrow-none');
+            container.classList.add('arrow-' + arrowPos);
+
+            // Calculate precise pixel offset for the arrow to point at the center of the trigger
+            const triggerRect = this.elementRef.nativeElement.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
+            if (arrowPos === 'top' || arrowPos === 'bottom') {
+              const triggerCenter = triggerRect.left + (triggerRect.width / 2);
+              const containerLeft = containerRect.left;
+              const relativeOffset = triggerCenter - containerLeft;
+              container.style.setProperty('--arrow-offset', `${relativeOffset}px`);
+            } else if (arrowPos === 'left' || arrowPos === 'right') {
+              const triggerCenter = triggerRect.top + (triggerRect.height / 2);
+              const containerTop = containerRect.top;
+              const relativeOffset = triggerCenter - containerTop;
+              container.style.setProperty('--arrow-offset', `${relativeOffset}px`);
+            }
+          }
+        });
+      }
+    });
+
     const portal = new TemplatePortal(this.popoverTemplate, this.viewContainerRef);
     this.overlayRef.attach(portal);
   }
@@ -83,5 +118,53 @@ export class BuiPopoverDirective implements OnDestroy {
 
   ngOnDestroy() {
     this.close();
+  }
+
+  private getPositions() {
+    const belowPositions = [{
+      originX: 'center' as const,
+      originY: 'bottom' as const,
+      overlayX: 'center' as const,
+      overlayY: 'top' as const,
+      offsetY: this.arrowOffset
+    }, {
+      originX: 'start' as const,
+      originY: 'bottom' as const,
+      overlayX: 'start' as const,
+      overlayY: 'top' as const,
+      offsetY: this.arrowOffset
+    }, {
+      originX: 'end' as const,
+      originY: 'bottom' as const,
+      overlayX: 'end' as const,
+      overlayY: 'top' as const,
+      offsetY: this.arrowOffset
+    }];
+
+    const abovePositions = [{
+      originX: 'center' as const,
+      originY: 'top' as const,
+      overlayX: 'center' as const,
+      overlayY: 'bottom' as const,
+      offsetY: -this.arrowOffset
+    }, {
+      originX: 'start' as const,
+      originY: 'top' as const,
+      overlayX: 'start' as const,
+      overlayY: 'bottom' as const,
+      offsetY: -this.arrowOffset
+    }, {
+      originX: 'end' as const,
+      originY: 'top' as const,
+      overlayX: 'end' as const,
+      overlayY: 'bottom' as const,
+      offsetY: -this.arrowOffset
+    }];
+
+    if (this.buiPopoverPlacement === 'top') {
+      return [...abovePositions, ...belowPositions];
+    }
+
+    return [...belowPositions, ...abovePositions];
   }
 }

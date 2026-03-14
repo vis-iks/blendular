@@ -41,6 +41,9 @@ export class BuiButtonComponent {
   /** Whether to show a dropdown menu chevron */
   hasMenu = input(false, { transform: booleanAttribute });
 
+  /** Custom icon size (font-size) */
+  iconSize = input<number | string | undefined>();
+
   /** Two-way binding for toggle state */
   pressed = model(false);
 
