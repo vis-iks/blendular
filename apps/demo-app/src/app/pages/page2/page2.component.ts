@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { BuiSliderComponent, BuiDatalistComponent, BuiDatalistAction, BuiDatalistItemActionsDirective } from '@blender-ui/core';
+import { BuiSliderComponent, BuiDatalistComponent, BuiDatalistAction, BuiDatalistItem, BuiDatalistItemActionsDirective } from '@blender-ui/core';
 
 @Component({
   selector: 'app-page2',
@@ -27,31 +27,32 @@ export class Page2Component {
   formSlider = new FormControl(25);
 
   // Datalist Demo Data
-  demoItems = signal([
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' }
+  demoItems = signal<BuiDatalistItem[]>([
+    { id: '1', label: 'Item 1', icon: 'mesh_cube' },
+    { id: '2', label: 'Item 2', icon: 'mesh_cube' },
+    { id: '3', label: 'Item 3', icon: 'mesh_cube' }
   ]);
-  selectedDemoItem = signal<any>(this.demoItems()[0]);
+  selectedDemoItemId = signal<string | null>(this.demoItems()[0].id);
+  selectedDemoItem = computed(() => this.demoItems().find((item) => item.id === this.selectedDemoItemId()) ?? null);
   datalistActions: BuiDatalistAction[] = [
     { id: 'settings', icon: 'settings' }
   ];
 
   addItem() {
     const list = [...this.demoItems()];
-    const newItem = { id: Date.now(), name: 'New Item ' + (list.length + 1) };
+    const newItem: BuiDatalistItem = { id: String(Date.now()), label: 'New Item ' + (list.length + 1), icon: 'mesh_cube' };
     list.push(newItem);
     this.demoItems.set(list);
-    this.selectedDemoItem.set(newItem);
+    this.selectedDemoItemId.set(newItem.id);
   }
 
-  removeItem(item: any) {
+  removeItem(item: BuiDatalistItem) {
     const list = this.demoItems().filter(g => g.id !== item.id);
     this.demoItems.set(list);
-    this.selectedDemoItem.set(list.length > 0 ? list[list.length - 1] : null);
+    this.selectedDemoItemId.set(list.length > 0 ? list[list.length - 1].id : null);
   }
 
-  moveItemUp(item: any) {
+  moveItemUp(item: BuiDatalistItem) {
     const list = [...this.demoItems()];
     const index = list.findIndex(g => g.id === item.id);
     if (index > 0) {
@@ -60,7 +61,7 @@ export class Page2Component {
     }
   }
 
-  moveItemDown(item: any) {
+  moveItemDown(item: BuiDatalistItem) {
     const list = [...this.demoItems()];
     const index = list.findIndex(g => g.id === item.id);
     if (index < list.length - 1) {

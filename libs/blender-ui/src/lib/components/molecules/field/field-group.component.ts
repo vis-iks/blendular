@@ -20,16 +20,14 @@ import { CommonModule } from '@angular/common';
     </div>
   `,
   styles: [`
-    @use '../../../styles/variables' as *;
-
     :host {
       display: block;
       margin-bottom: 8px;
     }
 
     .bui-field-group-header {
-      font-size: $bui-font-size-small;
-      color: $bui-text-dimmed;
+      font-size: var(--bui-font-size-small);
+      color: var(--bui-text-muted);
       padding: 0 8px 6px 8px; /* 8px left/right matches fields */
       user-select: none;
     }
@@ -75,9 +73,9 @@ import { CommonModule } from '@angular/common';
 
           /* If there's only one child, keep it rounded */
           &:first-child:last-child .bui-field-control > * {
-            border-radius: $bui-radius-sm;
+            border-radius: var(--bui-radius-sm);
             ::ng-deep .bui-dropdown-trigger {
-               border-radius: $bui-radius-sm;
+               border-radius: var(--bui-radius-sm);
             }
           }
         }

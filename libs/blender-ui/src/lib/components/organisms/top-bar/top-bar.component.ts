@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, input, model } from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { MenubarComponent } from '../../molecules/menu/menubar.component';
 import { MenuItem } from '../../molecules/menu/menu.interface';
-import { BuiWorkspaceTabsComponent } from '../../molecules/workspace-tabs/workspace-tabs.component';
+import { BuiWorkspaceTabsComponent, BuiWorkspaceTab } from '../../molecules/workspace-tabs/workspace-tabs.component';
 
 @Component({
   selector: 'bui-top-bar',
@@ -40,15 +40,13 @@ import { BuiWorkspaceTabsComponent } from '../../molecules/workspace-tabs/worksp
     </div>
   `,
   styles: [`
-    @use '../../../styles/variables' as *;
-
     .bui-top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       height: 24px;
-      background-color: #212121; // Darker top bar in Blender
-      border-bottom: 1px solid $bui-border-dark;
+      background-color: #212121; /* Darker top bar in Blender */
+      border-bottom: 1px solid var(--bui-border-dark);
       padding: 0 4px;
       font-family: var(--bui-font-display, 'Inter', system-ui, sans-serif);
       font-size: 11px;
@@ -69,7 +67,7 @@ import { BuiWorkspaceTabsComponent } from '../../molecules/workspace-tabs/worksp
 
     .bui-logo {
       font-size: 14px;
-      color: #e37d36; // Blender orange
+      color: #e37d36; /* Blender orange */
       cursor: default;
     }
 
@@ -92,7 +90,7 @@ import { BuiWorkspaceTabsComponent } from '../../molecules/workspace-tabs/worksp
     .bui-scene-info {
       display: flex;
       gap: 16px;
-      color: $bui-text-color;
+      color: var(--bui-text-color);
       opacity: 0.8;
     }
 
@@ -114,7 +112,7 @@ import { BuiWorkspaceTabsComponent } from '../../molecules/workspace-tabs/worksp
 })
 export class BuiTopBarComponent {
   menuItems = input<MenuItem[]>([]);
-  workspaces = input<string[]>(['Layout', 'Modeling', 'Sculpting', 'UV Editing', 'Shading', 'Animation', 'Rendering']);
+  workspaces = input<Array<string | BuiWorkspaceTab>>(['Layout', 'Modeling', 'Sculpting', 'UV Editing', 'Shading', 'Animation', 'Rendering']);
   activeWorkspace = model<string>('Layout');
 
   onAddWorkspace() {

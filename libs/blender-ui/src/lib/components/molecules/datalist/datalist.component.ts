@@ -1,17 +1,18 @@
-import { 
-  Component, 
-  Input, 
-  Output, 
-  EventEmitter, 
-  ContentChild, 
-  TemplateRef,
+import {
   ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Directive,
+  TemplateRef,
   computed,
-  signal,
-  Directive
+  input,
+  model,
+  output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { BuiBadgeComponent } from '../../atoms/badge/badge.component';
+import { BuiSearchFieldComponent } from '../../atoms/search-field/search-field.component';
+import { BuiTone } from '../../../foundation/types';
 
 export interface BuiDatalistAction {
   id: string;
@@ -20,125 +21,104 @@ export interface BuiDatalistAction {
   active?: boolean;
 }
 
-/** Directive to mark the per-item actions template */
+export interface BuiDatalistItem {
+  id: string;
+  label: string;
+  icon?: string;
+  description?: string;
+  meta?: string;
+  disabled?: boolean;
+  badge?: {
+    text: string;
+    tone?: BuiTone;
+  };
+}
+
 @Directive({
   selector: '[buiDatalistItemActions]',
-  standalone: true
+  standalone: true,
 })
 export class BuiDatalistItemActionsDirective {
-  constructor(public templateRef: TemplateRef<any>) {}
+  constructor(public templateRef: TemplateRef<{ $implicit: BuiDatalistItem }>) {}
 }
 
 @Component({
   selector: 'bui-datalist',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, BuiBadgeComponent, BuiSearchFieldComponent],
   templateUrl: './datalist.component.html',
   styleUrl: './datalist.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BuiDatalistComponent {
-  /** The full array of items */
-  @Input() set items(val: any[]) {
-    this._items.set(val || []);
-  }
-  private _items = signal<any[]>([]);
+  items = input<BuiDatalistItem[]>([]);
+  searchPlaceholder = input('Search');
+  headerActions = input<BuiDatalistAction[]>([]);
+  showFilterSort = input(false);
+  loading = input(false);
+  emptyMessage = input('No items found');
 
-  /** Currently selected item */
-  @Input() selectedItem: any = null;
+  selectedItemId = model<string | null>(null);
+  searchQuery = model('');
 
-  /** Which object property to check when filtering text */
-  @Input() filterKey: string = 'name';
+  selectionChange = output<BuiDatalistItem | null>();
+  add = output<void>();
+  remove = output<BuiDatalistItem>();
+  moveUp = output<BuiDatalistItem>();
+  moveDown = output<BuiDatalistItem>();
+  actionClick = output<BuiDatalistAction>();
+  filterClick = output<void>();
+  sortClick = output<void>();
 
-  /** Placeholder for text search input */
-  @Input() searchPlaceholder: string = 'Search...';
+  @ContentChild(TemplateRef) itemTemplate?: TemplateRef<{ $implicit: BuiDatalistItem }>;
 
-  /** Optional Extra Header Actions */
-  @Input() headerActions: BuiDatalistAction[] = [];
+  @ContentChild(BuiDatalistItemActionsDirective)
+  private itemActionsDirective?: BuiDatalistItemActionsDirective;
 
-  /** Whether to show filter/sort buttons in bottom row */
-  @Input() showFilterSort: boolean = false;
-
-  /** Emitted when selected item changes */
-  @Output() selectionChange = new EventEmitter<any>();
-
-  /** Emitted when "+" is clicked */
-  @Output() add = new EventEmitter<void>();
-
-  /** Emitted when "-" is clicked */
-  @Output() remove = new EventEmitter<any>();
-
-  /** Emitted when "^" is clicked */
-  @Output() moveUp = new EventEmitter<any>();
-
-  /** Emitted when "v" is clicked */
-  @Output() moveDown = new EventEmitter<any>();
-
-  @Output() actionClick = new EventEmitter<BuiDatalistAction>();
-
-  /** Emitted when filter button is clicked */
-  @Output() filterClick = new EventEmitter<void>();
-
-  /** Emitted when sort button is clicked */
-  @Output() sortClick = new EventEmitter<void>();
-
-  /** Custom template for rendering each row's main content */
-  @ContentChild(TemplateRef) itemTemplate!: TemplateRef<any>;
-
-  /** Custom template for per-item right-aligned actions */
-  @ContentChild(BuiDatalistItemActionsDirective) 
-  private _itemActionsDir!: BuiDatalistItemActionsDirective;
-
-  get itemActionsTemplate(): TemplateRef<any> | null {
-    return this._itemActionsDir?.templateRef || null;
-  }
-
-  searchQuery = signal('');
-  menuOpen = signal(false);
+  itemActionsTemplate = computed(() => this.itemActionsDirective?.templateRef ?? null);
 
   filteredItems = computed(() => {
-    const query = this.searchQuery().toLowerCase();
-    const items = this._items();
-    
-    if (!query) return items;
-    
-    return items.filter(item => {
-      if (typeof item === 'string') {
-        return item.toLowerCase().includes(query);
-      }
-      
-      if (this.filterKey && item[this.filterKey]) {
-         return String(item[this.filterKey]).toLowerCase().includes(query);
-      }
-      
-      return false;
+    const query = this.searchQuery().trim().toLowerCase();
+    if (!query) {
+      return this.items();
+    }
+
+    return this.items().filter((item) => {
+      const haystack = [item.label, item.description, item.meta].filter(Boolean).join(' ').toLowerCase();
+      return haystack.includes(query);
     });
   });
 
-  selectItem(item: any) {
-    this.selectedItem = item;
+  selectedItem = computed(() => this.items().find((item) => item.id === this.selectedItemId()) ?? null);
+
+  selectItem(item: BuiDatalistItem) {
+    if (item.disabled) {
+      return;
+    }
+
+    this.selectedItemId.set(item.id);
     this.selectionChange.emit(item);
   }
 
-  onAdd() {
-    this.add.emit();
-  }
-
   onRemove() {
-    if (this.selectedItem) {
-      this.remove.emit(this.selectedItem);
+    const item = this.selectedItem();
+    if (item) {
+      this.remove.emit(item);
     }
   }
 
   onMoveUp() {
-    if (this.selectedItem) {
-      this.moveUp.emit(this.selectedItem);
+    const item = this.selectedItem();
+    if (item) {
+      this.moveUp.emit(item);
     }
   }
 
   onMoveDown() {
-    if (this.selectedItem) {
-      this.moveDown.emit(this.selectedItem);
+    const item = this.selectedItem();
+    if (item) {
+      this.moveDown.emit(item);
     }
   }
 }
+

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -32,9 +32,12 @@ import {
   BreadcrumbItem,
   BuiDatalistComponent,
   BuiDatalistAction,
+  BuiDatalistItem,
   BuiDatalistItemActionsDirective,
   BuiDatagridComponent,
-  DatagridColumn
+  DatagridColumn,
+  BuiDatagridSort,
+  BuiDatagridRow
 } from '@blender-ui/core';
 
 @Component({
@@ -268,9 +271,7 @@ import {
                          <bui-panel title="Vertex Groups" [expanded]="true">
                            <bui-datalist 
                              [items]="vertexGroups()"
-                             [selectedItem]="selectedVertexGroup()"
-                             (selectionChange)="selectedVertexGroup.set($event)"
-                             filterKey="name"
+                             [(selectedItemId)]="selectedVertexGroupId"
                              searchPlaceholder="Search Vertex Groups"
                              [headerActions]="datalistActions"
                              (add)="addVertexGroup()"
@@ -281,7 +282,7 @@ import {
                               <ng-template let-item>
                                 <div style="display: flex; align-items: center; width: 100%;">
                                   <span class="bl-icons-group_vertex" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span>
-                                  <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.name }}</span>
+                                  <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.label }}</span>
                                 </div>
                               </ng-template>
                               <ng-template buiDatalistItemActions let-item>
@@ -319,11 +320,9 @@ import {
                              <bui-datagrid
                                [columns]="gridColumns"
                                [data]="gridData()"
-                               [sortColumn]="gridSortColumn()"
-                               [sortDirection]="gridSortDirection()"
+                               [(sort)]="gridSort"
                                (sortChange)="onGridSort($event)"
-                               [selectedRow]="gridSelectedRow()"
-                               (rowClick)="gridSelectedRow.set($event)"
+                               [(selectedRowId)]="gridSelectedRowId"
                              >
                                 <!-- Custom template for the Index column to look like Blender -->
                                 <ng-template buiDatagridCell="index" let-row let-col="column">
@@ -521,39 +520,40 @@ export class WorkspaceDemoComponent {
   ]);
 
   // UIList Datalist Demo Data
-  vertexGroups = signal([
-    { id: 1, name: 'Group' },
-    { id: 2, name: 'Arm_L' },
-    { id: 3, name: 'Arm_R' },
-    { id: 4, name: 'Leg_L' },
-    { id: 5, name: 'Leg_R' },
-    { id: 6, name: 'Head' },
-    { id: 7, name: 'Spine' }
+  vertexGroups = signal<BuiDatalistItem[]>([
+    { id: '1', label: 'Group', icon: 'group_vertex' },
+    { id: '2', label: 'Arm_L', icon: 'group_vertex' },
+    { id: '3', label: 'Arm_R', icon: 'group_vertex' },
+    { id: '4', label: 'Leg_L', icon: 'group_vertex' },
+    { id: '5', label: 'Leg_R', icon: 'group_vertex' },
+    { id: '6', label: 'Head', icon: 'group_vertex' },
+    { id: '7', label: 'Spine', icon: 'group_vertex' }
   ]);
-  selectedVertexGroup = signal<any>(this.vertexGroups()[0]);
+  selectedVertexGroupId = signal<string | null>(this.vertexGroups()[0].id);
+  selectedVertexGroup = computed(() => this.vertexGroups().find((item) => item.id === this.selectedVertexGroupId()) ?? null);
   datalistActions: BuiDatalistAction[] = [
     { id: 'options', icon: 'downres' } // Dropdown arrow
   ];
 
   addVertexGroup() {
     const list = [...this.vertexGroups()];
-    const newItem = { id: Date.now(), name: 'Group' + (list.length > 0 ? '.' + list.length.toString().padStart(3, '0') : '') };
+    const newItem: BuiDatalistItem = { id: String(Date.now()), label: 'Group' + (list.length > 0 ? '.' + list.length.toString().padStart(3, '0') : ''), icon: 'group_vertex' };
     list.push(newItem);
     this.vertexGroups.set(list);
-    this.selectedVertexGroup.set(newItem);
+    this.selectedVertexGroupId.set(newItem.id);
   }
 
-  removeVertexGroup(item: any) {
+  removeVertexGroup(item: BuiDatalistItem) {
     const list = this.vertexGroups().filter(g => g.id !== item.id);
     this.vertexGroups.set(list);
     if (list.length > 0) {
-       this.selectedVertexGroup.set(list[list.length - 1]);
+       this.selectedVertexGroupId.set(list[list.length - 1].id);
     } else {
-       this.selectedVertexGroup.set(null);
+       this.selectedVertexGroupId.set(null);
     }
   }
 
-  moveVertexGroupUp(item: any) {
+  moveVertexGroupUp(item: BuiDatalistItem) {
     const list = [...this.vertexGroups()];
     const index = list.findIndex(g => g.id === item.id);
     if (index > 0) {
@@ -564,7 +564,7 @@ export class WorkspaceDemoComponent {
     }
   }
 
-  moveVertexGroupDown(item: any) {
+  moveVertexGroupDown(item: BuiDatalistItem) {
     const list = [...this.vertexGroups()];
     const index = list.findIndex(g => g.id === item.id);
     if (index < list.length - 1) {
@@ -582,22 +582,26 @@ export class WorkspaceDemoComponent {
     { key: 'selection', label: 'Selection', width: '80px', sortable: true }
   ];
 
-  private baseGridData = Array.from({ length: 50 }).map((_, i) => ({
+  private baseGridData: BuiDatagridRow[] = Array.from({ length: 50 }).map((_, i) => ({
+    id: i,
     index: i,
     position: `[${(Math.random() * 2 - 1).toFixed(3)}, ${(Math.random() * 2 - 1).toFixed(3)}, ${(Math.random() * 2 - 1).toFixed(3)}]`,
     selection: Math.random() > 0.8 ? 'true' : 'false'
   }));
 
   gridData = signal(this.baseGridData);
-  gridSortColumn = signal<string | null>(null);
-  gridSortDirection = signal<'asc' | 'desc' | null>(null);
-  gridSelectedRow = signal<any>(null);
+  gridSort = signal<BuiDatagridSort | null>(null);
+  gridSelectedRowId = signal<string | number | null>(null);
 
-  onGridSort(event: { column: string, direction: 'asc' | 'desc' }) {
-    this.gridSortColumn.set(event.column);
-    this.gridSortDirection.set(event.direction);
+  onGridSort(event: BuiDatagridSort | null) {
+    this.gridSort.set(event);
 
-    const sorted = [...this.baseGridData].sort((a: any, b: any) => {
+    if (!event) {
+      this.gridData.set(this.baseGridData);
+      return;
+    }
+
+    const sorted = [...this.baseGridData].sort((a: BuiDatagridRow, b: BuiDatagridRow) => {
       const valA = a[event.column];
       const valB = b[event.column];
       
@@ -855,4 +859,3 @@ export class WorkspaceDemoComponent {
     }
   ];
 }
-

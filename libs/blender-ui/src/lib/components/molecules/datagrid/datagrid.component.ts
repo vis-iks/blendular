@@ -1,15 +1,16 @@
-import { 
-  Component, 
-  Input, 
-  Output, 
-  EventEmitter, 
-  ContentChild, 
-  TemplateRef,
+import {
   ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Directive,
+  Input,
+  TemplateRef,
+  contentChildren,
   computed,
   signal,
-  Directive,
-  contentChildren
+  model,
+  input,
+  output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,17 +19,35 @@ export interface DatagridColumn {
   label: string;
   width?: string;
   sortable?: boolean;
+  align?: 'left' | 'center' | 'right';
+}
+
+export interface BuiDatagridRow {
+  id: string | number;
+  [key: string]: unknown;
+}
+
+export interface BuiDatagridSort {
+  column: string;
+  direction: 'asc' | 'desc';
 }
 
 @Directive({
   selector: '[buiDatagridCell]',
-  standalone: true
+  standalone: true,
 })
 export class BuiDatagridCellDirective {
-  /** The key/column this template corresponds to */
   @Input('buiDatagridCell') columnKey!: string;
 
-  constructor(public template: TemplateRef<any>) {}
+  constructor(public template: TemplateRef<{ $implicit: BuiDatagridRow; column: DatagridColumn }>) {}
+}
+
+@Directive({
+  selector: '[buiDatagridHeaderActions]',
+  standalone: true,
+})
+export class BuiDatagridHeaderActionsDirective {
+  constructor(public template: TemplateRef<unknown>) {}
 }
 
 @Component({
@@ -37,72 +56,63 @@ export class BuiDatagridCellDirective {
   imports: [CommonModule],
   templateUrl: './datagrid.component.html',
   styleUrl: './datagrid.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BuiDatagridComponent {
-  /** Column definitions */
-  @Input() columns: DatagridColumn[] = [];
+  columns = input<DatagridColumn[]>([]);
+  title = input('');
+  loading = input(false);
+  emptyMessage = input('No data available');
+  striped = input(true);
 
-  /** Data rows */
-  @Input() set data(val: any[]) {
-    this._data.set(val || []);
+  @Input() set data(value: BuiDatagridRow[]) {
+    this._data.set(value ?? []);
   }
-  _data = signal<any[]>([]);
+  readonly _data = signal<BuiDatagridRow[]>([]);
 
-  /** Currently selected row item */
-  @Input() selectedRow: any = null;
+  sort = model<BuiDatagridSort | null>(null);
+  selectedRowId = model<string | number | null>(null);
 
-  /** Current sort column key */
-  @Input() sortColumn: string | null = null;
+  rowClick = output<BuiDatagridRow>();
 
-  /** Current sort direction */
-  @Input() sortDirection: 'asc' | 'desc' | null = null;
+  @ContentChild(BuiDatagridHeaderActionsDirective)
+  headerActionsTemplate?: BuiDatagridHeaderActionsDirective;
 
-  /** Emitted when a row is clicked */
-  @Output() rowClick = new EventEmitter<any>();
-
-  /** Emitted when a sortable header is clicked */
-  @Output() sortChange = new EventEmitter<{ column: string, direction: 'asc' | 'desc' }>();
-
-  /** Custom cell templates passed mapped by columnKey */
-  @ContentChild(TemplateRef) defaultTemplate?: TemplateRef<any>;
-  
   cellTemplates = contentChildren(BuiDatagridCellDirective);
 
-  /** A computed map of columnKey -> TemplateRef for easy lookup in the HTML */
   templateMap = computed(() => {
-    const map = new Map<string, TemplateRef<any>>();
-    this.cellTemplates().forEach(dir => {
-      map.set(dir.columnKey, dir.template);
+    const map = new Map<string, TemplateRef<{ $implicit: BuiDatagridRow; column: DatagridColumn }>>();
+    this.cellTemplates().forEach((directive) => {
+      map.set(directive.columnKey, directive.template);
     });
     return map;
   });
 
-  onRowClick(row: any) {
-    this.selectedRow = row;
+  onRowClick(row: BuiDatagridRow) {
+    this.selectedRowId.set(row.id);
     this.rowClick.emit(row);
   }
 
   onHeaderClick(column: DatagridColumn) {
-    if (!column.sortable) return;
-
-    let newDirection: 'asc' | 'desc' = 'asc';
-    
-    if (this.sortColumn === column.key) {
-      // Toggle direction if already sorting by this column
-      newDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    if (!column.sortable) {
+      return;
     }
 
-    this.sortColumn = column.key;
-    this.sortDirection = newDirection;
-
-    this.sortChange.emit({ column: column.key, direction: newDirection });
+    const current = this.sort();
+    const nextDirection: 'asc' | 'desc' = current?.column === column.key && current.direction === 'asc' ? 'desc' : 'asc';
+    const nextSort = { column: column.key, direction: nextDirection } as BuiDatagridSort;
+    this.sort.set(nextSort);
   }
 
   getSortIcon(column: DatagridColumn): string {
-    if (this.sortColumn !== column.key) {
+    if (this.sort()?.column !== column.key) {
       return '';
     }
-    return this.sortDirection === 'asc' ? 'bl-icons-tria_up' : 'bl-icons-tria_down';
+    return this.sort()?.direction === 'asc' ? 'bl-icons-tria_up' : 'bl-icons-tria_down';
+  }
+
+  getCellValue(row: BuiDatagridRow, column: DatagridColumn): string {
+    const value = row[column.key];
+    return value == null ? '' : String(value);
   }
 }

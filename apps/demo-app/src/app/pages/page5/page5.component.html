@@ -43,11 +43,9 @@
         <bui-datagrid
           [columns]="gridColumns"
           [data]="gridData()"
-          [sortColumn]="gridSortColumn()"
-          [sortDirection]="gridSortDirection()"
+          [(sort)]="gridSort"
           (sortChange)="onGridSort($event)"
-          [selectedRow]="selectedGridRow()"
-          (rowClick)="selectedGridRow.set($event)"
+          [(selectedRowId)]="selectedGridRowId"
         >
           <!-- Custom template to add an icon for the 'type' column -->
           <ng-template buiDatagridCell="type" let-row let-col="column">

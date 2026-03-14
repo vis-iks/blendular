@@ -4,11 +4,14 @@
   [class.horizontal]="orientation() === 'horizontal'"
   [class.vertical]="orientation() === 'vertical'"
   [class.dragging]="dragging()"
+  [class.disabled]="disabled()"
 >
   <!-- First pane -->
   <div
     class="bui-pane first-pane"
     [style.flex-basis.%]="firstPaneSize()"
+    [style.min-width.%]="orientation() === 'horizontal' ? minFirstPaneSize() : null"
+    [style.min-height.%]="orientation() === 'vertical' ? minFirstPaneSize() : null"
   >
     <ng-content select="[first]"></ng-content>
   </div>
@@ -22,7 +25,11 @@
   </div>
 
   <!-- Second pane -->
-  <div class="bui-pane second-pane">
+  <div
+    class="bui-pane second-pane"
+    [style.min-width.%]="orientation() === 'horizontal' ? minSecondPaneSize() : null"
+    [style.min-height.%]="orientation() === 'vertical' ? minSecondPaneSize() : null"
+  >
     <ng-content select="[second]"></ng-content>
   </div>
 </div>

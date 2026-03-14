@@ -1,6 +1,9 @@
 export * from './lib/core/core';
+export * from './lib/foundation/types';
+export * from './lib/foundation/docs-manifest';
 export * from './lib/services/theme.service';
 export * from './lib/services/themes';
+export * from './lib/foundation/icons-list';
 
 // Atoms
 export * from './lib/components/atoms/checkbox/checkbox.component';
@@ -17,6 +20,15 @@ export * from './lib/components/atoms/radio-group/radio-group.component';
 export * from './lib/components/atoms/tooltip/index';
 export * from './lib/components/atoms/breadcrumbs/breadcrumbs.component';
 export * from './lib/components/atoms/progress/progress.component';
+export * from './lib/components/atoms/icon-button/icon-button.component';
+export * from './lib/components/atoms/toggle-button/toggle-button.component';
+export * from './lib/components/atoms/text-input/text-input.component';
+export * from './lib/components/atoms/search-field/search-field.component';
+export * from './lib/components/atoms/divider/divider.component';
+export * from './lib/components/atoms/badge/badge.component';
+export * from './lib/components/atoms/shortcut/shortcut.component';
+export * from './lib/components/atoms/disclosure/disclosure.component';
+export * from './lib/components/atoms/scroll-area/scroll-area.component';
 
 // Molecules
 export * from './lib/components/molecules/panel/panel.component';
@@ -39,6 +51,15 @@ export * from './lib/components/molecules/workspace-tabs/workspace-tabs.componen
 export * from './lib/components/molecules/datalist/datalist.component';
 export * from './lib/components/molecules/datagrid/datagrid.component';
 export * from './lib/components/molecules/button-group/button-group.component';
+export * from './lib/components/molecules/activity-bar/activity-bar.component';
+export * from './lib/components/molecules/sidebar-section-header/sidebar-section-header.component';
+export * from './lib/components/molecules/explorer-row/explorer-row.component';
+export * from './lib/components/molecules/inspector-row/inspector-row.component';
+export * from './lib/components/molecules/status-bar/status-bar.component';
+export * from './lib/components/molecules/command-palette/command-palette.component';
+export * from './lib/components/molecules/panel-stack/panel-stack.component';
+export * from './lib/components/molecules/tab-strip/tab-strip.component';
+export * from './lib/components/molecules/table-toolbar/table-toolbar.component';
 
 // Organisms
 export * from './lib/components/organisms/modifier-panel/modifier-panel.component';
@@ -55,4 +76,7 @@ export * from './lib/components/organisms/editor-type-popover/index';
 export * from './lib/components/organisms/snap-popover/index';
 export * from './lib/components/organisms/top-bar/top-bar.component';
 export * from './lib/components/organisms/git-graph/git-graph.component';
-
+export * from './lib/components/organisms/explorer-sidebar/explorer-sidebar.component';
+export * from './lib/components/organisms/inspector-sidebar/inspector-sidebar.component';
+export * from './lib/components/organisms/editor-group/editor-group.component';
+export * from './lib/components/organisms/workbench-shell/workbench-shell.component';

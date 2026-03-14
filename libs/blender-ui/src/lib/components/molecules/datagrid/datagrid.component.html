@@ -1,17 +1,31 @@
 <div class="bui-datagrid-container">
+  @if (title() || headerActionsTemplate) {
+    <div class="bui-datagrid-header">
+      @if (title()) {
+        <div class="bui-datagrid-title">{{ title() }}</div>
+      }
+      <div class="bui-datagrid-header-actions">
+        @if (headerActionsTemplate) {
+          <ng-container *ngTemplateOutlet="headerActionsTemplate.template"></ng-container>
+        }
+      </div>
+    </div>
+  }
+
   <table class="bui-datagrid-table">
     <thead>
       <tr>
-        @for (col of columns; track col.key) {
-          <th 
-            [style.width]="col.width" 
+        @for (col of columns(); track col.key) {
+          <th
+            [style.width]="col.width"
+            [style.text-align]="col.align || 'left'"
             [class.sortable]="col.sortable"
-            [class.sorted]="sortColumn === col.key"
+            [class.sorted]="sort()?.column === col.key"
             (click)="onHeaderClick(col)"
           >
             <div class="th-content">
               <span>{{ col.label }}</span>
-              @if (col.sortable && sortColumn === col.key) {
+              @if (col.sortable && sort()?.column === col.key) {
                 <span [class]="getSortIcon(col)" class="sort-icon"></span>
               }
             </div>
@@ -20,26 +34,28 @@
       </tr>
     </thead>
     <tbody>
-      @if (_data().length === 0) {
+      @if (loading()) {
         <tr>
-          <td [attr.colspan]="columns.length" class="empty-cell">No data available</td>
+          <td [attr.colspan]="columns().length" class="empty-cell">Loading…</td>
+        </tr>
+      } @else if (_data().length === 0) {
+        <tr>
+          <td [attr.colspan]="columns().length" class="empty-cell">{{ emptyMessage() }}</td>
         </tr>
       }
 
-      @for (row of _data(); track row; let i = $index) {
-        <tr 
-          [class.selected]="row === selectedRow" 
-          [class.stripe]="i % 2 !== 0"
+      @for (row of _data(); track row.id; let i = $index) {
+        <tr
+          [class.selected]="row.id === selectedRowId()"
+          [class.stripe]="striped() && i % 2 !== 0"
           (click)="onRowClick(row)"
         >
-          @for (col of columns; track col.key) {
-            <td [style.width]="col.width">
-              <!-- Render custom template if provided for this column -->
+          @for (col of columns(); track col.key) {
+            <td [style.width]="col.width" [style.text-align]="col.align || 'left'">
               @if (templateMap().has(col.key)) {
                 <ng-container *ngTemplateOutlet="templateMap().get(col.key)!; context: { $implicit: row, column: col }"></ng-container>
               } @else {
-                <!-- Default text rendering -->
-                <span class="cell-text" [title]="row[col.key]">{{ row[col.key] }}</span>
+                <span class="cell-text" [title]="getCellValue(row, col)">{{ getCellValue(row, col) }}</span>
               }
             </td>
           }
@@ -48,3 +64,4 @@
     </tbody>
   </table>
 </div>
+

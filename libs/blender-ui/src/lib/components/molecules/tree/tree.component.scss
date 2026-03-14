@@ -6,14 +6,15 @@
   font-size: 11px;
   color: $bui-text-color;
   user-select: none;
+  outline: none;
 }
 
 // ─── Tree Node Row ──────────────────────────────────
 .bui-tree-node {
   display: flex;
   align-items: center;
-  gap: 2px;
-  height: 22px;
+  gap: 4px;
+  min-height: 22px;
   padding-right: 8px;
   cursor: pointer;
   border-radius: 2px;
@@ -29,6 +30,19 @@
     &:hover {
       background: rgba(71, 114, 179, 0.45);
     }
+  }
+
+  &.focused {
+    outline: 1px solid rgba(120, 163, 235, 0.45);
+    outline-offset: -1px;
+  }
+
+  &.active-row .node-label {
+    color: #fff;
+  }
+
+  &.muted .node-label {
+    color: var(--bui-text-muted, #9ca3af);
   }
 
   &.disabled {
@@ -112,7 +126,21 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 8px;
+}
+
+.node-copy {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+
+.node-description {
+  color: var(--bui-text-muted, #9ca3af);
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .flex-spacer {
@@ -138,13 +166,16 @@
   align-items: center;
   justify-content: center;
   transition: color 0.1s;
+  opacity: 0.8;
 
   &:hover {
     color: #fff;
+    opacity: 1;
   }
 
   &.active {
     color: #fff;
+    opacity: 1;
   }
 }
 

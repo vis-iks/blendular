@@ -1,78 +1,172 @@
-export interface Theme {
-  name: string;
-  properties: {
-    [key: string]: string;
-  };
-}
+import { createThemeProperties } from '../foundation/theme-tokens';
+import { BuiThemeTokens, Theme } from '../foundation/types';
+export type { Theme } from '../foundation/types';
 
-export const blenderDark: Theme = {
+const baseTypography = {
+  family: '"Segoe UI", "Noto Sans", sans-serif',
+  sizeXs: '11px',
+  sizeSm: '12px',
+  sizeMd: '13px',
+  weightRegular: '400',
+  weightMedium: '500',
+  weightBold: '600',
+};
+
+const baseSpacing = {
+  xs: '2px',
+  sm: '4px',
+  md: '8px',
+  lg: '12px',
+  row: '22px',
+};
+
+const baseDensity = {
+  compactRow: '22px',
+  comfortableRow: '28px',
+  controlHeightSm: '24px',
+  controlHeightMd: '28px',
+};
+
+const baseTheme = (tokens: BuiThemeTokens): Theme => ({
   name: 'dark',
-  properties: {
-    '--bui-primary': '#4772b3',
-    '--bui-bg-light': '#e0e0e0',
-    '--bui-bg-dark': '#1d1d1d',
-    '--bui-panel-bg': '#2b2b2b',
-    '--bui-panel-header': '#303030',
-    '--bui-input-bg': '#181818',
-    '--bui-input-active-green': '#55802b',
-    '--bui-input-active-yellow': '#8c7f21',
-    '--bui-input-text': '#dedede',
-    '--bui-tab-bg': '#222222',
-    '--bui-tab-active': '#3d3d3d',
-    '--bui-border-dark': '#3d3d3d',
-    '--bui-text-color': '#cccccc',
-    '--bui-border-radius': '4px',
-    '--bui-highlight': '#5680c2',
-    '--bui-surface-dark': '#303030',
-    '--bui-surface-light': '#f5f5f5',
-    '--bui-card-bg': '#303030',
-    '--bui-menu-bg': '#2b2b2b',
-    '--bui-menu-hover': '#4772b3',
-    '--bui-menu-text-muted': '#8f8f8f',
-    '--bui-menu-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)',
-    '--bui-folder-icon': '#dcb67a',
-    '--bui-channel-red': '#e04e4e',
-    '--bui-channel-green': '#7ec928',
-    '--bui-channel-blue': '#4e8ce0',
-    '--bui-channel-yellow': '#d9bc26',
-    '--bui-grid-line': '#2a2a2a',
-    '--bui-grid-line-strong': '#353535',
-    '--bui-text-muted': '#9ca3af',
+  tokens,
+  properties: createThemeProperties(tokens),
+});
+
+const blenderDarkTokens: BuiThemeTokens = {
+  color: {
+    primary: '#4772b3',
+    highlight: '#5680c2',
+    text: '#cccccc',
+    textMuted: '#9ca3af',
+    textDisabled: '#6b7280',
+    info: '#4e8ce0',
+    success: '#7ec928',
+    warning: '#d9bc26',
+    danger: '#e04e4e',
+  },
+  surface: {
+    app: '#1d1d1d',
+    panel: '#2b2b2b',
+    panelHeader: '#303030',
+    panelHeaderHover: '#373737',
+    panelHeaderExpanded: '#3a3a3a',
+    input: '#181818',
+    tab: '#222222',
+    tabActive: '#3d3d3d',
+    menu: '#2b2b2b',
+    card: '#303030',
+    overlay: '#e0e0e0',
+  },
+  border: {
+    subtle: '#2a2a2a',
+    default: '#3d3d3d',
+    strong: '#4a4a4a',
+    hover: '#5b82c7',
+    focus: '#78a3eb',
+  },
+  spacing: baseSpacing,
+  radius: {
+    sm: '3px',
+    md: '5px',
+    lg: '8px',
+  },
+  typography: baseTypography,
+  icon: {
+    sm: '12px',
+    md: '14px',
+    lg: '16px',
+  },
+  density: baseDensity,
+  focus: {
+    outlineWidth: '1px',
+    outlineOffset: '1px',
+  },
+  motion: {
+    fast: '120ms',
+    normal: '180ms',
+  },
+  channel: {
+    red: '#e04e4e',
+    green: '#7ec928',
+    blue: '#4e8ce0',
+    yellow: '#d9bc26',
+  },
+  asset: {
+    folder: '#dcb67a',
   },
 };
 
-export const blenderLight: Theme = {
-  name: 'light',
-  properties: {
-    '--bui-primary': '#4772b3',
-    '--bui-bg-light': '#e0e0e0',
-    '--bui-bg-dark': '#1d1d1d',
-    '--bui-panel-bg': '#f0f0f0',
-    '--bui-panel-header': '#f5f5f5',
-    '--bui-input-bg': '#ffffff',
-    '--bui-input-active-green': '#7bc654',
-    '--bui-input-active-yellow': '#d4c24a',
-    '--bui-input-text': '#333333',
-    '--bui-tab-bg': '#d9d9d9',
-    '--bui-tab-active': '#e6e6e6',
-    '--bui-border-dark': '#d1d1d1',
-    '--bui-text-color': '#222222',
-    '--bui-border-radius': '4px',
-    '--bui-highlight': '#375e97',
-    '--bui-surface-dark': '#303030',
-    '--bui-surface-light': '#f5f5f5',
-    '--bui-card-bg': '#ffffff',
-    '--bui-menu-bg': '#f0f0f0',
-    '--bui-menu-hover': '#4772b3',
-    '--bui-menu-text-muted': '#8f8f8f',
-    '--bui-menu-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-    '--bui-folder-icon': '#dcb67a',
-    '--bui-channel-red': '#e04e4e',
-    '--bui-channel-green': '#7ec928',
-    '--bui-channel-blue': '#4e8ce0',
-    '--bui-channel-yellow': '#d9bc26',
-    '--bui-grid-line': '#d1d1d1',
-    '--bui-grid-line-strong': '#b0b0b0',
-    '--bui-text-muted': '#666666',
+const blenderLightTokens: BuiThemeTokens = {
+  color: {
+    primary: '#4772b3',
+    highlight: '#375e97',
+    text: '#222222',
+    textMuted: '#666666',
+    textDisabled: '#9ca3af',
+    info: '#4e8ce0',
+    success: '#7bc654',
+    warning: '#d4c24a',
+    danger: '#e04e4e',
   },
+  surface: {
+    app: '#d9d9d9',
+    panel: '#f0f0f0',
+    panelHeader: '#f5f5f5',
+    panelHeaderHover: '#fafafa',
+    panelHeaderExpanded: '#ffffff',
+    input: '#181818',
+    tab: '#d9d9d9',
+    tabActive: '#e6e6e6',
+    menu: '#f0f0f0',
+    card: '#ffffff',
+    overlay: '#fafafa',
+  },
+  border: {
+    subtle: '#e3e3e3',
+    default: '#d1d1d1',
+    strong: '#b0b0b0',
+    hover: '#6a8fcb',
+    focus: '#375e97',
+  },
+  spacing: baseSpacing,
+  radius: {
+    sm: '3px',
+    md: '5px',
+    lg: '8px',
+  },
+  typography: baseTypography,
+  icon: {
+    sm: '12px',
+    md: '14px',
+    lg: '16px',
+  },
+  density: baseDensity,
+  focus: {
+    outlineWidth: '1px',
+    outlineOffset: '1px',
+  },
+  motion: {
+    fast: '120ms',
+    normal: '180ms',
+  },
+  channel: {
+    red: '#e04e4e',
+    green: '#7ec928',
+    blue: '#4e8ce0',
+    yellow: '#d9bc26',
+  },
+  asset: {
+    folder: '#dcb67a',
+  },
+};
+
+export const blenderDark: Theme = {
+  ...baseTheme(blenderDarkTokens),
+  name: 'dark',
+};
+
+export const blenderLight: Theme = {
+  ...baseTheme(blenderLightTokens),
+  name: 'light',
 };

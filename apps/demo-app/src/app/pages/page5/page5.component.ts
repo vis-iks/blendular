@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BuiTreeComponent, BuiTreeNode, BuiTreeAction, BuiDatagridComponent, DatagridColumn } from '@blender-ui/core';
+import { BuiTreeComponent, BuiTreeNode, BuiTreeAction, BuiDatagridComponent, DatagridColumn, BuiDatagridSort, BuiDatagridRow } from '@blender-ui/core';
 
 @Component({
   selector: 'app-page5',
@@ -107,7 +107,7 @@ export class Page5Component {
     { key: 'size', label: 'Size', sortable: true }
   ];
 
-  private defaultData = [
+  private defaultData: BuiDatagridRow[] = [
     { id: 1, name: 'Suzanne', type: 'Mesh', size: '2 MB' },
     { id: 2, name: 'Camera', type: 'Camera', size: '1 KB' },
     { id: 3, name: 'Point Light', type: 'Light', size: '1 KB' },
@@ -117,15 +117,19 @@ export class Page5Component {
   ];
 
   gridData = signal(this.defaultData);
-  gridSortColumn = signal<string | null>(null);
-  gridSortDirection = signal<'asc' | 'desc' | null>(null);
-  selectedGridRow = signal<any>(null);
+  gridSort = signal<BuiDatagridSort | null>(null);
+  selectedGridRowId = signal<string | number | null>(null);
+  selectedGridRow = computed(() => this.gridData().find((row) => row.id === this.selectedGridRowId()) ?? null);
 
-  onGridSort(event: { column: string, direction: 'asc' | 'desc' }) {
-    this.gridSortColumn.set(event.column);
-    this.gridSortDirection.set(event.direction);
+  onGridSort(event: BuiDatagridSort | null) {
+    this.gridSort.set(event);
 
-    const sorted = [...this.defaultData].sort((a: any, b: any) => {
+    if (!event) {
+      this.gridData.set(this.defaultData);
+      return;
+    }
+
+    const sorted = [...this.defaultData].sort((a: BuiDatagridRow, b: BuiDatagridRow) => {
       const valA = a[event.column];
       const valB = b[event.column];
       

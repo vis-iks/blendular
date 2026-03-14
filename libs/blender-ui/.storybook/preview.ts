@@ -40,13 +40,16 @@ const preview: Preview = {
       },
       styles: [
         `
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
         @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
         * { box-sizing: border-box; }
         body {
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          font-size: 12px;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          font-size: 13px;
+          background: var(--bui-surface-app);
+          color: var(--bui-color-text);
         }
         `,
       ],

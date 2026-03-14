@@ -28,8 +28,6 @@ import { CommonModule } from '@angular/common';
     </div>
   `,
   styles: [`
-    @use '../../../styles/variables' as *;
-
     :host {
       display: block;
       width: 100%;
@@ -40,7 +38,7 @@ import { CommonModule } from '@angular/common';
       align-items: center;
       min-height: 24px;
       padding: 1px 8px;
-      gap: $bui-spacing-md;
+      gap: var(--bui-spacing-md);
       width: 100%;
 
       &.disabled {
@@ -55,8 +53,8 @@ import { CommonModule } from '@angular/common';
 
     .bui-field-label {
       flex: 0 0 35%;
-      font-size: $bui-font-size-small;
-      color: $bui-text-color;
+      font-size: var(--bui-font-size-small);
+      color: var(--bui-text-color);
       text-align: right;
       white-space: nowrap;
       overflow: hidden;

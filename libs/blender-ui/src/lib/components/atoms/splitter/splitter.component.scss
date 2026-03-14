@@ -43,6 +43,13 @@
   &.dragging {
     user-select: none;
   }
+
+  &.disabled {
+    .bui-divider {
+      cursor: default;
+      opacity: 0.6;
+    }
+  }
 }
 
 .bui-pane {

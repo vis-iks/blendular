@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkDrag, CdkDragHandle, CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
-import { ShaderNode, ShaderSocket, NODE_HEADER_COLORS, SOCKET_COLORS } from '../shader-editor.types';
+import { NODE_HEADER_COLORS, SOCKET_COLORS } from '../shader-editor.types';
+import type { ShaderNode, ShaderSocket } from '../shader-editor.types';
 import { BuiSelectComponent } from '../../../atoms/select/select.component';
 import { BuiNumberInputComponent } from '../../../atoms/number-input/number-input.component';
 

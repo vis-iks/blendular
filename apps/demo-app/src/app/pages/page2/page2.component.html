@@ -65,9 +65,7 @@
     <div class="demo-block" style="max-width: 400px;">
       <bui-datalist 
         [items]="demoItems()"
-        [selectedItem]="selectedDemoItem()"
-        (selectionChange)="selectedDemoItem.set($event)"
-        filterKey="name"
+        [(selectedItemId)]="selectedDemoItemId"
         searchPlaceholder="Search Items"
         [headerActions]="datalistActions"
         (add)="addItem()"
@@ -78,7 +76,7 @@
         <ng-template let-item>
           <div style="display: flex; align-items: center; width: 100%;">
             <span class="bl-icons-mesh_cube" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span>
-            <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.name }}</span>
+            <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.label }}</span>
           </div>
         </ng-template>
         <ng-template buiDatalistItemActions let-item>
@@ -87,7 +85,7 @@
       </bui-datalist>
 
       @if (selectedDemoItem()) {
-        <p class="demo-info" style="margin-top: 8px;">Selected: {{ selectedDemoItem().name }} (ID: {{ selectedDemoItem().id }})</p>
+        <p class="demo-info" style="margin-top: 8px;">Selected: {{ selectedDemoItem()!.label }} (ID: {{ selectedDemoItem()!.id }})</p>
       }
     </div>
   </section>

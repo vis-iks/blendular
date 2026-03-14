@@ -1,6 +1,6 @@
 import {
   Component, ChangeDetectionStrategy, input, signal, ElementRef,
-  viewChild, OnDestroy
+  viewChild, OnDestroy, model, effect, booleanAttribute
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -31,6 +31,18 @@ export class BuiSplitterComponent implements OnDestroy {
   /** Initial size of the first pane in percent */
   initialSize = input(50);
 
+  /** Controlled first pane size in percent */
+  size = model<number | null>(null);
+
+  /** Minimum size of the first pane in percent */
+  minFirstPaneSize = input(10);
+
+  /** Minimum size of the second pane in percent */
+  minSecondPaneSize = input(10);
+
+  /** Whether the divider can be dragged */
+  disabled = input(false, { transform: booleanAttribute });
+
   /** First pane size as a percentage */
   firstPaneSize = signal(50);
 
@@ -43,11 +55,15 @@ export class BuiSplitterComponent implements OnDestroy {
   private boundMouseUp = this.onMouseUp.bind(this);
 
   constructor() {
-    // We'll set the initial size after input is available
-    setTimeout(() => this.firstPaneSize.set(this.initialSize()));
+    effect(() => {
+      const controlledSize = this.size();
+      const fallbackSize = this.initialSize();
+      this.firstPaneSize.set(this.clampSize(controlledSize ?? fallbackSize));
+    });
   }
 
   onDividerMouseDown(event: MouseEvent) {
+    if (this.disabled()) return;
     this.dragging.set(true);
     document.addEventListener('mousemove', this.boundMouseMove);
     document.addEventListener('mouseup', this.boundMouseUp);
@@ -67,8 +83,9 @@ export class BuiSplitterComponent implements OnDestroy {
       pct = ((event.clientY - rect.top) / rect.height) * 100;
     }
 
-    // Clamp between 10% and 90%
-    this.firstPaneSize.set(Math.min(90, Math.max(10, pct)));
+    const clamped = this.clampSize(pct);
+    this.firstPaneSize.set(clamped);
+    this.size.set(clamped);
   }
 
   private onMouseUp() {
@@ -80,5 +97,11 @@ export class BuiSplitterComponent implements OnDestroy {
   ngOnDestroy() {
     document.removeEventListener('mousemove', this.boundMouseMove);
     document.removeEventListener('mouseup', this.boundMouseUp);
+  }
+
+  private clampSize(value: number): number {
+    const min = this.minFirstPaneSize();
+    const max = 100 - this.minSecondPaneSize();
+    return Math.min(max, Math.max(min, value));
   }
 }

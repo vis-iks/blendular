@@ -13,27 +13,43 @@ import { RouterModule } from '@angular/router';
 export class ShowcaseLayoutComponent {
   categories = [
     {
-      name: 'Atoms',
+      name: 'Foundations',
       links: [
-        { path: '/page1', label: 'Buttons & Checkboxes' },
-        { path: '/page2', label: 'Sliders & Basic Controls' },
-        { path: '/page3', label: 'Dropdowns & Color Pickers' },
+        { path: '/foundations', label: 'Overview & Catalog' },
+        { path: '/token-playground', label: 'Theme + Tokens' },
+        { path: '/icon-browser', label: 'Icon Browser' },
       ]
     },
     {
-      name: 'Molecules',
+      name: 'Navigation & Data',
       links: [
-        { path: '/page4', label: 'Panels & Tabs' },
-        { path: '/page5', label: 'Trees & Data Grids' },
-        { path: '/page6', label: 'Dialogs & Overlays' },
+        { path: '/navigation-data', label: 'Trees, Lists & Grids' },
       ]
     },
     {
-      name: 'Organisms',
+      name: 'Inspector & Panels',
       links: [
-        { path: '/page7', label: 'Complex Property Panels' },
+        { path: '/inspector-panels', label: 'Inspector Sidebar' },
+      ]
+    },
+    {
+      name: 'Workbench Layouts',
+      links: [
+        { path: '/workbench-blender', label: 'Blender Workspace' },
+        { path: '/workbench-ide', label: 'IDE Workspace' },
         { path: '/shader-editor', label: 'Shader Editor' },
-        { path: '/workspace-demo', label: 'Full Workspace Layout' },
+      ]
+    },
+    {
+      name: 'Legacy Demos',
+      links: [
+        { path: '/page1', label: 'Page 1: Buttons & Checkboxes' },
+        { path: '/page2', label: 'Page 2: Numeric Controls' },
+        { path: '/page3', label: 'Page 3: Dropdowns & Color Pickers' },
+        { path: '/page4', label: 'Page 4: Panels & Tabs' },
+        { path: '/page5', label: 'Page 5: Data & Hierarchies' },
+        { path: '/page6', label: 'Page 6: Dialogs & Overlays' },
+        { path: '/page7', label: 'Page 7: Complex Property Panels' },
       ]
     }
   ];

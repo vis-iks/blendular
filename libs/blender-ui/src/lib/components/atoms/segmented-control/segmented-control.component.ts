@@ -31,8 +31,6 @@ export interface BuiSegmentOption {
     </div>
   `,
   styles: [`
-    @use '../../../styles/variables' as *;
-
     :host {
       display: block;
       width: 100%;
@@ -43,7 +41,7 @@ export interface BuiSegmentOption {
       width: 100%;
       height: 20px;
       background-color: var(--bui-input-bg, #2c2c2c);
-      border-radius: $bui-radius-sm;
+      border-radius: var(--bui-radius-sm);
       overflow: hidden;
       border: 1px solid var(--bui-border-dark, #111);
       
@@ -59,7 +57,7 @@ export interface BuiSegmentOption {
       background: none;
       border: none;
       border-right: 1px solid var(--bui-border-dark, #111);
-      color: $bui-text-color;
+      color: var(--bui-text-color);
       font-size: 11px;
       padding: 0 4px;
       cursor: pointer;
