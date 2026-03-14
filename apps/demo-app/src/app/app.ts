@@ -2,11 +2,7 @@ import { Component, inject, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { 
-  BuiThemeService, LayoutComponent, ModifierPanelComponent, HeaderComponent, 
-  FooterComponent, OutlinerComponent, PropertiesComponent, ViewportComponent, 
-  TimelineComponent, ContextMenuTriggerDirective, ContextMenuItem, 
-  FileBrowserComponent, GraphEditorComponent, ScenePropertiesComponent, ShaderEditorComponent,
-  BuiCheckboxComponent, BuiNumberInputComponent, BuiSelectComponent, BuiSectionComponent
+  BuiThemeService, ContextMenuTriggerDirective, ContextMenuItem
 } from '@blender-ui/core';
 
 interface Tab {
@@ -21,11 +17,8 @@ interface Category {
 
 @Component({
   imports: [
-    CommonModule, RouterModule, LayoutComponent, ModifierPanelComponent, 
-    HeaderComponent, FooterComponent, OutlinerComponent, PropertiesComponent, 
-    ViewportComponent, TimelineComponent, ContextMenuTriggerDirective, 
-    FileBrowserComponent, GraphEditorComponent, ScenePropertiesComponent, ShaderEditorComponent,
-    BuiCheckboxComponent, BuiNumberInputComponent, BuiSelectComponent, BuiSectionComponent
+    CommonModule, RouterModule,
+    ContextMenuTriggerDirective
   ],
   selector: 'app-root',
   templateUrl: './app.html',

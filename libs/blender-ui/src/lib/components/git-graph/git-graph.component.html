@@ -1,0 +1,61 @@
+<div class="bui-git-graph">
+  <!-- SVG layer for lines and nodes -->
+  <svg
+    class="bui-git-graph__svg"
+    [attr.width]="layout().svgWidth"
+    [attr.height]="layout().svgHeight"
+    [style.min-width.px]="layout().svgWidth"
+  >
+    <!-- Connection lines -->
+    @for (entry of layout().entries; track entry.node.id; let i = $index) {
+      @for (conn of entry.parentConnections; track conn.parentId) {
+        <path
+          [attr.d]="getConnectionPath(entry, conn)"
+          [attr.stroke]="conn.color"
+          stroke-width="2"
+          fill="none"
+        />
+      }
+    }
+
+    <!-- Commit circles -->
+    @for (entry of layout().entries; track entry.node.id; let i = $index) {
+      <circle
+        #circle
+        [attr.cx]="getNodeX(entry.column)"
+        [attr.cy]="getNodeY(i)"
+        r="4"
+        [attr.fill]="entry.color"
+        [attr.stroke]="entry.color"
+        stroke-width="1.5"
+        class="node-circle"
+        (mouseenter)="onCircleHover(circle, true)"
+        (mouseleave)="onCircleHover(circle, false)"
+        style="cursor: pointer; pointer-events: all;"
+      />
+    }
+  </svg>
+
+  <!-- Commit messages list -->
+  <div class="bui-git-graph__messages">
+    @for (entry of layout().entries; track entry.node.id) {
+      <div class="bui-git-graph__row" (click)="onNodeClick(entry.node)" [style.padding-left]="graphPaddingLeft">
+        <!-- Ref labels (branch names) -->
+        @if (entry.node.refs && entry.node.refs.length > 0) {
+          @for (ref of entry.node.refs; track ref) {
+            <span class="bui-git-graph__ref" [style.border-color]="entry.color" [style.color]="entry.color">
+              {{ ref }}
+            </span>
+          }
+        }
+        <span class="bui-git-graph__message">{{ entry.node.message }}</span>
+        @if (entry.node.author) {
+          <span class="bui-git-graph__author">{{ entry.node.author }}</span>
+        }
+        @if (entry.node.date) {
+          <span class="bui-git-graph__date">{{ entry.node.date }}</span>
+        }
+      </div>
+    }
+  </div>
+</div>

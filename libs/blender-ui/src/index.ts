@@ -52,3 +52,9 @@ export * from './lib/components/top-bar/top-bar.component';
 export * from './lib/components/breadcrumbs/breadcrumbs.component';
 
 export * from './lib/components/datalist/datalist.component';
+
+export * from './lib/components/datagrid/datagrid.component';
+
+export * from './lib/components/progress/progress.component';
+
+export * from './lib/components/git-graph/git-graph.component';

@@ -79,8 +79,10 @@
           <div style="display: flex; align-items: center; width: 100%;">
             <span class="bl-icons-mesh_cube" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span>
             <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.name }}</span>
-            <span class="bl-icons-visible_on" style="font-size: 14px; color: #a5a5a5;"></span>
           </div>
+        </ng-template>
+        <ng-template buiDatalistItemActions let-item>
+          <span class="bl-icons-hide_off" title="Visibility" style="font-size: 14px; color: #a5a5a5; cursor: pointer;"></span>
         </ng-template>
       </bui-datalist>
 

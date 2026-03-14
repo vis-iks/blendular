@@ -7,7 +7,8 @@ import {
   TemplateRef,
   ChangeDetectionStrategy,
   computed,
-  signal
+  signal,
+  Directive
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,15 @@ export interface BuiDatalistAction {
   icon: string;
   label?: string;
   active?: boolean;
+}
+
+/** Directive to mark the per-item actions template */
+@Directive({
+  selector: '[buiDatalistItemActions]',
+  standalone: true
+})
+export class BuiDatalistItemActionsDirective {
+  constructor(public templateRef: TemplateRef<any>) {}
 }
 
 @Component({
@@ -46,6 +56,9 @@ export class BuiDatalistComponent {
   /** Optional Extra Header Actions */
   @Input() headerActions: BuiDatalistAction[] = [];
 
+  /** Whether to show filter/sort buttons in bottom row */
+  @Input() showFilterSort: boolean = false;
+
   /** Emitted when selected item changes */
   @Output() selectionChange = new EventEmitter<any>();
 
@@ -63,10 +76,25 @@ export class BuiDatalistComponent {
 
   @Output() actionClick = new EventEmitter<BuiDatalistAction>();
 
-  /** Custom template for rendering each row */
+  /** Emitted when filter button is clicked */
+  @Output() filterClick = new EventEmitter<void>();
+
+  /** Emitted when sort button is clicked */
+  @Output() sortClick = new EventEmitter<void>();
+
+  /** Custom template for rendering each row's main content */
   @ContentChild(TemplateRef) itemTemplate!: TemplateRef<any>;
 
+  /** Custom template for per-item right-aligned actions */
+  @ContentChild(BuiDatalistItemActionsDirective) 
+  private _itemActionsDir!: BuiDatalistItemActionsDirective;
+
+  get itemActionsTemplate(): TemplateRef<any> | null {
+    return this._itemActionsDir?.templateRef || null;
+  }
+
   searchQuery = signal('');
+  menuOpen = signal(false);
 
   filteredItems = computed(() => {
     const query = this.searchQuery().toLowerCase();
@@ -75,12 +103,10 @@ export class BuiDatalistComponent {
     if (!query) return items;
     
     return items.filter(item => {
-      // If it's a primitive string array
       if (typeof item === 'string') {
         return item.toLowerCase().includes(query);
       }
       
-      // If filterKey is provided and exists on item
       if (this.filterKey && item[this.filterKey]) {
          return String(item[this.filterKey]).toLowerCase().includes(query);
       }

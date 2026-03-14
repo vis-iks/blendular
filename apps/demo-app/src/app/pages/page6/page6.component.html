@@ -56,4 +56,63 @@
       <bui-button (click)="showToast('error')" style="color: #d9534f;">Error Toast</bui-button>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PROGRESS INDICATOR                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="demo-section" style="margin-top: 2rem;">
+    <h3 class="section-title">Progress Indicator</h3>
+    <p class="section-desc" style="color: #999; font-size: 12px; margin-bottom: 12px;">A Blender-style progress bar for rendering, baking, or any long-running process.</p>
+
+    <div class="demo-block" style="max-width: 500px; display: flex; flex-direction: column; gap: 12px;">
+      <!-- Determinate (Blue) -->
+      <div>
+        <h4 class="demo-label">Determinate (with simulation)</h4>
+        <bui-progress
+          [value]="renderProgress()"
+          [cancelable]="isRendering()"
+          [label]="isRendering() ? 'Rendering... ' + renderProgress() + '%' : (renderProgress() === 100 ? 'Complete!' : 'Click Start')"
+          color="blue"
+          (cancel)="stopRender()"
+        ></bui-progress>
+        <div style="margin-top: 8px;">
+          <bui-button (click)="startRender()" [disabled]="isRendering()">Start Render</bui-button>
+        </div>
+      </div>
+
+      <!-- Green static -->
+      <div>
+        <h4 class="demo-label">Determinate (Green, 75%)</h4>
+        <bui-progress [value]="75" label="Baking Normals 75%" color="green"></bui-progress>
+      </div>
+
+      <!-- Orange static -->
+      <div>
+        <h4 class="demo-label">Determinate (Orange, 30%)</h4>
+        <bui-progress [value]="30" label="Loading Textures 30%" color="orange"></bui-progress>
+      </div>
+
+      <!-- Indeterminate -->
+      <div>
+        <h4 class="demo-label">Indeterminate</h4>
+        <bui-progress [determinate]="false" label="Processing..." [cancelable]="true" color="blue"></bui-progress>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- GIT GRAPH                                              -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="demo-section" style="margin-top: 2rem;">
+    <h3 class="section-title">Git Graph</h3>
+    <p class="section-desc" style="color: #999; font-size: 12px; margin-bottom: 12px;">A VS Code-style commit history graph with SVG branching lines.</p>
+
+    <div class="demo-block" style="max-width: 700px; border: 1px solid #333; border-radius: 4px; overflow: hidden;">
+      <bui-git-graph
+        [nodes]="commitHistory"
+        (nodeClick)="toastService.info('Clicked commit: ' + $event.id + ' — ' + $event.message)"
+      ></bui-git-graph>
+    </div>
+  </section>
+
 </div>

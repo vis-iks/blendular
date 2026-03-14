@@ -1,0 +1,23 @@
+<div
+  class="bui-progress"
+  [class.indeterminate]="!determinate"
+  [class]="'bui-progress--' + color"
+>
+  <!-- Filled bar -->
+  <div
+    class="bui-progress__fill"
+    [style.width.%]="determinate ? clampedValue : 100"
+  ></div>
+
+  <!-- Centered label overlay -->
+  @if (displayLabel) {
+    <span class="bui-progress__label">{{ displayLabel }}</span>
+  }
+
+  <!-- Cancel button -->
+  @if (cancelable) {
+    <button class="bui-progress__cancel" (click)="onCancel($event)" title="Cancel">
+      <span class="bl-icons-cancel"></span>
+    </button>
+  }
+</div>

@@ -1,0 +1,50 @@
+<div class="bui-datagrid-container">
+  <table class="bui-datagrid-table">
+    <thead>
+      <tr>
+        @for (col of columns; track col.key) {
+          <th 
+            [style.width]="col.width" 
+            [class.sortable]="col.sortable"
+            [class.sorted]="sortColumn === col.key"
+            (click)="onHeaderClick(col)"
+          >
+            <div class="th-content">
+              <span>{{ col.label }}</span>
+              @if (col.sortable && sortColumn === col.key) {
+                <span [class]="getSortIcon(col)" class="sort-icon"></span>
+              }
+            </div>
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @if (_data().length === 0) {
+        <tr>
+          <td [attr.colspan]="columns.length" class="empty-cell">No data available</td>
+        </tr>
+      }
+
+      @for (row of _data(); track row; let i = $index) {
+        <tr 
+          [class.selected]="row === selectedRow" 
+          [class.stripe]="i % 2 !== 0"
+          (click)="onRowClick(row)"
+        >
+          @for (col of columns; track col.key) {
+            <td [style.width]="col.width">
+              <!-- Render custom template if provided for this column -->
+              @if (templateMap().has(col.key)) {
+                <ng-container *ngTemplateOutlet="templateMap().get(col.key)!; context: { $implicit: row, column: col }"></ng-container>
+              } @else {
+                <!-- Default text rendering -->
+                <span class="cell-text" [title]="row[col.key]">{{ row[col.key] }}</span>
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

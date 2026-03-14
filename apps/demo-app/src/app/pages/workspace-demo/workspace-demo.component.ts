@@ -24,7 +24,6 @@ import {
   BuiFieldComponent,
   BuiFieldGroupComponent,
   BuiSliderComponent,
-  BuiCheckboxComponent,
   BuiDropdownComponent,
   BuiDropdownOption,
   BuiSegmentOption,
@@ -32,7 +31,10 @@ import {
   BuiBreadcrumbsComponent,
   BreadcrumbItem,
   BuiDatalistComponent,
-  BuiDatalistAction
+  BuiDatalistAction,
+  BuiDatalistItemActionsDirective,
+  BuiDatagridComponent,
+  DatagridColumn
 } from '@blender-ui/core';
 
 @Component({
@@ -61,11 +63,12 @@ import {
     BuiFieldComponent,
     BuiFieldGroupComponent,
     BuiSliderComponent,
-    BuiCheckboxComponent,
     BuiDropdownComponent,
     BuiSegmentedControlComponent,
     BuiBreadcrumbsComponent,
-    BuiDatalistComponent
+    BuiDatalistComponent,
+    BuiDatalistItemActionsDirective,
+    BuiDatagridComponent
   ],
   template: `
     <div class="workspace-demo-container">
@@ -279,8 +282,10 @@ import {
                                 <div style="display: flex; align-items: center; width: 100%;">
                                   <span class="bl-icons-group_vertex" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span>
                                   <span style="flex: 1; overflow: hidden; text-overflow: ellipsis;">{{ item.name }}</span>
-                                  <span class="bl-icons-locked" style="font-size: 12px; color: #555;"></span>
                                 </div>
+                              </ng-template>
+                              <ng-template buiDatalistItemActions let-item>
+                                <span class="bl-icons-decorate_unlocked" title="Lock" style="font-size: 14px; color: #555; cursor: pointer;"></span>
                               </ng-template>
                            </bui-datalist>
 
@@ -301,6 +306,32 @@ import {
                          <bui-panel title="Modifiers" [(expanded)]="panelExpanded">
                             <bui-toolbar-btn style="width: 100%; margin: 8px 0;">Add Modifier</bui-toolbar-btn>
                          </bui-panel>
+                      </bui-tab>
+
+                      <!-- Geometry Nodes (Spreadsheet Demo) Tab -->
+                      <bui-tab label="Data" icon="node_geometry">
+                        <div style="height: 100%; display: flex; flex-direction: column;">
+                           <!-- Small local toolbar for spreadsheet -->
+                           <div style="padding: 4px; border-bottom: 1px solid #1e1e1e; font-size: 11px; color: #ccc; background: #282828;">
+                             <span class="bl-icons-mesh_data" style="margin-right: 4px;"></span> Mesh › Vertex
+                           </div>
+                           <div style="flex: 1; overflow: hidden; padding: 2px;">
+                             <bui-datagrid
+                               [columns]="gridColumns"
+                               [data]="gridData()"
+                               [sortColumn]="gridSortColumn()"
+                               [sortDirection]="gridSortDirection()"
+                               (sortChange)="onGridSort($event)"
+                               [selectedRow]="gridSelectedRow()"
+                               (rowClick)="gridSelectedRow.set($event)"
+                             >
+                                <!-- Custom template for the Index column to look like Blender -->
+                                <ng-template buiDatagridCell="index" let-row let-col="column">
+                                   <div style="color: #888; text-align: right; width: 100%;">{{ row[col.key] }}</div>
+                                </ng-template>
+                             </bui-datagrid>
+                           </div>
+                        </div>
                       </bui-tab>
                     </bui-tabs>
                   </div>
@@ -542,6 +573,45 @@ export class WorkspaceDemoComponent {
       list[index + 1] = temp;
       this.vertexGroups.set(list);
     }
+  }
+
+  // Datagrid (Spreadsheet) Demo Data
+  gridColumns: DatagridColumn[] = [
+    { key: 'index', label: 'Index', width: '60px', sortable: true },
+    { key: 'position', label: 'Position', sortable: false },
+    { key: 'selection', label: 'Selection', width: '80px', sortable: true }
+  ];
+
+  private baseGridData = Array.from({ length: 50 }).map((_, i) => ({
+    index: i,
+    position: `[${(Math.random() * 2 - 1).toFixed(3)}, ${(Math.random() * 2 - 1).toFixed(3)}, ${(Math.random() * 2 - 1).toFixed(3)}]`,
+    selection: Math.random() > 0.8 ? 'true' : 'false'
+  }));
+
+  gridData = signal(this.baseGridData);
+  gridSortColumn = signal<string | null>(null);
+  gridSortDirection = signal<'asc' | 'desc' | null>(null);
+  gridSelectedRow = signal<any>(null);
+
+  onGridSort(event: { column: string, direction: 'asc' | 'desc' }) {
+    this.gridSortColumn.set(event.column);
+    this.gridSortDirection.set(event.direction);
+
+    const sorted = [...this.baseGridData].sort((a: any, b: any) => {
+      const valA = a[event.column];
+      const valB = b[event.column];
+      
+      let comparison = 0;
+      if (typeof valA === 'number' && typeof valB === 'number') {
+        comparison = valA - valB;
+      } else {
+        comparison = String(valA).localeCompare(String(valB));
+      }
+
+      return event.direction === 'asc' ? comparison : -comparison;
+    });
+
+    this.gridData.set(sorted);
   }
 
   onDrop(event: CdkDragDrop<any[]>) {

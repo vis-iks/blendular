@@ -1,12 +1,12 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { BuiSliderComponent, BuiDatalistComponent, BuiDatalistAction } from '@blender-ui/core';
+import { BuiSliderComponent, BuiDatalistComponent, BuiDatalistAction, BuiDatalistItemActionsDirective } from '@blender-ui/core';
 
 @Component({
   selector: 'app-page2',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, BuiSliderComponent, BuiDatalistComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, BuiSliderComponent, BuiDatalistComponent, BuiDatalistItemActionsDirective],
   templateUrl: './page2.component.html',
   styleUrl: './page2.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

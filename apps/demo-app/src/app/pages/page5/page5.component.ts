@@ -1,11 +1,11 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BuiTreeComponent, BuiTreeNode, BuiTreeAction } from '@blender-ui/core';
+import { BuiTreeComponent, BuiTreeNode, BuiTreeAction, BuiDatagridComponent, DatagridColumn } from '@blender-ui/core';
 
 @Component({
   selector: 'app-page5',
   standalone: true,
-  imports: [CommonModule, BuiTreeComponent],
+  imports: [CommonModule, BuiTreeComponent, BuiDatagridComponent],
   templateUrl: './page5.component.html',
   styleUrl: './page5.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -97,5 +97,48 @@ export class Page5Component {
     
     // Trigger CDR
     this.sceneTree = [...this.sceneTree];
+  }
+
+  // --- Datagrid (Spreadsheet) Demo ---
+  gridColumns: DatagridColumn[] = [
+    { key: 'id', label: 'ID', width: '50px', sortable: true },
+    { key: 'name', label: 'Name', sortable: true },
+    { key: 'type', label: 'Type', sortable: true },
+    { key: 'size', label: 'Size', sortable: true }
+  ];
+
+  private defaultData = [
+    { id: 1, name: 'Suzanne', type: 'Mesh', size: '2 MB' },
+    { id: 2, name: 'Camera', type: 'Camera', size: '1 KB' },
+    { id: 3, name: 'Point Light', type: 'Light', size: '1 KB' },
+    { id: 4, name: 'Rig', type: 'Armature', size: '150 KB' },
+    { id: 5, name: 'Floor', type: 'Mesh', size: '5 MB' },
+    { id: 6, name: 'HDRI', type: 'Image', size: '25 MB' }
+  ];
+
+  gridData = signal(this.defaultData);
+  gridSortColumn = signal<string | null>(null);
+  gridSortDirection = signal<'asc' | 'desc' | null>(null);
+  selectedGridRow = signal<any>(null);
+
+  onGridSort(event: { column: string, direction: 'asc' | 'desc' }) {
+    this.gridSortColumn.set(event.column);
+    this.gridSortDirection.set(event.direction);
+
+    const sorted = [...this.defaultData].sort((a: any, b: any) => {
+      const valA = a[event.column];
+      const valB = b[event.column];
+      
+      let comparison = 0;
+      if (typeof valA === 'number' && typeof valB === 'number') {
+        comparison = valA - valB;
+      } else {
+        comparison = String(valA).localeCompare(String(valB));
+      }
+
+      return event.direction === 'asc' ? comparison : -comparison;
+    });
+
+    this.gridData.set(sorted);
   }
 }

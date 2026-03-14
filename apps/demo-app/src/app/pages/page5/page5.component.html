@@ -29,4 +29,43 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- DATAGRID COMPONENT                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <section class="section" style="margin-top: 3rem;">
+    <h3 class="section-title">Datagrid Component</h3>
+    <p class="section-desc">Dense, zebra-striped data table supporting sortable columns, custom cell templates, and row selection (e.g., Blender Spreadsheet / Keymap Editor).</p>
+
+    <div class="demo-block" style="max-width: 600px;">
+      <h4 class="demo-label">Asset List</h4>
+      <div style="height: 250px;">
+        <bui-datagrid
+          [columns]="gridColumns"
+          [data]="gridData()"
+          [sortColumn]="gridSortColumn()"
+          [sortDirection]="gridSortDirection()"
+          (sortChange)="onGridSort($event)"
+          [selectedRow]="selectedGridRow()"
+          (rowClick)="selectedGridRow.set($event)"
+        >
+          <!-- Custom template to add an icon for the 'type' column -->
+          <ng-template buiDatagridCell="type" let-row let-col="column">
+             <div style="display: flex; align-items: center;">
+               @if (row[col.key] === 'Mesh') { <span class="bl-icons-mesh_data" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span> }
+               @if (row[col.key] === 'Camera') { <span class="bl-icons-camera_data" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span> }
+               @if (row[col.key] === 'Light') { <span class="bl-icons-light_data" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span> }
+               @if (row[col.key] === 'Armature') { <span class="bl-icons-armature_data" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span> }
+               @if (row[col.key] === 'Image') { <span class="bl-icons-image_data" style="margin-right: 6px; font-size: 14px; color: #a5a5a5;"></span> }
+               {{ row[col.key] }}
+             </div>
+          </ng-template>
+        </bui-datagrid>
+      </div>
+      @if (selectedGridRow()) {
+        <p class="demo-info" style="margin-top: 8px;">Selected Row: {{ selectedGridRow() | json }}</p>
+      }
+    </div>
+  </section>
+
 </div>

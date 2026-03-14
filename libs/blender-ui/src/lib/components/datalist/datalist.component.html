@@ -1,5 +1,6 @@
 <div class="bui-datalist-container">
-  <div class="bui-datalist-main">
+  
+  <div class="bui-datalist-main-column">
     
     <!-- The scrollable list view -->
     <div class="bui-datalist-viewport">
@@ -13,58 +14,100 @@
           [class.selected]="item === selectedItem"
           (click)="selectItem(item)"
         >
-          <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
-          
-          <!-- Fallback if no template is provided -->
-          @if (!itemTemplate) {
-            <span class="default-item-text">{{ typeof item === 'string' ? item : item[filterKey] }}</span>
+          <!-- Item content (custom template or default) -->
+          <div class="bui-datalist-item__content">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
+            
+            @if (!itemTemplate) {
+              <span class="default-item-text">{{ typeof item === 'string' ? item : item[filterKey] }}</span>
+            }
+          </div>
+
+          <!-- Right-aligned per-item actions (lock, checkbox, etc.) -->
+          @if (itemActionsTemplate) {
+            <div class="bui-datalist-item__actions">
+              <ng-container *ngTemplateOutlet="itemActionsTemplate; context: { $implicit: item }"></ng-container>
+            </div>
           }
         </div>
       }
     </div>
 
-    <!-- The vertical tool column on the right -->
-    <div class="bui-datalist-toolbar">
+    <!-- Bottom toolbar: menu triangle + search + settings -->
+    <div class="bui-datalist-bottom-row">
+      <!-- Left: grip dots / drag handle indicator -->
+      <button class="bui-btn-icon bui-datalist-bottom-grip" title="Display options" (click)="menuOpen.set(!menuOpen())">
+        <span class="bl-icons-collapsemenu"></span>
+      </button>
+
+      <!-- Center: search / filter input -->
+      <div class="bui-search-input-wrapper">
+        <span class="bl-icons-viewzoom search-icon"></span>
+        <input 
+          type="text" 
+          class="bui-search-input" 
+          [(ngModel)]="searchQuery" 
+          [placeholder]="searchPlaceholder"
+        />
+        @if (searchQuery()) {
+          <span class="bl-icons-x clear-icon" (click)="searchQuery.set('')"></span>
+        }
+      </div>
+
+      <!-- Right: filter/settings buttons -->
+      @if (showFilterSort) {
+        <button class="bui-btn-icon" title="Filter" (click)="filterClick.emit()">
+          <span class="bl-icons-filter"></span>
+        </button>
+        <button class="bui-btn-icon" title="Sort" (click)="sortClick.emit()">
+          <span class="bl-icons-sortalpha"></span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- The vertical tool column on the right -->
+  <div class="bui-datalist-toolbar">
+    
+    <!-- Group 1: Add/Remove -->
+    <div class="bui-datalist-btn-group">
       <button class="bui-btn-icon" (click)="onAdd()" title="Add">
         <span class="bl-icons-add"></span>
       </button>
+      <div class="bui-datalist-btn-divider"></div>
       <button class="bui-btn-icon" (click)="onRemove()" [disabled]="!selectedItem" title="Remove">
         <span class="bl-icons-remove"></span>
       </button>
-      
-      <div class="toolbar-separator"></div>
-      
+    </div>
+    
+    <div class="toolbar-spacer"></div>
+
+    <!-- Chevron menu button (like object data properties menu) -->
+    <button class="bui-btn-icon bui-datalist-chevron-btn" title="More Options">
+      <span class="bl-icons-downarrow_hlt"></span>
+    </button>
+
+    <div class="toolbar-spacer"></div>
+
+    <!-- Group 2: Move Up/Down -->
+    <div class="bui-datalist-btn-group">
       <button class="bui-btn-icon" (click)="onMoveUp()" [disabled]="!selectedItem" title="Move Up">
-        <span class="bl-icons-select_handle"></span>
+        <span class="bl-icons-tria_up"></span>
       </button>
-      <button class="bui-btn-icon" (click)="onMoveDown()" [disabled]="!selectedItem" style="transform: scaleY(-1);" title="Move Down">
-        <span class="bl-icons-select_handle"></span>
+      <div class="bui-datalist-btn-divider"></div>
+      <button class="bui-btn-icon" (click)="onMoveDown()" [disabled]="!selectedItem" title="Move Down">
+        <span class="bl-icons-tria_down"></span>
       </button>
-
-      @if (headerActions.length > 0) {
-        <div class="toolbar-separator"></div>
-        @for (action of headerActions; track action.id) {
-           <button class="bui-btn-icon" (click)="actionClick.emit(action)" [title]="action.label || ''">
-             <span [class]="'bl-icons-' + action.icon"></span>
-           </button>
-        }
-      }
     </div>
+
+    @if (headerActions.length > 0) {
+      <div class="toolbar-separator"></div>
+      @for (action of headerActions; track action.id) {
+         <button class="bui-btn-icon" (click)="actionClick.emit(action)" [title]="action.label || ''">
+           <span [class]="'bl-icons-' + action.icon"></span>
+         </button>
+      }
+    }
   </div>
 
-  <!-- Search / Filter input below the list -->
-  <div class="bui-datalist-search-row">
-    <div class="bui-search-input-wrapper">
-      <span class="bl-icons-search search-icon"></span>
-      <input 
-        type="text" 
-        class="bui-search-input" 
-        [(ngModel)]="searchQuery" 
-        [placeholder]="searchPlaceholder"
-      />
-      @if (searchQuery()) {
-        <span class="bl-icons-x clear-icon" (click)="searchQuery.set('')"></span>
-      }
-    </div>
-  </div>
 </div>
