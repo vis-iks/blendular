@@ -39,6 +39,40 @@
         <bui-button variant="icon" icon="duplicate"></bui-button>
       </div>
     </div>
+
+    <!-- Grouped Icon Buttons -->
+    <div class="demo-block">
+      <h4 class="demo-label">Grouped Icon Buttons (with 1px gap)</h4>
+      <div class="demo-row" style="gap: 12px;">
+
+        <!-- Selection Tools Group -->
+        <bui-button-group>
+          <bui-button variant="toggle" [pressed]="true" icon="world">Hello</bui-button>
+          <bui-button variant="toggle" icon="snap_grid">Snap</bui-button>
+          <bui-button variant="toggle" icon="mesh_cube">Cube</bui-button>
+        </bui-button-group>
+
+        <!-- Tool settings/modes Group -->
+        <bui-button-group>
+          <bui-button variant="icon" icon="world"></bui-button>
+          <bui-button variant="icon" icon="snap_grid"></bui-button>
+        </bui-button-group>
+
+        <!-- Action + Menu Group (Primary Blue) -->
+        <bui-button-group gap="0">
+          <bui-button variant="primary" icon="mesh_cube">Add Cube</bui-button>
+          <bui-button variant="icon" icon="tria_down" class="bui-btn-menu"></bui-button>
+        </bui-button-group>
+
+        <!-- Action + Menu Group (Standard) -->
+        <bui-button-group gap="0">
+          <bui-button icon="settings">Options</bui-button>
+          <bui-button variant="icon" icon="downarrow_hlt" class="bui-btn-menu"></bui-button>
+        </bui-button-group>
+
+      </div>
+      <p class="demo-info">Grouped buttons use <code>bui-button-group</code> with a default 1px gap.</p>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════ -->

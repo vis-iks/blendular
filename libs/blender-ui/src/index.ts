@@ -38,6 +38,7 @@ export * from './lib/components/molecules/toolbar/index';
 export * from './lib/components/molecules/workspace-tabs/workspace-tabs.component';
 export * from './lib/components/molecules/datalist/datalist.component';
 export * from './lib/components/molecules/datagrid/datagrid.component';
+export * from './lib/components/molecules/button-group/button-group.component';
 
 // Organisms
 export * from './lib/components/organisms/modifier-panel/modifier-panel.component';

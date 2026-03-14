@@ -1,0 +1,76 @@
+@use '../../../styles/variables' as *;
+
+:host {
+  display: inline-flex;
+  gap: var(--bui-group-gap, 1px);
+  align-items: stretch; /* Ensure all buttons in the group have the same height */
+  vertical-align: middle;
+
+  ::ng-deep {
+    bui-button {
+      display: flex; /* Allow the host to be stretched by the group */
+      
+      .bui-button {
+        flex: 1; /* Make the inner button fill the host's flex space */
+        height: 100%; /* Fill the height of the group */
+        min-height: unset; /* Override default min-height to allow stretching/shrinking if needed */
+        border-radius: 0;
+      }
+
+      &:first-child .bui-button {
+        border-top-left-radius: $bui-radius-sm;
+        border-bottom-left-radius: $bui-radius-sm;
+      }
+
+      &:last-child .bui-button {
+        border-top-right-radius: $bui-radius-sm;
+        border-bottom-right-radius: $bui-radius-sm;
+      }
+
+      /* Specialized styling for chevron/menu buttons in a group */
+      &.bui-btn-menu {
+        flex: 0 0 18px; /* Slightly narrower for chevrons */
+        
+        .bui-button {
+          padding: 0;
+          background-color: #1a1a1a; 
+          border-left: none; /* Attached look */
+        }
+
+        .bui-btn-icon {
+          font-size: 6px !important; /* Truly tiny icon (split-button style) */
+          opacity: 0.7;
+        }
+
+        &:hover .bui-button:not(.disabled) {
+          background-color: #333333; 
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &.vertical {
+    flex-direction: column;
+    align-items: stretch;
+
+    ::ng-deep {
+      bui-button {
+        flex: none; /* Don't stretch vertically in a vertical group to fill parent, but fill width */
+        width: 100%;
+
+        &:first-child .bui-button {
+          border-radius: $bui-radius-sm $bui-radius-sm 0 0;
+        }
+
+        &:last-child .bui-button {
+          border-radius: 0 0 $bui-radius-sm $bui-radius-sm;
+        }
+
+        &:only-child .bui-button {
+          border-radius: $bui-radius-sm;
+        }
+      }
+    }
+  }
+}
