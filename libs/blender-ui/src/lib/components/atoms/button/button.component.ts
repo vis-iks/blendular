@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output, model } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, model, booleanAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /**
@@ -31,6 +31,9 @@ export class BuiButtonComponent {
 
   /** Whether the button is disabled */
   disabled = input(false);
+
+  /** Force a square aspect ratio (useful for icons in any variant) */
+  square = input(false, { transform: booleanAttribute });
 
   /** Two-way binding for toggle state */
   pressed = model(false);

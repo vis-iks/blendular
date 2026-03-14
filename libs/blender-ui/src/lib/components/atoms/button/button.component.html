@@ -1,7 +1,7 @@
 <button
   class="bui-button"
   [class.toggle]="variant() === 'toggle'"
-  [class.icon-only]="variant() === 'icon'"
+  [class.icon-only]="variant() === 'icon' || square()"
   [class.primary]="variant() === 'primary'"
   [class.pressed]="pressed()"
   [class.disabled]="disabled()"

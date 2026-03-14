@@ -73,6 +73,32 @@
       </div>
       <p class="demo-info">Grouped buttons use <code>bui-button-group</code> with a default 1px gap.</p>
     </div>
+
+    <!-- Complex Layout Example from Screenshot -->
+    <div class="demo-block">
+      <h4 class="demo-label">Complex Layout (Blender Header Style)</h4>
+      <div class="demo-row" style="gap: 8px; align-items: center;">
+
+        <!-- Action + Menu (Split) -->
+        <bui-button-group gap="0">
+          <bui-button variant="primary" [square]="true" icon="snap_face_center"></bui-button>
+          <bui-button variant="icon" icon="downarrow_hlt" class="bui-btn-menu"></bui-button>
+        </bui-button-group>
+
+        <!-- Single Separated Item -->
+        <bui-button variant="icon" icon="duplicate" title="Duplicate"></bui-button>
+
+        <!-- Long Multi-item Group -->
+        <bui-button-group gap="1">
+          <bui-button variant="toggle" [square]="true" icon="world"></bui-button>
+          <bui-button variant="toggle" [square]="true" [pressed]="true" icon="shading_solid"></bui-button>
+          <bui-button variant="toggle" [square]="true" icon="shading_texture"></bui-button>
+          <bui-button variant="toggle" [square]="true" icon="shading_rendered"></bui-button>
+          <bui-button variant="icon" icon="downarrow_hlt" class="bui-btn-menu"></bui-button>
+        </bui-button-group>
+
+      </div>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════ -->
