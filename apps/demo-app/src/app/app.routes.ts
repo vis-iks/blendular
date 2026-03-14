@@ -23,6 +23,10 @@ export const appRoutes: Route[] = [
         path: 'workspace-demo',
         loadComponent: () => import('./pages/workspace-demo/workspace-demo.component').then(m => m.WorkspaceDemoComponent)
       },
+      {
+        path: 'shader-editor',
+        loadComponent: () => import('./pages/shader-editor-demo/shader-editor-demo.component').then(m => m.ShaderEditorDemoComponent)
+      },
       { path: '', redirectTo: 'page1', pathMatch: 'full' }
     ]
   }

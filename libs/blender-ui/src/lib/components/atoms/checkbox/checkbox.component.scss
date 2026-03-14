@@ -1,0 +1,59 @@
+@use '../../../styles/variables' as *;
+
+:host {
+  display: inline-block;
+}
+
+.bui-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: $bui-spacing-sm; // Blender-style margin
+  cursor: pointer;
+  user-select: none;
+  height: $bui-spacing-row;
+
+  &.disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+.bui-checkbox-box {
+  width: 14px;
+  height: 14px;
+  background-color: $bui-input-bg;
+  border: 1px solid $bui-border-dark;
+  border-radius: $bui-radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s;
+
+  &.checked {
+    background-color: $bui-accent-blue;
+    border-color: $bui-border-dark;
+
+    &.filled-variant {
+      background-color: $bui-accent-blue; // Primary blue
+      border-color: $bui-border-dark;
+    }
+  }
+
+  .disabled &.checked {
+    background-color: #444; // Solid gray fill for disabled
+    border-color: #555;
+  }
+}
+
+.check-icon {
+  font-size: 8px;
+  line-height: 1;
+  color: white;
+  pointer-events: none;
+}
+
+.bui-checkbox-label {
+  font-size: 11px;
+  color: $bui-text-color;
+  white-space: nowrap;
+}

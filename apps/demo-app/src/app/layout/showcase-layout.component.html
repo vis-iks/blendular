@@ -4,19 +4,24 @@
       <h2>Blender UI Component Library</h2>
     </div>
     <nav class="bui-sidebar-nav">
-      <ul class="bui-nav-list">
-        @for (link of navLinks; track link.path) {
-        <li class="bui-nav-item">
-          <a
-            [routerLink]="link.path"
-            routerLinkActive="active"
-            class="bui-nav-link"
-          >
-            {{ link.label }}
-          </a>
-        </li>
-        }
-      </ul>
+      @for (category of categories; track category.name) {
+      <div class="bui-nav-category">
+        <h3 class="bui-nav-category-title">{{ category.name }}</h3>
+        <ul class="bui-nav-list">
+          @for (link of category.links; track link.path) {
+          <li class="bui-nav-item">
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              class="bui-nav-link"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+          }
+        </ul>
+      </div>
+      }
     </nav>
   </aside>
   

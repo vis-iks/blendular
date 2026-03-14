@@ -11,14 +11,30 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowcaseLayoutComponent {
-  navLinks = [
-    { path: '/page1', label: 'Page 1: Basic Inputs' },
-    { path: '/page2', label: 'Page 2: Numeric Controls' },
-    { path: '/page3', label: 'Page 3: Advanced Form Controls' },
-    { path: '/page4', label: 'Page 4: Layout & Splitters' },
-    { path: '/page5', label: 'Page 5: Data & Hierarchies' },
-    { path: '/page6', label: 'Page 6: Overlays & Messaging' },
-    { path: '/page7', label: 'Page 7: Blender Property Panels' },
-    { path: '/workspace-demo', label: 'Workspace Toolbar & Tabs' },
+  categories = [
+    {
+      name: 'Atoms',
+      links: [
+        { path: '/page1', label: 'Buttons & Checkboxes' },
+        { path: '/page2', label: 'Sliders & Basic Controls' },
+        { path: '/page3', label: 'Dropdowns & Color Pickers' },
+      ]
+    },
+    {
+      name: 'Molecules',
+      links: [
+        { path: '/page4', label: 'Panels & Tabs' },
+        { path: '/page5', label: 'Trees & Data Grids' },
+        { path: '/page6', label: 'Dialogs & Overlays' },
+      ]
+    },
+    {
+      name: 'Organisms',
+      links: [
+        { path: '/page7', label: 'Complex Property Panels' },
+        { path: '/shader-editor', label: 'Shader Editor' },
+        { path: '/workspace-demo', label: 'Full Workspace Layout' },
+      ]
+    }
   ];
 }

@@ -1,0 +1,76 @@
+@use '../../../styles/variables' as var;
+
+:host {
+  display: block;
+}
+
+.bui-breadcrumbs-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 2px;
+  padding: 0 8px;
+  height: 24px;
+  font-family: sans-serif;
+  font-size: 11px;
+  color: var.$bui-text-primary;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Hide scrollbar for cleaner look */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 6px;
+  border-radius: var.$bui-radius-sm;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease;
+  min-width: 0; // Allow flex children to shrink
+
+  &:hover {
+    background-color: var.$bui-highlight;
+  }
+
+  &:active {
+    background-color: var.$bui-accent-blue;
+    color: #fff;
+  }
+}
+
+.breadcrumb-icon {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var.$bui-text-secondary;
+  
+  .breadcrumb-item:hover & {
+    color: var.$bui-text-primary;
+  }
+}
+
+.breadcrumb-label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.breadcrumb-separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var.$bui-text-secondary;
+  font-size: 10px;
+  padding: 0 4px;
+  opacity: 0.6;
+}

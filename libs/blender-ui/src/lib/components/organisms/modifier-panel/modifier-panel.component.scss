@@ -1,0 +1,190 @@
+@use '../../../styles/variables' as *;
+
+:host {
+  display: block;
+  /* Removed fixed height/width */
+  background-color: transparent; /* Let container decide */
+  color: $bui-text-color;
+  font-family: var(--bui-font-display, "Inter", "system-ui", "sans-serif");
+  font-size: 12px;
+}
+
+.modifier-panel-content {
+  padding: 0.5rem;
+}
+
+.add-modifier-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 0.75rem;
+  background-color: $bui-surface-dark;
+  border: 1px solid $bui-border-dark;
+  border-radius: $bui-border-radius;
+  color: $bui-text-color;
+  cursor: pointer;
+  gap: 4px;
+
+  &:hover {
+    background-color: rgba(255,255,255,0.05);
+  }
+
+  .material-icons { font-size: 16px; }
+}
+
+.bui-modifier-card {
+  border: 1px solid $bui-primary;
+  border-radius: $bui-border-radius;
+  background-color: $bui-card-bg;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.bui-modifier-header {
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  background-color: $bui-panel-header;
+  border-bottom: 1px solid $bui-border-dark;
+  gap: 0.5rem;
+  user-select: none;
+
+  .expand-icon {
+     font-size: 14px;
+     color: #888;
+     cursor: pointer;
+  }
+
+  .modifier-icon {
+    font-size: 14px;
+    color: $bui-highlight;
+  }
+
+  .modifier-title {
+    flex: 1;
+    font-weight: 600;
+  }
+
+  .modifier-toggles {
+    display: flex;
+    gap: 2px;
+
+    .toggle-btn {
+      padding: 0.125rem;
+      border-radius: 2px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: #888;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        background-color: rgba(255,255,255,0.1);
+      }
+
+      &.active {
+        color: $bui-highlight;
+      }
+
+      .material-icons { font-size: 14px; }
+    }
+  }
+
+  .separator-vertical {
+     height: 1rem;
+     width: 1px;
+     background-color: $bui-border-dark;
+     margin: 0 0.25rem;
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: #fff;
+    }
+
+    .material-icons { font-size: 14px; }
+  }
+
+  .close-btn:hover {
+     color: #ff5555;
+  }
+}
+
+.bui-modifier-body {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.type-toggle-row {
+  display: flex;
+  margin-bottom: 0.5rem;
+
+  .toggle-group {
+    display: flex;
+    width: 100%;
+    border: 1px solid $bui-border-dark;
+    border-radius: 2px;
+    overflow: hidden;
+
+    .toggle-option {
+      flex: 1;
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+      background-color: $bui-surface-dark;
+      color: $bui-text-color;
+      border: none;
+      border-right: 1px solid $bui-border-dark;
+      cursor: pointer;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &:hover {
+        background-color: rgba(255,255,255,0.05);
+      }
+
+      &.active {
+        background-color: $bui-primary;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.control-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 10px;
+  gap: 0.25rem;
+  align-items: center;
+
+  label {
+    text-align: right;
+    padding-right: 0.5rem;
+    color: #888;
+  }
+
+  .status-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: #555;
+
+    &.hidden {
+      opacity: 0;
+    }
+  }
+}

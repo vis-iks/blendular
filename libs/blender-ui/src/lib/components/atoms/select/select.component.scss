@@ -1,0 +1,46 @@
+@use '../../../styles/variables' as *;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.bui-select-container {
+  position: relative;
+  width: 100%;
+}
+
+.bui-select {
+  width: 100%;
+  appearance: none;
+  background: $bui-input-bg-gradient;
+  border: 1px solid $bui-border-dark;
+  border-radius: $bui-radius-sm;
+  color: $bui-text-color;
+  font-family: inherit;
+  font-size: $bui-font-size-small;
+  height: $bui-spacing-row;
+  padding: 0 1.5rem 0 0.5rem; // Right padding for arrow
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &:focus {
+    outline: none;
+    border-color: $bui-accent-blue;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: $bui-input-border-hover;
+  }
+}
+
+.arrow-icon {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: $bui-text-disabled;
+  font-size: 12px;
+}

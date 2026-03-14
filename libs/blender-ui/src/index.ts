@@ -1,60 +1,57 @@
 export * from './lib/core/core';
 export * from './lib/services/theme.service';
 export * from './lib/services/themes';
-export * from './lib/components/checkbox/checkbox.component';
-export * from './lib/components/button/button.component';
-export * from './lib/components/slider/slider.component';
-export * from './lib/components/dropdown/dropdown.component';
-export * from './lib/components/color-picker/color-picker.component';
-export * from './lib/components/panel/panel.component';
-export * from './lib/components/tabs/tabs.component';
-export * from './lib/components/splitter/splitter.component';
-export * from './lib/components/tree/tree.component';
 
-// Step 7
-export * from './lib/components/dialog/dialog.component';
-export * from './lib/components/context-menu/context-menu.component';
-export * from './lib/components/context-menu/context-menu-trigger.directive';
-export * from './lib/components/context-menu/context-menu.interface';
-export * from './lib/components/toast/toast.service';
-export * from './lib/components/toast/toast.component';
+// Atoms
+export * from './lib/components/atoms/checkbox/checkbox.component';
+export * from './lib/components/atoms/button/button.component';
+export * from './lib/components/atoms/slider/slider.component';
+export * from './lib/components/atoms/dropdown/dropdown.component';
+export * from './lib/components/atoms/color-picker/color-picker.component';
+export * from './lib/components/atoms/tabs/tabs.component';
+export * from './lib/components/atoms/splitter/splitter.component';
+export * from './lib/components/atoms/number-input/number-input.component';
+export * from './lib/components/atoms/select/select.component';
+export * from './lib/components/atoms/segmented-control/segmented-control.component';
+export * from './lib/components/atoms/radio-group/radio-group.component';
+export * from './lib/components/atoms/tooltip/index';
+export * from './lib/components/atoms/breadcrumbs/breadcrumbs.component';
+export * from './lib/components/atoms/progress/progress.component';
 
-// Step 8
-export * from './lib/components/field/field.component';
-export * from './lib/components/field/field-group.component';
-export * from './lib/components/segmented-control/segmented-control.component';
-export * from './lib/components/radio-group/radio-group.component';
+// Molecules
+export * from './lib/components/molecules/panel/panel.component';
+export * from './lib/components/molecules/tree/tree.component';
+export * from './lib/components/molecules/dialog/dialog.component';
+export * from './lib/components/molecules/context-menu/context-menu.component';
+export * from './lib/components/molecules/context-menu/context-menu-trigger.directive';
+export * from './lib/components/molecules/context-menu/context-menu.interface';
+export * from './lib/components/molecules/toast/toast.service';
+export * from './lib/components/molecules/toast/toast.component';
+export * from './lib/components/molecules/field/field.component';
+export * from './lib/components/molecules/field/field-group.component';
+export * from './lib/components/molecules/section/section.component';
+export * from './lib/components/molecules/header/header.component';
+export * from './lib/components/molecules/footer/footer.component';
+export * from './lib/components/molecules/menu/index';
+export * from './lib/components/molecules/popover/index';
+export * from './lib/components/molecules/toolbar/index';
+export * from './lib/components/molecules/workspace-tabs/workspace-tabs.component';
+export * from './lib/components/molecules/datalist/datalist.component';
+export * from './lib/components/molecules/datagrid/datagrid.component';
 
-export * from './lib/components/number-input/number-input.component';
-export * from './lib/components/select/select.component';
-export * from './lib/components/section/section.component';
-export * from './lib/components/modifier-panel/modifier-panel.component';
-export * from './lib/components/layout/layout.component';
-export * from './lib/components/header/header.component';
-export * from './lib/components/footer/footer.component';
-export * from './lib/components/outliner/outliner.component';
-export * from './lib/components/properties/properties.component';
-export * from './lib/components/viewport/viewport.component';
-export * from './lib/components/timeline/timeline.component';
-export * from './lib/components/scene-properties/scene-properties.component';
-export * from './lib/components/file-browser/file-browser.component';
-export * from './lib/components/graph-editor/graph-editor.component';
-export * from './lib/components/shader-editor/shader-editor.component';
-export * from './lib/components/menu/index';
-export * from './lib/components/tooltip/index';
-export * from './lib/components/popover/index';
-export * from './lib/components/toolbar/index';
-export * from './lib/components/editor-type-popover/index';
-export * from './lib/components/snap-popover/index';
-export * from './lib/components/workspace-tabs/workspace-tabs.component';
-export * from './lib/components/top-bar/top-bar.component';
+// Organisms
+export * from './lib/components/organisms/modifier-panel/modifier-panel.component';
+export * from './lib/components/organisms/layout/layout.component';
+export * from './lib/components/organisms/outliner/outliner.component';
+export * from './lib/components/organisms/properties/properties.component';
+export * from './lib/components/organisms/viewport/viewport.component';
+export * from './lib/components/organisms/timeline/timeline.component';
+export * from './lib/components/organisms/scene-properties/scene-properties.component';
+export * from './lib/components/organisms/file-browser/file-browser.component';
+export * from './lib/components/organisms/graph-editor/graph-editor.component';
+export * from './lib/components/organisms/shader-editor/shader-editor.component';
+export * from './lib/components/organisms/editor-type-popover/index';
+export * from './lib/components/organisms/snap-popover/index';
+export * from './lib/components/organisms/top-bar/top-bar.component';
+export * from './lib/components/organisms/git-graph/git-graph.component';
 
-export * from './lib/components/breadcrumbs/breadcrumbs.component';
-
-export * from './lib/components/datalist/datalist.component';
-
-export * from './lib/components/datagrid/datagrid.component';
-
-export * from './lib/components/progress/progress.component';
-
-export * from './lib/components/git-graph/git-graph.component';

@@ -31,10 +31,23 @@
   }
 }
 
-.bui-sidebar-nav {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--bui-spacing-md) 0;
+.bui-nav-category {
+  margin-bottom: var(--bui-spacing-lg);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bui-nav-category-title {
+  padding: var(--bui-spacing-sm) var(--bui-spacing-lg);
+  margin: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--bui-text-muted);
+  background-color: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--bui-border-dark);
 }
 
 .bui-nav-list {
