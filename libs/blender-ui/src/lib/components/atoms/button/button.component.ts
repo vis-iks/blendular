@@ -35,6 +35,12 @@ export class BuiButtonComponent {
   /** Force a square aspect ratio (useful for icons in any variant) */
   square = input(false, { transform: booleanAttribute });
 
+  /** Content horizontal alignment */
+  align = input<'left' | 'center' | 'right'>('center');
+
+  /** Whether to show a dropdown menu chevron */
+  hasMenu = input(false, { transform: booleanAttribute });
+
   /** Two-way binding for toggle state */
   pressed = model(false);
 

@@ -17,6 +17,11 @@
         border-radius: 0;
       }
 
+      /* Single-pixel border between grouped buttons */
+      &:not(:first-child) .bui-button {
+        border-left: none;
+      }
+
       &:first-child .bui-button {
         border-top-left-radius: $bui-radius-sm;
         border-bottom-left-radius: $bui-radius-sm;
@@ -34,7 +39,6 @@
         .bui-button {
           padding: 0;
           background-color: #1a1a1a; 
-          border-left: none; /* Attached look */
         }
 
         .bui-btn-icon {

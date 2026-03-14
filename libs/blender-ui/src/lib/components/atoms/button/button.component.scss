@@ -10,6 +10,22 @@
   justify-content: center;
   gap: 4px;
   padding: 3px 10px;
+  position: relative; /* Support absolute positioning of elements like icons */
+
+  &.align-left {
+    .bui-btn-icon {
+      position: absolute;
+      left: 10px;
+    }
+  }
+
+  &.align-right {
+    .bui-btn-icon {
+      position: absolute;
+      right: 10px;
+    }
+  }
+
   min-height: $bui-spacing-row;
   font-family: inherit;
   font-size: $bui-font-size-small;
@@ -84,4 +100,11 @@
 
 .bui-btn-label {
   white-space: nowrap;
+}
+
+.bui-menu-chevron {
+  font-size: 6px;
+  line-height: 1;
+  opacity: 0.8;
+  margin-left: 2px;
 }

@@ -3,6 +3,8 @@
   [class.toggle]="variant() === 'toggle'"
   [class.icon-only]="variant() === 'icon' || square()"
   [class.primary]="variant() === 'primary'"
+  [class.align-left]="align() === 'left'"
+  [class.align-right]="align() === 'right'"
   [class.pressed]="pressed()"
   [class.disabled]="disabled()"
   [disabled]="disabled()"
@@ -14,4 +16,7 @@
   <span class="bui-btn-label">
     <ng-content></ng-content>
   </span>
+  @if (hasMenu()) {
+    <span class="bui-menu-chevron bl-icons-downarrow_hlt"></span>
+  }
 </button>
